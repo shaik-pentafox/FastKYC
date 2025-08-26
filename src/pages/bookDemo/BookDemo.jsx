@@ -1,4 +1,4 @@
-import { IconClock, IconCpu, IconShield, IconStar } from "@tabler/icons-react";
+import { IconCpu, IconShield, IconStar } from "@tabler/icons-react";
 import Logo from "../../assets/Images/Logo.png";
 import Banks from "../../assets/Images/Banks.png";
 import { motion } from "framer-motion";
@@ -13,7 +13,7 @@ export default function BookDemo() {
             <div className="bg-black text-white min-h-screen px-6 md:px-16 py-12">
                 <header className="flex justify-between items-center mb-12">
                     <div className="flex items-center gap-2">
-                        <img src={Logo} alt="FastKYC" className="h-8" />
+                        <img src={Logo} alt="FastKYC" className="h-8 filter grayscale-100 brightness-2000" />
                         <span className="text-red-600 text-xl font-bold">FastKYC</span>
                     </div>
                     <nav className="flex gap-8 items-center text-gray-300">

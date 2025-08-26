@@ -5,12 +5,15 @@ import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Main from './pages/Landing_Page/Main'
 import BookDemo from './pages/bookDemo/BookDemo'
+import Login from './pages/login/Login'
+
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<Main />} />
+          <Route path='/' element={<Login />} />
+          <Route path='/landing-page' element={<Main />} />
           <Route path='/book-demo' element={<BookDemo />} />
         </Routes>
       </BrowserRouter>
