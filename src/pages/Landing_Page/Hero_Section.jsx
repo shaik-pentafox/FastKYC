@@ -20,8 +20,12 @@ import Security from '../../assets/Images/Discount_icon.png';
 import Circle from '../../assets/Images/circle.png';
 import Banks from '../../assets/Images/Banks.png';
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
+
+  const navigate = useNavigate();
+
   return (
     <>
       {/* Navbar */}
@@ -79,6 +83,7 @@ function Navbar() {
                   backgroundColor: "#E20303",
                   color: "white",
                 }}
+                onClick={() => navigate('/book-demo')}
               >
                 Book a demo
               </Button>
