@@ -3,6 +3,8 @@ import Hero from './Hero_Section'
 import Product from './Products'
 import Customers from './Customers'
 import Designed from './Designed'
+import Book from './BookDemo'
+import Footer from './Footer'
 
 function Main() {
   return (
@@ -11,6 +13,8 @@ function Main() {
      <Product/>
      <Customers/>
      <Designed/>
+     <Book/>
+     <Footer/>
     </>
   )
 }

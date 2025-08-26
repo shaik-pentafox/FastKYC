@@ -164,7 +164,7 @@ function Navbar() {
             border: "none",
             boxShadow: "none",
             padding: "0 20px",
-            marginTop:"-300px"
+            marginTop: "-300px"
           }}
         >
           {/* Floating Left Card 1 */}
@@ -271,7 +271,7 @@ function Navbar() {
             {/* Header with icon + title */}
             <Group mb="xs" style={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
               <img src={Circle} alt="status" height={25} />
-              <Text fw={600}>FastKYC*</Text>
+              <Text fw={600}>FastKYC</Text>
             </Group>
 
             <Divider color="#DCDCDC" mb="sm" />
@@ -297,39 +297,39 @@ function Navbar() {
         </Card>
 
         {/* Banks Left-to-Right Scroll */}
-       <Box
-  style={{
-    overflow: "hidden",
-    width: "100%",
-    padding: "20px 0",
-    position: "relative",
-  }}
->
-  <motion.div
-    style={{ display: "flex", width: "200%" }}
-    animate={{ x: ["0%", "-50%"] }}
-    transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
-  >
-    <img
-      src={Banks}
-      alt="Banks"
-      style={{
-        width: "50%",
-        objectFit: "cover",
-        filter: "grayscale(100%)", // makes image gray
-      }}
-    />
-    <img
-      src={Banks}
-      alt="Banks"
-      style={{
-        width: "50%",
-        objectFit: "cover",
-        filter: "grayscale(100%)", // makes image gray
-      }}
-    />
-  </motion.div>
-</Box>
+        <Box
+          style={{
+            overflow: "hidden",
+            width: "100%",
+            padding: "20px 0",
+            position: "relative",
+          }}
+        >
+          <motion.div
+            style={{ display: "flex", width: "200%" }}
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
+          >
+            <img
+              src={Banks}
+              alt="Banks"
+              style={{
+                width: "50%",
+                objectFit: "cover",
+                filter: "grayscale(100%)", // makes image gray
+              }}
+            />
+            <img
+              src={Banks}
+              alt="Banks"
+              style={{
+                width: "50%",
+                objectFit: "cover",
+                filter: "grayscale(100%)", // makes image gray
+              }}
+            />
+          </motion.div>
+        </Box>
       </section>
     </>
   );
