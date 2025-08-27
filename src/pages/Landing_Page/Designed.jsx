@@ -1,70 +1,39 @@
 import React from "react";
-import { Container, Text, Title, Image, Paper, SimpleGrid, Box } from "@mantine/core";
 import Design from "../../assets/Images/Design.png";
 
 function Designed() {
   return (
-    <Paper
-      py={80}
-      style={{
-        background: "linear-gradient(to right, #000000 0%, #000000 30%, #8B0000 100%)",
-      }}
-    >
-      <Container size="lg">
-        <SimpleGrid
-          cols={2}
-          spacing="xl"
-          breakpoints={[{ maxWidth: "md", cols: 1, spacing: "md" }]}
-        >
+    <section className="py-20 bg-gradient-to-r from-black via-black to-red-900">
+      <div className="max-w-7xl mx-auto px-6 md:px-20">
+        <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* Left Column: Text */}
-          <Box
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              height: "100%",
-              borderRadius: 8,
-            }}
-          >
-            <Title order={2} fw={400} fz={24} mb="md" c="red">
+          <div className="flex flex-col justify-center">
+            <h3 className="text-red-600 text-lg font-normal mb-2">
               Designed for developers
-            </Title>
-
-            <Text size="xl" fw={400} fz={32} c="white" mb="md">
+            </h3>
+            <h2 className="text-3xl md:text-3xl font-normal text-white mb-4">
               Integrate in minutes.<br /> Scale with confidence
-            </Text>
-
-            <Text size="md" c="#F7F7F7" fw={400} fz={16}>
+            </h2>
+            <p className="text-gray-200 text-md md:text-md">
               We take care of the complex KYC, compliance, and verification
               frameworks so your team can focus on building amazing products.
               With our REST APIs, clear documentation, and developer-first
               approach, you can go from sandbox to production in hours — and
               scale securely to millions of verifications.
-            </Text>
-          </Box>
+            </p>
+          </div>
 
-          {/* Right Column: Image*/}
-          <Box
-            style={{
-              display: "flex",
-              alignItems: "flex-start",
-              justifyContent: "flex-start",
-              height: "100%",
-            }}
-          >
-            <Image
+          {/* Right Column: Image */}
+          <div className="flex justify-start items-start">
+            <img
               src={Design}
               alt="Developer integration illustration"
-              radius="md"
-              shadow="md"
-              width="100%"
-              height="100%"
-              fit="cover"
+              className="w-full h-full object-cover rounded-lg shadow-md"
             />
-          </Box>
-        </SimpleGrid>
-      </Container>
-    </Paper>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 

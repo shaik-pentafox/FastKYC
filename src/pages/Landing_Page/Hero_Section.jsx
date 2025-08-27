@@ -1,338 +1,231 @@
-import React from "react";
-import {
-  Container,
-  Group,
-  Button,
-  Menu,
-  Text,
-  Paper,
-  Avatar,
-  Flex,
-  Card,
-  Divider,
-  Progress,
-  Box
-} from "@mantine/core";
-import { IconChevronDown } from "@tabler/icons-react";
-import Logo from "../../assets/Images/FastKYC_logo.png";
-import Premium from '../../assets/Images/Premium_rate.png';
-import Security from '../../assets/Images/Discount_icon.png';
-import Circle from '../../assets/Images/circle.png';
-import Banks from '../../assets/Images/Banks.png';
+import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { IconChevronDown, IconMenu2, IconX } from "@tabler/icons-react";
 
-function Navbar() {
+// Assets
+import Logo from "../../assets/Images/FastKYC_logo.png";
+import Premium from "../../assets/Images/icons/Premium_rate.png";
+import Security from "../../assets/Images/icons/Discount_icon.png";
+import Circle from "../../assets/Images/icons/circle.png";
+import bank1 from '../../assets/Images/Bank_assets/bank1.png'
+import bank2 from '../../assets/Images/Bank_assets/bank2.png'
+import bank3 from '../../assets/Images/Bank_assets/bank3.png'
+import bank4 from '../../assets/Images/Bank_assets/bank4.png'
+import bank5 from '../../assets/Images/Bank_assets/bank5.png'
+import bank6 from '../../assets/Images/Bank_assets/bank6.png'
+import bank7 from '../../assets/Images/Bank_assets/bank7.png'
+import bank8 from '../../assets/Images/Bank_assets/bank8.png'
+function Hero_Section() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
-    <>
+    <div className="bg-[#121212] min-h-screen w-full">
       {/* Navbar */}
-      <header
-        style={{
-          background: "#121212",
-          padding: "20px 130px",
-        }}
-      >
-        <Container size="xl">
-          <Flex justify="space-between" align="center">
-            {/* Left: Logo */}
-            <img src={Logo} alt="FastKYC Logo" style={{ height: "38px" }} />
+      <header className="px-6 min-[800px]:px-20 py-6 relative z-50">
+        <div className="max-w-7xl mx-auto flex justify-between items-center">
+          <img src={Logo} alt="FastKYC Logo" className="h-10" />
 
-            {/* Center: Links */}
-            <Group spacing="lg" style={{ marginLeft: 74, gap: 23 }}>
-              <Text size="sm" fw={500} c="white" style={{ cursor: "pointer" }}>
-                Why FastKYC
-              </Text>
+          <nav className="hidden min-[800px]:flex items-center gap-8 ml-[54px]">
+            <span className="text-white text-sm font-medium cursor-pointer">
+              Why FastKYC
+            </span>
 
-              <Menu shadow="md" width={200}>
-                <Menu.Target>
-                  <Group spacing={4} style={{ cursor: "pointer" }}>
-                    <Text size="sm" fw={400} c="white">
-                      Products
-                    </Text>
-                    <IconChevronDown size={16} color="white" />
-                  </Group>
-                </Menu.Target>
+            <div className="relative group">
+              <div className="flex items-center gap-1 cursor-pointer">
+                <span className="text-white text-sm">Products</span>
+                <IconChevronDown size={16} className="text-white" />
+              </div>
 
-                <Menu.Dropdown>
-                  <Menu.Item>Product 1</Menu.Item>
-                  <Menu.Item>Product 2</Menu.Item>
-                  <Menu.Item>Product 3</Menu.Item>
-                </Menu.Dropdown>
-              </Menu>
-            </Group>
+              <div className="absolute hidden group-hover:block bg-white rounded-md shadow-md mt-2 w-40 z-50">
+                <ul className="text-sm text-gray-800">
+                  <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                    Product 1
+                  </li>
+                  <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                    Product 2
+                  </li>
+                  <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                    Product 3
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
 
-            {/* Right: Buttons */}
-            <Group spacing="sm">
-              <Button
-                variant="outline"
-                color="red"
-                radius="md"
-                style={{ fontSize: "14px", fontWeight: 500 }}
-              >
-                Sign in
-              </Button>
+          <div className="hidden min-[800px]:flex items-center gap-6">
+            <button className="border border-red-600 text-red-600 px-4 py-1 rounded-md text-sm font-normal">
+              Sign in
+            </button>
+            <button className="bg-red-600 text-white px-4 py-1 rounded-md text-sm font-normal">
+              Book a demo
+            </button>
+          </div>
 
-              <Button
-                radius="md"
-                style={{
-                  fontSize: "14px",
-                  fontWeight: 500,
-                  backgroundColor: "#E20303",
-                  color: "white",
-                }}
-              >
-                Book a demo
-              </Button>
-            </Group>
-          </Flex>
-        </Container>
+          <div className="min-[800px]:hidden">
+            <button onClick={() => setMenuOpen(!menuOpen)}>
+              {menuOpen ? (
+                <IconX size={28} className="text-white" />
+              ) : (
+                <IconMenu2 size={28} className="text-white" />
+              )}
+            </button>
+          </div>
+        </div>
+
+       {menuOpen && (
+  <div className="fixed inset-0 bg-black text-white z-50 flex flex-col justify-center items-center gap-8">
+    <button
+      onClick={() => setMenuOpen(false)}
+      className="absolute top-6 right-6 text-white"
+    >
+      <IconX size={28} />
+    </button>
+
+    <ul className="flex flex-col gap-6 text-2xl font-medium text-center">
+      <li className="cursor-pointer" style={{fontWeight:"500",fontSize:"24"}}>Why FastKYC</li>
+      <li className="cursor-pointer" style={{fontWeight:"500",fontSize:"24"}}>Products</li>
+    </ul>
+  </div>
+)}
+
       </header>
 
-      {/* Hero Section body */}
-      <section
-        style={{
-          background: "#121212",
-          padding: "40px 0 0 0",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        <Container size="lg" style={{ textAlign: "center", color: "white", padding: "40px 0" }}>
-          {/* Top Badges */}
-          <Group justify="center" spacing="md" mb="md">
-            <Button
-              variant="outline"
-              color="white"
-              radius="xl"
-              size="sm"
-              style={{ fontWeight: 400, fontSize: 14 }}
-            >
-              Faster Onboarding
-            </Button>
-            <Button
-              variant="outline"
-              color="white"
-              radius="xl"
-              size="sm"
-              style={{ fontWeight: 400, fontSize: 14 }}
-            >
-              Stronger Compliance
-            </Button>
-          </Group>
-
-          {/* Headline */}
-          <Text
-            fw={500}
-            style={{
-              fontSize: "48px",
-              lineHeight: 1.2,
-              marginBottom: "20px",
-            }}
-          >
-            Simplify Compliance. <br /> Maximize Growth.
-          </Text>
-
-          {/* Subheading */}
-          <Text c="dimmed" size="lg" maw={720} mx="auto" mb="lg" fw={400}>
-            Pentafox FastKYC offers an end-to-end tax automation platform that
-            helps businesses verify tax IDs, calculate and pay taxes, generate
-            e-invoices, process tax documents, reconcile ledgers, and file tax
-            returns — all through secure SDKs & APIs.
-          </Text>
-
-          {/* CTA Button */}
-          <Button
-            size="md"
-            radius="md"
-            style={{
-              backgroundColor: "#E20303",
-              color: "white",
-              fontSize: "15px",
-              fontWeight: 600,
-              padding: "0px 32px",
-              marginBottom: "40px"
-            }}
-          >
-            Get started
-          </Button>
-        </Container>
-
-        <Card
-          style={{
-            position: "relative",
-            minHeight: "500px",
-            backgroundColor: "transparent",
-            border: "none",
-            boxShadow: "none",
-            padding: "0 20px",
-            marginTop: "-300px"
-          }}
-        >
-          {/* Floating Left Card 1 */}
-          <Paper
-            shadow="md"
-            radius="lg"
-            p="sm"
-            style={{
-              position: "absolute",
-              left: "12%",
-              top: "40%",
-              width: "300px",
-              background: "rgba(255, 255, 255, 0.12)",
-              color: "white",
-              border: "1px solid rgba(255, 255, 255, 0.25)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              backdropFilter: "blur(12px)",
-              WebkitBackdropFilter: "blur(12px)",
-              boxShadow: "0 4px 20px rgba(0, 0, 0, 0.15)",
-              transition: "box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out",
-              cursor: "pointer",
-            }}
-          >
-            {/* Icon */}
-            <div style={{ flex: "0 0 20%", textAlign: "right", marginLeft: "13px" }}>
-              <img src={Premium} alt="Icon" height={54} />
+      {/* Hero Section */}
+      <section className="text-center text-white relative overflow-hidden mt-12">
+        <div className="relative max-w-4xl mx-auto pb-14 px-4">
+          <div className="relative z-10">
+            <div className="flex flex-wrap min-[800px]:flex-nowrap justify-center gap-3 mb-6">
+              <button className="border border-white text-white text-sm font-normal px-4 py-1.5 rounded-full">
+                Faster Onboarding
+              </button>
+              <button className="border border-white text-white text-sm font-normal px-4 py-1.5 rounded-full">
+                Stronger Compliance
+              </button>
             </div>
 
-            {/* Text */}
-            <div style={{ flex: "0 0 68%" }}>
-              <Text fw={400} size="sm">
+            <div className="relative flex justify-center">
+              <div className="absolute inset-0 flex justify-center">
+                <div className="w-96 h-72 bg-red-500/40 blur-[100px] rounded-full"></div>
+              </div>
+
+              <h1 className="relative text-4xl min-[800px]:text-5xl font-bold leading-tight mb-5 text-center">
+                Simplify Compliance. <br /> Maximize Growth.
+              </h1>
+            </div>
+
+            <div className="relative">
+              <div className="absolute bottom-0 left-0 w-40 h-40 bg-gradient-to-tr from-red-500/40 to-transparent blur-2xl"></div>
+              <div className="absolute bottom-0 right-0 w-40 h-40 bg-gradient-to-tl from-red-500/40 to-transparent blur-2xl"></div>
+
+              <p className="relative text-gray-300 text-md max-w-2xl mx-auto mb-6 text-center">
+                Pentafox FastKYC offers an end-to-end tax automation platform that
+                helps businesses verify tax IDs, calculate and pay taxes, generate
+                e-invoices, process tax documents, reconcile ledgers, and file tax
+                returns — all through secure SDKs & APIs.
+              </p>
+            </div>
+
+            <button className="bg-red-600 text-white font-semibold px-8 py-2 rounded-md relative z-10">
+              Get started
+            </button>
+          </div>
+        </div>
+
+
+        {/* Floating Cards*/}
+        <div className="relative h-[600px] mt-[-180px] hidden min-[800px]:block">
+          {/* Left Card 1 */}
+          <div className="absolute left-[12%] top-[15%] w-72 bg-white/10 text-white border border-white/20 backdrop-blur-lg shadow-lg rounded-3xl p-3 flex items-center gap-4 cursor-pointer transition-transform hover:scale-105">
+            <img src={Premium} alt="Premium" className="h-12" />
+            <div>
+              <p className="text-sm font-normal text-start">
                 Instant PAN & Aadhaar Verification
-              </Text>
-              <Text fw={600} size="md" mt={4}>
-                99.9% Accuracy
-              </Text>
+              </p>
+              <p className="text-md font-bold mt-1 text-start">99.9% Accuracy</p>
             </div>
-          </Paper>
+          </div>
 
-          {/* Floating Left Card 2 */}
-          <Paper
-            shadow="md"
-            radius="lg"
-            p="sm"
-            style={{
-              position: "absolute",
-              left: "5%",
-              top: "65%",
-              width: "300px",
-              background: "rgba(255, 255, 255, 0.12)",
-              color: "white",
-              border: "1px solid rgba(255, 255, 255, 0.25)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              backdropFilter: "blur(12px)",
-              WebkitBackdropFilter: "blur(12px)",
-              boxShadow: "0 4px 30px rgba(0, 0, 0, 0.15)",
-              borderRadius: "16px",
-              padding: "16px",
-              transition: "all 0.3s ease-in-out",
-              cursor: "pointer",
-            }}
-          >
-            {/* Icon */}
-            <div style={{ flex: "0 0 20%", textAlign: "right", marginLeft: "13px" }}>
-              <img src={Security} alt="Icon" height={54} />
-            </div>
-
-            {/* Text */}
-            <div style={{ flex: "0 0 68%" }}>
-              <Text fw={400} size="sm">
+          {/* Left Card 2 */}
+          <div className="absolute left-[5%] top-[36%] w-72 bg-white/10 text-white border border-white/20 backdrop-blur-lg shadow-lg rounded-3xl p-4 flex items-center gap-4 cursor-pointer transition-transform hover:scale-105">
+            <img src={Security} alt="Security" className="h-12" />
+            <div>
+              <p className="text-sm font-normal text-start">
                 Successful Verifications
-              </Text>
-              <Text fw={600} size="md" mt={4}>
+              </p>
+              <p className="text-md font-bold mt-1 text-start">
                 1.2M+ Completed
-              </Text>
+              </p>
             </div>
-          </Paper>
+          </div>
 
-          {/* Floating Right Card */}
-          <Paper
-            shadow="md"
-            radius="md"
-            p="md"
-            style={{
-              position: "absolute",
-              right: "5%",
-              top: "25%",
-              width: "260px",
-              background: "rgba(255, 255, 255, 0.12)",
-              color: "white",
-              border: "1px solid rgba(255, 255, 255, 0.25)",
-              backdropFilter: "blur(12px)",
-              WebkitBackdropFilter: "blur(12px)",
-              boxShadow: "0 4px 30px rgba(0, 0, 0, 0.15)",
-              borderRadius: "16px",
-              transition: "all 0.3s ease-in-out",
-              cursor: "pointer",
-            }}
-          >
-            {/* Header with icon + title */}
-            <Group mb="xs" style={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
-              <img src={Circle} alt="status" height={25} />
-              <Text fw={600}>FastKYC</Text>
-            </Group>
+          {/* Right Card */}
+          <div className="absolute right-[5%] top-[5%] w-64 bg-white/10 text-white border border-white/20 backdrop-blur-lg shadow-lg rounded-3xl p-5 cursor-pointer transition-transform hover:scale-105">
+            <div className="flex justify-between items-center mb-3">
+              <img src={Circle} alt="status" className="h-6" />
+              <p className="font-normal">FastKYC*</p>
+            </div>
+            <hr className="border-gray-300/50 mb-3" />
 
-            <Divider color="#DCDCDC" mb="sm" />
+            <div className="flex -space-x-3 mb-3">
+              <img
+                className="w-8 h-8 rounded-full border-2 border-[#121212]"
+                src="https://i.pravatar.cc/40?img=1"
+                alt=""
+              />
+              <img
+                className="w-8 h-8 rounded-full border-2 border-[#121212]"
+                src="https://i.pravatar.cc/40?img=2"
+                alt=""
+              />
+              <img
+                className="w-8 h-8 rounded-full border-2 border-[#121212]"
+                src="https://i.pravatar.cc/40?img=3"
+                alt=""
+              />
+            </div>
 
-            {/* Avatars */}
-            <Group mb="sm" spacing="xs">
-              <Avatar.Group>
-                <Avatar src="https://i.pravatar.cc/40?img=1" radius="xl" />
-                <Avatar src="https://i.pravatar.cc/40?img=2" radius="xl" />
-                <Avatar src="https://i.pravatar.cc/40?img=3" radius="xl" />
-              </Avatar.Group>
-            </Group>
+            <p className="font-normal text-start text-sm">Total Verifications</p>
+            <p className="font-bold text-start text-lg mt-1">1.2M+</p>
 
-            {/* Text content */}
-            <Text fw={500} fz={16}>Total Verifications</Text>
-            <Text fw={600} size="lg" mt={2} fz={18}>
-              1.2M+
-            </Text>
+            <div className="w-full bg-gray-600 rounded-full h-2 mt-3">
+              <div className="bg-red-600 h-2 rounded-full w-[70%]"></div>
+            </div>
+          </div>
+        </div>
 
-            {/* Progress bar */}
-            <Progress value={70} color="red" />
-          </Paper>
-        </Card>
-
-        {/* Banks Left-to-Right Scroll */}
-        <Box
-          style={{
-            overflow: "hidden",
-            width: "100%",
-            padding: "20px 0",
-            position: "relative",
-          }}
-        >
+        {/* Banks Scrolling Logos */}
+        <div className="overflow-hidden w-full py-6 relative mt-10 min-[800px]:mt-[-262px]">
           <motion.div
-            style={{ display: "flex", width: "200%" }}
+            className="flex gap-12 w-max"
             animate={{ x: ["0%", "-50%"] }}
             transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
           >
-            <img
-              src={Banks}
-              alt="Banks"
-              style={{
-                width: "50%",
-                objectFit: "cover",
-                filter: "grayscale(100%)", // makes image gray
-              }}
-            />
-            <img
-              src={Banks}
-              alt="Banks"
-              style={{
-                width: "50%",
-                objectFit: "cover",
-                filter: "grayscale(100%)", // makes image gray
-              }}
-            />
+            {/* First row */}
+            {[bank1, bank2, bank3, bank4, bank5, bank6, bank7, bank8].map(
+              (logo, idx) => (
+                <img
+                  key={idx}
+                  src={logo}
+                  alt={`Bank ${idx + 1}`}
+                  className="h-8 w-auto object-contain grayscale"
+                />
+              )
+            )}
+            {[bank1, bank2, bank3, bank4, bank5, bank6, bank7, bank8].map(
+              (logo, idx) => (
+                <img
+                  key={`dup-${idx}`}
+                  src={logo}
+                  alt={`Bank ${idx + 1}`}
+                  className="h-8 w-auto object-contain grayscale"
+                />
+              )
+            )}
           </motion.div>
-        </Box>
+        </div>
       </section>
-    </>
+    </div>
   );
 }
 
-export default Navbar;
+export default Hero_Section;

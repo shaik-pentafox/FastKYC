@@ -1,24 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
-import {
-  Container,
-  Grid,
-  Title,
-  Text,
-  List,
-  ThemeIcon,
-  Image,
-  Stack,
-  Box,
-} from "@mantine/core";
-import { IconCheck } from "@tabler/icons-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { IconBolt, IconShieldCheck, IconGlobe } from "@tabler/icons-react";
 
 // Product images
-import Product1 from "../../assets/Images/Product1.png";
-import Product2 from "../../assets/Images/Product2.png";
-import Product3 from "../../assets/Images/Product3.png";
-import Product4 from "../../assets/Images/Product4.png";
-import Product5 from "../../assets/Images/Product5.png";
+import Product1 from "../../assets/Images/Product_assets/Product1.png";
+import Product2 from "../../assets/Images/Product_assets/Product2.png";
+import Product3 from "../../assets/Images/Product_assets/Product3.png";
+import Product4 from "../../assets/Images/Product_assets/Product4.png";
+import Product5 from "../../assets/Images/Product_assets/Product5.png";
 
 // Sections data
 const productSections = [
@@ -76,8 +65,8 @@ function Products() {
   const [activeSection, setActiveSection] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const sectionRefs = useRef([]);
-  const observerRef = useRef();
 
+  // Detect mobile view
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile();
@@ -85,36 +74,34 @@ function Products() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
+  // Intersection Observer to detect which section is visible
   useEffect(() => {
-    // Intersection Observer for detecting visible section
-    const options = { root: null, threshold: 0.6 };
-
-    const handleIntersect = (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const index = sectionRefs.current.findIndex(
-            (ref) => ref === entry.target
-          );
-          if (index !== -1) setActiveSection(index);
-        }
-      });
-    };
-
-    observerRef.current = new IntersectionObserver(handleIntersect, options);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = sectionRefs.current.findIndex((ref) => ref === entry.target);
+            if (index !== -1) setActiveSection(index);
+          }
+        });
+      },
+      { root: null, threshold: 0.6 }
+    );
 
     sectionRefs.current.forEach((section) => {
-      if (section) observerRef.current.observe(section);
+      if (section) observer.observe(section);
     });
 
-    return () => observerRef.current?.disconnect();
+    return () => observer.disconnect();
   }, []);
 
   return (
-    <Container size="lg" py="xl" mb={80} mt={35}>
-      <Grid gutter="xl">
-        {/* Left side - Scrollable content */}
-        <Grid.Col span={{ base: 12, md: 6 }}>
-          <Stack spacing={100}>
+    <>
+      {/* Products Section */}
+      <div className="max-w-7xl mx-auto py-12 px-6 md:px-20 mb-24">
+        <div className="flex flex-col md:flex-row gap-x-12">
+          {/* Left side */}
+          <div className="flex-1 space-y-24">
             {productSections.map((section, index) => (
               <SectionBlock
                 key={section.id}
@@ -122,120 +109,152 @@ function Products() {
                 ref={(el) => (sectionRefs.current[index] = el)}
                 isActive={activeSection === index}
                 showHeader={index === 0}
+                isMobile={isMobile}
               />
             ))}
-          </Stack>
-        </Grid.Col>
+          </div>
 
-        {/* Right side - Sticky image */}
-        {!isMobile && (
-          <Grid.Col span={6}>
-            <Box
-              style={{
-                position: "sticky",
-                top: 0,
-                height: "100vh",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeSection}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 1.1 }}
-                  transition={{ duration: 0.5 }}
-                  style={{
-                    width: "100%",
-                    maxWidth: 500,
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <Image
+          {/* Right side - Sticky image */}
+          {!isMobile && (
+            <div className="flex-1 relative">
+              <div className="sticky top-0 h-screen flex items-center justify-center">
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={activeSection}
                     src={productSections[activeSection].image}
                     alt={productSections[activeSection].title}
-                    radius="md"
-                    fit="contain"
-                    style={{
-                      width: "100%",
-                      maxWidth: 500,
-                      maxHeight: "80vh",
-                      objectFit: "contain",
-                    }}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 1.05 }}
+                    transition={{ duration: 0.4 }}
+                    className="w-full max-w-md max-h-[80vh] object-contain rounded-lg"
                   />
-                </motion.div>
-              </AnimatePresence>
-            </Box>
-          </Grid.Col>
-        )}
-      </Grid>
-    </Container>
+                </AnimatePresence>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* FastKYC section */}
+      <div className="container mx-auto py-16 px-6 md:px-20 mb-24 mt-[-45px]">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="space-y-6">
+            <p className="text-red-600 font-medium text-2xl">Why choose FastKYC?</p>
+            <h2 className="text-3xl md:text-3xl font-normal leading-snug">
+              The core of identity & compliance <br /> for growing businesses
+            </h2>
+            <p className="text-gray-500 text-lg font-normal">
+              FastKYC makes onboarding effortless. We combine speed, trust, and compliance to help
+              businesses onboard customers instantly while staying fully secure. No delays, no risks—just smarter verification.
+            </p>
+
+            <div className="flex flex-wrap justify-between mt-6 gap-6">
+              <div className="text-center flex-1 min-w-[120px]">
+                <h3 className="text-4xl font-bold">500+</h3>
+                <p className="text-gray-500 text-base">Identities verified</p>
+              </div>
+              <div className="text-center flex-1 min-w-[120px]">
+                <h3 className="text-4xl font-bold">96%</h3>
+                <p className="text-gray-500 text-base">Auto-approval rate</p>
+              </div>
+              <div className="text-center flex-1 min-w-[120px]">
+                <h3 className="text-4xl font-bold">60%</h3>
+                <p className="text-gray-500 text-base">Reduction in drop-offs</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-6 mt-6 lg:mt-0">
+            <FeatureCard
+              icon={<IconBolt size={24} />}
+              title="Faster Approvals"
+              description="Cut verification times from days to minutes."
+            />
+            <FeatureCard
+              icon={<IconShieldCheck size={24} />}
+              title="Trusted Security"
+              description="Protect your business with AI-powered fraud detection."
+            />
+            <FeatureCard
+              icon={<IconGlobe size={24} />}
+              title="Global Compliance"
+              description="Stay ahead with KYC, AML, GDPR, and more."
+            />
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
 
-// Section Block
-const SectionBlock = React.forwardRef(({ section, isActive, showHeader }, ref) => {
+// SectionBlock with mobile dynamic image
+const SectionBlock = React.forwardRef(({ section, isActive, showHeader, isMobile }, ref) => {
   return (
-    <Box
+    <div
       ref={ref}
-      style={{
-        minHeight: "90vh", // ensures equal section height
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center", // vertical center
-        padding: "40px 0",
-        scrollMarginTop: "100px",
-        opacity: isActive ? 1 : 0.5,
-        transform: isActive ? "translateY(0)" : "translateY(20px)",
-        transition: "all 0.4s ease",
-      }}
+      className={`min-h-[90vh] flex flex-col justify-center py-10 transition-all duration-500 ${
+        isActive ? "opacity-100 translate-y-0" : "opacity-60 translate-y-5"
+      }`}
     >
       {showHeader && (
-        <Box mb="xl">
-          <Text fw={500} c="red" fz={20} mb={5}>
-            Products
-          </Text>
-          <Text fw={400} fz={32} mt={10}>
+        <div className="mb-8">
+          <p className="text-red-600 text-xl mb-2">Products</p>
+          <h2 className="text-3xl md:text-3xl font-medium text-gray-900">
             Powerful APIs for fast, secure, and reliable customer onboarding
-          </Text>
-        </Box>
+          </h2>
+        </div>
       )}
 
-      <Title order={2} fw={500} fz={42} mb={12}>
-        {section.title}
-      </Title>
+      {/* Mobile - show image only if active */}
+      {isMobile && (
+        <div className="mb-6 flex justify-center">
+          <AnimatePresence mode="wait">
+            {isActive && (
+              <motion.img
+                key={section.id}
+                src={section.image}
+                alt={section.title}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                className="w-full max-w-sm object-contain rounded-lg"
+              />
+            )}
+          </AnimatePresence>
+        </div>
+      )}
 
-      <Text c="dimmed" fw={400} fz={20} mb={20}>
-        {section.description}
-      </Text>
+      <h2 className="text-3xl md:text-4xl font-semibold mb-3">{section.title}</h2>
+      <p className="text-gray-500 text-base mb-6">{section.description}</p>
 
-      <Text fw={500} mb={8}>
-        Includes:
-      </Text>
-
-      <List
-        spacing="sm"
-        size="md"
-        icon={
-          <ThemeIcon color="red" size={22} radius="xl">
-            <IconCheck size={14} />
-          </ThemeIcon>
-        }
-      >
+      <p className="font-bold mb-2">Includes:</p>
+      <ul className="list-none space-y-2">
         {section.list.map((item, i) => (
-          <List.Item key={i} c="#616161" fz={16}>
+          <li key={i} className="flex items-center text-gray-700 text-base" style={{color:"gray"}}>
+            <span className="inline-block w-5 h-5 mr-2 text-green-600">✔</span>
             {item}
-          </List.Item>
+          </li>
         ))}
-      </List>
-    </Box>
+      </ul>
+    </div>
   );
 });
 
 SectionBlock.displayName = "SectionBlock";
+
+// Feature Card Component
+const FeatureCard = ({ icon, title, description }) => (
+  <div className="flex items-start bg-red-50 p-6 rounded-lg shadow-sm">
+    <div className="flex-shrink-0 w-10 h-10 bg-red-100 text-red-600 flex items-center justify-center rounded-md">
+      {icon}
+    </div>
+    <div className="ml-4">
+      <p className="text-purple-900 font-semibold text-lg leading-snug">{title}</p>
+      <p className="text-gray-500 text-sm leading-relaxed">{description}</p>
+    </div>
+  </div>
+);
 
 export default Products;
