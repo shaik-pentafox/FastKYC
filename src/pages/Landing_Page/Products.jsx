@@ -1,72 +1,21 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { IconBolt, IconShieldCheck, IconGlobe } from "@tabler/icons-react";
+import CountUp from "react-countup";
+import { CheckIcon } from "@mantine/core";
+import { IconHourglass, IconHeart, IconWorld } from "@tabler/icons-react";
 
-// Product images
-import Product1 from "../../assets/Images/Product_assets/Product1.png";
-import Product2 from "../../assets/Images/Product_assets/Product2.png";
-import Product3 from "../../assets/Images/Product_assets/Product3.png";
-import Product4 from "../../assets/Images/Product_assets/Product4.png";
-import Product5 from "../../assets/Images/Product_assets/Product5.png";
-
-// Sections data
-const productSections = [
-  {
-    id: 1,
-    title: "Customer KYC APIs",
-    description:
-      "Simplify onboarding with powerful KYC checks that confirm identity, address, and authenticity in real time.",
-    list: [
-      "PAN Verification & PAN–Aadhaar Link",
-      "Name & Address Match",
-      "Driving License, Voter ID, Passport Verification",
-      "Liveliness Check & Face Match",
-    ],
-    image: Product1,
-  },
-  {
-    id: 2,
-    title: "Banking APIs",
-    description:
-      "Instantly verify customer bank accounts and prevent failed transactions. Our APIs ensure accurate account validation, enabling secure, smooth, and trustworthy payments.",
-    list: ["Bank Account Verification"],
-    image: Product2,
-  },
-  {
-    id: 3,
-    title: "GST & Business Verification APIs",
-    description:
-      "Verify GST-registered businesses and their compliance status without manual effort. Ensure you only work with genuine, tax-compliant entities.",
-    list: ["GST Verification (No PAN Input)"],
-    image: Product3,
-  },
-  {
-    id: 4,
-    title: "OCR APIs",
-    description:
-      "Extract data from government IDs and documents instantly with advanced OCR technology. Save time, eliminate manual entry errors, and accelerate digital onboarding.",
-    list: [
-      "OCR for PAN, Passport, Driving License, Voter ID, Vehicle RC",
-      "Aadhaar OCR",
-    ],
-    image: Product4,
-  },
-  {
-    id: 5,
-    title: "Security & Compliance APIs",
-    description:
-      "Safeguard sensitive data with in-built compliance tools. Enhance document integrity, protect customer identity, and meet regulatory requirements with ease.",
-    list: ["Aadhaar Masking", "Watermark"],
-    image: Product5,
-  },
-];
-
-function Products() {
+function Products({ sections = [], whyChoose = {}, features = [] }) {
   const [activeSection, setActiveSection] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const [counterInView, setCounterInView] = useState(false);
   const sectionRefs = useRef([]);
+  const counterRef = useRef(null);
 
-  // Detect mobile view
+const iconMap = {
+  Hourglass: <IconHourglass size={24} />,
+  Heart: <IconHeart size={24} />,
+  World: <IconWorld size={24} />
+};
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile();
@@ -74,7 +23,6 @@ function Products() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // Intersection Observer to detect which section is visible
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -87,22 +35,48 @@ function Products() {
       },
       { root: null, threshold: 0.6 }
     );
-
-    sectionRefs.current.forEach((section) => {
-      if (section) observer.observe(section);
-    });
-
+    sectionRefs.current.forEach((section) => section && observer.observe(section));
     return () => observer.disconnect();
   }, []);
 
+  // ✅ Counter Animation
+  useEffect(() => {
+    const counterObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setCounterInView(true);
+        });
+      },
+      { root: null, threshold: 0.3 }
+    );
+    if (counterRef.current) counterObserver.observe(counterRef.current);
+    return () => counterObserver.disconnect();
+  }, []);
+
+  // ✅ Animations
+  const topToBottom = {
+    hidden: { opacity: 0, y: -20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+  };
+
+  const containerVariants = { 
+    hidden: {}, 
+    visible: { transition: { staggerChildren: 0.3, ease: "easeOut" } } 
+  };
+
+  const bottomToTop = {
+    hidden: { opacity: 0, y: 40 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+  };
+
   return (
     <>
-      {/* Products Section */}
-      <div className="max-w-7xl mx-auto py-12 px-6 md:px-20 mb-24">
-        <div className="flex flex-col md:flex-row gap-x-12">
-          {/* Left side */}
+      {/* ---------------- PRODUCTS SECTION ---------------- */}
+      <section className="py-12 mb-24">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 flex flex-col md:flex-row gap-x-12">
+          {/* Left Side */}
           <div className="flex-1 space-y-24">
-            {productSections.map((section, index) => (
+            {sections.map((section, index) => (
               <SectionBlock
                 key={section.id}
                 section={section}
@@ -114,147 +88,161 @@ function Products() {
             ))}
           </div>
 
-          {/* Right side - Sticky image */}
+          {/* Right Side Image */}
           {!isMobile && (
             <div className="flex-1 relative">
               <div className="sticky top-0 h-screen flex items-center justify-center">
-                <AnimatePresence mode="wait">
-                  <motion.img
-                    key={activeSection}
-                    src={productSections[activeSection].image}
-                    alt={productSections[activeSection].title}
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 1.05 }}
-                    transition={{ duration: 0.4 }}
-                    className="w-full max-w-md max-h-[80vh] object-contain rounded-lg"
-                  />
-                </AnimatePresence>
+                <div className="relative w-full max-w-md h-[80vh]">
+                  <AnimatePresence mode="wait">
+                    <motion.img
+                      key={activeSection}
+                      src={sections[activeSection].image}
+                      alt={sections[activeSection].title}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.5 }}
+                      className="absolute inset-0 w-full h-full object-contain rounded-lg"
+                    />
+                  </AnimatePresence>
+                </div>
               </div>
             </div>
           )}
         </div>
-      </div>
+      </section>
 
-      {/* FastKYC section */}
-      <div className="container mx-auto py-16 px-6 md:px-20 mb-24 mt-[-45px]">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6">
-            <p className="text-red-600 font-medium text-2xl">Why choose FastKYC?</p>
-            <h2 className="text-3xl md:text-3xl font-normal leading-snug">
-              The core of identity & compliance <br /> for growing businesses
-            </h2>
-            <p className="text-gray-500 text-lg font-normal">
-              FastKYC makes onboarding effortless. We combine speed, trust, and compliance to help
-              businesses onboard customers instantly while staying fully secure. No delays, no risks—just smarter verification.
-            </p>
+      {/* ---------------- WHY CHOOSE SECTION ---------------- */}
+      <section className="py-16 mb-24 mt-[-125px]">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
+          <motion.div 
+            className="grid lg:grid-cols-2 gap-12 items-center" 
+            initial="hidden" 
+            whileInView="visible" 
+            viewport={{ once: true, amount: 0.3 }} 
+            variants={containerVariants}
+          >
+            {/* Left: Heading + Counters */}
+            <motion.div className="space-y-6" variants={containerVariants}>
+              <motion.p variants={topToBottom} className="text-red-600 font-medium text-[24px]">
+                {whyChoose.heading}
+              </motion.p>
+              <motion.h2 variants={topToBottom} className="text-3xl md:text-[32px] font-medium leading-snug">
+                {whyChoose.subheading}
+              </motion.h2>
+              <motion.p variants={topToBottom} className="text-gray-500 text-[20px] font-medium">
+                {whyChoose.description}
+              </motion.p>
 
-            <div className="flex flex-wrap justify-between mt-6 gap-6">
-              <div className="text-center flex-1 min-w-[120px]">
-                <h3 className="text-4xl font-bold">500+</h3>
-                <p className="text-gray-500 text-base">Identities verified</p>
-              </div>
-              <div className="text-center flex-1 min-w-[120px]">
-                <h3 className="text-4xl font-bold">96%</h3>
-                <p className="text-gray-500 text-base">Auto-approval rate</p>
-              </div>
-              <div className="text-center flex-1 min-w-[120px]">
-                <h3 className="text-4xl font-bold">60%</h3>
-                <p className="text-gray-500 text-base">Reduction in drop-offs</p>
-              </div>
-            </div>
-          </div>
+              <motion.div className="flex flex-wrap justify-between mt-6 gap-6" ref={counterRef} variants={topToBottom}>
+                {whyChoose.counters.map((counter, index) => (
+                  <motion.div key={index} className="text-center min-w-[120px]" variants={topToBottom}>
+                    <h3 className="text-[42px] font-bold text-black-600">
+                      {counterInView ? <CountUp end={counter.end} duration={2} suffix={counter.suffix || ""} /> : 0}
+                    </h3>
+                    <p className="text-gray-500 text-[16px] font-medium">{counter.label}</p>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </motion.div>
 
-          <div className="space-y-6 mt-6 lg:mt-0">
-            <FeatureCard
-              icon={<IconBolt size={24} />}
-              title="Faster Approvals"
-              description="Cut verification times from days to minutes."
-            />
-            <FeatureCard
-              icon={<IconShieldCheck size={24} />}
-              title="Trusted Security"
-              description="Protect your business with AI-powered fraud detection."
-            />
-            <FeatureCard
-              icon={<IconGlobe size={24} />}
-              title="Global Compliance"
-              description="Stay ahead with KYC, AML, GDPR, and more."
-            />
-          </div>
+            {/* Right: Feature Cards */}
+            <motion.div className="space-y-6 mt-6 lg:mt-0" variants={containerVariants}>
+              {whyChoose.featureCards.map((card,index) => (
+                <FeatureCard
+                  key={index}
+                  icon={iconMap[card.icon]}
+                  title={card.title}
+                  description={card.description}
+                  variants={bottomToTop}
+                />
+              ))}
+            </motion.div>
+          </motion.div>
         </div>
-      </div>
+      </section>
     </>
   );
 }
 
-// SectionBlock with mobile dynamic image
+// ---------------- SECTION BLOCK ----------------
 const SectionBlock = React.forwardRef(({ section, isActive, showHeader, isMobile }, ref) => {
   return (
-    <div
+    <motion.div
       ref={ref}
-      className={`min-h-[90vh] flex flex-col justify-center py-10 transition-all duration-500 ${
-        isActive ? "opacity-100 translate-y-0" : "opacity-60 translate-y-5"
-      }`}
+      className="flex flex-col justify-center py-10"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: isActive ? 1 : 0.6 }}
+      transition={{ duration: 0.6 }}
     >
       {showHeader && (
         <div className="mb-8">
-          <p className="text-red-600 text-xl mb-2">Products</p>
-          <h2 className="text-3xl md:text-3xl font-medium text-gray-900">
-            Powerful APIs for fast, secure, and reliable customer onboarding
+          <p className="text-[#E20303] text-[24px] font-medium mb-2">Products</p>
+          <h2 className="text-[32px] font-medium text-gray-900">
+            Powerful APIs for fast, secure and reliable customer onboarding
           </h2>
         </div>
       )}
 
-      {/* Mobile - show image only if active */}
       {isMobile && (
-        <div className="mb-6 flex justify-center">
-          <AnimatePresence mode="wait">
-            {isActive && (
-              <motion.img
-                key={section.id}
-                src={section.image}
-                alt={section.title}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
-                className="w-full max-w-sm object-contain rounded-lg"
-              />
-            )}
-          </AnimatePresence>
+        <div className="flex justify-center items-center mb-6">
+          <motion.img
+            key={section.id}
+            src={section.image}
+            alt={section.title}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+            className="w-full max-w-sm object-contain rounded-lg"
+          />
         </div>
       )}
 
-      <h2 className="text-3xl md:text-4xl font-semibold mb-3">{section.title}</h2>
-      <p className="text-gray-500 text-base mb-6">{section.description}</p>
+      <div className="flex items-center gap-4 mb-3">
+        <img src={section.icon} alt={section.title} className="w-14 h-14 flex-shrink-0" />
+        <h2 className="text-3xl md:text-[40px] font-bold">{section.title}</h2>
+      </div>
 
-      <p className="font-bold mb-2">Includes:</p>
+      <p className="text-gray-500 text-[20px] font-medium mb-6">{section.description}</p>
+
+      <p className="font-bold text-[24px] mb-2">Includes:</p>
       <ul className="list-none space-y-2">
         {section.list.map((item, i) => (
-          <li key={i} className="flex items-center text-gray-700 text-base" style={{color:"gray"}}>
-            <span className="inline-block w-5 h-5 mr-2 text-green-600">✔</span>
+          <li key={i} className="flex items-center text-gray-700 text-[20px] font-medium">
+            <CheckIcon className="w-3 h-3 mr-4 text-red-600" />
             {item}
           </li>
         ))}
       </ul>
-    </div>
+
+      <div className="py-6">
+        <button className="cursor-pointer flex items-center justify-center font-medium text-[20px] text-red-600 border border-red-600 rounded-[8px] px-7 py-1 hover:bg-red-50 transition">
+          Know more
+          <span className="ml-2 mb-1 text-[28px] font-medium leading-none">→</span>
+        </button>
+      </div>
+    </motion.div>
   );
 });
-
 SectionBlock.displayName = "SectionBlock";
 
-// Feature Card Component
-const FeatureCard = ({ icon, title, description }) => (
-  <div className="flex items-start bg-red-50 p-6 rounded-lg shadow-sm">
+// ---------------- FEATURE CARD ----------------
+const FeatureCard = ({ icon, title, description, variants }) => (
+  <motion.div
+    className="flex items-start bg-red-50 p-6 rounded-lg shadow-sm will-change-transform"
+    variants={variants}
+    whileHover={{ scale: 1.03, transition: { duration: 0.25, ease: "easeOut" } }}
+    whileTap={{ scale: 0.98 }}
+  >
     <div className="flex-shrink-0 w-10 h-10 bg-red-100 text-red-600 flex items-center justify-center rounded-md">
       {icon}
     </div>
     <div className="ml-4">
-      <p className="text-purple-900 font-semibold text-lg leading-snug">{title}</p>
-      <p className="text-gray-500 text-sm leading-relaxed">{description}</p>
+      <p className="text-black-900 font-medium text-[16px] leading-snug">{title}</p>
+      <p className="text-gray-500 font-medium text-[16px] leading-relaxed">{description}</p>
     </div>
-  </div>
+  </motion.div>
 );
 
 export default Products;

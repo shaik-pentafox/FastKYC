@@ -1,70 +1,130 @@
 import React from "react";
-import Logo from "../../assets/Images/Growth.png";
-import border from "../../assets/Images/icons/border.png";
+import { motion } from "framer-motion";
 
-function Customers() {
+function Customers({data}) {
+  const containerVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 1.5, ease: "easeInOut" },
+    },
+  };
+
+  const imageVariants = {
+    hidden: { opacity: 0, x: 100, scale: 0.95 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      scale: 1,
+      transition: { duration: 1.5, ease: "easeInOut" },
+    },
+  };
+
+  const featureVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: (i) => ({
+      opacity: 1,
+      x: 0,
+      transition: { delay: i * 0.3, duration: 1, ease: "easeInOut" },
+    }),
+  };
+
   return (
-    <section className="relative py-16 bg-gray-100">
-      {/* Border Image */}
+    <section className="relative py-16 bg-gray-100 overflow-hidden">
       <img
-        src={border}
+        src={data.image2}
         alt="Border Decoration"
         className="absolute inset-0 w-full h-full object-cover pointer-events-none"
       />
 
-      <div className="relative max-w-7xl mx-auto px-6 md:px-20">
+      <div className="relative max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
         <div className="grid md:grid-cols-2 gap-12 items-center">
-          {/* Left Side Text */}
-          <div className="order-1 md:order-1">
-            <p className="text-red-600 font-medium text-xl mb-2">Customer stories</p>
-            <h2 className="text-3xl md:text-3xl font-normal mb-6">
-              Bold Visions That Shape Digital Futures
-            </h2>
+          {/* Left Side */}
+          <motion.div
+            className="order-1 md:order-1"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+          >
+            <motion.p
+              className="text-red-600 font-medium text-[24px] mb-2"
+              variants={featureVariants}
+              custom={0}
+            >
+              {data.sectionTitle}
+            </motion.p>
 
-            <div className="md:hidden mb-6 flex justify-center">
+            <motion.h2
+              className="text-3xl md:text-[32px] font-medium mb-6"
+              variants={featureVariants}
+              custom={1}
+            >
+              {data.sectionSubtitle}
+            </motion.h2>
+
+            <motion.div
+              className="md:hidden mb-6 flex justify-center"
+              variants={featureVariants}
+              custom={2}
+            >
               <img
-                src={Logo}
+                src={data.image}
                 alt="Growth"
                 className="max-w-full max-h-[350px] object-contain rounded-lg"
               />
-            </div>
+            </motion.div>
 
-            {/* Feature 1 */}
-            <div className="flex items-start mb-4 gap-3">
-              <div className="flex-shrink-0 mt-1.5 w-5 h-5 rounded-full border-2 border-black bg-black flex items-center justify-center">
-                <div className="w-2 h-2 rounded-full bg-white"></div>
-              </div>
-              <p className="text-base text-gray-800">
-                <span className="text-red-600 font-medium text-lg">98%</span> Reduction in fraudulent applications with real-time verification
-              </p>
-            </div>
+            {data.features.map((feature, index) => (
+              <motion.div
+                key={index}
+                className="flex items-start mb-4 gap-3"
+                variants={featureVariants}
+                custom={index + 3}
+              >
+                <div className="flex-shrink-0 mt-1.5 w-5 h-5 rounded-full border-2 border-black bg-black flex items-center justify-center">
+                  <div className="w-2 h-2 rounded-full bg-white"></div>
+                </div>
+                <p className="text-base text-gray-800">
+                  <span className="text-red-600 font-medium text-[20px]">
+                    {feature.highlight}
+                  </span>{" "}
+                  <span className="text-[#5A5A59]">{feature.text}</span>
+                </p>
+              </motion.div>
+            ))}
 
-            {/* Feature 2 */}
-            <div className="flex items-start mb-4 gap-3">
-              <div className="flex-shrink-0 mt-1.5 w-5 h-5 rounded-full border-2 border-black bg-black flex items-center justify-center">
-                <div className="w-2 h-2 rounded-full bg-white"></div>
-              </div>
-              <p className="text-base text-gray-800">
-                <span className="text-red-600 font-medium text-lg">5000+</span> Customer identities verified every day through our APIs
-              </p>
-            </div>
+            <motion.p
+              className="text-gray-500 mb-2 font-medium text-[16px]"
+              variants={featureVariants}
+              custom={5}
+            >
+              {data.testimonial.quote}
+            </motion.p>
+            <motion.p
+              className="text-red-600 text-[16px] font-medium"
+              variants={featureVariants}
+              custom={6}
+            >
+              {data.testimonial.author}
+            </motion.p>
+          </motion.div>
 
-            <p className="text-gray-500 mb-2 text-base">
-              "With Pentafox FastKYC, we were able to onboard customers instantly while staying compliant. The APIs are seamless, reliable, and give us the confidence to scale securely."
-            </p>
-            <p className="text-red-600 text-sm font-medium">
-              — A Leading Fintech Partner
-            </p>
-          </div>
-
-          {/* Right Side - Image for desktop only */}
-          <div className="hidden md:flex justify-center items-center order-2">
+          {/* Right Side */}
+          <motion.div
+            className="hidden md:flex justify-center items-center order-2"
+            variants={imageVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+          >
             <img
-              src={Logo}
+              src={data.image}
               alt="Growth"
-              className="max-w-full max-h-[450px] object-contain rounded-lg"
+              className="max-w-full max-h-[450px] object-contain rounded-3xl"
             />
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

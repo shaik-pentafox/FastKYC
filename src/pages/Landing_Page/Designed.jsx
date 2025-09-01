@@ -1,36 +1,83 @@
 import React from "react";
-import Design from "../../assets/Images/Design.png";
+import { motion } from "framer-motion";
 
-function Designed() {
+function Designed({data}) {
+  const textContainerVariants = {
+    hidden: {},
+    visible: {
+      transition: { staggerChildren: 0.5 },
+    },
+  };
+
+  const textItemVariants = {
+    hidden: { opacity: 0, x: -40 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 1.5, ease: "easeInOut" },
+    },
+  };
+
+  const imageVariants = {
+    hidden: { opacity: 0, x: 80, scale: 0.95 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      scale: 1,
+      transition: { duration: 1.5, ease: "easeInOut", delay: 0.5 },
+    },
+  };
+
   return (
-    <section className="py-20 bg-gradient-to-r from-black via-black to-red-900">
-      <div className="max-w-7xl mx-auto px-6 md:px-20">
+    <section className="py-20 bg-gradient-to-b from-white via-white to-red-100 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
         <div className="grid md:grid-cols-2 gap-12 items-center">
-          {/* Left Column: Text */}
-          <div className="flex flex-col justify-center">
-            <h3 className="text-red-600 text-lg font-normal mb-2">
-              Designed for developers
-            </h3>
-            <h2 className="text-3xl md:text-3xl font-normal text-white mb-4">
-              Integrate in minutes.<br /> Scale with confidence
-            </h2>
-            <p className="text-gray-200 text-md md:text-md">
-              We take care of the complex KYC, compliance, and verification
-              frameworks so your team can focus on building amazing products.
-              With our REST APIs, clear documentation, and developer-first
-              approach, you can go from sandbox to production in hours — and
-              scale securely to millions of verifications.
-            </p>
-          </div>
+          {/* Left side */}
+          <motion.div
+            className="flex flex-col justify-center"
+            variants={textContainerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+          >
+            <motion.h3
+              className="text-red-600 text-[24px] font-medium mb-2"
+              variants={textItemVariants}
+            >
+              {data.sectionTitle}
+            </motion.h3>
 
-          {/* Right Column: Image */}
-          <div className="flex justify-start items-start">
+            <motion.h2
+              className="text-3xl md:text-[32px] font-medium text-gray-900 mb-4"
+              variants={textItemVariants}
+            >
+              {data.heading.split(".")[0]}.
+              <br />
+              {data.heading.split(".")[1]}
+            </motion.h2>
+
+            <motion.p
+              className="text-gray-700 text-[16px] font-medium md:text-[16px]"
+              variants={textItemVariants}
+            >
+              {data.description}
+            </motion.p>
+          </motion.div>
+
+          {/* Right side */}
+          <motion.div
+            className="flex justify-start items-start"
+            variants={imageVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+          >
             <img
-              src={Design}
+              src={data.image}
               alt="Developer integration illustration"
-              className="w-full h-full object-cover rounded-lg shadow-md"
+              className="w-full h-full object-cover rounded-lg"
             />
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

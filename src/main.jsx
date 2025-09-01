@@ -9,9 +9,9 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <MantineProvider
       theme={{
-        fontFamily: 'Inter, sans-serif',
+        fontFamily: "Satoshi",
       }}
-      defaultColorScheme="light" // or "dark"
+      defaultColorScheme="light"
     >
       <App />
     </MantineProvider>
