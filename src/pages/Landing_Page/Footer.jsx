@@ -8,7 +8,7 @@ import {
 
 function Footer({data}) {
   return (
-    <footer className="bg-black text-white py-12">
+    <footer className="bg-[#121212] text-white py-12">
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 flex flex-col gap-12">
         
         <div className="md:hidden flex justify-center">
@@ -20,7 +20,7 @@ function Footer({data}) {
           <div className="grid grid-cols-2 md:grid-cols-3 gap-10 text-left md:text-left">
             {data.menus.map((menu, idx) => (
               <div key={idx}>
-                <h3 className="text-red-500 font-bold text-[20px] mb-4">{menu.title}</h3>
+                <h3 className="text-[#E20303] font-bold text-[20px] mb-4">{menu.title}</h3>
                 <ul className="space-y-3">
                   {menu.links.map((item, i) => (
                     <li key={i}>
@@ -38,7 +38,7 @@ function Footer({data}) {
           </div>
 
           <div className="hidden md:flex flex-col flex-1 max-w-sm gap-3">
-            <h3 className="text-red-500 font-medium text-[20px] mb-4">
+            <h3 className="text-[#E20303] font-medium text-[20px] mb-4">
               {data.subscribe.title}
             </h3>
             <div className="relative w-full">
@@ -49,10 +49,10 @@ function Footer({data}) {
               <input
                 type="email"
                 placeholder={data.subscribe.placeholder}
-                className="w-full pl-10 pr-4 py-2 rounded-md bg-white text-black focus:ring-2 focus:ring-red-500 outline-none"
+                className="w-full pl-10 pr-4 py-2 rounded-md bg-white text-[#878787] focus:ring-2 focus:ring-red-500 outline-none"
               />
             </div>
-            <button className="w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-md font-bold text-[16px] shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all">
+            <button className="w-full bg-[#F44336] hover:bg-red-700 text-white py-2 rounded-md font-bold text-[16px] shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all">
               {data.subscribe.button}
             </button>
           </div>

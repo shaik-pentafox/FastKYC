@@ -1,7 +1,7 @@
 import React from "react";
 import { IconPhone } from "@tabler/icons-react";
 
-export default function Contact({data}) {
+export default function Contact({ data }) {
   return (
     <section className="py-16 bg-white">
       {/* Consistent*/}
@@ -12,19 +12,19 @@ export default function Contact({data}) {
             <div className="text-left">
               <h2 className="text-3xl sm:text-4xl md:text-[32px] font-bold mb-4">
                 {data.title}
-                <span className="text-red-600">{data.highlight}</span>
+                <span className="text-[#E20303]">{data.highlight}</span>
               </h2>
-              <p className="text-gray-600 text-base sm:text-[16px] md:text-[16px] font-medium mb-6">
+              <p className="text-[#616161] text-base sm:text-[16px] md:text-[16px] font-medium mb-6">
                 {data.description}
               </p>
 
-              <div className="flex flex-row justify-start gap-4 flex-wrap">
+              <div className="flex flex-col md:flex-row justify-start gap-4 flex-wrap">
                 {data.buttons.map((btn, index) => (
                   <button
                     key={index}
                     className={`flex items-center justify-center gap-2 px-6 py-2 rounded-[7.53px] text-[16px] font-bold transition ${btn.type === "primary"
-                      ? "border border-red-600 bg-red-600 text-white hover:bg-red-500"
-                      : "border border-gray-300 text-red-600 bg-white hover:bg-red-50"
+                        ? "border border-[#F44336] bg-[#F44336] text-white hover:bg-red-500"
+                        : "border border-[#F44336] text-[#F44336] bg-white hover:bg-red-50"
                       }`}
                   >
                     {btn.icon === "phone" && <IconPhone size={18} />}
@@ -32,6 +32,7 @@ export default function Contact({data}) {
                   </button>
                 ))}
               </div>
+
 
             </div>
 

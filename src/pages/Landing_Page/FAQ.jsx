@@ -16,7 +16,7 @@ function FAQ({data}) {
   return (
     <div className="w-full py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-20">
-        <h2 className="text-2xl sm:text-3xl md:text-[48px] font-bold mb-8 text-left">
+        <h2 className="text-2xl sm:text-3xl md:text-[48px] font-bold mb-8 text-left text-[#161C2D]">
           Frequently asked questions (FAQs)
         </h2>
 
@@ -57,7 +57,7 @@ function FAQ({data}) {
                     transition={{ duration: 0.5, ease: "easeInOut" }}
                     className="overflow-hidden"
                   >
-                    <div className="mt-4 text-gray-700 text-base sm:text-lg md:text-[18px] leading-relaxed">
+                    <div className="mt-4 text-[#424242] text-base sm:text-lg md:text-[18px] leading-relaxed">
                       {item.answer}
                     </div>
                   </motion.div>

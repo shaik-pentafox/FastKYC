@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-function Customers({data}) {
+function Customers({ data }) {
   const containerVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: {
@@ -17,7 +17,7 @@ function Customers({data}) {
       opacity: 1,
       x: 0,
       scale: 1,
-      transition: { duration: 1.5, ease: "easeInOut" },
+      transition: { duration: 1, ease: "easeInOut" },
     },
   };
 
@@ -26,7 +26,7 @@ function Customers({data}) {
     visible: (i) => ({
       opacity: 1,
       x: 0,
-      transition: { delay: i * 0.3, duration: 1, ease: "easeInOut" },
+      transition: { delay: i * 0.3, duration: 0.5, ease: "easeInOut" },
     }),
   };
 
@@ -49,7 +49,7 @@ function Customers({data}) {
             viewport={{ once: true, amount: 0.3 }}
           >
             <motion.p
-              className="text-red-600 font-medium text-[24px] mb-2"
+              className="text-[#E20303] font-medium text-[24px] mb-2"
               variants={featureVariants}
               custom={0}
             >
@@ -57,7 +57,7 @@ function Customers({data}) {
             </motion.p>
 
             <motion.h2
-              className="text-3xl md:text-[32px] font-medium mb-6"
+              className="text-3xl md:text-[32px] font-medium mb-6 text-[#212121]"
               variants={featureVariants}
               custom={1}
             >
@@ -65,7 +65,7 @@ function Customers({data}) {
             </motion.h2>
 
             <motion.div
-              className="md:hidden mb-6 flex justify-center"
+              className="md:hidden mb-6 flex justify-center text-[#333333]"
               variants={featureVariants}
               custom={2}
             >
@@ -87,23 +87,23 @@ function Customers({data}) {
                   <div className="w-2 h-2 rounded-full bg-white"></div>
                 </div>
                 <p className="text-base text-gray-800">
-                  <span className="text-red-600 font-medium text-[20px]">
+                  <span className="text-[#E20303] font-medium text-[20px]">
                     {feature.highlight}
                   </span>{" "}
-                  <span className="text-[#5A5A59]">{feature.text}</span>
+                  <span className="text-[#424242]">{feature.text}</span>
                 </p>
               </motion.div>
             ))}
 
             <motion.p
-              className="text-gray-500 mb-2 font-medium text-[16px]"
+              className="text-[#424242] mb-2 font-medium text-[16px]"
               variants={featureVariants}
               custom={5}
             >
               {data.testimonial.quote}
             </motion.p>
             <motion.p
-              className="text-red-600 text-[16px] font-medium"
+              className="text-[#AD0000] text-[16px] font-medium"
               variants={featureVariants}
               custom={6}
             >

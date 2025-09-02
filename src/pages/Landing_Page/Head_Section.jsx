@@ -1,9 +1,7 @@
-2)
-import React, { useState, useEffect, useRef, useId } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence, useAnimation } from "framer-motion";
 import { IconChevronDown, IconMenu2, IconX } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
-import border from "../../assets/Images/icons/border.png";
 
 const RunnerPath = ({ d, duration = 6, className, color = "#E20303" }) => {
   const pathRef = useRef(null);
@@ -37,9 +35,9 @@ const RunnerPath = ({ d, duration = 6, className, color = "#E20303" }) => {
         stroke={`url(#lineGradient-${color})`}
         strokeWidth="3"
         strokeLinecap="round"
-        strokeDasharray={`${segmentLength} ${segmentLength}`} 
+        strokeDasharray={`${segmentLength} ${segmentLength}`}
         animate={{
-          strokeDashoffset: [0, -2 * segmentLength], 
+          strokeDashoffset: [0, -2 * segmentLength],
         }}
         transition={{
           duration: duration,
@@ -51,83 +49,59 @@ const RunnerPath = ({ d, duration = 6, className, color = "#E20303" }) => {
   );
 };
 
-
-function Hero_Section({ data }) {
+function Head_Section({ data }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [buttonText, setButtonText] = useState(data.cta.textDesktop);
+  const [speedFactor, setSpeedFactor] = useState(1);
+  const [showPaths, setShowPaths] = useState(true);
+  const controls = useAnimation();
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 768) setButtonText(data.cta.textMobile);
-      else setButtonText(data.cta.textDesktop);
+      setButtonText(window.innerWidth < 768 ? data.cta.textMobile : data.cta.textDesktop);
+      setShowPaths(window.innerWidth >= 768);
     };
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
+  }, [data]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSpeedFactor((prev) => Math.min(prev + 0.01, 5));
+    }, 100);
+    return () => clearInterval(interval);
   }, []);
 
-  // const container = { hidden: {}, show: { transition: { staggerChildren: 0.3, delayChildren: 0.5 } } };
-  // const fadeUp = { hidden: { opacity: 0, y: 50 }, show: { opacity: 1, y: 0, transition: { duration: 1, ease: "easeOut" } } };
-  // const card1 = { hidden: { opacity: 0, x: -80, y: 100 }, show: { opacity: 1, x: 0, y: 0, transition: { delay: 0.5, duration: 2.5, ease: "easeOut" } } };
-  // const card2 = { hidden: { opacity: 0, x: -40, y: 100 }, show: { opacity: 1, x: 0, y: 0, transition: { delay: 1, duration: 2.5, ease: "easeOut" } } };
-  // const card3 = { hidden: { opacity: 0, x: 60, y: 100 }, show: { opacity: 1, x: 0, y: 0, transition: { delay: 1.5, duration: 2.5, ease: "easeOut" } } };
-  
-const container = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.2, // slightly faster stagger
-      delayChildren: 0.2,   // shorter initial delay
+  const container = {
+    hidden: {},
+    show: {
+      transition: { staggerChildren: 0.2 / speedFactor, delayChildren: 0.2 / speedFactor },
     },
-  },
-};
+  };
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 50 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: "easeOut" }, // faster but smooth
-  },
-};
+  const fadeUp = {
+    hidden: { opacity: 0, y: 50 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.5 / speedFactor, ease: "easeOut" } },
+  };
 
-const card1 = {
-  hidden: { opacity: 0, x: -80, y: 100 },
-  show: {
-    opacity: 1,
-    x: 0,
-    y: 0,
-    transition: { delay: 0.1, duration: 1.2, ease: "easeOut" },
-  },
-};
+  const card1 = {
+    hidden: { opacity: 0, x: -80, y: 100 },
+    show: { opacity: 1, x: 0, y: 0, transition: { delay: 0.1 / speedFactor, duration: 1.2 / speedFactor, ease: "easeOut" } },
+  };
+  const card2 = {
+    hidden: { opacity: 0, x: -40, y: 100 },
+    show: { opacity: 1, x: 0, y: 0, transition: { delay: 0.2 / speedFactor, duration: 1.2 / speedFactor, ease: "easeOut" } },
+  };
+  const card3 = {
+    hidden: { opacity: 0, x: 60, y: 100 },
+    show: { opacity: 1, x: 0, y: 0, transition: { delay: 0.3 / speedFactor, duration: 1.2 / speedFactor, ease: "easeOut" } },
+  };
 
-const card2 = {
-  hidden: { opacity: 0, x: -40, y: 100 },
-  show: {
-    opacity: 1,
-    x: 0,
-    y: 0,
-    transition: { delay: 0.2, duration: 1.2, ease: "easeOut" },
-  },
-};
-
-const card3 = {
-  hidden: { opacity: 0, x: 60, y: 100 },
-  show: {
-    opacity: 1,
-    x: 0,
-    y: 0,
-    transition: { delay: 0.3, duration: 1.2, ease: "easeOut" },
-  },
-};
-
- return (
+  return (
     <div className="min-h-screen w-full py-6 relative z-50 overflow-x-hidden">
-      <img
-        src={border}
-        alt="Border Decoration"
-        className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-      />
+      <img src={data.bg_image} alt="Border Decoration" className="absolute inset-0 w-full h-full object-cover pointer-events-none" />
+
       {/* Navbar */}
       <header className="py-6 relative z-50">
         <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 flex justify-between items-center">
@@ -140,14 +114,14 @@ const card3 = {
                 <IconChevronDown size={16} className="text-black" />
               </div>
             </div>
+            <span className="text-[#1E1E1E] text-[16px] font-medium cursor-pointer">Resources</span>
             <a href="https://pentafox.in/" rel="noopener noreferrer">
               <span className="text-[#1E1E1E] text-[16px] font-medium cursor-pointer">Company</span>
             </a>
-
           </nav>
 
           <div className="hidden min-[800px]:flex items-center gap-6">
-            <Link to="/Login" className="border border-[#F44336] px-5 py-2 rounded-[8px] text-[16px] font-medium text-[#F44336]">Sign in</Link>
+            <Link to="/Login" className="border border-[#F44336] px-5 py-2 rounded-[8px] text-[16px] font-medium text-[#F44336] hover:bg-[#F44336] hover:text-white transition">Sign in</Link>
             <Link to={data.cta.link} className="bg-[#F44336] text-white px-5 py-2 rounded-[8px] text-[16px] font-medium">{data.cta.textMobile}</Link>
           </div>
 
@@ -161,24 +135,27 @@ const card3 = {
         <AnimatePresence>
           {menuOpen && (
             <motion.div
-              className="fixed inset-0 bg-black text-white z-50 flex flex-col justify-center items-center gap-8"
+              className="fixed inset-0 bg-white text-[#1E1E1E] z-50 flex flex-col justify-center items-center gap-8 md:hidden"
               initial={{ opacity: 0, y: -50 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -50 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
+              animate={{ opacity: 1, y: 0, transition: { duration: 0.3 } }}
+              exit={{ opacity: 0, y: -50, transition: { duration: 0.3 } }}
             >
-              <button onClick={() => setMenuOpen(false)} className="absolute top-6 right-6 text-white">
+              <button
+                onClick={() => setMenuOpen(false)}
+                className="absolute top-6 right-6 text-[#F44336] rounded-full border border-[#F44336] p-2"
+              >
                 <IconX size={28} className="cursor-pointer" />
               </button>
-              <ul className="flex flex-col gap-6 text-2xl font-medium text-center text-[W]">
+
+              <ul className="flex flex-col gap-6 text-2xl font-medium text-center">
                 <li className="cursor-pointer">Why FastKYC</li>
                 <li className="cursor-pointer">Products</li>
+                <li className="cursor-pointer">Resources</li>
                 <li className="cursor-pointer">
-                  <a href="https://pentafox.in/" className="text-[white] text-[16px] font-medium">
+                  <a href="https://pentafox.in/" className="text-[#1E1E1E] text-2xl font-medium">
                     Company
                   </a>
                 </li>
-
               </ul>
             </motion.div>
           )}
@@ -186,146 +163,94 @@ const card3 = {
       </header>
 
       {/* Hero Section */}
-      <motion.section className="text-center text-black relative overflow-hidden pt-12" variants={container} initial="hidden" animate="show">
+      <motion.section
+        className="text-center text-black relative overflow-hidden pt-12"
+        variants={container}
+        initial="hidden"
+        animate="show"
+      >
+        {showPaths && (
+          <>
+            <motion.div variants={fadeUp}>
+              <RunnerPath d="M10 250 H150 H250 V200 V50 Q250 20, 280 20 H345" color="#E20303" className="top-[183px]"/>
+            </motion.div>
+            <motion.div variants={fadeUp}>
+              <RunnerPath d="M400 300 V360 Q400 380 420 380 H520 Q540 380 540 400 V440 Q540 460 545" color="#E20303" className="mt-[123px] left-[636px]" />
+            </motion.div>
+            <motion.div variants={fadeUp}>
+              <RunnerPath d="M100 300 V100 Q100 50 150 50 H258" color="#E20303" className="top-[124px] left-[1036px]" />
+            </motion.div>
+          </>
+        )}
 
-        {/* <RunnerPath
-          d="
-    M10 250              
-    H150                  
-    C150 250, 250 250, 250 200
-    V50                    
-    Q250 20, 280 20        
-    H345                   
-  "
-        color="#E20303"
-          
-          duration={5}
-          className="top-[183px] left-[53px]"
-          delay={2}
-        />
+        {/* Gradient overlays */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(239,68,68,0.3)_0%,_transparent_78%)] pointer-events-none"></div>
+        <div className="absolute top-0 left-0 w-full h-16 bg-gradient-to-b from-white to-transparent pointer-events-none"></div>
+        <div className="absolute left-0 top-0 h-full w-16 bg-gradient-to-r from-white/100 to-transparent pointer-events-none"></div>
+        <div className="absolute right-0 top-0 h-full w-16 bg-gradient-to-l from-white/100 to-transparent pointer-events-none"></div>
 
-
-        <RunnerPath
-          d="
-    M400 300
-    V360 Q400 380 420 380
-    H520 Q540 380 540 400
-    V440 Q540 460 545 
-  "
-        color="#E20303"
-          
-          duration={5}
-          className="mt-[123px] left-[658px]"
-          delay={2.5}
-        />
-
-        <RunnerPath
-          d="M100 300 V100 Q100 50 150 50 H258"
-         color="#E20303"
-          
-          duration={5}
-          className="top-[124px] left-[1036px]"
-          delay={3}
-        /> */}
-
-<motion.div variants={fadeUp}>
-  <RunnerPath
-    d="M10 250 H150 C150 250, 250 250, 250 200 V50 Q250 20, 280 20 H345"
-    color="#E20303"
-    duration={5}    
-    className="top-[183px]"
-    delay={0}       
-  />
-</motion.div>
-
-<motion.div variants={fadeUp}>
-  <RunnerPath
-    d="M400 300 V360 Q400 380 420 380 H520 Q540 380 540 400 V440 Q540 460 545"
-    color="#E20303"
-    duration={5}    
-    className="mt-[123px] left-[636px]"
-    delay={3}       
-  />
-</motion.div>
-
-<motion.div variants={fadeUp}>
-  <RunnerPath
-    d="M100 300 V100 Q100 50 150 50 H258"
-    color="#E20303"
-    duration={5}    
-    className="top-[124px] left-[1036px]"
-    delay={4}       
-  />
-</motion.div>
-
-        {/* <div className="relative max-w-7xl mx-auto px-6 md:px-12 lg:px-20 pb-14 
-                bg-white/80 bg-[radial-gradient(ellipse_at_center,_white,_transparent)] overflow-hidden"> */}
-
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(239,68,68,0.3)_0%,_transparent_70%)] pointer-events-none"></div>
-          <div className="absolute top-0 left-0 w-full h-16 bg-gradient-to-b from-white to-transparent pointer-events-none"></div>
-          <div className="absolute left-0 top-0 h-full w-16 bg-gradient-to-r from-white/100 to-transparent pointer-events-none"></div>
-          <div className="absolute right-0 top-0 h-full w-16 bg-gradient-to-l from-white/100 to-transparent pointer-events-none"></div>
-
-          <motion.div
-            variants={fadeUp}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="flex flex-wrap min-[800px]:flex-nowrap justify-center gap-3 mb-6 will-change-transform will-change-opacity"
-          >
-            {data.buttons.map((btn, i) => (
-              <button
-                key={i}
-                className="border border-[#00000066] text-[#333333] text-[14px] font-medium px-5 py-2 rounded-full bg-white/80 backdrop-blur-sm transition-transform duration-300"
-              >
-                {btn}
-              </button>
-            ))}
-          </motion.div>
-
-          <motion.h1
-            variants={fadeUp}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-            className="relative text-4xl min-[800px]:text-[48px] font-bold leading-tight mb-6 text-center will-change-transform will-change-opacity text-[#1E1E1E]"
-          >
-            {data.heading.map((line, i) => (
-              <React.Fragment key={i}>
-                {line}
-                <br />
-              </React.Fragment>
-            ))}
-          </motion.h1>
-
-          <motion.p
-            variants={fadeUp}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="relative text-[#424242] text-[18px] max-w-2xl mx-auto mb-6 text-center font-medium will-change-transform will-change-opacity"
-          >
-            {data.description}
-          </motion.p>
-
-          <motion.div
-            variants={fadeUp}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
-            className="inline-block relative z-10 will-change-transform"
-          >
-            <Link
-              to={data.cta.link}
-              className="w-full text-center bg-[#F44336] text-white font-semibold px-8 py-3 rounded-md text-[16px] hover:bg-red-500 transition-colors cursor-pointer block"
+        <motion.div
+          variants={fadeUp}
+          transition={{ duration: 0.6 / speedFactor }}
+          className="flex flex-wrap min-[800px]:flex-nowrap justify-center gap-3 mb-6"
+        >
+          {data.buttons.map((btn, i) => (
+            <button
+              key={i}
+              className="border border-[#00000066] text-[#333333] text-[14px] font-medium px-5 py-2 rounded-full bg-white/80 backdrop-blur-sm transition-transform duration-300"
             >
-              {buttonText}
-            </Link>
-          </motion.div>
-        {/* </div> */}
+              {btn}
+            </button>
+          ))}
+        </motion.div>
+
+        {/* Heading */}
+        <motion.h1
+          variants={fadeUp}
+          transition={{ duration: 0.7 / speedFactor }}
+          className="relative text-4xl min-[800px]:text-[48px] font-bold leading-tight mb-6 text-center"
+        >
+          {data.heading.map((line, i) => (
+            <React.Fragment key={i}>
+              {line}
+              <br />
+            </React.Fragment>
+          ))}
+        </motion.h1>
 
 
+        <motion.p
+          variants={fadeUp}
+          transition={{ duration: 0.8 / speedFactor }}
+          className="relative text-[#424242] text-[18px] max-w-2xl mx-auto mb-6 text-center font-medium"
+        >
+          {data.description}
+        </motion.p>
+
+
+        <motion.div
+          variants={fadeUp}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ duration: 0.3 / speedFactor }}
+          className="inline-block relative z-10"
+        >
+          <Link
+            to={data.cta.link}
+            className="w-full text-center bg-[#F44336] text-white font-semibold px-8 py-3 rounded-md text-[16px] hover:bg-red-500 transition-colors block"
+          >
+            {buttonText}
+          </Link>
+        </motion.div>
+
+        {/* Cards */}
         <div className="relative h-[600px] mt-[-130px] hidden min-[800px]:block">
           <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 relative h-full">
             {[data.cards[0]].map((card, i) => (
               <motion.div key={i} variants={card1} className="absolute left-38 top-[15%] w-72 bg-white/90 backdrop-blur-md text-black border border-[#00000033] shadow-lg rounded-3xl p-4 py-2 flex items-center gap-4 cursor-pointer">
                 <motion.img src={card.img} alt={card.title} className="h-13" initial={{ scale: 0.8, rotate: -10 }} animate={{ scale: 1, rotate: 0 }} transition={{ delay: 1, duration: 1.8 }} />
                 <div>
-                  <p className="text-[16px] font-normal text-start ">{card.title}</p>
+                  <p className="text-[16px] font-normal text-start">{card.title}</p>
                   <p className="text-[18px] font-bold mt-1 text-start text-[#333333]">{card.value}</p>
                 </div>
               </motion.div>
@@ -370,14 +295,13 @@ const card3 = {
                     }}
                   />
                 </motion.div>
-
               </motion.div>
             ))}
           </div>
         </div>
 
         {/* Bank Logos */}
-        <motion.div className="overflow-hidden w-full py-6 relative mt-10 min-[800px]:mt-[-262px]" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2, duration: 1.5 }} md:transition={{ delay: 3, duration: 1.5 }}>
+        <motion.div className="overflow-hidden w-full py-6 relative mt-10 min-[800px]:mt-[-262px]" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2, duration: 1.5 }}>
           <motion.div className="flex gap-12 w-max" animate={{ x: ["0%", "-30%"] }} transition={{ x: { repeat: Infinity, repeatType: "loop", duration: 20, ease: "linear" } }}>
             {[...Array(5)].map((_, i) => (
               <div key={i} className="flex gap-12">
@@ -393,5 +317,4 @@ const card3 = {
   );
 }
 
-export default Hero_Section;
-
+export default Head_Section;

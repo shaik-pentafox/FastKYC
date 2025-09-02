@@ -14,7 +14,7 @@ function Designed({data}) {
     visible: {
       opacity: 1,
       x: 0,
-      transition: { duration: 1.5, ease: "easeInOut" },
+      transition: { duration: 1, ease: "easeInOut" },
     },
   };
 
@@ -24,7 +24,7 @@ function Designed({data}) {
       opacity: 1,
       x: 0,
       scale: 1,
-      transition: { duration: 1.5, ease: "easeInOut", delay: 0.5 },
+      transition: { duration: 1, ease: "easeInOut", delay: 0.5 },
     },
   };
 
@@ -41,14 +41,14 @@ function Designed({data}) {
             viewport={{ once: true, amount: 0.3 }}
           >
             <motion.h3
-              className="text-red-600 text-[24px] font-medium mb-2"
+              className="text-[#E20303] text-[24px] font-medium mb-2"
               variants={textItemVariants}
             >
               {data.sectionTitle}
             </motion.h3>
 
             <motion.h2
-              className="text-3xl md:text-[32px] font-medium text-gray-900 mb-4"
+              className="text-3xl md:text-[32px] font-medium text-[#1E1E1E] mb-4"
               variants={textItemVariants}
             >
               {data.heading.split(".")[0]}.
@@ -57,7 +57,7 @@ function Designed({data}) {
             </motion.h2>
 
             <motion.p
-              className="text-gray-700 text-[16px] font-medium md:text-[16px]"
+              className="text-[#333333] text-[16px] font-medium md:text-[16px]"
               variants={textItemVariants}
             >
               {data.description}

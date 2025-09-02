@@ -3,6 +3,7 @@ import bank1 from "../assets/Images/Company_assets/Company_logo1.png";
 import bank2 from "../assets/Images/Company_assets/Company_logo2.png";
 import bank3 from "../assets/Images/Company_assets/Company_logo3.png";
 import bank4 from "../assets/Images/Company_assets/Company_logo4.png";
+import bg_border from "../assets/Images/icons/border.png";
 
 //2)Product_Section (icons & images)
 import Icon1 from "../assets/Images/Product_assets/Icon1.png";
@@ -22,7 +23,7 @@ import FastKYC_Logo from "../assets/Images/FastKYC_logo.png";
 import Premium from "../assets/Images/icons/Premium_rate.png";
 import Security from "../assets/Images/icons/Discount_icon.png";
 import Circle from "../assets/Images/icons/Circle.png";
-import border from "../assets/Images/icons/border.png";
+import bg_border2 from "../assets/Images/icons/border.png";
 import CustomerLogo from "../assets/Images/Growth.png";
 import Design from "../assets/Images/Design.png";
 import Integration from "../assets/Images/Integration.png";
@@ -31,6 +32,7 @@ import FastKYC_Logo2 from "../assets/Images/FastKYC_logo2.png";
 
 const data = {
   heroData :{
+    bg_image:bg_border,
     image: FastKYC_Logo,
     buttons: ["Faster Onboarding", "Stronger Compliance"],
     heading: ["Simplify Compliance.","Maximize Growth."],
@@ -138,7 +140,7 @@ const data = {
     sectionTitle: "Customer stories",
     sectionSubtitle: "Bold Visions That Shape Digital Futures",
     image: CustomerLogo,
-    image2: border,
+    image2: bg_border2,
     features: [
       {
         highlight: "98%",

@@ -1,4 +1,4 @@
-import Logo from "../assets/Images/FastKYC_logo2.png";
+import Logo from "../assets/Images/FastKYC_logo.png";
 import bank1 from "../assets/Images/Company_assets/Company_logo1.png";
 import bank2 from "../assets/Images/Company_assets/Company_logo2.png";
 import bank3 from "../assets/Images/Company_assets/Company_logo3.png";

@@ -14,7 +14,7 @@ function PayIntegrate({data}) {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 1, ease: "easeInOut" },
+      transition: { duration: 0.5, ease: "easeInOut" },
     },
   };
 
@@ -55,21 +55,21 @@ function PayIntegrate({data}) {
             viewport={{ once: true, amount: 0.3 }}
           >
             <motion.h2
-              className="text-2xl md:text-3xl lg:text-5xl font-bold text-gray-900 mb-4 leading-snug"
+              className="text-2xl md:text-3xl lg:text-5xl font-bold text-[#161C2D] mb-4 leading-snug"
               variants={textItemVariants}
             >
               {data.heading}
             </motion.h2>
 
             <motion.p
-              className="text-base md:text-lg lg:text-xl text-gray-600 mb-6 font-medium leading-relaxed"
+              className="text-base md:text-lg lg:text-xl text-[#424242] mb-6 font-medium leading-relaxed"
               variants={textItemVariants}
             >
               {data.description}
             </motion.p>
 
             <motion.div className="pt-4" variants={textItemVariants}>
-              <button className="cursor-pointer flex items-center font-medium text-base md:text-lg lg:text-xl text-red-600 border border-red-600 rounded-lg px-6 md:px-8 lg:px-10 py-2 hover:bg-red-50 transition">
+              <button className="cursor-pointer flex items-center font-medium text-base md:text-lg lg:text-xl text-[#E20303] border border-[#E20303] rounded-lg px-6 md:px-8 lg:px-10 py-2 hover:bg-red-50 transition">
                 {data.buttonText}
                 <span className="ml-2 mb-1 text-2xl md:text-3xl font-bold leading-none">
                   {data.buttonIcon}
