@@ -22,7 +22,7 @@ export default function Contact({ data }) {
                 {data.buttons.map((btn, index) => (
                   <button
                     key={index}
-                    className={`flex items-center justify-center gap-2 px-6 py-2 rounded-[7.53px] text-[16px] font-bold transition ${btn.type === "primary"
+                    className={`h-10 flex items-center justify-center gap-2 px-6 py-2 rounded-[10px] text-[16px] font-bold transition ${btn.type === "primary"
                         ? "border border-[#F44336] bg-[#F44336] text-white hover:bg-red-500"
                         : "border border-[#F44336] text-[#F44336] bg-white hover:bg-red-50"
                       }`}

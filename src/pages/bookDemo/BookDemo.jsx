@@ -22,6 +22,7 @@ export default function BookDemo({ data }) {
   const { hero, form, logo } = data;
 
   return (
+    <>
     <div className="min-h-screen w-full py-6 overflow-x-hidden bg-gradient-to-b from-white via-white to-red-100 overflow-hidden">
       {/* Header */}
 
@@ -189,7 +190,9 @@ export default function BookDemo({ data }) {
           ))}
         </motion.div>
       </div>
-
-    </div>
+</div>
+    
+   
+    </>
   );
 }

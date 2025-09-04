@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import CountUp from "react-countup";
 import { CheckIcon } from "@mantine/core";
 import { IconHourglass, IconHeart, IconWorld } from "@tabler/icons-react";
+import { Link } from "react-router-dom";
 
 function Products({ sections = [], whyChoose = {}, features = [] }) {
   const [activeSection, setActiveSection] = useState(null);
@@ -262,10 +263,13 @@ const SectionBlock = React.forwardRef(({ section, isActive, isMobile }, ref) => 
       </ul>
 
       <div className="py-6">
-        <button className="cursor-pointer flex items-center justify-center font-medium text-[20px] text-[#F44336] border border-[#F44336] rounded-[8px] px-7 py-1 hover:bg-red-50 transition">
+        <Link
+          to={section.link}
+          className="w-[214px] h-10 cursor-pointer flex items-center justify-center font-medium text-[16px] text-[#F44336] border border-[#F44336] rounded-[8px] px-7 py-1 hover:bg-red-50 transition"
+        >
           Know more
           <span className="ml-2 mb-1 text-[28px] font-medium leading-none">→</span>
-        </button>
+        </Link>
       </div>
     </motion.div>
   );
@@ -280,7 +284,7 @@ const FeatureCard = ({ icon, title, description, variants }) => (
     whileHover={{ scale: 1.03, transition: { duration: 0.25, ease: "easeOut" } }}
     whileTap={{ scale: 0.98 }}
   >
-    <div className="flex-shrink-0 w-10 h-10 bg-red-100 text-red-600 flex items-center justify-center rounded-md">
+    <div className="flex-shrink-0 w-10 h-10 bg-red-100 text-[#F44336] flex items-center justify-center rounded-md">
       {icon}
     </div>
     <div className="ml-4">

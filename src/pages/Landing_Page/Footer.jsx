@@ -52,7 +52,7 @@ function Footer({data}) {
                 className="w-full pl-10 pr-4 py-2 rounded-md bg-white text-[#878787] focus:ring-2 focus:ring-red-500 outline-none"
               />
             </div>
-            <button className="w-full bg-[#F44336] hover:bg-red-700 text-white py-2 rounded-md font-bold text-[16px] shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all">
+            <button className="w-full bg-[#F44336] hover:bg-red-700 text-white py-2 rounded-md font-bold text-[16px] shadow-md hover:shadow-lg transform  transition-all cursor-pointer">
               {data.subscribe.button}
             </button>
           </div>
@@ -78,12 +78,12 @@ function Footer({data}) {
           ))}
         </div>
 
-        <hr className="border-gray-700 my-6" />
+        <hr className="border-gray-700 my-0 md:my-6" />
 
         <div className="flex flex-col md:flex-row justify-center md:justify-between items-center text-gray-400 text-sm gap-4 text-center md:text-left">
 
           <div className="hidden md:flex justify-start">
-            <img src={data.image} alt="FastKYC Logo" className="w-32 object-contain" />
+            <img src={data.image} alt="FastKYC Logo" className="w-36 object-contain" />
           </div>
 
           <div className="flex flex-wrap justify-center gap-12">

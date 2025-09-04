@@ -5,6 +5,13 @@ import bank3 from "../assets/Images/Company_assets/Company_logo3.png";
 import bank4 from "../assets/Images/Company_assets/Company_logo4.png";
 import bg_border from "../assets/Images/icons/border.png";
 
+// Nav icons
+import Product1_nav from "../assets/Images/Product_assets/Icon1.png";
+import Product2_nav from "../assets/Images/Product_assets/Icon2.png";
+import Product3_nav from "../assets/Images/Product_assets/Icon3.png";
+import Product4_nav from "../assets/Images/Product_assets/Icon4.png";
+import Product5_nav from "../assets/Images/Product_assets/Icon5.png";
+
 //2)Product_Section (icons & images)
 import Icon1 from "../assets/Images/Product_assets/Icon1.png";
 import Icon2 from "../assets/Images/Product_assets/Icon2.png";
@@ -31,11 +38,11 @@ import Book from "../assets/Images/Book.png";
 import FastKYC_Logo2 from "../assets/Images/FastKYC_logo2.png";
 
 const data = {
-  heroData :{
-    bg_image:bg_border,
+  heroData: {
+    bg_image: bg_border,
     image: FastKYC_Logo,
     buttons: ["Faster Onboarding", "Stronger Compliance"],
-    heading: ["Simplify Compliance.","Maximize Growth."],
+    heading: ["Simplify Compliance.", "Maximize Growth."],
     description:
       "Pentafox FastKYC offers an end-to-end tax automation platform that helps businesses verify tax IDs, calculate and pay taxes, generate e-invoices, process tax documents, reconcile ledgers, and file tax returns — all through secure SDKs & APIs.",
     cta: { textDesktop: "Get Started", textMobile: "Book a demo", link: "/Book_demo" },
@@ -60,7 +67,14 @@ const data = {
       },
     ],
     banks: [bank1, bank2, bank3, bank4],
-  }, 
+  },
+  products_nav: [
+    { icon: Product1_nav, title: "GST", desc: "GST & Business Verification APIs", link: "/Products_GST" },
+    { icon: Product2_nav, title: "Security & Compliance APIs", desc: "Watermark and Aadhaar Masking", link: "/Products_security" },
+    { icon: Product3_nav, title: "Bank", desc: "Bank Account Verification", link: "/Products_bank-account-verification" },
+    { icon: Product4_nav, title: "OCR APIs", desc: "Extract data from government IDs and documents", link: "/Products_OCR-APIs" },
+    { icon: Product5_nav, title: "KYCs", desc: "Simplify onboarding with powerful KYC", link: "/Products_KYC" },
+  ],
   productSections: [
     {
       title: "KYC APIs",
@@ -73,7 +87,8 @@ const data = {
         "Liveliness Check & Face Match"
       ],
       image: Product1,
-      icon: Icon1
+      icon: Icon1,
+      link: "/Products_KYC"
     },
     {
       title: "Banking APIs",
@@ -81,7 +96,8 @@ const data = {
         "Instantly verify customer bank accounts and prevent failed transactions. Our APIs ensure accurate account validation, enabling secure, smooth, and trustworthy payments.",
       list: ["Bank Account Verification"],
       image: Product2,
-      icon: Icon2
+      icon: Icon2,
+      link: "/Products_bank-account-verification"
     },
     {
       title: "GST & Business Verification APIs",
@@ -89,7 +105,8 @@ const data = {
         "Verify GST-registered businesses and their compliance status without manual effort. Ensure you only work with genuine, tax-compliant entities.",
       list: ["GST Verification (No PAN Input)"],
       image: Product3,
-      icon: Icon3
+      icon: Icon3,
+      link: "/Products_GST"
     },
     {
       title: "OCR APIs",
@@ -97,7 +114,8 @@ const data = {
         "Extract data from government IDs and documents instantly with advanced OCR technology. Save time, eliminate manual entry errors, and accelerate digital onboarding.",
       list: ["OCR for PAN, Aadhaar", "OCR for Passport, Driving License, Voter ID, Vehicle RC"],
       image: Product4,
-      icon: Icon4
+      icon: Icon4,
+      link: "/Products_OCR-APIs"
     },
     {
       title: "Security & Compliance APIs",
@@ -105,7 +123,8 @@ const data = {
         "Safeguard sensitive data with in-built compliance tools. Enhance document integrity, protect customer identity, and meet regulatory requirements with ease.",
       list: ["Aadhaar Masking", "Watermark"],
       image: Product5,
-      icon: Icon5
+      icon: Icon5,
+      link: "/Security_APIs"
     }
   ],
   whyChoose: {
