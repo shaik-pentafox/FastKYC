@@ -9,7 +9,6 @@ import {
 } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 
-
 const RunnerPath = ({ d, duration = 6, offset = 0, className, color = "#E20303" }) => {
   const segmentLength = 180;
 
@@ -149,7 +148,9 @@ function Head_Section({ data, products_nav }) {
       <header className="py-6 relative z-50">
         <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 flex justify-between items-center">
           {/* Logo */}
-          <img src={data.image} alt="FastKYC Logo" className="h-10" />
+          <Link to="/">
+            <img src={data.image} alt="FastKYC Logo" className="h-10 cursor-pointer" />
+          </Link>
 
           {/* Desktop Nav */}
           <nav className="hidden min-[800px]:flex items-center gap-8 ml-10 relative">
@@ -175,7 +176,8 @@ function Head_Section({ data, products_nav }) {
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
-                    className="absolute top-[35px] left-1/2 -translate-x-1/2 mt-2 
+                    transition={{ duration: 0.3 }}
+                    className="absolute top-[35px] left-3/4 -translate-x-1/2 mt-2 
                    w-[712px] bg-white shadow-lg rounded-[20px] p-6 
                    grid grid-cols-2 gap-5 z-50 border border-[#F44336]"
                   >
@@ -183,19 +185,49 @@ function Head_Section({ data, products_nav }) {
                       Products
                     </h3>
                     {products_nav.map((p, i) => (
-                      <Link
-                        to={p.link}
+                      <motion.div
                         key={i}
-                        className="flex items-start gap-3 p-2 rounded-lg hover:bg-gray-50 cursor-pointer"
-                        onClick={() => setOpenDropdown(false)}
+                        initial="hidden"
+                        animate="visible"
+                        variants={{
+                          visible: {
+                            transition: {
+                              staggerChildren: 0.25,
+                              delayChildren: i * 0.4,
+                            },
+                          },
+                        }}
                       >
-                        <img src={p.icon} alt={p.title} className="w-12 h-12" />
-                        <div>
-                          <p className="text-[16px] font-medium text-[#F44336]">{p.title}</p>
-                          <p className="text-[18px] text-[#212121] font-medium">{p.desc}</p>
-                        </div>
-                      </Link>
+                        <Link
+                          to={p.link}
+                          className="flex items-start gap-3 p-2 rounded-lg hover:bg-gray-50 cursor-pointer"
+                          onClick={() => setOpenDropdown(false)}
+                        >
+                          {/* Icon animation */}
+                          <motion.img
+                            src={p.icon}
+                            alt={p.title}
+                            className="w-12 h-12"
+                            variants={{
+                              hidden: { opacity: 0, y: 30 },
+                              visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
+                            }}
+                          />
+
+                          {/* Text animation */}
+                          <motion.div
+                            variants={{
+                              hidden: { opacity: 0, y: 20 },
+                              visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
+                            }}
+                          >
+                            <p className="text-[16px] font-medium text-[#F44336]">{p.title}</p>
+                            <p className="text-[18px] text-[#212121] font-medium">{p.desc}</p>
+                          </motion.div>
+                        </Link>
+                      </motion.div>
                     ))}
+
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -291,19 +323,44 @@ function Head_Section({ data, products_nav }) {
                 </h3>
                 <div className="flex flex-col gap-5">
                   {products_nav.map((p, i) => (
-                    <Link
-                      to={p.link}
+                    <motion.div
                       key={i}
-                      className="flex items-center gap-4 cursor-pointer"
-                      onClick={() => setMenuOpen(false)}
+                      initial="hidden"
+                      animate="visible"
+                      variants={{
+                        visible: {
+                          transition: { staggerChildren: 0.2, delayChildren: i * 0.4 },
+                        },
+                      }}
                     >
-                      <img src={p.icon} alt={p.title} className="w-12 h-12" />
-                      <div>
-                        <p className="font-medium text-[#F44336]">{p.title}</p>
-                        <p className="font-medium text-[#212121] text-[18px]">{p.desc}</p>
-                      </div>
-                    </Link>
+                      <Link
+                        to={p.link}
+                        className="flex items-center gap-4 cursor-pointer"
+                        onClick={() => setMenuOpen(false)}
+                      >
+                        <motion.img
+                          src={p.icon}
+                          alt={p.title}
+                          className="w-12 h-12"
+                          variants={{
+                            hidden: { opacity: 0, x: 20 },
+                            visible: { opacity: 1, x: 0, transition: { duration: 0.4 } },
+                          }}
+                        />
+
+                        <motion.div
+                          variants={{
+                            hidden: { opacity: 0, x: 20 },
+                            visible: { opacity: 1, x: 0, transition: { duration: 0.4 } },
+                          }}
+                        >
+                          <p className="font-medium text-[#F44336]">{p.title}</p>
+                          <p className="font-medium text-[#212121] text-[18px]">{p.desc}</p>
+                        </motion.div>
+                      </Link>
+                    </motion.div>
                   ))}
+
                 </div>
               </div>
             )}
@@ -319,19 +376,47 @@ function Head_Section({ data, products_nav }) {
         animate="show"
       >
         <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 ">
+          {/* Runner Paths */}
           {showPaths && (
             <div className="hidden lg:block">
-              <motion.div variants={fadeUp}>
-                <RunnerPath d="M10 250 H150 H250 V200 V50 Q250 20, 280 20 H345" color="#E20303" className="top-[183px]" />
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5, duration: 0.8 }}
+              >
+                <RunnerPath
+                  d="M10 250 H150 H250 V200 V50 Q250 20, 280 20 H345"
+                  color="#E20303"
+                  className="top-[183px]"
+                />
               </motion.div>
-              <motion.div variants={fadeUp}>
-                <RunnerPath d="M400 300 V360 Q400 380 420 380 H520 Q540 380 540 400 V440 Q540 460 545" color="#E20303" className="mt-[123px] left-[636px]" />
+
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.0, duration: 0.8 }}
+              >
+                <RunnerPath
+                  d="M400 300 V360 Q400 380 420 380 H520 Q540 380 540 400 V440 Q540 460 545"
+                  color="#E20303"
+                  className="mt-[123px] left-[636px]"
+                />
               </motion.div>
-              <motion.div variants={fadeUp}>
-                <RunnerPath d="M100 300 V100 Q100 50 150 50 H258" color="#E20303" className="top-[124px] left-[1036px]" />
+
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.5, duration: 0.8 }}
+              >
+                <RunnerPath
+                  d="M100 300 V100 Q100 50 150 50 H258"
+                  color="#E20303"
+                  className="top-[124px] left-[1036px]"
+                />
               </motion.div>
             </div>
           )}
+
 
           {/* Gradient overlays */}
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(239,68,68,0.3)_0%,_transparent_78%)] pointer-events-none"></div>

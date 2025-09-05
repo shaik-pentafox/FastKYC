@@ -4,19 +4,20 @@ import React from "react";
 import Head_Section from "./Bank_HeadSection";
 import Why_FastKYC from "./Why_FastKYC"
 import FlowIntegrate from "./FlowIntergate_Section";
-import Footer from "../../Landing_Page/Footer";
+import Footer from "../../Footer";
 
 //Json Data
 import data from "../../../services/LandingPageData";
 import BankData from "../../../services/BankingPageData";
+import footerData from '../../../services/FooterPageData'
 
 function App() {
   return (
     <div>
-    <Head_Section data={BankData.pageData}/>
+    <Head_Section data={BankData.pageData} products_nav={data.products_nav}/>
     <Why_FastKYC data={BankData.whyFastKycData}/>
     <FlowIntegrate data={BankData.flowData}/>
-    <Footer data={data.footerData} /> 
+    <Footer data={footerData} /> 
     </div>
   );
 }

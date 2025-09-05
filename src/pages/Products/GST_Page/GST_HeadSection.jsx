@@ -1,10 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { IconChevronDown, IconMenu2, IconX } from "@tabler/icons-react";
+import {
+  IconChevronDown,
+  IconMenu2,
+  IconX,
+  IconChevronRight,
+  IconChevronLeft,
+} from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 
-function Hero_Section({ data }) {
+function GST_HeadSection({ data, products_nav }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [submenu, setSubmenu] = useState(null);
+  const [openDropdown, setOpenDropdown] = useState(false);
+  const dropdownRef = useRef(null);
+
+  // Close sidebar automatically when width ≥ 768px
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setMenuOpen(false);
+        setSubmenu(null);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setOpenDropdown(false);
+      }
+    };
+    if (openDropdown) document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [openDropdown]);
 
   const containerVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -25,50 +57,123 @@ function Hero_Section({ data }) {
       {/* Navbar */}
       <header className="py-6 relative z-50">
         <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 flex justify-between items-center">
-          <img src={data.header.logo} alt="FastKYC Logo" className="h-10" />
-
+          <Link to="/">
+            <img src={data.header.logo} alt="FastKYC Logo" className="h-10" />
+          </Link>
           {/* Desktop Nav */}
-          <nav className="hidden min-[800px]:flex items-center gap-8 ml-10">
+          <nav className="hidden min-[800px]:flex items-center gap-8 ml-10 relative">
             {data.header.nav.map((item, idx) =>
-              item.external ? (
+              item.dropdown ? (
+                // Dropdown item
+                <div
+                  key={idx}
+                  className="relative"
+                  ref={dropdownRef}
+                >
+                  <div
+                    className="flex items-center gap-1 cursor-pointer text-[#1E1E1E] text-[16px] font-medium"
+                    onClick={() => setOpenDropdown(!openDropdown)}
+                  >
+                    {item.label}
+                    <IconChevronDown size={16} />
+                  </div>
+
+                  {/* Products dropdown */}
+                  <AnimatePresence>
+                    {openDropdown && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        className="absolute top-[35px] left-1/2 -translate-x-1/2 mt-2 
+                        w-[712px] bg-white shadow-lg rounded-[20px] p-6 
+                        grid grid-cols-2 gap-5 z-50 border border-[#F44336]"
+                      >
+                        <h3 className="col-span-2 text-[#F44336] font-medium text-[18px] p-2">
+                          Products
+                        </h3>
+                        {products_nav.map((p, i) => (
+                          <motion.div
+                            key={i}
+                            initial="hidden"
+                            animate="visible"
+                            variants={{
+                              visible: {
+                                transition: {
+                                  staggerChildren: 0.25,
+                                  delayChildren: i * 0.4,
+                                },
+                              },
+                            }}
+                          >
+                            <Link
+                              to={p.link}
+                              className="flex items-start gap-3 p-2 rounded-lg hover:bg-gray-50 cursor-pointer"
+                              onClick={() => setOpenDropdown(false)}
+                            >
+                              <motion.img
+                                src={p.icon}
+                                alt={p.title}
+                                className="w-12 h-12"
+                                variants={{
+                                  hidden: { opacity: 0, y: 30 },
+                                  visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
+                                }}
+                              />
+
+                              <motion.div
+                                variants={{
+                                  hidden: { opacity: 0, y: 20 },
+                                  visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
+                                }}
+                              >
+                                <p className="text-[16px] font-medium text-[#F44336]">{p.title}</p>
+                                <p className="text-[18px] text-[#212121] font-medium">{p.desc}</p>
+                              </motion.div>
+                            </Link>
+                          </motion.div>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              ) : item.external ? (
                 <a
                   key={idx}
                   href={item.link}
                   rel="noopener noreferrer"
-                  className="text-[#1E1E1E] text-[16px] font-medium cursor-pointer flex items-center gap-1"
+                  className="text-[#1E1E1E] text-[16px] font-medium cursor-pointer"
                 >
                   {item.label}
-                  {item.dropdown && <IconChevronDown size={16} />}
                 </a>
               ) : (
-                <span
+                <Link
                   key={idx}
-                  className="text-[#1E1E1E] text-[16px] font-medium cursor-pointer flex items-center gap-1"
+                  to={item.link}
+                  className="text-[#1E1E1E] text-[16px] font-medium cursor-pointer"
                 >
                   {item.label}
-                  {item.dropdown && <IconChevronDown size={16} />}
-                </span>
+                </Link>
               )
             )}
           </nav>
 
           {/* Desktop Actions */}
-         
-                   <div className="hidden min-[800px]:flex items-center gap-6">
-                     {data.header.actions.map((btn, i) => (
-                       <Link
-                         key={i}
-                         to={btn.link}
-                         className={
-                           btn.primary
-                             ? "border border-[#F44336] h-10 flex items-center justify-center bg-[#F44336] text-white px-5 rounded-[8px] text-[16px] font-medium hover:opacity-90 transition"
-                             : "h-10 flex items-center justify-center border border-[#F44336] px-5 rounded-[8px] text-[16px] font-medium text-[#F44336] hover:bg-[#F44336] hover:text-white transition"
-                         }
-                       >
-                         {btn.text}
-                       </Link>
-                     ))}
-                   </div>
+          <div className="hidden min-[800px]:flex items-center gap-6">
+            {data.header.actions.map((btn, i) => (
+              <Link
+                key={i}
+                to={btn.link}
+                className={
+                  btn.primary
+                    ? "h-10 flex items-center justify-center bg-[#F44336] text-white px-5 rounded-[8px] text-[16px] font-medium hover:opacity-90 transition"
+                    : "h-10 flex items-center justify-center border border-[#F44336] px-5 rounded-[8px] text-[16px] font-medium text-[#F44336] hover:bg-[#F44336] hover:text-white transition"
+                }
+              >
+                {btn.text}
+              </Link>
+            ))}
+          </div>
 
           {/* Mobile Menu Button */}
           <div className="min-[800px]:hidden">
@@ -82,36 +187,113 @@ function Hero_Section({ data }) {
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Sidebar */}
         <AnimatePresence>
           {menuOpen && (
             <motion.div
-              className="fixed inset-0 bg-white text-[#1E1E1E] z-50 flex flex-col justify-center items-center gap-8 md:hidden"
-              initial={{ opacity: 0, y: -50 }}
-              animate={{ opacity: 1, y: 0, transition: { duration: 0.3 } }}
-              exit={{ opacity: 0, y: -50, transition: { duration: 0.3 } }}
+              className="fixed inset-0 bg-white z-[200] flex flex-col w-full"
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "tween", ease: "easeInOut", duration: 0.4 }}
             >
-              <button
-                onClick={() => setMenuOpen(false)}
-                className="absolute top-6 right-6 text-[#F44336] rounded-full border border-[#F44336] p-2"
-              >
-                <IconX size={28} className="cursor-pointer" />
-              </button>
-              <ul className="flex flex-col gap-6 text-2xl font-medium text-center">
-                {data.header.nav.map((item, idx) =>
-                  item.external ? (
-                    <li key={idx}>
-                      <a href={item.link} className="cursor-pointer">
+              {/* Top Bar */}
+              <div className="flex justify-between items-center p-6 border-b">
+                <img src={data.header.logo} alt="FastKYC Logo" className="h-9" />
+                <button onClick={() => setMenuOpen(false)}>
+                  <IconX size={28} className="text-gray-600 cursor-pointer" />
+                </button>
+              </div>
+
+              {/* Main Menu (Mobile) */}
+              {submenu === null && (
+                <div className="flex flex-col gap-6 p-6 text-lg font-medium">
+                  {data.header.nav.map((item, idx) =>
+                    item.dropdown ? (
+                      <span
+                        key={idx}
+                        className="flex justify-between items-center cursor-pointer"
+                        onClick={() => setSubmenu("products")}
+                      >
+                        {item.label} <IconChevronRight size={20} />
+                      </span>
+                    ) : item.external ? (
+                      <a
+                        key={idx}
+                        href={item.link}
+                        rel="noopener noreferrer"
+                        className="cursor-pointer"
+                      >
                         {item.label}
                       </a>
-                    </li>
-                  ) : (
-                    <li key={idx} className="cursor-pointer">
-                      {item.label}
-                    </li>
-                  )
-                )}
-              </ul>
+                    ) : (
+                      <Link
+                        key={idx}
+                        to={item.link}
+                        className="cursor-pointer"
+                        onClick={() => setMenuOpen(false)}
+                      >
+                        {item.label}
+                      </Link>
+                    )
+                  )}
+                </div>
+              )}
+
+              {/* Products Submenu (Mobile) */}
+              {submenu === "products" && (
+                <div className="flex flex-col p-6">
+                  <button
+                    className="flex items-center gap-2 text-gray-600 mb-6 cursor-pointer"
+                    onClick={() => setSubmenu(null)}
+                  >
+                    <IconChevronLeft size={20} /> Back
+                  </button>
+                  <h3 className="text-[#F44336] font-medium text-lg mb-4">
+                    Products
+                  </h3>
+                  <div className="flex flex-col gap-5">
+                    {products_nav.map((p, i) => (
+                      <motion.div
+                        key={i}
+                        initial="hidden"
+                        animate="visible"
+                        variants={{
+                          visible: {
+                            transition: { staggerChildren: 0.2, delayChildren: i * 0.4 },
+                          },
+                        }}
+                      >
+                        <Link
+                          to={p.link}
+                          className="flex items-center gap-4 cursor-pointer"
+                          onClick={() => setMenuOpen(false)}
+                        >
+                          <motion.img
+                            src={p.icon}
+                            alt={p.title}
+                            className="w-12 h-12"
+                            variants={{
+                              hidden: { opacity: 0, x: 20 },
+                              visible: { opacity: 1, x: 0, transition: { duration: 0.4 } },
+                            }}
+                          />
+
+                          <motion.div
+                            variants={{
+                              hidden: { opacity: 0, x: 20 },
+                              visible: { opacity: 1, x: 0, transition: { duration: 0.4 } },
+                            }}
+                          >
+                            <p className="font-medium text-[#F44336]">{p.title}</p>
+                            <p className="font-medium text-[#212121] text-[18px]">{p.desc}</p>
+                          </motion.div>
+                        </Link>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </motion.div>
           )}
         </AnimatePresence>
@@ -140,7 +322,10 @@ function Hero_Section({ data }) {
             {data.hero.subtext}
           </motion.p>
 
-          <motion.div className="flex flex-wrap gap-4 pt-4 h-10" variants={itemVariants}>
+          <motion.div
+            className="flex flex-wrap gap-4 pt-4 h-10"
+            variants={itemVariants}
+          >
             {data.hero.buttons.map((btn, i) => (
               <Link key={i} to={btn.link} className={btn.style}>
                 {btn.label}
@@ -198,4 +383,4 @@ function Hero_Section({ data }) {
   );
 }
 
-export default Hero_Section;
+export default GST_HeadSection;

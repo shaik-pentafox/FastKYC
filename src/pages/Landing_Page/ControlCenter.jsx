@@ -8,10 +8,11 @@ import Designed from "./Designed";
 import PayIntegrate from "./PayIntegrate";
 import FAQ from "./FAQ";
 import Contact from "./Contact";
-import Footer from "./Footer";
+import Footer from "../Footer";
 
 //Json Data
 import data from "../../services/LandingPageData";
+import footerData from "../../services/FooterPageData";
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
       <PayIntegrate data={data.payIntegrateData} />
       <FAQ data={data.faqData} />
       <Contact data={data.contactData} />
-      <Footer data={data.footerData} />
+      <Footer data={footerData} />
     </div>
   );
 }

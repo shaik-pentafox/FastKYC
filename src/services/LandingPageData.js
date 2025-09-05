@@ -35,7 +35,7 @@ import CustomerLogo from "../assets/Images/Growth.png";
 import Design from "../assets/Images/Design.png";
 import Integration from "../assets/Images/Integration.png";
 import Book from "../assets/Images/Book.png";
-import FastKYC_Logo2 from "../assets/Images/FastKYC_logo2.png";
+// import FastKYC_Logo2 from "../assets/Images/FastKYC_logo2.png";
 
 const data = {
   heroData: {
@@ -232,25 +232,25 @@ const data = {
     image: Book
   },
 
-  footerData: {
-    menus: [
-      { title: "Products", links: ["Fast KYC", "ID verification", "Face authentication"] },
-      { title: "Resources", links: ["Blogs", "Customer"] },
-      { title: "Privacy & Security", links: ["Terms and conditions", "Privacy policy", "Security"] }
-    ],
-    subscribe: {
-      title: "Subscribe",
-      placeholder: "Enter your email address",
-      button: "Subscribe now"
-    },
-    bottomLinks: ["Terms", "Privacy", "Cookies"],
-    socialLinks: [
-      { icon: "linkedin", url: "#" },
-      { icon: "facebook", url: "#" },
-      { icon: "twitter", url: "#" }
-    ],
-    image: FastKYC_Logo2
-  }
+  // footerData: {
+  //   menus: [
+  //     { title: "Products", links: ["Fast KYC", "ID verification", "Face authentication"] },
+  //     { title: "Resources", links: ["Blogs", "Customer"] },
+  //     { title: "Privacy & Security", links: ["Terms and conditions", "Privacy policy", "Security"] }
+  //   ],
+  //   subscribe: {
+  //     title: "Subscribe",
+  //     placeholder: "Enter your email address",
+  //     button: "Subscribe now"
+  //   },
+  //   bottomLinks: ["Terms", "Privacy", "Cookies"],
+  //   socialLinks: [
+  //     { icon: "linkedin", url: "#" },
+  //     { icon: "facebook", url: "#" },
+  //     { icon: "twitter", url: "#" }
+  //   ],
+  //   image: FastKYC_Logo2
+  // }
 };
 
 export default data;

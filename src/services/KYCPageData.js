@@ -1,3 +1,10 @@
+// Nav icons
+import Product1_nav from "../assets/Images/Product_assets/Icon1.png";
+import Product2_nav from "../assets/Images/Product_assets/Icon2.png";
+import Product3_nav from "../assets/Images/Product_assets/Icon3.png";
+import Product4_nav from "../assets/Images/Product_assets/Icon4.png";
+import Product5_nav from "../assets/Images/Product_assets/Icon5.png";
+
 // KYCData.ts
 import Logo from "../assets/Images/FastKYC_logo.png";
 import KYC from "../assets/Images/Product_assets/KYC_Image.png";
@@ -50,6 +57,13 @@ const KYCData = {
       productImage: KYC,
       companiesLogos: [bank1, bank2, bank3, bank4],
     },
+     products_nav: [
+                { icon: Product1_nav, title: "GST", desc: "GST & Business Verification APIs", link: "/Products_GST" },
+                { icon: Product2_nav, title: "Security & Compliance APIs", desc: "Watermark and Aadhaar Masking", link: "/Products_security" },
+                { icon: Product3_nav, title: "Bank", desc: "Bank Account Verification", link: "/Products_bank-account-verification" },
+                { icon: Product4_nav, title: "OCR APIs", desc: "Extract data from government IDs and documents", link: "/Products_OCR-APIs" },
+                { icon: Product5_nav, title: "KYCs", desc: "Simplify onboarding with powerful KYC", link: "/Products_KYC" },
+              ]
   },
 
   flowData: [
