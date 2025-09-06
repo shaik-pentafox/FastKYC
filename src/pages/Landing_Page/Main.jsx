@@ -1,16 +1,12 @@
 import React from 'react'
-import Hero from './Hero_Section'
-import Product from './Products'
-import Customers from './Customers'
-import Designed from './Designed'
+//import Product from './Products'
+import Animations from './animations'
 
 function Main() {
   return (
     <>
-     <Hero/> 
-     <Product/>
-     <Customers/>
-     <Designed/>
+     {/* <Product/> */}
+     <Animations/>
     </>
   )
 }
