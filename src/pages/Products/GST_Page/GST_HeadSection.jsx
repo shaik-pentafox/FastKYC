@@ -68,12 +68,10 @@ function GST_HeadSection({ data, products_nav }) {
                 <div
                   key={idx}
                   className="relative"
-                  ref={dropdownRef}
+                  onMouseEnter={() => setOpenDropdown(true)}
+                  onMouseLeave={() => setOpenDropdown(false)}
                 >
-                  <div
-                    className="flex items-center gap-1 cursor-pointer text-[#1E1E1E] text-[16px] font-medium"
-                    onClick={() => setOpenDropdown(!openDropdown)}
-                  >
+                  <div className="flex items-center gap-1 cursor-pointer text-[#1E1E1E] text-[16px] font-medium">
                     {item.label}
                     <IconChevronDown size={16} />
                   </div>
@@ -86,8 +84,8 @@ function GST_HeadSection({ data, products_nav }) {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
                         className="absolute top-[35px] left-1/2 -translate-x-1/2 mt-2 
-                        w-[712px] bg-white shadow-lg rounded-[20px] p-6 
-                        grid grid-cols-2 gap-5 z-50 border border-[#F44336]"
+        w-[712px] bg-white shadow-lg rounded-[20px] p-6 
+        grid grid-cols-2 gap-5 z-50 border border-[#F44336]"
                       >
                         <h3 className="col-span-2 text-[#F44336] font-medium text-[18px] p-2">
                           Products
@@ -109,7 +107,6 @@ function GST_HeadSection({ data, products_nav }) {
                             <Link
                               to={p.link}
                               className="flex items-start gap-3 p-2 rounded-lg hover:bg-gray-50 cursor-pointer"
-                              onClick={() => setOpenDropdown(false)}
                             >
                               <motion.img
                                 src={p.icon}
@@ -120,7 +117,6 @@ function GST_HeadSection({ data, products_nav }) {
                                   visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
                                 }}
                               />
-
                               <motion.div
                                 variants={{
                                   hidden: { opacity: 0, y: 20 },
@@ -137,6 +133,7 @@ function GST_HeadSection({ data, products_nav }) {
                     )}
                   </AnimatePresence>
                 </div>
+
               ) : item.external ? (
                 <a
                   key={idx}
@@ -247,7 +244,7 @@ function GST_HeadSection({ data, products_nav }) {
                     className="flex items-center gap-2 text-gray-600 mb-6 cursor-pointer"
                     onClick={() => setSubmenu(null)}
                   >
-                    <IconChevronLeft size={20} /> Back
+                    <IconChevronLeft size={20} /> 
                   </button>
                   <h3 className="text-[#F44336] font-medium text-lg mb-4">
                     Products

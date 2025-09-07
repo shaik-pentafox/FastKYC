@@ -159,11 +159,13 @@ function Head_Section({ data, products_nav }) {
             </span>
 
             {/* Desktop Products Dropdown */}
-            <div className="relative" ref={dropdownRef}>
-              <div
-                className="flex items-center gap-1 cursor-pointer"
-                onClick={() => setOpenDropdown(!openDropdown)}
-              >
+            <div
+              className="relative"
+              ref={dropdownRef}
+              onMouseEnter={() => setOpenDropdown(true)}
+              onMouseLeave={() => setOpenDropdown(false)}
+            >
+              <div className="flex items-center gap-1 cursor-pointer">
                 <span className="text-[#1E1E1E] text-[16px] font-medium">
                   Products
                 </span>
@@ -178,8 +180,8 @@ function Head_Section({ data, products_nav }) {
                     exit={{ opacity: 0, y: -10 }}
                     transition={{ duration: 0.3 }}
                     className="absolute top-[35px] left-3/4 -translate-x-1/2 mt-2 
-                   w-[712px] bg-white shadow-lg rounded-[20px] p-6 
-                   grid grid-cols-2 gap-5 z-50 border border-[#F44336]"
+           w-[712px] bg-white shadow-lg rounded-[20px] p-6 
+           grid grid-cols-2 gap-5 z-50 border border-[#F44336]"
                   >
                     <h3 className="col-span-2 text-[#F44336] font-medium text-[18px] p-2">
                       Products
@@ -191,10 +193,7 @@ function Head_Section({ data, products_nav }) {
                         animate="visible"
                         variants={{
                           visible: {
-                            transition: {
-                              staggerChildren: 0.25,
-                              delayChildren: i * 0.4,
-                            },
+                            transition: { staggerChildren: 0.25, delayChildren: i * 0.4 },
                           },
                         }}
                       >
@@ -227,11 +226,11 @@ function Head_Section({ data, products_nav }) {
                         </Link>
                       </motion.div>
                     ))}
-
                   </motion.div>
                 )}
               </AnimatePresence>
             </div>
+
 
             <span className="text-[#1E1E1E] text-[16px] font-medium cursor-pointer">
               Resources

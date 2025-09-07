@@ -45,3 +45,151 @@
                     </motion.div>
                   ))}
                 </div>                    
+
+
+2)hero_Section
+
+ <div className="relative" ref={dropdownRef}>
+              <div
+                className="flex items-center gap-1 cursor-pointer"
+                onClick={() => setOpenDropdown(!openDropdown)}
+              >
+                <span className="text-[#1E1E1E] text-[16px] font-medium">
+                  Products
+                </span>
+                <IconChevronDown size={16} className="text-black" />
+              </div>
+
+              <AnimatePresence>
+                {openDropdown && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.3 }}
+                    className="absolute top-[35px] left-3/4 -translate-x-1/2 mt-2 
+                   w-[712px] bg-white shadow-lg rounded-[20px] p-6 
+                   grid grid-cols-2 gap-5 z-50 border border-[#F44336]"
+                  >
+                    <h3 className="col-span-2 text-[#F44336] font-medium text-[18px] p-2">
+                      Products
+                    </h3>
+                    {products_nav.map((p, i) => (
+                      <motion.div
+                        key={i}
+                        initial="hidden"
+                        animate="visible"
+                        variants={{
+                          visible: {
+                            transition: {
+                              staggerChildren: 0.25,
+                              delayChildren: i * 0.4,
+                            },
+                          },
+                        }}
+                      >
+                        <Link
+                          to={p.link}
+                          className="flex items-start gap-3 p-2 rounded-lg hover:bg-gray-50 cursor-pointer"
+                          onClick={() => setOpenDropdown(false)}
+                        >
+                          {/* Icon animation */}
+                          <motion.img
+                            src={p.icon}
+                            alt={p.title}
+                            className="w-12 h-12"
+                            variants={{
+                              hidden: { opacity: 0, y: 30 },
+                              visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
+                            }}
+                          />
+
+                          {/* Text animation */}
+                          <motion.div
+                            variants={{
+                              hidden: { opacity: 0, y: 20 },
+                              visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
+                            }}
+                          >
+                            <p className="text-[16px] font-medium text-[#F44336]">{p.title}</p>
+                            <p className="text-[18px] text-[#212121] font-medium">{p.desc}</p>
+                          </motion.div>
+                        </Link>
+                      </motion.div>
+                    ))}
+
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+ 3)Bank
+ <div key={idx} className="relative" ref={dropdownRef}>
+                  <div
+                    className="flex items-center gap-1 cursor-pointer text-[#1E1E1E] text-[16px] font-medium"
+                    onClick={() => setOpenDropdown(!openDropdown)}
+                  >
+                    {item.label}
+                    <IconChevronDown size={16} />
+                  </div>
+
+                  {/* Products dropdown */}
+                  <AnimatePresence>
+                    {openDropdown && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        className="absolute top-[35px] left-1/2 -translate-x-1/2 mt-2 
+                        w-[712px] bg-white shadow-lg rounded-[20px] p-6 
+                        grid grid-cols-2 gap-5 z-50 border border-[#F44336]"
+                      >
+                        <h3 className="col-span-2 text-[#F44336] font-medium text-[18px] p-2">
+                          Products
+                        </h3>
+                        {products_nav.map((p, i) => (
+                          <motion.div
+                            key={i}
+                            initial="hidden"
+                            animate="visible"
+                            variants={{
+                              visible: {
+                                transition: {
+                                  staggerChildren: 0.25,
+                                  delayChildren: i * 0.4,
+                                },
+                              },
+                            }}
+                          >
+                            <Link
+                              to={p.link}
+                              className="flex items-start gap-3 p-2 rounded-lg hover:bg-gray-50 cursor-pointer"
+                              onClick={() => setOpenDropdown(false)}
+                            >
+                              <motion.img
+                                src={p.icon}
+                                alt={p.title}
+                                className="w-12 h-12"
+                                variants={{
+                                  hidden: { opacity: 0, y: 30 },
+                                  visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
+                                }}
+                              />
+
+                              <motion.div
+                                variants={{
+                                  hidden: { opacity: 0, y: 20 },
+                                  visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
+                                }}
+                              >
+                                <p className="text-[16px] font-medium text-[#F44336]">{p.title}</p>
+                                <p className="text-[18px] text-[#212121] font-medium">{p.desc}</p>
+                              </motion.div>
+                            </Link>
+                          </motion.div>
+                        ))}
+
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>           
