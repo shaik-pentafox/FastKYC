@@ -8,6 +8,7 @@ import GST_Page from './pages/Products/GST_Page/GST_ControlCenter'
 import BANK_Page from './pages/Products/BANK_Page/Bank_ControlCenter'
 import OCR_Page from './pages/Products/OCR(APIs)_Page/OCR_ControlCenter'
 import Products_security from './pages/Products/SECURITY(APIs)_Page/SECURITY_ControlCenter'
+import Why_FastKYC from './pages/Why_FastKYC/FastKYC_ControlCenter'
 import BookDemo from './pages/bookDemo/BookDemo'
 
 //Json Data
@@ -27,6 +28,7 @@ function App() {
           <Route path='/products-ocr-apis' element={<OCR_Page />} />
           <Route path='/products-security' element={<Products_security />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/why-fastkyc' element={<Why_FastKYC />} />
           <Route path="/book-demo" element={<BookDemo data={data} footerData={footerData}/>} />
         </Routes>
       </BrowserRouter>

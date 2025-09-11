@@ -1,59 +1,19 @@
-//1)Hero section
+1)Hero_Section
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useAnimation } from "framer-motion";
-import {
-  IconChevronRight,
-  IconChevronLeft,
-  IconMenu2,
-  IconX,
-} from "@tabler/icons-react";
+import { IconMenu2, IconX, IconChevronRight, IconChevronLeft } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
+import { CheckIcon } from "@mantine/core";
+import icon from "../../assets/Images/Why_FastKYC/Star1.png"
+import icon2 from "../../assets/Images/Why_FastKYC/Star2.png"
+import icon3 from "../../assets/Images/Why_FastKYC/Star3.png"
+import icon4 from "../../assets/Images/Why_FastKYC/Star4.png"
+import icon5 from "../../assets/Images/Why_FastKYC/Star5.png"
 
-const RunnerPath = ({ d, duration = 6, offset = 0, className, color = "#E20303" }) => {
-  const segmentLength = 180;
-
-  return (
-    <motion.svg
-      className={`absolute left-0 w-full h-full pointer-events-none ${className || ""}`}
-      viewBox="0 0 1200 600"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <defs>
-        <linearGradient id={`lineGradient-${color}-${offset}`} x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stopColor={color} stopOpacity="1" />
-          <stop offset="70%" stopColor={color} stopOpacity="0.6" />
-          <stop offset="100%" stopColor={color} stopOpacity="0" />
-        </linearGradient>
-      </defs>
-
-      <motion.path
-        d={d}
-        stroke={`url(#lineGradient-${color}-${offset})`}
-        strokeWidth="3"
-        strokeLinecap="round"
-        strokeDasharray={`${segmentLength} ${segmentLength}`}
-        animate={{
-          strokeDashoffset: [0, -2 * segmentLength],
-        }}
-        transition={{
-          duration,
-          repeat: Infinity,
-          ease: "linear",
-          repeatDelay: offset,
-        }}
-      />
-    </motion.svg>
-  );
-};
-
-function Head_Section({ data, products_nav }) {
-  const [menuOpen, setMenuOpen] = useState(false);
+function FastKYC_HeadSection({data}) {
+    const [menuOpen, setMenuOpen] = useState(false);
   const [submenu, setSubmenu] = useState(null);
   const [openDropdown, setOpenDropdown] = useState(false);
-  const [buttonText, setButtonText] = useState(data.cta.textDesktop);
-  const [speedFactor, setSpeedFactor] = useState(1);
-  const [showPaths, setShowPaths] = useState(true);
 
   const [isSticky, setIsSticky] = useState(false);
   const controls = useAnimation();
@@ -86,18 +46,7 @@ function Head_Section({ data, products_nav }) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    const handleResize = () => {
-      setButtonText(
-        window.innerWidth < 768 ? data.cta.textMobile : data.cta.textDesktop
-      );
-    };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, [data]);
 
-  // Close sidebar automatically when width ≥ 768px
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 768) {
@@ -109,81 +58,33 @@ function Head_Section({ data, products_nav }) {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setSpeedFactor((prev) => Math.min(prev + 0.01, 5));
-    }, 100);
-    return () => clearInterval(interval);
-  }, []);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setButtonText(window.innerWidth < 768 ? data.cta.textMobile : data.cta.textDesktop);
-      if (window.innerWidth >= 768) {
-        setMenuOpen(false);
-        setSubmenu(null);
-      }
-    };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, [data]);
-
+  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
         setOpenDropdown(false);
       }
     };
-    if (openDropdown) {
-      document.addEventListener("mousedown", handleClickOutside);
-    } else {
-      document.removeEventListener("mousedown", handleClickOutside);
-    }
+    if (openDropdown) document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [openDropdown]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsSticky(true);
-      } else {
-        setIsSticky(false);
-      }
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const container = {
-    hidden: {},
-    show: {
-      transition: { staggerChildren: 0.2 / speedFactor, delayChildren: 0.2 / speedFactor },
+  // Variants
+  const containerVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { staggerChildren: 0.2, duration: 0.6, ease: "easeOut" },
     },
   };
-
-  const fadeUp = {
-    hidden: { opacity: 0, y: 50 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.5 / speedFactor, ease: "easeOut" } },
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
   };
-
-  const card1 = {
-    hidden: { opacity: 0, x: -80, y: 100 },
-    show: { opacity: 1, x: 0, y: 0, transition: { delay: 0.1 / speedFactor, duration: 1.2 / speedFactor, ease: "easeOut" } },
-  };
-  const card2 = {
-    hidden: { opacity: 0, x: -40, y: 100 },
-    show: { opacity: 1, x: 0, y: 0, transition: { delay: 0.2 / speedFactor, duration: 1.2 / speedFactor, ease: "easeOut" } },
-  };
-  const card3 = {
-    hidden: { opacity: 0, x: 60, y: 100 },
-    show: { opacity: 1, x: 0, y: 0, transition: { delay: 0.3 / speedFactor, duration: 1.2 / speedFactor, ease: "easeOut" } },
-  };
-
   return (
-    <div className="min-h-screen w-full py-6 relative z-50 overflow-x-hidden">
-      <img src={data.bg_image} alt="Border Decoration" className="absolute inset-0 w-full h-full object-cover pointer-events-none" />
-
+    <>
+     <div className="min-h-screen w-full py-6 relative z-50 overflow-x-hidden bg-white">
+      {/* Navbar */}
       <header
         className={`w-full top-0 z-[100] fixed transition-transform duration-300 transform
     ${isSticky && showNavbar ? "bg-white py-6" : "bg-transparent py-12 shadow-none"}
@@ -193,112 +94,125 @@ function Head_Section({ data, products_nav }) {
         <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 flex justify-between items-center">
           {/* Logo */}
           <Link to="/">
-            <img src={data.image} alt="FastKYC Logo" className="h-10 cursor-pointer" />
+            <img src={data.header.logo} alt="FastKYC Logo" className="h-10" />
           </Link>
-
           {/* Desktop Nav */}
           <nav className="hidden min-[800px]:flex items-center gap-8 ml-10 relative">
-            <span className="text-[#1E1E1E] text-[16px] font-medium cursor-pointer">
-              Why FastKYC
-            </span>
+            {data.header.nav.map((item, idx) =>
+              item.dropdown ? (
+                <div
+                  key={idx}
+                  className="relative"
+                  onMouseEnter={() => setOpenDropdown(true)}
+                  onMouseLeave={() => setOpenDropdown(false)}
+                >
+                  <div className="flex items-center gap-1 cursor-pointer text-[#1E1E1E] text-[16px] font-medium">
+                    {item.label}
+                  </div>
 
-            {/* Desktop Products Dropdown */}
-            <div
-              className="relative"
-              ref={dropdownRef}
-              onMouseEnter={() => setOpenDropdown(true)}
-              onMouseLeave={() => setOpenDropdown(false)}
-            >
-              <div className="flex items-center gap-1 cursor-pointer">
-                <span className="text-[#1E1E1E] text-[16px] font-medium">
-                  Products
-                </span>
-              </div>
-
-              <AnimatePresence>
-                {openDropdown && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.3 }}
-                    className="absolute left-3/4 -translate-x-1/2 mt-1.5
-           w-[712px] bg-white shadow-lg rounded-[20px] p-6 
-           grid grid-cols-2 gap-5 z-50 border border-[#F44336]"
-                  >
-                    {products_nav.map((p, i) => (
-                      <div
+                  {/* Products dropdown */}
+                  <AnimatePresence>
+                    {openDropdown && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.3 }}
+                        className="absolute left-3/4 -translate-x-1/2 mt-[5.5px]
+                                w-[712px] bg-white shadow-lg rounded-[20px] p-6 
+                                grid grid-cols-2 gap-5 z-50 border border-[#F44336]"
                       >
-                        <Link
-                          to={p.link}
-                          className="flex items-start gap-3 p-2 rounded-lg hover:bg-gray-50 cursor-pointer"
-                          onClick={() => setOpenDropdown(false)}
-                        >
-                          {/* Icon animation */}
-                          <motion.img
-                            src={p.icon}
-                            alt={p.title}
-                            className="w-12 h-12"
-                          />
-
-                          {/* Text animation */}
+                        {data.products_nav.map((p, i) => (
                           <div
+                            key={i}
+                            initial="hidden"
+                            animate="visible"
                             variants={{
-                              hidden: { opacity: 0, y: 20 },
-                              visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
+                              visible: {
+                                transition: {
+                                  staggerChildren: 0.25,
+                                  delayChildren: i * 0.4,
+                                },
+                              },
                             }}
                           >
-                            {/* <p className="text-[17px] font-medium text-[#212121]">{p.title}</p>
-                            <p className="text-[16px] text-[#616161] font-medium">{p.desc}</p> */}
-                            <h2 className="font-medium text-[#212121]">{p.title}</h2>
-                            <p className="text-[#616161] font-medium">{p.desc}</p>
+                            <Link
+                              to={p.link}
+                              className="flex items-start gap-3 p-2 rounded-lg hover:bg-gray-50 cursor-pointer"
+                            >
+                              <motion.img
+                                src={p.icon}
+                                alt={p.title}
+                                className="w-12 h-12"
+                                variants={{
+                                  hidden: { opacity: 0, y: 30 },
+                                  visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
+                                }}
+                              />
+                              <div
+                                variants={{
+                                  hidden: { opacity: 0, y: 20 },
+                                  visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
+                                }}
+                              >
+                                <h2 className="font-medium text-[#212121]">{p.title}</h2>
+                                <p className="text-[#616161] font-medium">{p.desc}</p>
+                              </div>
+                            </Link>
                           </div>
-                        </Link>
-                      </div>
-                    ))}
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
 
-
-            <span className="text-[#1E1E1E] text-[16px] font-medium cursor-pointer">
-              Resources
-            </span>
-
-            <a href="https://pentafox.in/" target="_blank" rel="noopener noreferrer">
-              <span className="text-[#1E1E1E] text-[16px] font-medium cursor-pointer">
-                Company
-              </span>
-            </a>
-
+              ) : item.external ? (
+                <a
+                  key={idx}
+                  href={item.link}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  className="text-[#1E1E1E] text-[16px] font-medium cursor-pointer"
+                >
+                  {item.label}
+                </a>
+              ) : (
+                <Link
+                  key={idx}
+                  to={item.link}
+                  className="text-[#1E1E1E] text-[16px] font-medium cursor-pointer"
+                >
+                  {item.label}
+                </Link>
+              )
+            )}
           </nav>
 
-          {/* Desktop Buttons */}
+          {/* Desktop Actions */}
           <div className="hidden min-[800px]:flex items-center gap-6">
-            <Link
-              to="/login"
-              className="h-10 flex items-center justify-center border border-[#F44336] px-5 rounded-[8px] text-[16px] font-medium text-[#F44336] hover:bg-[#F44336] hover:text-white transition"
-            >
-              Sign in
-            </Link>
-            <Link
-              to={data.cta.link}
-              className="h-10 flex items-center justify-center bg-[#F44336] text-white px-5 rounded-[8px] text-[16px] font-medium hover:bg-red-700 transition"
-            >
-              Book a demo
-            </Link>
+            {data.header.actions.map((btn, i) => (
+              <Link
+                key={i}
+                to={btn.link}
+                className={
+                  btn.primary
+                    ? "h-10 flex items-center justify-center bg-[#F44336] text-white px-5 rounded-[8px] text-[16px] font-medium hover:bg-red-700 transition"
+                    : "h-10 flex items-center justify-center border border-[#F44336] px-5 rounded-[8px] text-[16px] font-medium text-[#F44336] hover:bg-[#F44336] hover:text-white transition"
+                }
+              >
+                {btn.text}
+              </Link>
+            ))}
           </div>
 
           {/* Mobile Menu Button */}
           <div className="min-[800px]:hidden">
-            <button
-              onClick={() => {
-                setMenuOpen(true);
-                setSubmenu(null);
-              }}
-            >
-              <IconMenu2 size={28} className="text-black cursor-pointer" />
+            <button onClick={() => setMenuOpen(!menuOpen)}>
+              {menuOpen ? (
+                <IconX size={28} className="text-black cursor-pointer" />
+              ) : (
+                <IconMenu2 size={28} className="text-black cursor-pointer" />
+              )}
             </button>
           </div>
         </div>
@@ -316,10 +230,9 @@ function Head_Section({ data, products_nav }) {
           >
             {/* Top Bar */}
             <div className="flex justify-between items-center p-6 border-b">
-              <Link to="/">
-                <img src={data.image} alt="FastKYC Logo" className="h-9 cursor-pointer" />
+              <Link to='/'>
+                <img src={data.header.logo} alt="FastKYC Logo" className="h-9" />
               </Link>
-
               <button onClick={() => setMenuOpen(false)}>
                 <IconX size={28} className="text-gray-600 cursor-pointer" />
               </button>
@@ -328,17 +241,35 @@ function Head_Section({ data, products_nav }) {
             {/* Main Menu (Mobile) */}
             {submenu === null && (
               <div className="flex flex-col gap-6 p-6 text-lg font-medium">
-                <span className="cursor-pointer">Why FastKYC</span>
-                <span
-                  className="flex justify-between items-center cursor-pointer"
-                  onClick={() => setSubmenu("products")}
-                >
-                  Products <IconChevronRight size={20} />
-                </span>
-                <span className="cursor-pointer">Resources</span>
-                <a href="https://pentafox.in/" rel="noopener noreferrer">
-                  <span className="cursor-pointer">Company</span>
-                </a>
+                {data.header.nav.map((item, idx) =>
+                  item.dropdown ? (
+                    <span
+                      key={idx}
+                      className="flex justify-between items-center cursor-pointer"
+                      onClick={() => setSubmenu("products")}
+                    >
+                      {item.label} <IconChevronRight size={20} />
+                    </span>
+                  ) : item.external ? (
+                    <a
+                      key={idx}
+                      href={item.link}
+                      rel="noopener noreferrer"
+                      className="cursor-pointer"
+                    >
+                      {item.label}
+                    </a>
+                  ) : (
+                    <Link
+                      key={idx}
+                      to={item.link}
+                      className="cursor-pointer"
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      {item.label}
+                    </Link>
+                  )
+                )}
               </div>
             )}
 
@@ -355,7 +286,7 @@ function Head_Section({ data, products_nav }) {
                   Products
                 </h3>
                 <div className="flex flex-col gap-5">
-                  {products_nav.map((p, i) => (
+                  {data.products_nav.map((p, i) => (
                     <div
                       key={i}
                       initial="hidden"
@@ -387,8 +318,8 @@ function Head_Section({ data, products_nav }) {
                             visible: { opacity: 1, x: 0, transition: { duration: 0.4 } },
                           }}
                         >
-                          <p className="text-[17px] font-medium text-[#212121]">{p.title}</p>
-                          <p className="text-[16px] text-[#616161] font-medium">{p.desc}</p>
+                          <h2 className="font-medium text-[#212121]">{p.title}</h2>
+                          <p className="text-[#616161] font-medium">{p.desc}</p>
                         </div>
                       </Link>
                     </div>
@@ -403,181 +334,63 @@ function Head_Section({ data, products_nav }) {
 
       {/* Hero Section */}
       <motion.section
-        className="text-center text-black relative overflow-hidden pt-32"
-        variants={container}
+        className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-38 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
         initial="hidden"
-        animate="show"
+        animate="visible"
+        variants={containerVariants}
       >
-        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 ">
-          {/* Runner Paths */}
-          {showPaths && (
-            <div className="hidden lg:block">
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.5, duration: 0.8 }}
-              >
-                <RunnerPath
-                  d="M10 250 H150 H250 V200 V50 Q250 20, 280 20 H345"
-                  color="#E20303"
-                  className="top-[196px]"
-                />
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.0, duration: 0.8 }}
-              >
-                <RunnerPath
-                  d="M400 300 V360 Q400 380 420 380 H520 Q540 380 540 400 V440 Q540 460 545"
-                  color="#E20303"
-                  className="mt-[83px] left-[636px]"
-                />
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.5, duration: 0.8 }}
-              >
-                <RunnerPath
-                  d="M100 300 V100 Q100 50 150 50 H258"
-                  color="#E20303"
-                  className="top-[124px] left-[1036px]"
-                />
-              </motion.div>
-            </div>
-          )}
-
-
-          {/* Gradient overlays */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(239,68,68,0.3)_0%,_transparent_78%)] pointer-events-none"></div>
-          <div className="absolute top-0 left-0 w-full h-16 bg-gradient-to-b from-white to-transparent pointer-events-none"></div>
-          <div className="absolute left-0 top-0 h-full w-16 bg-gradient-to-r from-white/100 to-transparent pointer-events-none"></div>
-          <div className="absolute right-0 top-0 h-full w-16 bg-gradient-to-l from-white/100 to-transparent pointer-events-none"></div>
-
-          {/* Buttons */}
-          <motion.div
-            variants={fadeUp}
-            transition={{ duration: 0.6 / speedFactor }}
-            className="flex flex-wrap min-[800px]:flex-nowrap justify-center gap-3 mb-6"
-          >
-            {data.buttons.map((btn, i) => (
-              <button
-                key={i}
-                className="border border-[#00000066] text-black text-[14px] font-bold px-5 py-2 rounded-full  backdrop-blur-sm transition-transform duration-300 "
-              >
-                {btn}
-              </button>
-            ))}
-          </motion.div>
-
-          {/* Heading */}
+        {/* Left Content */}
+        <motion.div className="space-y-6" variants={containerVariants}>
           <motion.h1
-            variants={fadeUp}
-            transition={{ duration: 0.7 / speedFactor }}
-            className="relative text-4xl min-[800px]:text-[48px] font-bold leading-tight mb-6 text-center text-[#1E1E1E]"
+            className="text-4xl md:text-[48px] font-bold text-[#1E1E1E] leading-tight"
+            variants={itemVariants}
           >
-            {data.heading.map((line, i) => (
-              <React.Fragment key={i}>
-                {line}
-                <br />
-              </React.Fragment>
-            ))}
+            {data.hero.title}
           </motion.h1>
-
-          {/* Description */}
           <motion.p
-            variants={fadeUp}
-            transition={{ duration: 0.8 / speedFactor }}
-            className="relative text-[#424242] text-[18px] max-w-2xl mx-auto mb-6 text-center font-medium"
+            className="text-[#616161] font-medium text-[20px] max-w-lg"
+            variants={itemVariants}
           >
-            {data.description}
+            {data.hero.description}
           </motion.p>
-
-          {/* CTA */}
-          <motion.div
-            variants={fadeUp}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            transition={{ duration: 0.3 / speedFactor }}
-            className="inline-block relative z-10"
+          <motion.p
+            className="text-[#616161] font-medium text-[20px] max-w-lg"
+            variants={itemVariants}
           >
-            <Link
-              to={data.cta.link}
-              className="w-full text-center bg-[#F44336] text-white font-medium px-10 py-2 rounded-[8px] text-[16px] hover:bg-red-700 transition block h-10"
-            >
-              {buttonText}
-            </Link>
+            {data.hero.subtext}
+          </motion.p>
+          <motion.div className="flex flex-wrap gap-4 pt-4 h-10" variants={itemVariants}>
+            {data.hero.buttons.map((btn, i) => (
+              <Link key={i} to={btn.link} className={btn.style}>
+                {btn.label}
+              </Link>
+            ))}
           </motion.div>
+        </motion.div>
 
-          {/* Cards */}
-          <div className="relative h-[600px] mt-[-130px] hidden min-[800px]:block">
-            <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 relative h-full">
-              {[data.cards[0]].map((card, i) => (
-                <motion.div key={i} variants={card1} className="absolute top-[15%] w-72 bg-white/90 backdrop-blur-md text-black border border-[#00000033] shadow-lg rounded-3xl p-4 py-2 flex items-center gap-4 cursor-pointer">
-                  <motion.img src={card.img} alt={card.title} className="h-13" initial={{ scale: 0.8, rotate: -10 }} animate={{ scale: 1, rotate: 0 }} transition={{ delay: 1, duration: 1.8 }} />
-                  <div>
-                    <p className="text-[16px] font-normal text-start">{card.title}</p>
-                    <p className="text-[18px] font-bold mt-1 text-start text-[#333333]">{card.value}</p>
-                  </div>
-                </motion.div>
-              ))}
-              {[data.cards[1]].map((card, i) => (
-                <motion.div key={i} variants={card2} className="absolute left-[3px] top-[36%] w-72 bg-white/90 backdrop-blur-md text-black border border-gray-200 shadow-lg rounded-3xl p-4 flex items-center gap-4 cursor-pointer">
-                  <motion.img src={card.img} alt={card.title} className="h-13" initial={{ scale: 0.8, rotate: -10 }} animate={{ scale: 1, rotate: 0 }} transition={{ delay: 1.3, duration: 1.8 }} />
-                  <div>
-                    <p className="text-[16px] font-medium text-start text-[#1E1E1E]">{card.title}</p>
-                    <p className="text-[18px] font-bold mt-1 text-start text-[#333333]">{card.value}</p>
-                  </div>
-                </motion.div>
-              ))}
-              {[data.cards[2]].map((card, i) => (
-                <motion.div key={i} variants={card3} className="absolute mt-[21px] right-[-40px] w-64 bg-white/90 backdrop-blur-md text-black border border-gray-200 shadow-lg rounded-3xl p-5 cursor-pointer">
-                  <div className="flex justify-between items-center mb-3">
-                    <motion.img src={card.img} alt="status" className="h-8" initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 2.1, type: "spring", damping: 22, stiffness: 40 }} />
-                    <p className="font-medium text-[18px] text-[#1E1E1E]">{card.subTitle}</p>
-                  </div>
-                  <hr className="border-[#DCDCDC] mb-3 " />
-                  <div className="flex -space-x-3 mb-3">
-                    {card.avatars.map((i) => (
-                      <motion.img key={i} className="w-8 h-8 rounded-full border-2 border-white" src={`https://i.pravatar.cc/40?img=${i}`} alt={`user-${i}`} initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 2.2 + i * 0.7, type: "spring", damping: 22, stiffness: 40 }} />
-                    ))}
-                  </div>
-                  <p className="font-medium text-start text-[16px] text-[#1E1E1E]">{card.title}</p>
-                  <p className="font-bold text-start text-[18px] mt-1 text-[#333333]">{card.value}</p>
-                  <motion.div
-                    className="w-full bg-gray-300 rounded-full h-2 mt-3 overflow-hidden"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 1, delay: 2.3 }}
-                  >
-                    <motion.div
-                      className="bg-red-600 h-2 rounded-full"
-                      initial={{ width: 0 }}
-                      animate={{ width: `${card.progress}%` }}
-                      transition={{
-                        duration: 2,
-                        ease: "easeInOut",
-                        delay: 2.5
-                      }}
-                    />
-                  </motion.div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Company Logos */}
+        {/* Right Image */}
         <motion.div
-          className="overflow-hidden w-full py-6 relative mt-10 min-[800px]:mt-[-262px]"
+          initial={{ opacity: 0, x: 100 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.5 }}
+          className="flex justify-center"
+        >
+          <img
+            src={data.hero.image}
+            alt="KYC Verification"
+            className="w-full max-w-lg object-contain drop-shadow-lg"
+          />
+        </motion.div>
+      </motion.section>
+
+      {/* Company Logos */}
+      <section className="w-full py-10 -mt-25">
+        <motion.div
+          className="overflow-hidden w-full relative"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 2, duration: 1.5 }}
+          transition={{ delay: 1, duration: 1.5 }}
         >
-          {/* Fade overlays */}
           <div className="pointer-events-none absolute left-0 top-0 h-full w-32 bg-gradient-to-r from-white via-white/80 to-transparent z-10" />
           <div className="pointer-events-none absolute right-0 top-0 h-full w-32 bg-gradient-to-l from-white via-white/80 to-transparent z-10" />
 
@@ -585,673 +398,32 @@ function Head_Section({ data, products_nav }) {
             className="flex gap-12 w-max"
             animate={{ x: ["0%", "-30%"] }}
             transition={{
-              x: { repeat: Infinity, repeatType: "loop", duration: 20, ease: "linear" },
+              x: {
+                repeat: Infinity,
+                repeatType: "loop",
+                duration: 20,
+                ease: "linear",
+              },
             }}
           >
             {[...Array(5)].map((_, i) => (
               <div key={i} className="flex gap-12">
-                {data.banks.map((logo, idx) => (
+                {data.companiesLogos.map((logo, idx) => (
                   <motion.img
                     key={`${i}-${idx}`}
                     src={logo}
-                    alt={`Bank ${idx + 1}`}
-                    className="h-8 w-auto object-contain hover:scale-105 grayscale-0 transition"
-                    whileHover={{ scale: 1.1 }}
-                    transition={{ duration: 0.3 }}
+                    alt={`Company ${idx + 1}`}
+                    className="h-8 w-auto object-contain hover:scale-105 transition-transform duration-300"
                   />
                 ))}
               </div>
             ))}
           </motion.div>
         </motion.div>
-
-      </motion.section>
+      </section>
     </div>
-
-  );
-}
-
-export default Head_Section;
-
-
-2)Footer
-import React from "react";
-import {
-  IconBrandLinkedin,
-  IconBrandFacebook,
-  IconBrandTwitter,
-  IconMail,
-} from "@tabler/icons-react";
-
-function Footer({data}) {
-  return (
-    <footer className="bg-[#121212] text-white py-12">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 flex flex-col gap-12">
-        
-        <div className="md:hidden flex justify-center">
-          <img src={data.image} alt="FastKYC Logo" className="w-36 object-contain" />
-        </div>
-
-        <div className="flex flex-col md:flex-row justify-center md:justify-between gap-12">
-
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-10 text-left md:text-left">
-            {data.menus.map((menu, idx) => (
-              <div key={idx}>
-                <h3 className="text-[#E20303] font-bold text-[20px] mb-4">{menu.title}</h3>
-                <ul className="space-y-3">
-                  {menu.links.map((item, i) => (
-                    <li key={i}>
-                      <a
-                        href="#"
-                        className="text-gray-300 hover:text-white transition-all duration-200 hover:translate-x-1 inline-block text-[16px] font-medium"
-                      >
-                        {item}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-
-          <div className="hidden md:flex flex-col flex-1 max-w-sm gap-3">
-            <h3 className="text-[#E20303] font-medium text-[20px] mb-4">
-              {data.subscribe.title}
-            </h3>
-            <div className="relative w-full">
-              <IconMail
-                size={18}
-                className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"
-              />
-              <input
-                type="email"
-                placeholder={data.subscribe.placeholder}
-                className="w-full pl-10 pr-4 py-2 rounded-md bg-white text-[#878787] focus:ring-2 focus:ring-red-500 outline-none"
-              />
-            </div>
-            <button className="w-full bg-[#F44336] hover:bg-red-700 text-white py-2 rounded-md font-bold text-[16px] shadow-md hover:shadow-lg transform  transition-all cursor-pointer">
-              {data.subscribe.button}
-            </button>
-          </div>
-        </div>
-
-        <div className="flex justify-center md:justify-end gap-12 text-gray-400 sm:hidden">
-          {data.socialLinks.map((social, i) => (
-            <a
-              key={i}
-              href={social.url}
-              className={`hover:text-${
-                social.icon === "linkedin"
-                  ? "[#0A66C2]"
-                  : social.icon === "facebook"
-                  ? "[#1877F2]"
-                  : "[#1DA1F2]"
-              } transform hover:-translate-y-1 transition-all`}
-            >
-              {social.icon === "linkedin" && <IconBrandLinkedin size={24} />}
-              {social.icon === "facebook" && <IconBrandFacebook size={24} />}
-              {social.icon === "twitter" && <IconBrandTwitter size={24} />}
-            </a>
-          ))}
-        </div>
-
-        <hr className="border-gray-700 my-0 md:my-6" />
-
-        <div className="flex flex-col md:flex-row justify-center md:justify-between items-center text-gray-400 text-sm gap-4 text-center md:text-left">
-
-          <div className="hidden md:flex justify-start">
-            <img src={data.image} alt="FastKYC Logo" className="w-36 object-contain" />
-          </div>
-
-          <div className="flex flex-wrap justify-center gap-12">
-            {data.bottomLinks.map((item, i) => (
-              <a key={i} href="#" className="text-[14px] font-medium hover:text-white transition-colors">
-                {item}
-              </a>
-            ))}
-          </div>
-
-          <div className="hidden md:flex gap-8">
-            {data.socialLinks.map((social, i) => (
-              <a
-                key={i}
-                href={social.url}
-                className={`hover:text-${
-                  social.icon === "linkedin"
-                    ? "[#0A66C2]"
-                    : social.icon === "facebook"
-                    ? "[#1877F2]"
-                    : "[#1DA1F2]"
-                } transform hover:-translate-y-1 transition-all`}
-              >
-                {social.icon === "linkedin" && <IconBrandLinkedin size={24} />}
-                {social.icon === "facebook" && <IconBrandFacebook size={24} />}
-                {social.icon === "twitter" && <IconBrandTwitter size={24} />}
-              </a>
-            ))}
-          </div>
-        </div>
-
-        <p className="text-gray-500 text-center md:hidden">
-          &copy; {new Date().getFullYear()} FastKYC.
-        </p>
-      </div>
-    </footer>
-  );
-}
-
-export default Footer;
-
-
-
-3)Book a demo
-import { useState, useRef, useEffect } from "react";
-import {
-  IconCpu,
-  IconShield,
-  IconStar,
-  IconX,
-  IconMenu2,
-  IconChevronRight,
-  IconChevronLeft,
-} from "@tabler/icons-react";
-import { Link } from "react-router-dom";
-import { motion, AnimatePresence, useAnimation } from "framer-motion";
-import { GoogleReCaptcha } from "react-google-recaptcha-v3";
-import Footer from "../Footer";
-
-const iconMap = {
-  cpu: IconCpu,
-  shield: IconShield,
-  star: IconStar,
-};
-
-export default function BookDemo({ data, footerData }) {
-  const [submit, setSubmit] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [submenu, setSubmenu] = useState(null);
-  const [openDropdown, setOpenDropdown] = useState(false);
-
-  const [isSticky, setIsSticky] = useState(false);
-  const controls = useAnimation();
-  const dropdownRef = useRef(null);
-  const [showNavbar, setShowNavbar] = useState(true);
-  const lastScrollY = useRef(0);
-
-  const { hero, form } = data;
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-
-
-      if (currentScrollY > 50) {
-        setIsSticky(true);
-
-        if (currentScrollY > lastScrollY.current) {
-          setShowNavbar(false);
-        } else {
-          setShowNavbar(true);
-        }
-      } else {
-        setIsSticky(false);
-        setShowNavbar(true);
-      }
-
-      lastScrollY.current = currentScrollY;
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-        setOpenDropdown(false);
-      }
-    };
-    if (openDropdown) {
-      document.addEventListener("mousedown", handleClickOutside);
-    } else {
-      document.removeEventListener("mousedown", handleClickOutside);
-    }
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [openDropdown]);
-
-  return (
-    <>
-      <div className="min-h-screen w-full py-6 overflow-x-hidden bg-gradient-to-b from-white via-white to-red-100">
-
-        <header
-          className={`w-full top-0 z-[100] fixed transition-transform duration-300 transform
-    ${isSticky ? "bg-white shadow-md py-6" : "bg-transparent py-12"}
-    ${showNavbar ? "translate-y-0" : "-translate-y-full"}
-  `}
-        >
-          <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 flex justify-between items-center">
-            <Link to="/">
-              <img
-                src={data.logo}
-                alt="FastKYC Logo"
-                className="h-10 object-contain"
-              />
-            </Link>
-            {/* Desktop Nav */}
-            <nav className="hidden min-[800px]:flex items-center gap-8 ml-10 relative">
-              <span className="text-[#1E1E1E] text-[16px] font-medium cursor-pointer">
-                Why FastKYC
-              </span>
-
-              {/* Products Dropdown */}
-              <div
-                className="relative"
-                ref={dropdownRef}
-                onMouseEnter={() => setOpenDropdown(true)}
-                onMouseLeave={() => setOpenDropdown(false)}
-              >
-                <div className="flex items-center gap-1 cursor-pointer">
-                  <span className="text-[#1E1E1E] text-[16px] font-medium">
-                    Products
-                  </span>
-                </div>
-
-                <AnimatePresence>
-                  {openDropdown && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      transition={{ duration: 0.3 }}
-                      className="absolute left-3/4 -translate-x-1/2
-                         w-[712px] bg-white shadow-lg rounded-[20px] p-6 
-                         grid grid-cols-2 gap-5 z-50 border border-[#F44336]"
-                    >
-                      {data.products_nav.map((p, i) => (
-                        <div
-                        >
-                          <Link
-                            to={p.link}
-                            className="flex items-start gap-3 p-2 rounded-lg hover:bg-gray-50 cursor-pointer"
-                            onClick={() => setOpenDropdown(false)}
-                          >
-                            {/* Icon animation */}
-                            <motion.img
-                              src={p.icon}
-                              alt={p.title}
-                              className="w-12 h-12"
-                            />
-
-                            {/* Text animation */}
-                            <div
-                              variants={{
-                                hidden: { opacity: 0, y: 20 },
-                                visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
-                              }}
-                            >
-                              <h2 className="font-medium text-[#212121]">{p.title}</h2>
-                              <p className="text-[#616161] font-medium">{p.desc}</p>
-                            </div>
-                          </Link>
-                        </div>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-
-
-
-              <span className="text-[#1E1E1E] text-[16px] font-medium cursor-pointer">
-                Resources
-              </span>
-
-              <a href="https://pentafox.in/" target="_blank" rel="noopener noreferrer">
-                <span className="text-[#1E1E1E] text-[16px] font-medium cursor-pointer">
-                  Company
-                </span>
-              </a>
-            </nav>
-
-            {/* Desktop Buttons */}
-            <div className="hidden min-[800px]:flex items-center gap-6">
-              <Link
-                style={{ visibility: "hidden" }}
-                to="/book-demo"
-                className="bg-black text-white px-5 py-2 rounded-md text-sm font-medium border border-white/20 hover:bg-white/10"
-              >
-                Book a demo
-              </Link>
-              <Link
-                to="/Login"
-                className="border border-[#F44336] text-[#F44336] px-5 py-2 rounded-md text-[16px] font-medium hover:bg-[#F44336] hover:text-white transition"
-              >
-                Sign in
-              </Link>
-            </div>
-
-            {/* Mobile Button */}
-            <div className="min-[800px]:hidden">
-              <button
-                onClick={() => {
-                  setMenuOpen(true);
-                  setSubmenu(null);
-                }}
-              >
-                <IconMenu2 size={28} className="text-black cursor-pointer" />
-              </button>
-            </div>
-          </div>
-        </header>
-
-        {/* Mobile Sidebar */}
-        <AnimatePresence>
-          {menuOpen && (
-            <motion.div
-              className="fixed inset-0 bg-white z-[200] flex flex-col w-full"
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "tween", ease: "easeInOut", duration: 0.4 }}
-            >
-              {/* Top Bar */}
-              <div className="flex justify-between items-center p-6 border-b">
-                <Link to='/'>
-                  <img src={data.logo} alt="FastKYC Logo" className="h-9" />
-                </Link>
-                <button onClick={() => setMenuOpen(false)}>
-                  <IconX size={28} className="text-gray-600 cursor-pointer" />
-                </button>
-              </div>
-
-              {/* Main Menu */}
-              {submenu === null && (
-                <div className="flex flex-col gap-6 p-6 text-lg font-medium">
-                  <span className="cursor-pointer">Why FastKYC</span>
-                  <span
-                    className="flex justify-between items-center cursor-pointer"
-                    onClick={() => setSubmenu("products")}
-                  >
-                    Products <IconChevronRight size={20} />
-                  </span>
-                  <span className="cursor-pointer">Resources</span>
-                  <a href="https://pentafox.in/" rel="noopener noreferrer">
-                    <span className="cursor-pointer">Company</span>
-                  </a>
-                </div>
-              )}
-
-              {/* Products Submenu */}
-              {submenu === "products" && (
-                <div className="flex flex-col p-6">
-                  <button
-                    className="flex items-center gap-2 text-gray-600 mb-6 cursor-pointer"
-                    onClick={() => setSubmenu(null)}
-                  >
-                    <IconChevronLeft size={20} />
-                  </button>
-                  <h3 className="text-[#F44336] font-medium text-lg mb-4">
-                    Products
-                  </h3>
-                  <div className="flex flex-col gap-5">
-                    {data.products_nav.map((p, i) => (
-                      <div
-                        key={i}
-                        initial="hidden"
-                        animate="visible"
-                        variants={{
-                          visible: {
-                            transition: { staggerChildren: 0.2, delayChildren: i * 0.4 },
-                          },
-                        }}
-                      >
-                        <Link
-                          to={p.link}
-                          className="flex items-center gap-4 cursor-pointer"
-                          onClick={() => setMenuOpen(false)}
-                        >
-                          <motion.img
-                            src={p.icon}
-                            alt={p.title}
-                            className="w-12 h-12"
-                            variants={{
-                              hidden: { opacity: 0, x: 20 },
-                              visible: { opacity: 1, x: 0, transition: { duration: 0.4 } },
-                            }}
-                          />
-
-                          <div
-                            variants={{
-                              hidden: { opacity: 0, x: 20 },
-                              visible: { opacity: 1, x: 0, transition: { duration: 0.4 } },
-                            }}
-                          >
-                            <h2 className="font-medium text-[#212121]">{p.title}</h2>
-                            <p className="text-[#616161] font-medium">{p.desc}</p>
-                          </div>
-                        </Link>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Main Content */}
-        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 pt-34">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Left Text */}
-            <div className="flex flex-col justify-center h-full order-1 text-left">
-              <h1 className="text-3xl sm:text-4xl lg:text-[42px] font-semibold mb-6 leading-snug text-[#1E1E1E]">
-                {hero.title}
-              </h1>
-
-              <ul className="space-y-4 mb-10">
-                {hero.features.map((feature) => {
-                  const Icon = iconMap[feature.icon];
-                  return (
-                    <li
-                      key={feature.id}
-                      className="flex items-center gap-3 justify-start"
-                    >
-                      <span className="bg-[#FFF5F5] backdrop-blur-md p-3 rounded-lg">
-                        <Icon className="w-6 h-6 text-red-600" />
-                      </span>
-                      <span className="font-medium text-[18px] text-[#424242]">
-                        {feature.text}
-                      </span>
-                    </li>
-                  );
-                })}
-              </ul>
-
-              <div className="flex justify-center lg:justify-start gap-8 text-center mt-auto">
-                {hero.stats.map((stat, idx) => (
-                  <div key={idx}>
-                    <p className="text-[32px] sm:text-[42px] font-semibold text-[#1E1E1E]">
-                      {stat.value}
-                    </p>
-                    <p className="text-[#1E1E1E] text-[14px] sm:text-[16px] font-medium">
-                      {stat.label}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Mobile Bank Logos Carousel */}
-            <div
-              className="
-          block lg:hidden relative overflow-hidden py-6 order-1
-          w-screen max-w-none
-          ml-[calc(50%-50vw)] mr-[calc(50%-50vw)]
-        "
-            >
-              <div className="pointer-events-none absolute left-0 top-0 h-full w-32 bg-gradient-to-r from-white via-white/80 to-transparent z-10" />
-              <div className="pointer-events-none absolute right-0 top-0 h-full w-32 bg-gradient-to-l from-white via-white/80 to-transparent z-10" />
-
-              <motion.div
-                className="flex gap-12 w-max"
-                animate={{ x: ["0%", "-30%"] }}
-                transition={{
-                  x: { repeat: Infinity, repeatType: "loop", duration: 20, ease: "linear" },
-                }}
-              >
-                {[...Array(5)].map((_, i) => (
-                  <div key={i} className="flex gap-12">
-                    {hero.banks.map((logo, idx) => (
-                      <motion.img
-                        key={`${i}-${idx}`}
-                        src={logo}
-                        alt={`Bank ${idx + 1}`}
-                        className="h-8 w-auto object-contain hover:grayscale-0 transition"
-                        whileHover={{ scale: 1.1 }}
-                        transition={{ duration: 0.3 }}
-                      />
-                    ))}
-                  </div>
-                ))}
-              </motion.div>
-            </div>
-
-            {/* Right Form */}
-            <div className="flex flex-col justify-center h-full order-1 lg:order-2">
-              {submit && (
-                <div className="flex justify-center mb-4">
-                  <h3 className="text-[18px] fon-medium text-[#1E1E1E]">
-                    {form.successMessage}
-                  </h3>
-                </div>
-              )}
-              <div className="bg-white border border-gray-200 p-8 rounded-2xl shadow-lg w-full flex flex-col justify-center">
-                <form
-                  className="space-y-4"
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    setSubmit(true);
-                  }}
-                >
-                  {form.fields.map((field) => (
-                    <div key={field.id} className="flex flex-col">
-                      <label
-                        htmlFor={field.id}
-                        className="text-[#424242] text-[12px] font-medium mb-1"
-                      >
-                        {field.label}
-                      </label>
-                      {field.id === "phone" ? (
-                        <div className="flex gap-2">
-                          <select className="border border-[#00000033] rounded-lg p-3 text-gray-900 bg-white focus:outline-none focus:border-red-500">
-                            {form.countryOptions.map((c, i) => (
-                              <option key={i}>{c}</option>
-                            ))}
-                          </select>
-                          <input
-                            id={field.id}
-                            type={field.type}
-                            placeholder={field.placeholder}
-                            className="w-full p-3 rounded-lg text-[#808080] bg-white border border-[#00000033] focus:outline-none focus:border-red-500"
-                          />
-                        </div>
-                      ) : (
-                        <input
-                          id={field.id}
-                          type={field.type}
-                          placeholder={field.placeholder}
-                          className="w-full p-3 rounded-lg text-[#808080] bg-white border border-[#00000033] focus:outline-none focus:border-red-500"
-                        />
-                      )}
-                    </div>
-                  ))}
-                  <GoogleReCaptcha />
-                  <button
-                    type="submit"
-                    className="text-[16px] w-full bg-[#F44336] hover:bg-red-700 transition text-white font-bold p-3 rounded-lg cursor-pointer"
-                  >
-                    {form.submit.label}
-                  </button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-        {/* Desktop Bank Logos Carousel */}
-        <div className="hidden lg:block relative w-full overflow-hidden py-20">
-
-          <div
-            className="pointer-events-none absolute left-0 top-0 h-full w-32 z-10
-    bg-gradient-to-r from-red-100 via-red-100 to-transparent
-    [mask-image:linear-gradient(to_bottom,transparent,black,transparent)]
-    [mask-repeat:no-repeat] [mask-size:100%_100%]"
-          />
-
-          <div
-            className="pointer-events-none absolute right-0 top-0 h-full w-32 z-10
-    bg-gradient-to-l from-red-100 via-red-100 to-transparent
-    [mask-image:linear-gradient(to_bottom,transparent,black,transparent)]
-    [mask-repeat:no-repeat] [mask-size:100%_100%]"
-          />
-
-
-          <motion.div
-            className="flex gap-12 w-max"
-            animate={{ x: ["0%", "-30%"] }}
-            transition={{
-              x: { repeat: Infinity, repeatType: "loop", duration: 20, ease: "linear" },
-            }}
-          >
-            {[...Array(5)].map((_, i) => (
-              <div key={i} className="flex gap-12">
-                {hero.banks.map((logo, idx) => (
-                  <motion.img
-                    key={`${i}-${idx}`}
-                    src={logo}
-                    alt={`Bank ${idx + 1}`}
-                    className="h-8 w-auto object-contain hover:grayscale-0 transition"
-                    whileHover={{ scale: 1.1 }}
-                    transition={{ duration: 0.3 }}
-                  />
-                ))}
-              </div>
-            ))}
-          </motion.div>
-        </div>
-      </div>
-
-      {/* Footer Place */}
-      <Footer data={footerData} />
     </>
-  );
+  )
 }
 
-import { useState } from "react";
-import ReCAPTCHA from "react-google-recaptcha";
-
-export default function ContactForm() {
-  const [captchaValue, setCaptchaValue] = useState(null);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!captchaValue) {
-      alert("Please complete the reCAPTCHA!");
-      return;
-    }
-    console.log("Captcha token:", captchaValue);
-  };
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <input type="email" placeholder="Email" required />
-      <ReCAPTCHA
-        sitekey="6LfD3PIbAAAAAJs_eEHvoOl75_83eXSqpPSRFJ_u"
-        onChange={(value) => setCaptchaValue(value)}
-      />
-      <button type="submit">Submit</button>
-    </form>
-  );
-}
+export default FastKYC_HeadSection

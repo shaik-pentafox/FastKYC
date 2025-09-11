@@ -6,7 +6,7 @@ import {
   IconMenu2,
   IconX,
 } from "@tabler/icons-react";
-import { Link, useLocation } from "react-router-dom";
+import { Link} from "react-router-dom";
 
 const RunnerPath = ({ d, duration = 6, offset = 0, className, color = "#E20303" }) => {
   const segmentLength = 180;
