@@ -20,14 +20,13 @@ const containerVariant = {
 };
 
 const cardVariant = {
-  hidden: { opacity: 0, y: 50 },
+  hidden: { opacity: 0, y: -50 },
   show: {
     opacity: 1,
     y: 0,
     transition: { duration: 0.8, ease: "easeInOut" },
   },
 };
-
 
 function Flow_Section({ data }) {
   return (
@@ -45,7 +44,6 @@ function Flow_Section({ data }) {
             variants={cardVariant}
             className="flex flex-col items-start"
           >
-           
             <div className="bg-[#FFF5F5] p-3 rounded-2xl mb-4">
               {iconMap[item.icon]}
             </div>

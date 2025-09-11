@@ -39,7 +39,7 @@ const imageVariant = {
 
 function Customers_Section({ data }) {
   return (
-    <section className="py-12 mb-24">
+    <section className="py-12 mb-8">
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           {/* ✅ Left Side */}
@@ -103,14 +103,7 @@ function Customers_Section({ data }) {
                   </motion.li>
                 ))}
 
-                <motion.li variants={itemVariant} className="pt-6">
-                  <button className="h-10 cursor-pointer flex items-center justify-center font-medium text-[20px] text-[#F44336] border border-[#F44336] rounded-[8px] px-5 py-1 hover:bg-red-50 transition">
-                    {data.cta.label}
-                    <span className="ml-2 mb-1 text-[28px] font-medium leading-none">
-                      {data.cta.icon}
-                    </span>
-                  </button>
-                </motion.li>
+               
               </motion.ul>
             </motion.div>
           </motion.div>

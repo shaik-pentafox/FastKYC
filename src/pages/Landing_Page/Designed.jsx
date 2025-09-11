@@ -1,20 +1,21 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { IconChevronRight } from "@tabler/icons-react";
 
-function Designed({data}) {
-  const textContainerVariants = {
+function Designed({ data }) {
+  const containerVariants = {
     hidden: {},
     visible: {
-      transition: { staggerChildren: 0.5 },
+      transition: { staggerChildren: 0.4 },
     },
   };
 
-  const textItemVariants = {
+  const itemVariants = {
     hidden: { opacity: 0, x: -40 },
     visible: {
       opacity: 1,
       x: 0,
-      transition: { duration: 1, ease: "easeInOut" },
+      transition: { duration: 0.8, ease: "easeInOut" },
     },
   };
 
@@ -31,25 +32,25 @@ function Designed({data}) {
   return (
     <section className="py-20 bg-gradient-to-b from-white via-white to-red-100 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+        <div className="grid md:grid-cols-2 gap-12 items-start">
           {/* Left side */}
           <motion.div
             className="flex flex-col justify-center"
-            variants={textContainerVariants}
+            variants={containerVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
           >
             <motion.h3
               className="text-[#E20303] text-[24px] font-medium mb-2"
-              variants={textItemVariants}
+              variants={itemVariants}
             >
               {data.sectionTitle}
             </motion.h3>
 
             <motion.h2
               className="text-3xl md:text-[32px] font-medium text-[#1E1E1E] mb-4"
-              variants={textItemVariants}
+              variants={itemVariants}
             >
               {data.heading.split(".")[0]}.
               <br />
@@ -57,11 +58,39 @@ function Designed({data}) {
             </motion.h2>
 
             <motion.p
-              className="text-[#333333] text-[16px] font-medium md:text-[16px]"
-              variants={textItemVariants}
+              className="text-[#333333] text-[16px] font-medium md:text-[16px] mb-8"
+              variants={itemVariants}
             >
               {data.description}
             </motion.p>
+
+            {/* Bottom sections */}
+            {data.bottomSections && (
+              <div className="grid md:grid-cols-2 gap-6">
+                {data.bottomSections.map((section, index) => (
+                  <motion.div
+                    key={index}
+                    className="flex flex-col"
+                    variants={itemVariants}
+                  >
+                    <h3 className="text-[24px] font-medium text-[#000000] mb-2">
+                      {section.title}
+                    </h3>
+                    <p className="text-[#424242] text-[16px] font-medium mb-3">
+                      {section.description}
+                    </p>
+                    <a
+                      href={section.referenceLink}
+                      className="inline-flex items-center gap-2 text-[#F44336] text-[20px] font-medium"
+                    >
+                      <span className="leading-none">{section.referenceText}</span>
+                      <IconChevronRight size={22} stroke={2} className="align-middle mt-1" />
+                    </a>
+
+                  </motion.div>
+                ))}
+              </div>
+            )}
           </motion.div>
 
           {/* Right side */}

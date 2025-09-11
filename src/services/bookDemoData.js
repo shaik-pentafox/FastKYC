@@ -1,8 +1,8 @@
 import Logo from "../assets/Images/FastKYC_logo.png";
 import bank1 from "../assets/Images/Company_assets/Company_logo1.png";
 import bank2 from "../assets/Images/Company_assets/Company_logo2.png";
-import bank3 from "../assets/Images/Company_assets/Company_logo3.png";
-import bank4 from "../assets/Images/Company_assets/Company_logo4.png";
+import bank3 from "../assets/Images/Company_assets/Company_logo4.png";
+import bank4 from "../assets/Images/Company_assets/Company_logo3.png";
 
 // Nav icons
 import Product1_nav from "../assets/Images/Product_assets/Icon1.png";
@@ -16,14 +16,14 @@ const bookDemoData = {
   hero: {
     title: "Seamless verification with faster approvals, stronger security, and full compliance",
     features: [
-      { id: 1, icon: "cpu", text: "AI-driven onboarding in seconds" },
-      { id: 2, icon: "shield", text: "Fraud detection that blocks synthetic IDs" },
-      { id: 3, icon: "star", text: "Trusted by fintech, banks & marketplaces" }
+      { id: 1, icon: "cpu", text: "Instant KYC, bank, and GST verification in seconds" },
+      { id: 2, icon: "shield", text: "Secure Aadhaar masking, watermarking & fraud prevention" },
+      { id: 3, icon: "star", text: "Trusted by fintechs, banks, and enterprises across industries" }
     ],
     stats: [
-      { value: "500+", label: "Identities verified" },
-      { value: "96%", label: "Auto-approval rate" },
-      { value: "60%", label: "Reduction in drop-offs" }
+      { value: "500+", label: " Businesses Verified " },
+      { value: "96%", label: "Auto-approval Rate" },
+      { value: "60%", label: "Faster Onboarding" }
     ],
     banks: [bank1, bank2, bank3, bank4]
   },
@@ -39,12 +39,12 @@ const bookDemoData = {
     countryOptions: ["India (+91)"],
     submit: { label: "Submit" }
   },
-  products_nav: [
-    { icon: Product1_nav, title: "GST", desc: "GST & Business Verification APIs", link: "/Products_GST" },
-    { icon: Product2_nav, title: "Security & Compliance APIs", desc: "Watermark and Aadhaar Masking", link: "/Products_security" },
-    { icon: Product3_nav, title: "Bank", desc: "Bank Account Verification", link: "/Products_bank-account-verification" },
-    { icon: Product4_nav, title: "OCR APIs", desc: "Extract data from government IDs and documents", link: "/Products_OCR-APIs" },
-    { icon: Product5_nav, title: "KYCs", desc: "Simplify onboarding with powerful KYC", link: "/Products_KYC" },
+   products_nav: [
+              { icon: Product5_nav, title: "KYC", desc: "Simplify Onboarding with Powerful KYC", link: "/products-kyc" },
+              { icon: Product3_nav, title: "Bank", desc: "Instant Bank Account Verification", link: "/products-bank-account-verification" },
+              { icon: Product2_nav, title: "Security & Compliance API", desc: "Watermark and Aadhaar Masking", link: "/products-security" },
+              { icon: Product4_nav, title: "OCR API", desc: "Extract data from government IDs and documents", link: "/products-ocr-apis" },
+              { icon: Product1_nav, title: "GST", desc: "GST Verification APIs", link: "/products-gst" },
   ]
 };
 

@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 import {
   IconDatabase,
-  IconChecks,
-  IconUserPlus,
-  IconShield,
+  IconUser,
   IconCode,
   IconChevronRight,
+  IconFileOff,
+  IconAlertTriangle,
 } from "@tabler/icons-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const iconMap = {
   Database: <IconDatabase className="h-6 w-6 sm:h-7 sm:w-7 text-[#FF725E]" />,
-  Checks: <IconChecks className="h-6 w-6 sm:h-7 sm:w-7 text-[#FF725E]" />,
-  UserPlus: <IconUserPlus className="h-6 w-6 sm:h-7 sm:w-7 text-[#FF725E]" />,
-  Shield:  <IconShield className="h-6 w-6 sm:h-7 sm:w-7 text-[#FF725E]" />,
+  FileOff: <IconFileOff className="h-6 w-6 sm:h-7 sm:w-7 text-[#FF725E]" />,
+  User: <IconUser className="h-6 w-6 sm:h-7 sm:w-7 text-[#FF725E]" />,
+  Triangle: <IconAlertTriangle className="h-6 w-6 sm:h-7 sm:w-7 text-[#FF725E]" />,
   Code: <IconCode className="h-6 w-6 sm:h-7 sm:w-7 text-[#FF725E]" />,
 
 };
@@ -30,10 +30,10 @@ function BusinessSection({data}) {
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-12 lg:gap-24 px-6 md:px-12 lg:px-20">
         {/* ✅ Left Section*/}
         <div className="flex-1">
-          <p className="text-[#FF725E] font-medium text-xl sm:text-2xl md:text-[24px] mb-2">
+          <p className="text-[#FF725E] font-medium text-xl sm:text-2xl md:text-[24px] mb-4">
             {data.heading}
           </p>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
+          <h2 className="text-3xl md:text-[40px] font-bold mb-4 text-[#161C2D]">
             {data.subheading}
           </h2>
           <p className="text-[#616161] font-medium text-base sm:text-lg md:text-[20px]">

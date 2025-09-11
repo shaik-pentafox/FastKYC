@@ -4,21 +4,22 @@ import React from "react";
 import Head_Section from "./KYC_HeadSection";
 import Flow_Section from "./Flow_Section";
 import Customer_Section from './Customers_Section';
+import Verification_Section from './Verification_Section'
 import Contact_Section from "./Contact_Section";
 import PayIntegrate from "./PayIntergate_Section";
 import Footer from "../../Footer";
 
 //Json Data
-import data from "../../../services/LandingPageData";
 import KYCData from "../../../services/KYCPageData";
 import footerData from '../../../services/FooterPageData'
 
 function App() {
   return (
     <div>
-    <Head_Section data={KYCData.pageData} products_nav={data.products_nav}/>
+    <Head_Section data={KYCData.pageData}/>
     <Flow_Section data={KYCData.flowData}/>
     <Customer_Section data={KYCData.customerData}/>
+    <Verification_Section data={KYCData.verificationData}/>
     <Contact_Section data={KYCData.contactData}/>
     <PayIntegrate data={KYCData.payIntegrateData}/>
     <Footer data={footerData} /> 

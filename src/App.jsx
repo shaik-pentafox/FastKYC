@@ -7,7 +7,7 @@ import KYC_Page from './pages/Products/KYC_Page/KYC_ControlCenter'
 import GST_Page from './pages/Products/GST_Page/GST_ControlCenter'
 import BANK_Page from './pages/Products/BANK_Page/Bank_ControlCenter'
 import OCR_Page from './pages/Products/OCR(APIs)_Page/OCR_ControlCenter'
-//import /Products_security from './pages/Products/SECURITY(APIs)_Page/ControlCenter'
+import Products_security from './pages/Products/SECURITY(APIs)_Page/SECURITY_ControlCenter'
 import BookDemo from './pages/bookDemo/BookDemo'
 
 //Json Data
@@ -21,13 +21,13 @@ function App() {
        <ScrollToTop />
         <Routes>
           <Route path='/' element={<Landing_Page />} />
-          <Route path='/Products_KYC' element={<KYC_Page />} />
-          <Route path='/Products_GST' element={<GST_Page />} />
-          <Route path='/Products_bank-account-verification' element={<BANK_Page />} />
-          <Route path='/Products_OCR-APIs' element={<OCR_Page />} />
-          {/* <Route path='/Products_security' element={<SECURITY_Page />} /> */}
-          <Route path='/Login' element={<Login />} />
-          <Route path="/Book_demo" element={<BookDemo data={data} footerData={footerData}/>} />
+          <Route path='/products-kyc' element={<KYC_Page />} />
+          <Route path='/products-gst' element={<GST_Page />} />
+          <Route path='/products-bank-account-verification' element={<BANK_Page />} />
+          <Route path='/products-ocr-apis' element={<OCR_Page />} />
+          <Route path='/products-security' element={<Products_security />} />
+          <Route path='/login' element={<Login />} />
+          <Route path="/book-demo" element={<BookDemo data={data} footerData={footerData}/>} />
         </Routes>
       </BrowserRouter>
     </>
@@ -35,3 +35,5 @@ function App() {
 }
 
 export default App
+
+

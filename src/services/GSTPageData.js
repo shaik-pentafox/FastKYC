@@ -2,8 +2,8 @@ import Logo from "../assets/Images/FastKYC_logo.png";
 import Product_Logo from "../assets/Images/Product_assets/Product3.png";
 import bank1 from "../assets/Images/Company_assets/Company_logo1.png";
 import bank2 from "../assets/Images/Company_assets/Company_logo2.png";
-import bank3 from "../assets/Images/Company_assets/Company_logo3.png";
-import bank4 from "../assets/Images/Company_assets/Company_logo4.png";
+import bank3 from "../assets/Images/Company_assets/Company_logo4.png";
+import bank4 from "../assets/Images/Company_assets/Company_logo3.png";
 
 // Nav icons
 import Product1_nav from "../assets/Images/Product_assets/Icon1.png";
@@ -18,6 +18,8 @@ import icon2 from "../assets/Images/Product_assets/Products_Icon2.png";
 import icon3 from "../assets/Images/Product_assets/Products_Icon3.png";
 import icon4 from "../assets/Images/Product_assets/Products_Icon4.png";
 
+import assets from "../assets/Images/Productsverify_assets/GST_Verify.png";
+
 const GSTData = {
     pageData: {
         header: {
@@ -26,31 +28,37 @@ const GSTData = {
                 { label: "Why FastKYC", link: "#", dropdown: false },
                 { label: "Products", link: "#", dropdown: true },
                 { label: "Resources", link: "#", dropdown: false },
-                { label: "Company", link: "https://pentafox.in/", dropdown: false },
+                { label: "Company", link: "https://pentafox.in/", dropdown: false,external:true },
             ],
             actions: [
-                { text: "Sign in", link: "/Login", primary: false },
-                { text: "Book a demo", link: "/Book_demo", primary: true },
+                { text: "Sign in", link: "/login", primary: false },
+                { text: "Book a demo", link: "/book-demo", primary: true },
             ],
         },
         hero: {
             heading: "Simplify GST, Focus on Growth",
             subtext:
-                "Running a business is tough — managing GST shouldn’t be. Automate filings, validations, and compliance with ease.",
-           buttons: [
-        {
-          label: "Get started",
-          link: "/Login",
-          style:
-            "hidden md:block bg-[#F44336] text-white px-5 py-2 rounded-[8px] font-medium hover:bg-red-700 transition text-[16px]"
-        },
-        {
-          label: "Book a Demo",
-          link: "/Book_demo",
-          style:
-            "border border-[#F44336] px-5 py-2 rounded-[8px] font-medium hover:bg-[#F44336] hover:text-white transition md:text-[#F44336] bg-[#F44336] md:bg-white text-[#E4E6EA] text-[16px]"
-        }
-      ],
+                "Instant, reliable GST verification for compliant and seamless business operations.",
+            includes_title: "Includes:",
+            features: [
+                "Validate GSTINs instantly from trusted government sources",
+                "Ensure dealer authenticity and compliance with ease",
+                " APIs that are secure, accurate, and simple to integrate",
+            ],
+            buttons: [
+                {
+                    label: "Get started",
+                    link: "/login",
+                    style:
+                        "hidden md:block bg-[#F44336] text-white px-5 py-2 rounded-[8px] font-medium hover:bg-red-700 transition text-[16px]"
+                },
+                {
+                    label: "Book a Demo",
+                    link: "/book-demo",
+                    style:
+                        "border border-[#F44336] px-5 py-2 rounded-[8px] font-medium hover:bg-[#F44336] hover:text-white transition md:text-[#F44336] bg-[#F44336] md:bg-white text-[#E4E6EA] text-[16px]"
+                }
+            ],
             image: {
                 src: Product_Logo,
                 alt: "KYC Verification",
@@ -58,14 +66,14 @@ const GSTData = {
             companiesLogos: [bank1, bank2, bank3, bank4],
         },
           products_nav: [
-            { icon: Product1_nav, title: "GST", desc: "GST & Business Verification APIs", link: "/Products_GST" },
-            { icon: Product2_nav, title: "Security & Compliance APIs", desc: "Watermark and Aadhaar Masking", link: "/Products_security" },
-            { icon: Product3_nav, title: "Bank", desc: "Bank Account Verification", link: "/Products_bank-account-verification" },
-            { icon: Product4_nav, title: "OCR APIs", desc: "Extract data from government IDs and documents", link: "/Products_OCR-APIs" },
-            { icon: Product5_nav, title: "KYCs", desc: "Simplify onboarding with powerful KYC", link: "/Products_KYC" },
+            { icon: Product5_nav, title: "KYC", desc: "Simplify Onboarding with Powerful KYC", link: "/products-kyc" },
+            { icon: Product3_nav, title: "Bank", desc: "Instant Bank Account Verification", link: "/products-bank-account-verification" },
+            { icon: Product2_nav, title: "Security & Compliance API", desc: "Watermark and Aadhaar Masking", link: "/products-security" },
+            { icon: Product4_nav, title: "OCR API", desc: "Extract data from government IDs and documents", link: "/products-ocr-apis" },
+            { icon: Product1_nav, title: "GST", desc: "GST Verification APIs", link: "/products-gst" },
           ]
     },
-    
+
     whyFastKycData: {
         headingSmall: "Why FastKYC",
         headingMain: "Simple and Secure GST Verification",
@@ -74,13 +82,13 @@ const GSTData = {
         features: [
             {
                 icon: icon1,
-                title: "GSTN Licensed",
-                desc: "Stay compliant with confidence — FastKYC GST APIs are government-approved, secure, and built to simplify your GST verification process.",
+                title: "GSTIN Licensed",
+                desc: "Stay compliant with confidence — Fast KYC GST APIs are government-approved, secure, and built to simplify your GST verification process.",
             },
             {
                 icon: icon2,
                 title: "Real-Time Data Access",
-                desc: "Access live data directly from the GST Network and NIC for unmatched accuracy, compliance, and timeliness.",
+                desc: "Access live data directly from the GST Network for unmatched accuracy, compliance, and timeliness.",
             },
             {
                 icon: icon3,
@@ -90,7 +98,7 @@ const GSTData = {
             {
                 icon: icon4,
                 title: "Secure Encryption & Decryption",
-                desc: "Pentafox FastKYC handles encryption, decryption, and network complexities, so you can focus on your business while we keep your data secure.",
+                desc: "FastKYC handles encryption, decryption, and network complexities, so you can focus on your business while we keep your data secure.",
             },
         ],
     },
@@ -98,27 +106,26 @@ const GSTData = {
         headingSmall: "Know your business",
         headingMain: "Accelerate Trust",
         description:
-            "In today’s fast-paced business environment, verifying the authenticity of your partners — whether they’re buyers, sellers, or collaborators — is critical. With Pentafox FastKYC APIs, you can instantly confirm business credibility and stay compliant.",
+            "In today’s fast-paced business environment, verifying the authenticity of your partners whether they’re buyers, sellers, or collaborators is critical. With FastKYC APIs, you can instantly confirm business credibility and stay compliant.",
         features: [
             {
                 icon: "Hourglass",
                 title: "Verify GST-Registered Businesses",
                 description:
                     "Authenticate businesses in real-time using their GSTIN, directly from trusted government sources.",
-            },
-            {
-                icon: "Heart",
-                title: "Validate with PAN",
-                description:
-                    "Cross-check businesses registered under GST using their PAN for added accuracy.",
-            },
-            {
-                icon: "World",
-                title: "Check GST Filing Status",
-                description:
-                    "Quickly assess compliance by verifying GST return filing history.",
-            },
+            }
         ],
+    },
+    verificationData: {
+        title: "GST Verification",
+        subtitle: "(No PAN Input)",
+        description:
+            "Authenticate GST details instantly without requiring PAN input.",
+        points: [
+            "Verify GSTIN details with government sources.",
+            "Reduce tax fraud risks."
+        ],
+        image: assets
     }
 }
 

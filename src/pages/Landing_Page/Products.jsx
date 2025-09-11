@@ -44,7 +44,6 @@ function Products({ sections = [], whyChoose = {}, features = [] }) {
     return () => observer.disconnect();
   }, []);
 
-  // ✅ Detect initial section only if Products section is visible
   useEffect(() => {
     const detectInitialSection = () => {
       let visibleIndex = null;
@@ -54,7 +53,6 @@ function Products({ sections = [], whyChoose = {}, features = [] }) {
         if (!el) return;
         const rect = el.getBoundingClientRect();
 
-        // Check if product section is visible in viewport
         if (rect.top < window.innerHeight && rect.bottom > 0) {
           visibleIndex = index;
           hasVisible = true;
@@ -103,15 +101,24 @@ function Products({ sections = [], whyChoose = {}, features = [] }) {
     hidden: { opacity: 0, y: 40 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
   };
+  const listContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
 
   return (
     <>
       {/* PRODUCTS SECTION */}
-      <section className="py-12 mb-24">
+      <section className="py-12 mb-18">
         <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 ">
           <div className="mb-8">
             <p className="text-[#E20303] text-[24px] font-medium mb-2">Products</p>
-            <h2 className="w-full max-w-2xl text-[32px] font-medium text-[#212121]">
+            <h2 className="w-full max-w-2xl text-[32px]  md:text-[43px] font-bold text-[#212121]">
               Powerful APIs for fast, secure and reliable customer onboarding
             </h2>
           </div>
@@ -179,8 +186,7 @@ function Products({ sections = [], whyChoose = {}, features = [] }) {
               </motion.h2>
               <motion.p variants={topToBottom} className="text-[#424242] text-[20px] font-medium">
                 {whyChoose.description}
-              </motion.p>
-
+              </motion.p>             
               <motion.div
                 className="flex flex-wrap justify-between mt-6 gap-6"
                 ref={counterRef}

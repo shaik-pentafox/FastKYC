@@ -1,6 +1,7 @@
 import React from "react";
 
 //Components
+//import Navbar from './Navbar'
 import Head_Section from "./Head_Section";
 import Products from "./Products";
 import Customer from "./Customers";

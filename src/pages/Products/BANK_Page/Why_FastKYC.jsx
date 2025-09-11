@@ -28,14 +28,12 @@ function Why_FastKYC({data}) {
     <section className="bg-gradient-to-r from-[#FFD8D8] to-[#ffffff] py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-20">
         {/* Heading */}
-        <h3 className="text-[#F44336] font-medium text-[24px] mb-2">Why FastKYC</h3>
+        <h3 className="text-[#F44336] font-medium text-[24px] mb-2">{data.heading}</h3>
         <h2 className="text-2xl md:text-[32px] font-medium text-[#1E1E1E] mb-4">
-          Simple and Secure Bank Account Verification
+          {data.subheading}
         </h2>
         <p className="text-[#424242] max-w-3xl text-[16px] font-medium mb-10">
-          Our API enables instant validation of bank account details, ensuring
-          safe, accurate, and seamless transactions. Here’s why businesses
-          rely on us:
+          {data.description}
         </p>
 
         {/* datas Grid */}

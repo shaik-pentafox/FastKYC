@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useAnimation } from "framer-motion";
 import {
-  IconChevronDown,
   IconChevronLeft,
   IconChevronRight,
   IconMenu2,
@@ -10,11 +9,41 @@ import {
 import { Link } from "react-router-dom";
 import { CheckIcon } from "@mantine/core";
 
-function KYC_HeadSection({ data, products_nav }) {
+function KYC_HeadSection({ data }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [submenu, setSubmenu] = useState(null);
   const [openDropdown, setOpenDropdown] = useState(false);
+
+  const [isSticky, setIsSticky] = useState(false);
+  const controls = useAnimation();
   const dropdownRef = useRef(null);
+  const [showNavbar, setShowNavbar] = useState(true);
+  const lastScrollY = useRef(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+
+      if (currentScrollY > 50) {
+        setIsSticky(true);
+
+        if (currentScrollY > lastScrollY.current) {
+          setShowNavbar(false);
+        } else {
+          setShowNavbar(true);
+        }
+      } else {
+        setIsSticky(false);
+        setShowNavbar(true);
+      }
+
+      lastScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // Close sidebar automatically when width ≥ 768px
   useEffect(() => {
@@ -57,7 +86,12 @@ function KYC_HeadSection({ data, products_nav }) {
   return (
     <div className="min-h-screen w-full py-6 relative z-50 overflow-x-hidden bg-white">
       {/* ✅ Header */}
-      <header className="py-6 relative z-50">
+      <header
+        className={`w-full top-0 z-[100] fixed transition-transform duration-300 transform
+    ${isSticky && showNavbar ? "bg-white py-6" : "bg-transparent py-12 shadow-none"}
+    ${showNavbar ? "translate-y-0" : "-translate-y-full"}
+  `}
+      >
         <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 flex justify-between items-center">
           {/* Logo */}
           <Link to="/">
@@ -76,7 +110,6 @@ function KYC_HeadSection({ data, products_nav }) {
                 >
                   <div className="flex items-center gap-1 cursor-pointer text-[#1E1E1E] text-[16px] font-medium">
                     {item.label}
-                    <IconChevronDown size={16} />
                   </div>
 
                   {/* Products dropdown */}
@@ -86,15 +119,13 @@ function KYC_HeadSection({ data, products_nav }) {
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
-                        className="absolute top-[35px] left-1/2 -translate-x-1/2 mt-2 
-        w-[712px] bg-white shadow-lg rounded-[20px] p-6 
-        grid grid-cols-2 gap-5 z-50 border border-[#F44336]"
+                        transition={{ duration: 0.3 }}
+                        className="absolute left-3/4 -translate-x-1/2 mt-[5.5px]
+                                w-[712px] bg-white shadow-lg rounded-[20px] p-6 
+                                grid grid-cols-2 gap-5 z-50 border border-[#F44336]"
                       >
-                        <h3 className="col-span-2 text-[#F44336] font-medium text-[18px] p-2">
-                          Products
-                        </h3>
-                        {products_nav.map((p, i) => (
-                          <motion.div
+                        {data.products_nav.map((p, i) => (
+                          <div
                             key={i}
                             initial="hidden"
                             animate="visible"
@@ -120,17 +151,17 @@ function KYC_HeadSection({ data, products_nav }) {
                                   visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
                                 }}
                               />
-                              <motion.div
+                              <div
                                 variants={{
                                   hidden: { opacity: 0, y: 20 },
                                   visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
                                 }}
                               >
-                                <p className="text-[16px] font-medium text-[#F44336]">{p.title}</p>
-                                <p className="text-[18px] text-[#212121] font-medium">{p.desc}</p>
-                              </motion.div>
+                                <h2 className="font-medium text-[#212121]">{p.title}</h2>
+                                <p className="text-[#616161] font-medium">{p.desc}</p>
+                              </div>
                             </Link>
-                          </motion.div>
+                          </div>
                         ))}
                       </motion.div>
                     )}
@@ -142,6 +173,7 @@ function KYC_HeadSection({ data, products_nav }) {
                   key={idx}
                   href={item.link}
                   rel="noopener noreferrer"
+                  target="_blank"
                   className="text-[#1E1E1E] text-[16px] font-medium cursor-pointer"
                 >
                   {item.label}
@@ -166,7 +198,7 @@ function KYC_HeadSection({ data, products_nav }) {
                 to={btn.link}
                 className={
                   btn.primary
-                    ? "h-10 flex items-center justify-center bg-[#F44336] text-white px-5 rounded-[8px] text-[16px] font-medium hover:opacity-90 transition"
+                    ? "h-10 flex items-center justify-center bg-[#F44336] text-white px-5 rounded-[8px] text-[16px] font-medium hover:bg-red-700 transition"
                     : "h-10 flex items-center justify-center border border-[#F44336] px-5 rounded-[8px] text-[16px] font-medium text-[#F44336] hover:bg-[#F44336] hover:text-white transition"
                 }
               >
@@ -186,122 +218,124 @@ function KYC_HeadSection({ data, products_nav }) {
             </button>
           </div>
         </div>
+      </header>
 
-        {/* Mobile Sidebar */}
-        <AnimatePresence>
-          {menuOpen && (
-            <motion.div
-              className="fixed inset-0 bg-white z-[200] flex flex-col w-full"
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "tween", ease: "easeInOut", duration: 0.4 }}
-            >
-              {/* Top Bar */}
-              <div className="flex justify-between items-center p-6 border-b">
+      {/* Mobile Sidebar */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            className="fixed inset-0 bg-white z-[200] flex flex-col w-full"
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ type: "tween", ease: "easeInOut", duration: 0.4 }}
+          >
+            {/* Top Bar */}
+            <div className="flex justify-between items-center p-6 border-b">
+              <Link to="/">
                 <img src={data.header.logo} alt="FastKYC Logo" className="h-9" />
-                <button onClick={() => setMenuOpen(false)}>
-                  <IconX size={28} className="text-gray-600 cursor-pointer" />
-                </button>
-              </div>
+              </Link>
+              <button onClick={() => setMenuOpen(false)}>
+                <IconX size={28} className="text-gray-600 cursor-pointer" />
+              </button>
+            </div>
 
-              {/* Main Menu (Mobile) */}
-              {submenu === null && (
-                <div className="flex flex-col gap-6 p-6 text-lg font-medium">
-                  {data.header.nav.map((item, idx) =>
-                    item.dropdown ? (
-                      <span
-                        key={idx}
-                        className="flex justify-between items-center cursor-pointer"
-                        onClick={() => setSubmenu("products")}
-                      >
-                        {item.label} <IconChevronRight size={20} />
-                      </span>
-                    ) : item.external ? (
-                      <a
-                        key={idx}
-                        href={item.link}
-                        rel="noopener noreferrer"
-                        className="cursor-pointer"
-                      >
-                        {item.label}
-                      </a>
-                    ) : (
+            {/* Main Menu (Mobile) */}
+            {submenu === null && (
+              <div className="flex flex-col gap-6 p-6 text-lg font-medium">
+                {data.header.nav.map((item, idx) =>
+                  item.dropdown ? (
+                    <span
+                      key={idx}
+                      className="flex justify-between items-center cursor-pointer"
+                      onClick={() => setSubmenu("products")}
+                    >
+                      {item.label} <IconChevronRight size={20} />
+                    </span>
+                  ) : item.external ? (
+                    <a
+                      key={idx}
+                      href={item.link}
+                      rel="noopener noreferrer"
+                      className="cursor-pointer"
+                    >
+                      {item.label}
+                    </a>
+                  ) : (
+                    <Link
+                      key={idx}
+                      to={item.link}
+                      className="cursor-pointer"
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      {item.label}
+                    </Link>
+                  )
+                )}
+              </div>
+            )}
+
+            {/* Products Submenu (Mobile) */}
+            {submenu === "products" && (
+              <div className="flex flex-col p-6">
+                <button
+                  className="flex items-center gap-2 text-gray-600 mb-6 cursor-pointer"
+                  onClick={() => setSubmenu(null)}
+                >
+                  <IconChevronLeft size={20} />
+                </button>
+                <h3 className="text-[#F44336] font-medium text-lg mb-4">
+                  Products
+                </h3>
+                <div className="flex flex-col gap-5">
+                  {data.products_nav.map((p, i) => (
+                    <div
+                      key={i}
+                      initial="hidden"
+                      animate="visible"
+                      variants={{
+                        visible: {
+                          transition: { staggerChildren: 0.2, delayChildren: i * 0.4 },
+                        },
+                      }}
+                    >
                       <Link
-                        key={idx}
-                        to={item.link}
-                        className="cursor-pointer"
+                        to={p.link}
+                        className="flex items-center gap-4 cursor-pointer"
                         onClick={() => setMenuOpen(false)}
                       >
-                        {item.label}
-                      </Link>
-                    )
-                  )}
-                </div>
-              )}
+                        <motion.img
+                          src={p.icon}
+                          alt={p.title}
+                          className="w-12 h-12"
+                          variants={{
+                            hidden: { opacity: 0, x: 20 },
+                            visible: { opacity: 1, x: 0, transition: { duration: 0.4 } },
+                          }}
+                        />
 
-              {/* Products Submenu (Mobile) */}
-              {submenu === "products" && (
-                <div className="flex flex-col p-6">
-                  <button
-                    className="flex items-center gap-2 text-gray-600 mb-6 cursor-pointer"
-                    onClick={() => setSubmenu(null)}
-                  >
-                    <IconChevronLeft size={20} /> 
-                  </button>
-                  <h3 className="text-[#F44336] font-medium text-lg mb-4">
-                    Products
-                  </h3>
-                  <div className="flex flex-col gap-5">
-                    {products_nav.map((p, i) => (
-                      <motion.div
-                        key={i}
-                        initial="hidden"
-                        animate="visible"
-                        variants={{
-                          visible: {
-                            transition: { staggerChildren: 0.2, delayChildren: i * 0.4 },
-                          },
-                        }}
-                      >
-                        <Link
-                          to={p.link}
-                          className="flex items-center gap-4 cursor-pointer"
-                          onClick={() => setMenuOpen(false)}
+                        <div
+                          variants={{
+                            hidden: { opacity: 0, x: 20 },
+                            visible: { opacity: 1, x: 0, transition: { duration: 0.4 } },
+                          }}
                         >
-                          <motion.img
-                            src={p.icon}
-                            alt={p.title}
-                            className="w-12 h-12"
-                            variants={{
-                              hidden: { opacity: 0, x: 20 },
-                              visible: { opacity: 1, x: 0, transition: { duration: 0.4 } },
-                            }}
-                          />
-
-                          <motion.div
-                            variants={{
-                              hidden: { opacity: 0, x: 20 },
-                              visible: { opacity: 1, x: 0, transition: { duration: 0.4 } },
-                            }}
-                          >
-                            <p className="font-medium text-[#F44336]">{p.title}</p>
-                            <p className="font-medium text-[#212121] text-[18px]">{p.desc}</p>
-                          </motion.div>
-                        </Link>
-                      </motion.div>
-                    ))}
-                  </div>
+                          <h2 className="font-medium text-[#212121]">{p.title}</h2>
+                          <p className="text-[#616161] font-medium">{p.desc}</p>
+                        </div>
+                      </Link>
+                    </div>
+                  ))}
                 </div>
-              )}
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </header>
+              </div>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* ✅ Hero Section */}
       <motion.section
-        className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
+        className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-38 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
         initial="hidden"
         animate="visible"
         variants={containerVariants}
@@ -366,13 +400,16 @@ function KYC_HeadSection({ data, products_nav }) {
       </motion.section>
 
       {/* ✅ Company Logos */}
-      <section className="w-full py-10">
+      <section className="w-full py-10 -mt-25">
         <motion.div
           className="overflow-hidden w-full relative"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1, duration: 1.5 }}
         >
+          <div className="pointer-events-none absolute left-0 top-0 h-full w-32 bg-gradient-to-r from-white via-white/80 to-transparent z-10" />
+          <div className="pointer-events-none absolute right-0 top-0 h-full w-32 bg-gradient-to-l from-white via-white/80 to-transparent z-10" />
+
           <motion.div
             className="flex gap-12 w-max"
             animate={{ x: ["0%", "-30%"] }}

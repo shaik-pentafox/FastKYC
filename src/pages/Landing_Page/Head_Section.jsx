@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useAnimation } from "framer-motion";
 import {
-  IconChevronDown,
   IconChevronRight,
   IconChevronLeft,
   IconMenu2,
   IconX,
 } from "@tabler/icons-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const RunnerPath = ({ d, duration = 6, offset = 0, className, color = "#E20303" }) => {
   const segmentLength = 180;
@@ -54,8 +53,37 @@ function Head_Section({ data, products_nav }) {
   const [buttonText, setButtonText] = useState(data.cta.textDesktop);
   const [speedFactor, setSpeedFactor] = useState(1);
   const [showPaths, setShowPaths] = useState(true);
+
+  const [isSticky, setIsSticky] = useState(false);
   const controls = useAnimation();
   const dropdownRef = useRef(null);
+  const [showNavbar, setShowNavbar] = useState(true);
+  const lastScrollY = useRef(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+
+      if (currentScrollY > 50) {
+        setIsSticky(true);
+
+        if (currentScrollY > lastScrollY.current) {
+          setShowNavbar(false);
+        } else {
+          setShowNavbar(true);
+        }
+      } else {
+        setIsSticky(false);
+        setShowNavbar(true);
+      }
+
+      lastScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {
@@ -100,7 +128,6 @@ function Head_Section({ data, products_nav }) {
     return () => window.removeEventListener("resize", handleResize);
   }, [data]);
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -114,6 +141,7 @@ function Head_Section({ data, products_nav }) {
     }
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [openDropdown]);
+
 
   const container = {
     hidden: {},
@@ -144,8 +172,12 @@ function Head_Section({ data, products_nav }) {
     <div className="min-h-screen w-full py-6 relative z-50 overflow-x-hidden">
       <img src={data.bg_image} alt="Border Decoration" className="absolute inset-0 w-full h-full object-cover pointer-events-none" />
 
-      {/* Navbar */}
-      <header className="py-6 relative z-50">
+      <header
+        className={`w-full top-0 z-[100] fixed transition-transform duration-300 transform
+    ${isSticky && showNavbar ? "bg-white py-6" : "bg-transparent py-12 shadow-none"}
+    ${showNavbar ? "translate-y-0" : "-translate-y-full"}
+  `}
+      >
         <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 flex justify-between items-center">
           {/* Logo */}
           <Link to="/">
@@ -169,7 +201,6 @@ function Head_Section({ data, products_nav }) {
                 <span className="text-[#1E1E1E] text-[16px] font-medium">
                   Products
                 </span>
-                <IconChevronDown size={16} className="text-black" />
               </div>
 
               <AnimatePresence>
@@ -179,52 +210,37 @@ function Head_Section({ data, products_nav }) {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
                     transition={{ duration: 0.3 }}
-                    className="absolute top-[35px] left-3/4 -translate-x-1/2 mt-2 
+                    className="absolute left-3/4 -translate-x-1/2 mt-[5.5px]
            w-[712px] bg-white shadow-lg rounded-[20px] p-6 
            grid grid-cols-2 gap-5 z-50 border border-[#F44336]"
                   >
-                    <h3 className="col-span-2 text-[#F44336] font-medium text-[18px] p-2">
-                      Products
-                    </h3>
                     {products_nav.map((p, i) => (
-                      <motion.div
-                        key={i}
-                        initial="hidden"
-                        animate="visible"
-                        variants={{
-                          visible: {
-                            transition: { staggerChildren: 0.25, delayChildren: i * 0.4 },
-                          },
-                        }}
+                      <div
                       >
                         <Link
                           to={p.link}
                           className="flex items-start gap-3 p-2 rounded-lg hover:bg-gray-50 cursor-pointer"
                           onClick={() => setOpenDropdown(false)}
                         >
-                          {/* Icon animation */}
                           <motion.img
                             src={p.icon}
                             alt={p.title}
                             className="w-12 h-12"
-                            variants={{
-                              hidden: { opacity: 0, y: 30 },
-                              visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
-                            }}
                           />
 
-                          {/* Text animation */}
-                          <motion.div
+                          <div
                             variants={{
                               hidden: { opacity: 0, y: 20 },
                               visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
                             }}
                           >
-                            <p className="text-[16px] font-medium text-[#F44336]">{p.title}</p>
-                            <p className="text-[18px] text-[#212121] font-medium">{p.desc}</p>
-                          </motion.div>
+                            {/* <p className="text-[17px] font-medium text-[#212121]">{p.title}</p>
+                            <p className="text-[16px] text-[#616161] font-medium">{p.desc}</p> */}
+                            <h2 className="font-medium text-[#212121]">{p.title}</h2>
+                            <p className="text-[#616161] font-medium">{p.desc}</p>
+                          </div>
                         </Link>
-                      </motion.div>
+                      </div>
                     ))}
                   </motion.div>
                 )}
@@ -236,24 +252,25 @@ function Head_Section({ data, products_nav }) {
               Resources
             </span>
 
-            <a href="https://pentafox.in/" rel="noopener noreferrer">
+            <a href="https://pentafox.in/" target="_blank" rel="noopener noreferrer">
               <span className="text-[#1E1E1E] text-[16px] font-medium cursor-pointer">
                 Company
               </span>
             </a>
+
           </nav>
 
           {/* Desktop Buttons */}
           <div className="hidden min-[800px]:flex items-center gap-6">
             <Link
-              to="/Login"
+              to="/login"
               className="h-10 flex items-center justify-center border border-[#F44336] px-5 rounded-[8px] text-[16px] font-medium text-[#F44336] hover:bg-[#F44336] hover:text-white transition"
             >
               Sign in
             </Link>
             <Link
               to={data.cta.link}
-              className="h-10 flex items-center justify-center bg-[#F44336] text-white px-5 rounded-[8px] text-[16px] font-medium hover:opacity-90 transition"
+              className="h-10 flex items-center justify-center bg-[#F44336] text-white px-5 rounded-[8px] text-[16px] font-medium hover:bg-red-700 transition"
             >
               Book a demo
             </Link>
@@ -285,7 +302,10 @@ function Head_Section({ data, products_nav }) {
           >
             {/* Top Bar */}
             <div className="flex justify-between items-center p-6 border-b">
-              <img src={data.image} alt="FastKYC Logo" className="h-9" />
+              <Link to="/">
+                <img src={data.image} alt="FastKYC Logo" className="h-9 cursor-pointer" />
+              </Link>
+
               <button onClick={() => setMenuOpen(false)}>
                 <IconX size={28} className="text-gray-600 cursor-pointer" />
               </button>
@@ -322,7 +342,7 @@ function Head_Section({ data, products_nav }) {
                 </h3>
                 <div className="flex flex-col gap-5">
                   {products_nav.map((p, i) => (
-                    <motion.div
+                    <div
                       key={i}
                       initial="hidden"
                       animate="visible"
@@ -347,17 +367,17 @@ function Head_Section({ data, products_nav }) {
                           }}
                         />
 
-                        <motion.div
+                        <div
                           variants={{
                             hidden: { opacity: 0, x: 20 },
                             visible: { opacity: 1, x: 0, transition: { duration: 0.4 } },
                           }}
                         >
-                          <p className="font-medium text-[#F44336]">{p.title}</p>
-                          <p className="font-medium text-[#212121] text-[18px]">{p.desc}</p>
-                        </motion.div>
+                          <h2 className="font-medium text-[#212121]">{p.title}</h2>
+                          <p className="text-[#616161] font-medium">{p.desc}</p>
+                        </div>
                       </Link>
-                    </motion.div>
+                    </div>
                   ))}
 
                 </div>
@@ -367,9 +387,10 @@ function Head_Section({ data, products_nav }) {
         )}
       </AnimatePresence>
 
+
       {/* Hero Section */}
       <motion.section
-        className="text-center text-black relative overflow-hidden pt-12"
+        className="text-center text-black relative overflow-hidden pt-32"
         variants={container}
         initial="hidden"
         animate="show"
@@ -386,7 +407,7 @@ function Head_Section({ data, products_nav }) {
                 <RunnerPath
                   d="M10 250 H150 H250 V200 V50 Q250 20, 280 20 H345"
                   color="#E20303"
-                  className="top-[183px]"
+                  className="top-[196px]"
                 />
               </motion.div>
 
@@ -398,7 +419,7 @@ function Head_Section({ data, products_nav }) {
                 <RunnerPath
                   d="M400 300 V360 Q400 380 420 380 H520 Q540 380 540 400 V440 Q540 460 545"
                   color="#E20303"
-                  className="mt-[123px] left-[636px]"
+                  className="mt-[83px] left-[636px]"
                 />
               </motion.div>
 
@@ -432,7 +453,7 @@ function Head_Section({ data, products_nav }) {
             {data.buttons.map((btn, i) => (
               <button
                 key={i}
-                className="border border-[#00000066] text-black text-[14px] font-bold px-5 py-2 rounded-full  backdrop-blur-sm transition-transform duration-300"
+                className="border border-[#00000066] text-black text-[14px] font-bold px-5 py-2 rounded-full  backdrop-blur-sm transition-transform duration-300 "
               >
                 {btn}
               </button>
@@ -472,7 +493,7 @@ function Head_Section({ data, products_nav }) {
           >
             <Link
               to={data.cta.link}
-              className="w-full text-center bg-[#F44336] text-white font-medium px-10 py-2 rounded-[8px] text-[16px] hover:bg-red-500 transition-colors block h-10"
+              className="w-full text-center bg-[#F44336] text-white font-medium px-10 py-2 rounded-[8px] text-[16px] hover:bg-red-700 transition block h-10"
             >
               {buttonText}
             </Link>
@@ -500,12 +521,12 @@ function Head_Section({ data, products_nav }) {
                 </motion.div>
               ))}
               {[data.cards[2]].map((card, i) => (
-                <motion.div key={i} variants={card3} className="absolute right-[-40px] w-64 bg-white/90 backdrop-blur-md text-black border border-gray-200 shadow-lg rounded-3xl p-5 cursor-pointer">
+                <motion.div key={i} variants={card3} className="absolute mt-[21px] right-[-40px] w-64 bg-white/90 backdrop-blur-md text-black border border-gray-200 shadow-lg rounded-3xl p-5 cursor-pointer">
                   <div className="flex justify-between items-center mb-3">
                     <motion.img src={card.img} alt="status" className="h-8" initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 2.1, type: "spring", damping: 22, stiffness: 40 }} />
                     <p className="font-medium text-[18px] text-[#1E1E1E]">{card.subTitle}</p>
                   </div>
-                  <hr className="border-gray-300 mb-3" />
+                  <hr className="border-[#DCDCDC] mb-3 " />
                   <div className="flex -space-x-3 mb-3">
                     {card.avatars.map((i) => (
                       <motion.img key={i} className="w-8 h-8 rounded-full border-2 border-white" src={`https://i.pravatar.cc/40?img=${i}`} alt={`user-${i}`} initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 2.2 + i * 0.7, type: "spring", damping: 22, stiffness: 40 }} />
@@ -537,19 +558,43 @@ function Head_Section({ data, products_nav }) {
         </div>
 
         {/* Company Logos */}
-        <motion.div className="overflow-hidden w-full py-6 relative mt-10 min-[800px]:mt-[-262px]" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2, duration: 1.5 }}>
-          <motion.div className="flex gap-12 w-max" animate={{ x: ["0%", "-30%"] }} transition={{ x: { repeat: Infinity, repeatType: "loop", duration: 20, ease: "linear" } }}>
+        <motion.div
+          className="overflow-hidden w-full py-6 relative mt-10 min-[800px]:mt-[-262px]"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2, duration: 1.5 }}
+        >
+          {/* Fade overlays */}
+          <div className="pointer-events-none absolute left-0 top-0 h-full w-32 bg-gradient-to-r from-white via-white/80 to-transparent z-10" />
+          <div className="pointer-events-none absolute right-0 top-0 h-full w-32 bg-gradient-to-l from-white via-white/80 to-transparent z-10" />
+
+          <motion.div
+            className="flex gap-12 w-max"
+            animate={{ x: ["0%", "-30%"] }}
+            transition={{
+              x: { repeat: Infinity, repeatType: "loop", duration: 20, ease: "linear" },
+            }}
+          >
             {[...Array(5)].map((_, i) => (
               <div key={i} className="flex gap-12">
                 {data.banks.map((logo, idx) => (
-                  <motion.img key={`${i}-${idx}`} src={logo} alt={`Bank ${idx + 1}`} className="h-8 w-auto object-contain hover:scale-105 grayscale-0 transition" whileHover={{ scale: 1.1 }} transition={{ duration: 0.3 }} />
+                  <motion.img
+                    key={`${i}-${idx}`}
+                    src={logo}
+                    alt={`Bank ${idx + 1}`}
+                    className="h-8 w-auto object-contain hover:scale-105 grayscale-0 transition"
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ duration: 0.3 }}
+                  />
                 ))}
               </div>
             ))}
           </motion.div>
         </motion.div>
+
       </motion.section>
     </div>
+
   );
 }
 
