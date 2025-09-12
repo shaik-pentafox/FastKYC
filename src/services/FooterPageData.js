@@ -27,7 +27,7 @@ const footerData = {
     { 
       title: "Company", 
       links: [
-        { name: "Why FastKYC", path: "#" },
+        { name: "Why FastKYC", path: "/why-fastkyc" },
         { name: "Contact sales", path: "/book-demo" },
         { name: "Privacy", path: "#" },
         { name: "Terms of use", path: "#" },

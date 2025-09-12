@@ -2,12 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useAnimation } from "framer-motion";
 import { IconMenu2, IconX, IconChevronRight, IconChevronLeft } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
-
-import icon from "../../assets/Images/Why_FastKYC/Star1.png";
-import icon2 from "../../assets/Images/Why_FastKYC/Star2.png";
-import icon3 from "../../assets/Images/Why_FastKYC/Star3.png";
-import icon4 from "../../assets/Images/Why_FastKYC/Star4.png";
-import icon5 from "../../assets/Images/Why_FastKYC/Star5.png";
+import { CheckIcon } from "@mantine/core";
 
 function FastKYC_HeadSection({ data }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -23,6 +18,7 @@ function FastKYC_HeadSection({ data }) {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
+
 
       if (currentScrollY > 50) {
         setIsSticky(true);
@@ -44,6 +40,7 @@ function FastKYC_HeadSection({ data }) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 768) {
@@ -55,6 +52,7 @@ function FastKYC_HeadSection({ data }) {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -64,7 +62,6 @@ function FastKYC_HeadSection({ data }) {
     if (openDropdown) document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [openDropdown]);
-
   // Variants
   const containerVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -82,19 +79,264 @@ function FastKYC_HeadSection({ data }) {
   return (
     <>
       <div className="min-h-screen w-full py-6 relative z-50 overflow-x-hidden bg-white">
-       
+        {/* Navbar */}
+        <header
+          className={`w-full top-0 z-[100] fixed transition-transform duration-300 transform
+    ${isSticky && showNavbar ? "bg-white py-6" : "bg-transparent py-12 shadow-none"}
+    ${showNavbar ? "translate-y-0" : "-translate-y-full"}
+  `}
+        >
+          <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 flex justify-between items-center">
+            {/* Logo */}
+            <Link to="/">
+              <img src={data.header.logo} alt="FastKYC Logo" className="h-10" />
+            </Link>
+            {/* Desktop Nav */}
+            <nav className="hidden min-[800px]:flex items-center gap-8 ml-10 relative">
+              {data.header.nav.map((item, idx) =>
+                item.dropdown ? (
+                  <div
+                    key={idx}
+                    className="relative"
+                    onMouseEnter={() => setOpenDropdown(true)}
+                    onMouseLeave={() => setOpenDropdown(false)}
+                  >
+                    <div className="flex items-center gap-1 cursor-pointer text-[#1E1E1E] text-[16px] font-medium">
+                      {item.label}
+                    </div>
+
+                    {/* Products dropdown */}
+                    <AnimatePresence>
+                      {openDropdown && (
+                        <motion.div
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          transition={{ duration: 0.3 }}
+                          className="absolute left-3/4 -translate-x-1/2 mt-[5.5px]
+                                w-[712px] bg-white shadow-lg rounded-[20px] p-6 
+                                grid grid-cols-2 gap-5 z-50 border border-[#F44336]"
+                        >
+                          {data.products_nav.map((p, i) => (
+                            <div
+                              key={i}
+                              initial="hidden"
+                              animate="visible"
+                              variants={{
+                                visible: {
+                                  transition: {
+                                    staggerChildren: 0.25,
+                                    delayChildren: i * 0.4,
+                                  },
+                                },
+                              }}
+                            >
+                              <Link
+                                to={p.link}
+                                className="flex items-start gap-3 p-2 rounded-lg hover:bg-gray-50 cursor-pointer"
+                              >
+                                <motion.img
+                                  src={p.icon}
+                                  alt={p.title}
+                                  className="w-12 h-12"
+                                  variants={{
+                                    hidden: { opacity: 0, y: 30 },
+                                    visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
+                                  }}
+                                />
+                                <div
+                                  variants={{
+                                    hidden: { opacity: 0, y: 20 },
+                                    visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
+                                  }}
+                                >
+                                  <h2 className="font-medium text-[#212121]">{p.title}</h2>
+                                  <p className="text-[#616161] font-medium">{p.desc}</p>
+                                </div>
+                              </Link>
+                            </div>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+
+                ) : item.external ? (
+                  <a
+                    key={idx}
+                    href={item.link}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    className="text-[#1E1E1E] text-[16px] font-medium cursor-pointer"
+                  >
+                    {item.label}
+                  </a>
+                ) : (
+                  <Link
+                    key={idx}
+                    to={item.link}
+                    className="text-[#1E1E1E] text-[16px] font-medium cursor-pointer"
+                  >
+                    {item.label}
+                  </Link>
+                )
+              )}
+            </nav>
+
+            {/* Desktop Actions */}
+            <div className="hidden min-[800px]:flex items-center gap-6">
+              {data.header.actions.map((btn, i) => (
+                <Link
+                  key={i}
+                  to={btn.link}
+                  className={
+                    btn.primary
+                      ? "h-10 flex items-center justify-center bg-[#F44336] text-white px-5 rounded-[8px] text-[16px] font-medium hover:bg-red-700 transition"
+                      : "h-10 flex items-center justify-center border border-[#F44336] px-5 rounded-[8px] text-[16px] font-medium text-[#F44336] hover:bg-[#F44336] hover:text-white transition"
+                  }
+                >
+                  {btn.text}
+                </Link>
+              ))}
+            </div>
+
+            {/* Mobile Menu Button */}
+            <div className="min-[800px]:hidden">
+              <button onClick={() => setMenuOpen(!menuOpen)}>
+                {menuOpen ? (
+                  <IconX size={28} className="text-black cursor-pointer" />
+                ) : (
+                  <IconMenu2 size={28} className="text-black cursor-pointer" />
+                )}
+              </button>
+            </div>
+          </div>
+        </header>
+
+        {/* Mobile Sidebar */}
+        <AnimatePresence>
+          {menuOpen && (
+            <motion.div
+              className="fixed inset-0 bg-white z-[200] flex flex-col w-full"
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "tween", ease: "easeInOut", duration: 0.4 }}
+            >
+              {/* Top Bar */}
+              <div className="flex justify-between items-center p-6 border-b">
+                <Link to='/'>
+                  <img src={data.header.logo} alt="FastKYC Logo" className="h-9" />
+                </Link>
+                <button onClick={() => setMenuOpen(false)}>
+                  <IconX size={28} className="text-gray-600 cursor-pointer" />
+                </button>
+              </div>
+
+              {/* Main Menu (Mobile) */}
+              {submenu === null && (
+                <div className="flex flex-col gap-6 p-6 text-lg font-medium">
+                  {data.header.nav.map((item, idx) =>
+                    item.dropdown ? (
+                      <span
+                        key={idx}
+                        className="flex justify-between items-center cursor-pointer"
+                        onClick={() => setSubmenu("products")}
+                      >
+                        {item.label} <IconChevronRight size={20} />
+                      </span>
+                    ) : item.external ? (
+                      <a
+                        key={idx}
+                        href={item.link}
+                        rel="noopener noreferrer"
+                        className="cursor-pointer"
+                      >
+                        {item.label}
+                      </a>
+                    ) : (
+                      <Link
+                        key={idx}
+                        to={item.link}
+                        className="cursor-pointer"
+                        onClick={() => setMenuOpen(false)}
+                      >
+                        {item.label}
+                      </Link>
+                    )
+                  )}
+                </div>
+              )}
+
+              {/* Products Submenu (Mobile) */}
+              {submenu === "products" && (
+                <div className="flex flex-col p-6">
+                  <button
+                    className="flex items-center gap-2 text-gray-600 mb-6 cursor-pointer"
+                    onClick={() => setSubmenu(null)}
+                  >
+                    <IconChevronLeft size={20} />
+                  </button>
+                  <h3 className="text-[#F44336] font-medium text-lg mb-4">
+                    Products
+                  </h3>
+                  <div className="flex flex-col gap-5">
+                    {data.products_nav.map((p, i) => (
+                      <div
+                        key={i}
+                        initial="hidden"
+                        animate="visible"
+                        variants={{
+                          visible: {
+                            transition: { staggerChildren: 0.2, delayChildren: i * 0.4 },
+                          },
+                        }}
+                      >
+                        <Link
+                          to={p.link}
+                          className="flex items-center gap-4 cursor-pointer"
+                          onClick={() => setMenuOpen(false)}
+                        >
+                          <motion.img
+                            src={p.icon}
+                            alt={p.title}
+                            className="w-12 h-12"
+                            variants={{
+                              hidden: { opacity: 0, x: 20 },
+                              visible: { opacity: 1, x: 0, transition: { duration: 0.4 } },
+                            }}
+                          />
+
+                          <div
+                            variants={{
+                              hidden: { opacity: 0, x: 20 },
+                              visible: { opacity: 1, x: 0, transition: { duration: 0.4 } },
+                            }}
+                          >
+                            <h2 className="font-medium text-[#212121]">{p.title}</h2>
+                            <p className="text-[#616161] font-medium">{p.desc}</p>
+                          </div>
+                        </Link>
+                      </div>
+                    ))}
+
+                  </div>
+                </div>
+              )}
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+
         <motion.section
-          className="relative max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-38 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
+          className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-38 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center overflow-hidden"
           initial="hidden"
           animate="visible"
           variants={containerVariants}
         >
-          {/* Decorative Stars */}
-          <img src={icon} alt="star" className="absolute top-10  w-7 h-7 left-156" />
-          <img src={icon2} alt="star" className="absolute top-20 right-20 w-8 h-8 " />
-          <img src={icon3} alt="star" className="absolute bottom-16 left-24 w-7 h-7" />
-          <img src={icon4} alt="star" className="absolute top-1/2 left-3 w-7 h-7" />
-          <img src={icon5} alt="star" className="absolute bottom-10 right-10 w-12 h-12" />
+          <div className="absolute -left-40 top-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full bg-red-500/10 blur-3xl pointer-events-none z-0"></div>
+
+          <div className="absolute -right-40 top-1/3 w-[400px] h-[400px] rounded-full bg-red-500/10 blur-3xl pointer-events-none z-0"></div>
 
           {/* Left Content */}
           <motion.div className="space-y-6" variants={containerVariants}>
@@ -139,6 +381,50 @@ function FastKYC_HeadSection({ data }) {
             />
           </motion.div>
         </motion.section>
+
+        {/* Company Logos */}
+        <section className="w-full py-10 -mt-25 relative overflow-hidden">
+          <div className="absolute -left-40 top-1/2 -translate-y-1/2 w-[400px] h-[400px] 
+    rounded-full bg-red-100/10 blur-3xl pointer-events-none z-0"></div>
+
+          <div className="absolute -right-40 top-1/3 w-[400px] h-[400px] 
+    rounded-full bg-red-100/10 blur-3xl pointer-events-none z-0"></div>
+
+          <motion.div
+            className="overflow-hidden w-full relative z-10"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1, duration: 1.5 }}
+          >
+            {/* Logos scroll */}
+            <motion.div
+              className="flex gap-12 w-max"
+              animate={{ x: ["0%", "-30%"] }}
+              transition={{
+                x: {
+                  repeat: Infinity,
+                  repeatType: "loop",
+                  duration: 20,
+                  ease: "linear",
+                },
+              }}
+            >
+              {[...Array(5)].map((_, i) => (
+                <div key={i} className="flex gap-12">
+                  {data.companiesLogos.map((logo, idx) => (
+                    <motion.img
+                      key={`${i}-${idx}`}
+                      src={logo}
+                      alt={`Company ${idx + 1}`}
+                      className="h-8 w-auto object-contain hover:scale-105 transition-transform duration-300"
+                    />
+                  ))}
+                </div>
+              ))}
+            </motion.div>
+          </motion.div>
+        </section>
+
       </div>
     </>
   );

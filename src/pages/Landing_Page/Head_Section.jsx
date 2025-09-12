@@ -6,7 +6,7 @@ import {
   IconMenu2,
   IconX,
 } from "@tabler/icons-react";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const RunnerPath = ({ d, duration = 6, offset = 0, className, color = "#E20303" }) => {
   const segmentLength = 180;
@@ -187,7 +187,10 @@ function Head_Section({ data, products_nav }) {
           {/* Desktop Nav */}
           <nav className="hidden min-[800px]:flex items-center gap-8 ml-10 relative">
             <span className="text-[#1E1E1E] text-[16px] font-medium cursor-pointer">
-              Why FastKYC
+              <Link to="/why-fastkyc">
+
+                Why FastKYC
+              </Link>
             </span>
 
             {/* Desktop Products Dropdown */}
@@ -314,7 +317,11 @@ function Head_Section({ data, products_nav }) {
             {/* Main Menu (Mobile) */}
             {submenu === null && (
               <div className="flex flex-col gap-6 p-6 text-lg font-medium">
-                <span className="cursor-pointer">Why FastKYC</span>
+                <span className="cursor-pointer">
+                  <Link to="/why-fastkyc">
+                    Why FastKYC
+                  </Link>
+                </span>
                 <span
                   className="flex justify-between items-center cursor-pointer"
                   onClick={() => setSubmenu("products")}

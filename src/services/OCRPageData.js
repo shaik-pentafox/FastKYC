@@ -27,7 +27,7 @@ const OCRData = {
     header: {
       logo: Logo,
       nav: [
-        { label: "Why FastKYC", link: "#" },
+        { label: "Why FastKYC", link: "/why-fastkyc" },
         { label: "Products", link: "#", dropdown: true },
         { label: "Resources", link: "#" },
         { label: "Company", link: "https://pentafox.in/", external: true }
@@ -38,7 +38,7 @@ const OCRData = {
       ],
     },
     hero: {
-      title: "Simplify OCR, Focus on Accuracy",
+      heading: "Simplify OCR, Focus on Accuracy",
       subtext: "Instant, reliable document security for safe and compliant growth.",
       includes_title: "Includes:",
       features: [

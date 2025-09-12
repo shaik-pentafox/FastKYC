@@ -27,7 +27,7 @@ const SecurityData = {
     header: {
       logo: Logo,
       nav: [
-        { label: "Why FastKYC", link: "#", dropdown: false },
+        { label: "Why FastKYC", link: "/why-fastkyc", dropdown: false },
         { label: "Products", link: "#", dropdown: true },
         { label: "Resources", link: "#", dropdown: false },
         { label: "Company", link: "https://pentafox.in/", dropdown: false,external:true },
@@ -61,9 +61,9 @@ const SecurityData = {
             "border border-[#F44336] px-5 py-2 rounded-[8px] font-medium hover:bg-[#F44336] hover:text-white transition md:text-[#F44336] bg-[#F44336] md:bg-white text-[#E4E6EA] text-[16px]"
         }
       ],
-      productImage: SECURITY,
-      companiesLogos: [bank1, bank2, bank3, bank4],
+      image: SECURITY,
     },
+    companiesLogos: [bank1, bank2, bank3, bank4],
      products_nav: [
        { icon: Product5_nav, title: "KYC", desc: "Simplify Onboarding with Powerful KYC", link: "/products-kyc" },
        { icon: Product3_nav, title: "Bank", desc: "Instant Bank Account Verification", link: "/products-bank-account-verification" },

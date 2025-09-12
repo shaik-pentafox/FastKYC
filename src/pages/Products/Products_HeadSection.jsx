@@ -1,15 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useAnimation } from "framer-motion";
-import {
-  IconMenu2,
-  IconX,
-  IconChevronRight,
-  IconChevronLeft,
-} from "@tabler/icons-react";
+import { IconMenu2, IconX, IconChevronRight, IconChevronLeft } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 import { CheckIcon } from "@mantine/core";
 
-function GST_HeadSection({ data }) {
+function Products_HeadSection({ data }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [submenu, setSubmenu] = useState(null);
   const [openDropdown, setOpenDropdown] = useState(false);
@@ -19,7 +14,6 @@ function GST_HeadSection({ data }) {
   const dropdownRef = useRef(null);
   const [showNavbar, setShowNavbar] = useState(true);
   const lastScrollY = useRef(0);
-
 
   useEffect(() => {
     const handleScroll = () => {
@@ -69,6 +63,7 @@ function GST_HeadSection({ data }) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [openDropdown]);
 
+  // Animation Variants
   const containerVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -85,7 +80,7 @@ function GST_HeadSection({ data }) {
 
   return (
     <div className="min-h-screen w-full py-6 relative z-50 overflow-x-hidden bg-white">
-      {/* Navbar */}
+      {/* ✅ Header */}
       <header
         className={`w-full top-0 z-[100] fixed transition-transform duration-300 transform
     ${isSticky && showNavbar ? "bg-white py-6" : "bg-transparent py-12 shadow-none"}
@@ -94,12 +89,13 @@ function GST_HeadSection({ data }) {
       >
         <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 flex justify-between items-center">
           <Link to="/">
-            <img src={data.header.logo} alt="FastKYC Logo" className="h-10" />
+            <img src={data.header.logo} alt="Bank Logo" className="h-10" />
           </Link>
           {/* Desktop Nav */}
           <nav className="hidden min-[800px]:flex items-center gap-8 ml-10 relative">
             {data.header.nav.map((item, idx) =>
               item.dropdown ? (
+
                 <div
                   key={idx}
                   className="relative"
@@ -119,8 +115,8 @@ function GST_HeadSection({ data }) {
                         exit={{ opacity: 0, y: -10 }}
                         transition={{ duration: 0.3 }}
                         className="absolute left-3/4 -translate-x-1/2 mt-[5.5px]
-                                 w-[712px] bg-white shadow-lg rounded-[20px] p-6 
-                                 grid grid-cols-2 gap-5 z-50 border border-[#F44336]"
+                                w-[712px] bg-white shadow-lg rounded-[20px] p-6 
+                                grid grid-cols-2 gap-5 z-50 border border-[#F44336]"
                       >
                         {data.products_nav.map((p, i) => (
                           <div
@@ -231,7 +227,7 @@ function GST_HeadSection({ data }) {
             {/* Top Bar */}
             <div className="flex justify-between items-center p-6 border-b">
               <Link to="/">
-                <img src={data.header.logo} alt="FastKYC Logo" className="h-9" />
+                <img src={data.header.logo} alt="Bank Logo" className="h-9" />
               </Link>
               <button onClick={() => setMenuOpen(false)}>
                 <IconX size={28} className="text-gray-600 cursor-pointer" />
@@ -254,6 +250,7 @@ function GST_HeadSection({ data }) {
                     <a
                       key={idx}
                       href={item.link}
+                      target="_blank"
                       rel="noopener noreferrer"
                       className="cursor-pointer"
                     >
@@ -282,9 +279,7 @@ function GST_HeadSection({ data }) {
                 >
                   <IconChevronLeft size={20} />
                 </button>
-                <h3 className="text-[#F44336] font-medium text-lg mb-4">
-                  Products
-                </h3>
+                <h3 className="text-[#F44336] font-medium text-lg mb-4">Products</h3>
                 <div className="flex flex-col gap-5">
                   {data.products_nav.map((p, i) => (
                     <div
@@ -331,14 +326,14 @@ function GST_HeadSection({ data }) {
         )}
       </AnimatePresence>
 
-      {/* Hero Section */}
+      {/* ✅ Hero Section */}
       <motion.section
         className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-38 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
         initial="hidden"
         animate="visible"
         variants={containerVariants}
       >
-        {/* Left */}
+        {/* Left Content */}
         <motion.div className="space-y-6" variants={containerVariants}>
           <motion.h1
             className="text-4xl md:text-[48px] font-bold text-[#1E1E1E] leading-tight"
@@ -371,10 +366,8 @@ function GST_HeadSection({ data }) {
               ))}
             </ul>
           </motion.div>
-          <motion.div
-            className="flex flex-wrap gap-4 pt-4 h-10"
-            variants={itemVariants}
-          >
+
+          <motion.div className="flex flex-wrap gap-4 pt-4 h-10" variants={itemVariants}>
             {data.hero.buttons.map((btn, i) => (
               <Link key={i} to={btn.link} className={btn.style}>
                 {btn.label}
@@ -383,7 +376,7 @@ function GST_HeadSection({ data }) {
           </motion.div>
         </motion.div>
 
-        {/* Right */}
+        {/* Right Image */}
         <motion.div
           initial={{ opacity: 0, x: 100 }}
           animate={{ opacity: 1, x: 0 }}
@@ -391,14 +384,14 @@ function GST_HeadSection({ data }) {
           className="flex justify-center"
         >
           <img
-            src={data.hero.image?.src}
-            alt={data.hero.image?.alt}
+            src={data.hero.image}
+            alt="Banking Illustration"
             className="w-full max-w-lg object-contain drop-shadow-lg"
           />
         </motion.div>
       </motion.section>
 
-      {/* Company Logos */}
+      {/* ✅ Company Logos */}
       <section className="w-full py-10 -mt-25">
         <motion.div
           className="overflow-hidden w-full relative"
@@ -413,16 +406,21 @@ function GST_HeadSection({ data }) {
             className="flex gap-12 w-max"
             animate={{ x: ["0%", "-30%"] }}
             transition={{
-              x: { repeat: Infinity, repeatType: "loop", duration: 20, ease: "linear" },
+              x: {
+                repeat: Infinity,
+                repeatType: "loop",
+                duration: 20,
+                ease: "linear",
+              },
             }}
           >
             {[...Array(5)].map((_, i) => (
               <div key={i} className="flex gap-12">
-                {data.hero.companiesLogos?.map((logo, idx) => (
+                {data.companiesLogos.map((logo, idx) => (
                   <motion.img
                     key={`${i}-${idx}`}
                     src={logo}
-                    alt={`Bank ${idx + 1}`}
+                    alt={`Company ${idx + 1}`}
                     className="h-8 w-auto object-contain hover:scale-105 transition-transform duration-300"
                   />
                 ))}
@@ -435,4 +433,4 @@ function GST_HeadSection({ data }) {
   );
 }
 
-export default GST_HeadSection;
+export default Products_HeadSection;

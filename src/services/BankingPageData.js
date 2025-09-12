@@ -28,7 +28,7 @@ const BankData = {
     header: {
       logo: Logo,
       nav: [
-        { label: "Why FastKYC", link: "#" },
+        { label: "Why FastKYC", link: "/why-fastkyc" },
         { label: "Products", link: "#", dropdown: true },
         { label: "Resources", link: "#" },
         { label: "Company", link: "https://pentafox.in/", external: true }
@@ -136,11 +136,12 @@ const BankData = {
       },
     ],
     integration: {
-      title: "Jump into integration",
+      heading: "Jump into integration",
       description:
         "Our detailed API documentation makes setup simple, so you can go live in minutes.",
-      button: "API Reference",
-      image: Integration,
+      buttonText: "API Reference",
+      buttonIcon: "→",
+      image: Integration
     },
   }
 };

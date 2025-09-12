@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-function PayIntegrate({data}) {
+function PayIntegrate({ data, align = "left" }) {
   const containerVariants = {
     hidden: {},
     visible: {
@@ -30,8 +30,12 @@ function PayIntegrate({data}) {
   return (
     <section className="relative py-16 bg-white">
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
-        <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-12 md:gap-16">
-          {/* ✅ Left Side*/}
+        <div
+          className={`flex flex-col-reverse md:flex-row items-center justify-between gap-12 md:gap-16 ${
+            align === "right" ? "md:flex-row-reverse" : ""
+          }`}
+        >
+          {/* ✅ Image Side */}
           <motion.div
             className="md:w-1/2 flex justify-center"
             variants={imageVariants}
@@ -46,7 +50,7 @@ function PayIntegrate({data}) {
             />
           </motion.div>
 
-          {/* ✅ Right Side*/}
+          {/* ✅ Content Side */}
           <motion.div
             className="md:w-1/2"
             variants={containerVariants}

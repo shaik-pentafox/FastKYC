@@ -6,9 +6,9 @@ import Head_Section from "./Head_Section";
 import Products from "./Products";
 import Customer from "./Customers";
 import Designed from "./Designed";
-import PayIntegrate from "./PayIntegrate";
+import PayIntegrate from "../PayIntegrate";
 import FAQ from "./FAQ";
-import Contact from "./Contact";
+import Contact from "../Contact";
 import Footer from "../Footer";
 
 //Json Data
@@ -22,7 +22,7 @@ function App() {
       <Products sections={data.productSections} whyChoose={data.whyChoose} features={data.whyChoose.featureCards} />
       <Customer data={data.customerData} />
       <Designed data={data.designedData} />
-      <PayIntegrate data={data.payIntegrateData} />
+      <PayIntegrate data={data.payIntegrateData}  align="left" />
       <FAQ data={data.faqData} />
       <Contact data={data.contactData} />
       <Footer data={footerData} />

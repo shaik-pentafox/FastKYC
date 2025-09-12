@@ -1,8 +1,8 @@
 import React from "react";
 
 //Components
-import Head_Section from "./OCR_HeadSection";
-import Why_FastKYC from "./Why_FastKYC"
+import Head_Section from "../Products_HeadSection";
+import Why_FastKYC from "../Why_FastKYC"
 import Business_Section from "./Business_Section";
 import Check_Section from "./Check_Section";
 import Customer_Section from "./Customer_Section";

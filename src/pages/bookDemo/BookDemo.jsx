@@ -10,7 +10,7 @@ import {
 } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence, useAnimation } from "framer-motion";
-import ReCAPTCHA from "react-google-recaptcha";
+import HCaptcha from "@hcaptcha/react-hcaptcha";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Footer from "../Footer";
@@ -38,7 +38,7 @@ export default function BookDemo({ data, footerData }) {
 
   const { hero, form } = data;
 
-  const recaptchaRef = useRef(null);
+  const hcaptchaRef = useRef(null);
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
@@ -126,7 +126,7 @@ export default function BookDemo({ data, footerData }) {
     setFormData({});
     setErrors({});
     setCaptchaValue(null);
-    if (recaptchaRef.current) recaptchaRef.current.reset();
+    if (hcaptchaRef.current) hcaptchaRef.current.resetCaptcha();
   };
 
   const isFormComplete =
@@ -162,7 +162,10 @@ export default function BookDemo({ data, footerData }) {
             {/* Desktop Nav */}
             <nav className="hidden min-[800px]:flex items-center gap-8 ml-10 relative">
               <span className="text-[#1E1E1E] text-[16px] font-medium cursor-pointer">
-                Why FastKYC
+                <Link to="/why-fastkyc">
+
+                  Why FastKYC
+                </Link>
               </span>
 
               {/* Products Dropdown */}
@@ -289,7 +292,11 @@ export default function BookDemo({ data, footerData }) {
               {/* Main Menu */}
               {submenu === null && (
                 <div className="flex flex-col gap-6 p-6 text-lg font-medium">
-                  <span className="cursor-pointer">Why FastKYC</span>
+                  <span className="cursor-pointer">
+                    <Link to="/why-fastkyc">
+                      Why FastKYC
+                    </Link>
+                  </span>
                   <span
                     className="flex justify-between items-center cursor-pointer"
                     onClick={() => setSubmenu("products")}
@@ -502,11 +509,17 @@ export default function BookDemo({ data, footerData }) {
 
                     </div>
                   ))}
-                  <ReCAPTCHA
-                    ref={recaptchaRef}
-                    sitekey={import.meta.env.VITE_SITE_KEY}
-                    onChange={(value) => setCaptchaValue(value)}
-                  />
+                  <div className="flex justify-start w-full">
+                    <div className="transform scale-[0.70] sm:scale-[0.85] md:scale-100 origin-left">
+                      <HCaptcha
+                        ref={hcaptchaRef}
+                        sitekey={import.meta.env.VITE_SITE_KEY}
+                        onVerify={(token) => setCaptchaValue(token)}
+                        onExpire={() => setCaptchaValue(null)}
+                      />
+                    </div>
+                  </div>
+
                   <button
                     type="submit"
                     disabled={

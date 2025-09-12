@@ -1,12 +1,12 @@
 import React from "react";
 
 //Components
-import Head_Section from "./KYC_HeadSection";
+import Head_Section from "../Products_HeadSection";
 import Flow_Section from "./Flow_Section";
 import Customer_Section from './Customers_Section';
 import Verification_Section from './Verification_Section'
 import Contact_Section from "./Contact_Section";
-import PayIntegrate from "./PayIntergate_Section";
+import PayIntegrate from "../../PayIntegrate";
 import Footer from "../../Footer";
 
 //Json Data
@@ -21,7 +21,7 @@ function App() {
     <Customer_Section data={KYCData.customerData}/>
     <Verification_Section data={KYCData.verificationData}/>
     <Contact_Section data={KYCData.contactData}/>
-    <PayIntegrate data={KYCData.payIntegrateData}/>
+    <PayIntegrate data={KYCData.payIntegrateData} align="right"/>
     <Footer data={footerData} /> 
     </div>
   );
