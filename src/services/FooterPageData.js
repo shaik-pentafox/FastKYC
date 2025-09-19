@@ -5,7 +5,6 @@ const footerData = {
     { 
       title: FastKYC_Logo2,
       description: "FastKYC is India’s leading verification API platform, helping businesses simplify end-to-end compliance across KYC, Banking, OCR, Security & Compliance, and GST. Backed by deep domain expertise, strong security practices, and authorized licenses, FastKYC APIs interact in real time with government systems and verified entities.",
-      description2: "Trusted by startups, unicorns, and enterprises, FastKYC empowers businesses to verify identities, validate bank accounts, extract and secure documents, and ensure GST compliance all at scale, with speed, security, and reliability."
     },
     { 
       title: "Products", 
@@ -27,11 +26,11 @@ const footerData = {
     { 
       title: "Company", 
       links: [
-        { name: "Why FastKYC", path: "/why-fastkyc" },
-        { name: "Contact sales", path: "/book-demo" },
+        { name: "FastKYC", path: "/why-fastkyc" },
         { name: "Privacy", path: "#" },
         { name: "Terms of use", path: "#" },
-        { name: "About us", path: "https://pentafox.in/",external:true }
+        { name: "About us", path: "https://pentafox.in/",external:true },
+        { name: "Contact sales", path: "/book-demo" },
       ] 
     },
   ],

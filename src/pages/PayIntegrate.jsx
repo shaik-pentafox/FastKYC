@@ -31,9 +31,8 @@ function PayIntegrate({ data, align = "left" }) {
     <section className="relative py-16 bg-white">
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
         <div
-          className={`flex flex-col-reverse md:flex-row items-center justify-between gap-12 md:gap-16 ${
-            align === "right" ? "md:flex-row-reverse" : ""
-          }`}
+          className={`flex flex-col-reverse md:flex-row items-center justify-between gap-12 md:gap-16 ${align === "right" ? "md:flex-row-reverse" : ""
+            }`}
         >
           {/* ✅ Image Side */}
           <motion.div
@@ -46,7 +45,7 @@ function PayIntegrate({ data, align = "left" }) {
             <img
               src={data.image}
               alt="API Documentation"
-              className="rounded-xl border border-red-100 shadow-md max-w-full h-auto"
+              className="max-w-full h-auto"
             />
           </motion.div>
 
@@ -73,12 +72,13 @@ function PayIntegrate({ data, align = "left" }) {
             </motion.p>
 
             <motion.div className="pt-4" variants={textItemVariants}>
-              <button className="cursor-pointer flex items-center font-medium text-base md:text-lg lg:text-xl text-[#E20303] border border-[#E20303] rounded-[8px] px-6 md:px-8 lg:px-10 py-1 hover:bg-red-50 transition">
+              <button className="cursor-pointer flex items-center font-medium text-sm md:text-base lg:text-lg text-[#E20303] border border-[#E20303] rounded-[6px] px-3 md:px-4 lg:px-5 py-2 hover:bg-red-50 transition">
                 {data.buttonText}
-                <span className="ml-2 mb-1 text-2xl md:text-3xl font-bold leading-none">
+                <span className="ml-2 mb-0.5 text-lg md:text-xl font-bold leading-none">
                   {data.buttonIcon}
                 </span>
               </button>
+
             </motion.div>
           </motion.div>
         </div>

@@ -27,6 +27,7 @@ function Compliance_Section({ data }) {
               backgroundPosition: "center",
             }}
           >
+            <div className="absolute inset-0 bg-black/30"></div> 
             {/* Heading */}
             <h3
               className={`font-bold text-lg md:text-[26px] ${feature.headingAlign}`}

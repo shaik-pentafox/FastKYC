@@ -1,8 +1,25 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useAnimation } from "framer-motion";
-import { IconMenu2, IconX, IconChevronRight, IconChevronLeft } from "@tabler/icons-react";
-import { Link } from "react-router-dom";
-import { CheckIcon } from "@mantine/core";
+import {
+  IconMenu2,
+  IconX,
+  IconChevronRight,
+  IconChevronLeft,
+  IconReceiptTax,
+  IconCloudLock,
+  IconBuildingBank,
+  IconScan,
+  IconId,
+} from "@tabler/icons-react";
+import { Link, useLocation } from "react-router-dom";
+
+const iconMap = {
+  Tax: <IconReceiptTax size={28} stroke={1.5} />,
+  Lock: <IconCloudLock size={28} stroke={1.5} />,
+  Bank: <IconBuildingBank size={28} stroke={1.5} />,
+  Scan: <IconScan size={28} stroke={1.5} />,
+  Id: <IconId size={28} stroke={1.5} />,
+};
 
 function FastKYC_HeadSection({ data }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -14,20 +31,21 @@ function FastKYC_HeadSection({ data }) {
   const dropdownRef = useRef(null);
   const [showNavbar, setShowNavbar] = useState(true);
   const lastScrollY = useRef(0);
+  const location = useLocation();
+
+  useEffect(() => {
+    setMenuOpen(false);
+    setOpenDropdown(false);
+    setShowNavbar(true);
+  }, [location.pathname]);
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
-
       if (currentScrollY > 50) {
         setIsSticky(true);
-
-        if (currentScrollY > lastScrollY.current) {
-          setShowNavbar(false);
-        } else {
-          setShowNavbar(true);
-        }
+        setShowNavbar(currentScrollY < lastScrollY.current);
       } else {
         setIsSticky(false);
         setShowNavbar(true);
@@ -36,6 +54,7 @@ function FastKYC_HeadSection({ data }) {
       lastScrollY.current = currentScrollY;
     };
 
+    handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -78,13 +97,13 @@ function FastKYC_HeadSection({ data }) {
 
   return (
     <>
-      <div className="min-h-screen w-full py-6 relative z-50 overflow-x-hidden bg-white">
+      <div className="min-h-auto w-full py-6 relative z-50 overflow-x-hidden bg-white ">
         {/* Navbar */}
         <header
           className={`w-full top-0 z-[100] fixed transition-transform duration-300 transform
-    ${isSticky && showNavbar ? "bg-white py-6" : "bg-transparent py-12 shadow-none"}
-    ${showNavbar ? "translate-y-0" : "-translate-y-full"}
-  `}
+        ${isSticky && showNavbar ? "bg-white py-6 shadow-md" : "bg-transparent py-12 shadow-none"}
+        ${showNavbar ? "translate-y-0" : "-translate-y-full"}
+      `}
         >
           <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 flex justify-between items-center">
             {/* Logo */}
@@ -135,15 +154,10 @@ function FastKYC_HeadSection({ data }) {
                                 to={p.link}
                                 className="flex items-start gap-3 p-2 rounded-lg hover:bg-gray-50 cursor-pointer"
                               >
-                                <motion.img
-                                  src={p.icon}
-                                  alt={p.title}
-                                  className="w-12 h-12"
-                                  variants={{
-                                    hidden: { opacity: 0, y: 30 },
-                                    visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
-                                  }}
-                                />
+                                <div className="min-w-[48px] min-h-[48px] flex items-center justify-center rounded-xl bg-[#F44336]/10 text-[#F44336]">
+                                  {iconMap[p.icon]}
+                                </div>
+
                                 <div
                                   variants={{
                                     hidden: { opacity: 0, y: 20 },
@@ -297,15 +311,9 @@ function FastKYC_HeadSection({ data }) {
                           className="flex items-center gap-4 cursor-pointer"
                           onClick={() => setMenuOpen(false)}
                         >
-                          <motion.img
-                            src={p.icon}
-                            alt={p.title}
-                            className="w-12 h-12"
-                            variants={{
-                              hidden: { opacity: 0, x: 20 },
-                              visible: { opacity: 1, x: 0, transition: { duration: 0.4 } },
-                            }}
-                          />
+                          <div className="min-w-[48px] min-h-[48px] flex items-center justify-center rounded-xl bg-[#FFF5F5] text-[#F44336]">
+                            {iconMap[p.icon]}
+                          </div>
 
                           <div
                             variants={{
@@ -327,31 +335,24 @@ function FastKYC_HeadSection({ data }) {
           )}
         </AnimatePresence>
 
+        <div className="absolute -left-40 top-1/4 -translate-y-1/2 w-[400px] h-[200px] rounded-full bg-red-500/10 blur-3xl pointer-events-none z-0"></div>
+        <div className="absolute -right-40 top-1/3 w-[400px] h-[200px] rounded-full bg-red-500/10 blur-3xl pointer-events-none z-0"></div>
 
+        {/* Hero section */}
         <motion.section
-          className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-38 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center overflow-hidden"
+          className="min-h-screen max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-38 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center overflow-hidden"
           initial="hidden"
           animate="visible"
           variants={containerVariants}
         >
-          <div className="absolute -left-40 top-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full bg-red-500/10 blur-3xl pointer-events-none z-0"></div>
-
-          <div className="absolute -right-40 top-1/3 w-[400px] h-[400px] rounded-full bg-red-500/10 blur-3xl pointer-events-none z-0"></div>
-
           {/* Left Content */}
           <motion.div className="space-y-6" variants={containerVariants}>
             <motion.h1
               className="text-4xl md:text-[48px] font-bold text-[#1E1E1E] leading-tight"
               variants={itemVariants}
             >
-              {data.hero.title}
+              {data.hero.heading}
             </motion.h1>
-            <motion.p
-              className="text-[#616161] font-medium text-[20px] max-w-lg"
-              variants={itemVariants}
-            >
-              {data.hero.description}
-            </motion.p>
             <motion.p
               className="text-[#616161] font-medium text-[20px] max-w-lg"
               variants={itemVariants}
@@ -384,18 +385,15 @@ function FastKYC_HeadSection({ data }) {
 
         {/* Company Logos */}
         <section className="w-full py-10 -mt-25 relative overflow-hidden">
-          <div className="absolute -left-40 top-1/2 -translate-y-1/2 w-[400px] h-[400px] 
-    rounded-full bg-red-100/10 blur-3xl pointer-events-none z-0"></div>
-
-          <div className="absolute -right-40 top-1/3 w-[400px] h-[400px] 
-    rounded-full bg-red-100/10 blur-3xl pointer-events-none z-0"></div>
-
-          <motion.div
+        <motion.div
             className="overflow-hidden w-full relative z-10"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1, duration: 1.5 }}
           >
+            <div className="pointer-events-none absolute left-0 top-0 h-full w-32 bg-gradient-to-r from-white via-white/80 to-transparent z-10" />
+            <div className="pointer-events-none absolute right-0 top-0 h-full w-32 bg-gradient-to-l from-white via-white/80 to-transparent z-10" />
+
             {/* Logos scroll */}
             <motion.div
               className="flex gap-12 w-max"
@@ -424,7 +422,6 @@ function FastKYC_HeadSection({ data }) {
             </motion.div>
           </motion.div>
         </section>
-
       </div>
     </>
   );

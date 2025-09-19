@@ -7,16 +7,14 @@ import bank2 from "../assets/Images/Company_assets/Company_logo2.png";
 import bank3 from "../assets/Images/Company_assets/Company_logo4.png";
 import bank4 from "../assets/Images/Company_assets/Company_logo3.png";
 
-// Nav icons
-import Product1_nav from "../assets/Images/Product_assets/Icon1.png";
-import Product2_nav from "../assets/Images/Product_assets/Icon2.png";
-import Product3_nav from "../assets/Images/Product_assets/Icon3.png";
-import Product4_nav from "../assets/Images/Product_assets/Icon4.png";
-import Product5_nav from "../assets/Images/Product_assets/Icon5.png";
+// import api_logo from "../assets/Images/Integration.png";
+// import api_logo2 from "../assets/Images/Why_FastKYC/api_logo.png";
+// import api_logo3 from "../assets/Images/Why_FastKYC/api_logo2.png";
+import api_logo from "../assets/Images/Why_FastKYC/Devloper_logo.png";
+import api_logo2 from "../assets/Images/Why_FastKYC/api_doc2.png";
+import api_logo3 from "../assets/Images/Why_FastKYC/Dev_logo.png";
+import back from '../assets/Images/Why_FastKYC/back.png'
 
-import api_logo from "../assets/Images/Integration.png";
-import api_logo2 from "../assets/Images/Why_FastKYC/api_logo.png";
-import api_logo3 from "../assets/Images/Why_FastKYC/api_logo2.png";
 import postman_logo from "../assets/Images/Why_FastKYC/Vector.png";
 
 import border from "../assets/Images/Why_FastKYC/border.png";
@@ -29,7 +27,7 @@ const FastKYCPageData = {
     header: {
       logo: Logo,
       nav: [
-        { label: "Why FastKYC", link: "/why-fastkyc" },
+        { label: "FastKYC", link: "/why-fastkyc" },
         { label: "Products", link: "#", dropdown: true },
         { label: "Resources", link: "#" },
         { label: "Company", link: "https://pentafox.in/", external: true }
@@ -40,7 +38,7 @@ const FastKYCPageData = {
       ],
     },
     hero: {
-      title: "APIs That Automate Your KYC Process",
+      heading: "APIs That Automate Your KYC Process",
       subtext: "Plug into our API stack and let automation handle the heavy lifting - fast, seamless, and always compliant",
       buttons: [
         {
@@ -59,13 +57,13 @@ const FastKYCPageData = {
       image: Product_Logo
     },
     companiesLogos: [bank1, bank2, bank3, bank4],
-    products_nav: [
-      { icon: Product5_nav, title: "KYC", desc: "Simplify Onboarding with Powerful KYC", link: "/products-kyc" },
-      { icon: Product3_nav, title: "Bank", desc: "Instant Bank Account Verification", link: "/products-bank-account-verification" },
-      { icon: Product2_nav, title: "Security & Compliance API", desc: "Watermark and Aadhaar Masking", link: "/products-security" },
-      { icon: Product4_nav, title: "OCR API", desc: "Extract data from government IDs and documents", link: "/products-ocr-apis" },
-      { icon: Product1_nav, title: "GST", desc: "GST Verification APIs", link: "/products-gst" },
-    ]
+  products_nav: [
+    { icon: "Id", title: "KYC", desc: "Simplify Onboarding with Powerful KYC", link: "/products-kyc" },
+    { icon: "Bank", title: "Bank", desc: "Instant Bank Account Verification", link: "/products-bank-account-verification" },
+    { icon: "Lock", title: "Security & Compliance API", desc: "Watermark and Aadhaar Masking", link: "/products-security" },
+    { icon: "Scan", title: "OCR API", desc: "Extract data from government IDs and documents", link: "/products-ocr-apis" },
+    { icon: "Tax", title: "GST", desc: "GST Verification APIs", link: "/products-gst" },
+  ],
   },
   apiSections: {
     section1: {
@@ -78,7 +76,7 @@ const FastKYCPageData = {
         buttonColor: "text-red-600 border-red-600",
         buttonArrow: "→",
       },
-      rightImage: api_logo2,
+      rightImage: [back, api_logo],
     },
     section2: {
       heading: "API Documentation",
@@ -106,7 +104,7 @@ const FastKYCPageData = {
           iconBg: "#FFF5F5",
         },
       ],
-      leftImage: api_logo,
+      leftImage: [back, api_logo2],
     },
     section3: {
       heading: "Dev Console",
@@ -149,7 +147,7 @@ const FastKYCPageData = {
           iconBg: "#FFF5F5",
         },
       ],
-      rightImage: api_logo3,
+      rightImage: [back, api_logo3],
     },
   },
   complianceData: {
@@ -207,54 +205,54 @@ const FastKYCPageData = {
       },
     ]
   },
-ProtectedData :{
+  ProtectedData: {
     heading: " Your Data, Always Protected",
-    subheading: "       FastKYC safeguards sensitive data with top-tier security and compliance",
-features:[
-    {
-      id: 1,
-      icon: "Check",
-      title: "ISO/IEC Certified Security",
-      description:
-        "FastKYC follows ISO/IEC 27001 standards, ensuring world-class information security management",
-    },
-    {
-      id: 2,
-      icon: "Lock",
-      title: "Controlled Access. Maximum Security",
-      description:
-        "FastKYC lets you lock API access to your private network for an extra layer of security",
-    },
-    {
-      id: 3,
-      icon: "Shield",
-      title: "Shielded from Attacks",
-      description:
-        "Our systems detect and neutralize DDoS attacks instantly, keeping your services uninterrupted",
-    },
-    {
-      id: 4,
-      icon: "Trash",
-      title: "Zero Data Retention",
-      description:
-        "Zero sensitive data storage. Processed data is discarded within 30 days to ensure compliance",
-    },
-    {
-      id: 5,
-      icon: "UserShield",
-      title: "Role-based Access Control",
-      description:
-        "POLP-based controls limit data access to only those who need it, safeguarding security and compliance",
-    },
-    {
-      id: 6,
-      icon: "Triangle",
-      title: "Vulnerability Prevention",
-      description:
-        "FastKYC continuously scans for vulnerabilities, ensuring your systems remain secure and compliant",
-    },
-  ]
-},
+    subheading: "FastKYC safeguards sensitive data with top-tier security and compliance",
+    features: [
+      {
+        id: 1,
+        icon: "Check",
+        title: "ISO/IEC Certified Security",
+        description:
+          "FastKYC follows ISO/IEC 27001 standards, ensuring world-class information security management",
+      },
+      {
+        id: 2,
+        icon: "Lock",
+        title: "Controlled Access. Maximum Security",
+        description:
+          "FastKYC lets you lock API access to your private network for an extra layer of security",
+      },
+      {
+        id: 3,
+        icon: "Shield",
+        title: "Shielded from Attacks",
+        description:
+          "Our systems detect and neutralize DDoS attacks instantly, keeping your services uninterrupted",
+      },
+      {
+        id: 4,
+        icon: "Trash",
+        title: "Zero Data Retention",
+        description:
+          "Zero sensitive data storage. Processed data is discarded within 30 days to ensure compliance",
+      },
+      {
+        id: 5,
+        icon: "UserShield",
+        title: "Role-based Access Control",
+        description:
+          "POLP-based controls limit data access to only those who need it, safeguarding security and compliance",
+      },
+      {
+        id: 6,
+        icon: "Triangle",
+        title: "Vulnerability Prevention",
+        description:
+          "FastKYC continuously scans for vulnerabilities, ensuring your systems remain secure and compliant",
+      },
+    ]
+  },
   contactData: {
     title: "Launch Fast, Scale Boldly ",
     description:

@@ -54,7 +54,7 @@ function Customers_Section({ data }) {
               <p className="text-[#F44336] text-[24px] font-medium mb-2">
                 {data.subtitle}
               </p>
-              <h2 className="w-full max-w-2xl text-[32px] font-medium text-[#161C2D]">
+              <h2 className="w-full max-w-2xl text-[32px] font-bold text-[#161C2D]">
                 {data.title}
               </h2>
             </motion.div>

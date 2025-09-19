@@ -1,13 +1,6 @@
-// Nav icons
-import Product1_nav from "../assets/Images/Product_assets/Icon1.png";
-import Product2_nav from "../assets/Images/Product_assets/Icon2.png";
-import Product3_nav from "../assets/Images/Product_assets/Icon3.png";
-import Product4_nav from "../assets/Images/Product_assets/Icon4.png";
-import Product5_nav from "../assets/Images/Product_assets/Icon5.png";
-
 // KYCData
 import Logo from "../assets/Images/FastKYC_logo.png";
-import KYC from "../assets/Images/Product_assets/KYC_Image.png";
+import KYC from "../assets/Images/Product_assets/Product1.png";
 import bank1 from "../assets/Images/Company_assets/Company_logo1.png";
 import bank2 from "../assets/Images/Company_assets/Company_logo2.png";
 import bank3 from "../assets/Images/Company_assets/Company_logo4.png";
@@ -16,6 +9,7 @@ import KYC2 from "../assets/Images/Product_assets/KYC_Image.png";
 import Integration from "../assets/Images/Integration.png";
 
 //Verify
+import KYC_AadharVerify from "../assets/Images/Productsverify_assets/KYC_AadharVerify.png";
 import KYC_PanVerify from "../assets/Images/Productsverify_assets/KYC_PanVerify.png";
 import KYC_NameMatch from "../assets/Images/Productsverify_assets/KYC_NameMatch.png";
 import KYC_Addressmatch from "../assets/Images/Productsverify_assets/KYC_Addressmatch.png";
@@ -29,7 +23,7 @@ const KYCData = {
     header: {
       logo: Logo,
       nav: [
-        { label: "Why FastKYC", link: "/why-fastkyc", dropdown: false },
+        { label: "FastKYC", link: "/why-fastkyc", dropdown: false },
         { label: "Products", link: "#", dropdown: true },
         { label: "Resources", link: "#", dropdown: false },
         { label: "Company", link: "https://pentafox.in/", dropdown: false, external: true },
@@ -66,13 +60,13 @@ const KYCData = {
       image: KYC,
     },
     companiesLogos: [bank1, bank2, bank3, bank4],
-    products_nav: [
-      { icon: Product5_nav, title: "KYC", desc: "Simplify Onboarding with Powerful KYC", link: "/products-kyc" },
-      { icon: Product3_nav, title: "Bank", desc: "Instant Bank Account Verification", link: "/products-bank-account-verification" },
-      { icon: Product2_nav, title: "Security & Compliance API", desc: "Watermark and Aadhaar Masking", link: "/products-security" },
-      { icon: Product4_nav, title: "OCR API", desc: "Extract data from government IDs and documents", link: "/products-ocr-apis" },
-      { icon: Product1_nav, title: "GST", desc: "GST Verification APIs", link: "/products-gst" },
-    ]
+  products_nav: [
+    { icon: "Id", title: "KYC", desc: "Simplify Onboarding with Powerful KYC", link: "/products-kyc" },
+    { icon: "Bank", title: "Bank", desc: "Instant Bank Account Verification", link: "/products-bank-account-verification" },
+    { icon: "Lock", title: "Security & Compliance API", desc: "Watermark and Aadhaar Masking", link: "/products-security" },
+    { icon: "Scan", title: "OCR API", desc: "Extract data from government IDs and documents", link: "/products-ocr-apis" },
+    { icon: "Tax", title: "GST", desc: "GST Verification APIs", link: "/products-gst" },
+  ],
   },
 
   flowData: [
@@ -120,8 +114,34 @@ const KYCData = {
     }
   },
   verificationData: [
+     {
+      tabs: [
+        // { key: "All", label: "All", icon: "LayoutGrid" },
+        { key: "Aadhaar Verification", label: "Aadhaar Verification", icon: "Finger" },
+        { key: "PAN Verification", label: "PAN Verification", icon: "Id" },
+        { key: "Name Match", label: "Name Match", icon: "Check" },
+        { key: "Address Match", label: "Address Match", icon: "MapPin"},
+        { key: "Driving License", label: "Driving License", icon: "Badge2" },
+        { key: "Voter ID", label: "Voter ID", icon: "HandClick"},
+        { key: "Passport Verification", label: "Passport Verification", icon:"PlaneInflight" },
+        { key: "PAN - Aadhaar Link", label: "PAN–Aadhaar", icon: "Link" }
+      ],
+    },
     {
       id: 1,
+      title: "Aadhaar Verification",
+      description:
+        "Seamlessly verify Aadhaar details with government records for fast, secure, and compliant onboarding.",
+      features: [
+        "Authenticate individuals with ease.",
+        "Prevent fraud with real-time Aadhaar validation.",
+      ],
+      image: KYC_AadharVerify,
+      alt: "Aadhaar Verification",
+      bg: "#FFF2F2"
+    },
+    {
+      id: 2,
       title: "PAN Verification",
       description:
         "Seamlessly verify PAN details with government records for fast, secure, and compliant onboarding.",
@@ -131,10 +151,10 @@ const KYCData = {
       ],
       image: KYC_PanVerify,
       alt: "PAN Verification",
-      bg: "#FFFFFF"
+      bg: "#FFF2F2"
     },
     {
-      id: 2,
+      id: 3,
       title: "Name Match",
       description:
         "Ensure the customer’s name matches across official records for smooth KYC compliance.",
@@ -144,10 +164,10 @@ const KYCData = {
       ],
       image: KYC_NameMatch,
       alt: "Name Match Verification",
-      bg: "#F7F7F7"
+      bg: "#FFF2F2"
     },
     {
-      id: 3,
+      id: 4,
       title: "Address Match",
       description:
         "Quickly validate customer addresses by cross-checking with trusted government databases.",
@@ -157,10 +177,10 @@ const KYCData = {
       ],
       image: KYC_Addressmatch,
       alt: "Address Match",
-      bg: "#FFFFFF"
+      bg: "#FFF2F2"
     },
     {
-      id: 4,
+      id: 5,
       title: "Driving License",
       description:
         "Authenticate driving license details directly from official transport databases.",
@@ -170,10 +190,10 @@ const KYCData = {
       ],
       image: KYC_Driving,
       alt: "Driving License",
-      bg: "#F7F7F7"
+      bg: "#FFF2F2"
     },
     {
-      id: 5,
+      id: 6,
       title: "Voter ID",
       description:
         "Verify Voter ID details against official government records in real-time.",
@@ -183,10 +203,10 @@ const KYCData = {
       ],
       image: KYC_VoterID,
       alt: "Voter ID Verification",
-      bg: "#FFFFFF"
+      bg: "#FFF2F2"
     },
     {
-      id: 6,
+      id: 7,
       title: "Passport Verification",
       description:
         "Ensure global identity compliance with instant passport detail verification.",
@@ -196,10 +216,10 @@ const KYCData = {
       ],
       image: KYC_Passport,
       alt: "Passport Verification",
-      bg: "#F7F7F7"
+      bg: "#FFF2F2"
     },
     {
-      id: 7,
+      id: 8,
       title: "PAN - Aadhaar Link",
       description:
         "Confirm PAN - Aadhaar linkage status in seconds to ensure compliance.",
@@ -209,36 +229,28 @@ const KYCData = {
       ],
       image: KYC_Pan,
       alt: "PAN - Aadhaar Link Verification",
-      bg: "#FFFFFF"
+      bg: "#FFF2F2"
     },
   ],
 
   contactData: {
-    left: {
-      heading: "Ready to get started? as Unlock Instant Verification",
+    main: {
+      title: "Ready to get started? as Unlock Instant Verification",
       highlight: "get started?",
-      subtext:
+      description:
         "Create your account instantly and start using APIs, or connect with our team to tailor solutions for your needs.",
       buttons: [
-        {
-          label: "Get started",
-          link: "/login",
-        },
-        {
-          label: "Contact Sales",
-          link: "/book-demo",
-        }
-      ],
+        { text: "Get Started", type: "primary", link: "/login" },
+        { text: "Contact Sales", type: "secondary", icon: true, link: "/book-demo" },
+      ]
     },
-    cards: [
+    features: [
       {
-        id: 1,
         title: "Access Verified Documents",
         description:
           "Get real-time, verified documents directly from official and government systems. Enhance trust, reduce risks, and ensure seamless KYC every time."
       },
       {
-        id: 2,
         title: "Explore DigiLocker",
         description:
           "Seamlessly retrieve and share government-issued documents with secure DigiLocker integration."
@@ -248,9 +260,9 @@ const KYCData = {
   payIntegrateData: {
     heading: "Jump into integration",
     description: "Our detailed API documentation makes implementation simple and fast.",
-     buttonText: "API Reference",
-        buttonIcon: "→",
-        image: Integration
+    buttonText: "API Reference",
+    buttonIcon: "→",
+    image: Integration
   }
 };
 

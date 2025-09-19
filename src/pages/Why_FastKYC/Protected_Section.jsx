@@ -61,7 +61,7 @@ function Protected_Section({ data, contact_data }) {
                 >
                   <div className="flex flex-col items-start">
                     <div className="w-12 h-12 flex items-center justify-center mb-3">
-                      {IconComponent && <IconComponent size={36} color="#E20303" />}
+                      {IconComponent && <IconComponent size={36} color="#E20303" strokeWidth={1.5} />}
                     </div>
                     <h4 className="font-bold text-lg lg:text-[18px] text-[#1E1E1E]">
                       {feature.title}
@@ -78,7 +78,7 @@ function Protected_Section({ data, contact_data }) {
       </section>
 
       {/* Contact Section */}
-      <Contact data={contact_data} />
+      <Contact data={contact_data} type="image" />
     </>
   );
 }

@@ -1,8 +1,26 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useAnimation } from "framer-motion";
-import { IconMenu2, IconX, IconChevronRight, IconChevronLeft } from "@tabler/icons-react";
-import { Link } from "react-router-dom";
+import {
+  IconMenu2,
+  IconX,
+  IconChevronRight,
+  IconChevronLeft,
+  IconReceiptTax,
+  IconCloudLock,
+  IconBuildingBank,
+  IconScan,
+  IconId,
+} from "@tabler/icons-react";
+import { Link, useLocation } from "react-router-dom";
 import { CheckIcon } from "@mantine/core";
+
+const iconMap = {
+  Tax: <IconReceiptTax size={28} stroke={1.5} />,
+  Lock: <IconCloudLock size={28} stroke={1.5} />,
+  Bank: <IconBuildingBank size={28} stroke={1.5} />,
+  Scan: <IconScan size={28} stroke={1.5} />,
+  Id: <IconId size={28} stroke={1.5} />,
+};
 
 function Products_HeadSection({ data }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -14,20 +32,21 @@ function Products_HeadSection({ data }) {
   const dropdownRef = useRef(null);
   const [showNavbar, setShowNavbar] = useState(true);
   const lastScrollY = useRef(0);
+  const location = useLocation();
+
+  useEffect(() => {
+    setMenuOpen(false);
+    setOpenDropdown(false);
+    setShowNavbar(true);
+  }, [location.pathname]);
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
-
       if (currentScrollY > 50) {
         setIsSticky(true);
-
-        if (currentScrollY > lastScrollY.current) {
-          setShowNavbar(false);
-        } else {
-          setShowNavbar(true);
-        }
+        setShowNavbar(currentScrollY < lastScrollY.current);
       } else {
         setIsSticky(false);
         setShowNavbar(true);
@@ -36,9 +55,11 @@ function Products_HeadSection({ data }) {
       lastScrollY.current = currentScrollY;
     };
 
+    handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
 
   // Close sidebar automatically when width ≥ 768px
   useEffect(() => {
@@ -79,13 +100,13 @@ function Products_HeadSection({ data }) {
   };
 
   return (
-    <div className="min-h-screen w-full py-6 relative z-50 overflow-x-hidden bg-white">
+    <div className="min-h-auto w-full py-6 relative z-50 overflow-x-hidden bg-white">
       {/* ✅ Header */}
       <header
         className={`w-full top-0 z-[100] fixed transition-transform duration-300 transform
-    ${isSticky && showNavbar ? "bg-white py-6" : "bg-transparent py-12 shadow-none"}
-    ${showNavbar ? "translate-y-0" : "-translate-y-full"}
-  `}
+        ${isSticky && showNavbar ? "bg-white py-6 shadow-md" : "bg-transparent py-12 shadow-none"}
+        ${showNavbar ? "translate-y-0" : "-translate-y-full"}
+      `}
       >
         <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 flex justify-between items-center">
           <Link to="/">
@@ -136,15 +157,9 @@ function Products_HeadSection({ data }) {
                               to={p.link}
                               className="flex items-start gap-3 p-2 rounded-lg hover:bg-gray-50 cursor-pointer"
                             >
-                              <motion.img
-                                src={p.icon}
-                                alt={p.title}
-                                className="w-12 h-12"
-                                variants={{
-                                  hidden: { opacity: 0, y: 30 },
-                                  visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
-                                }}
-                              />
+                              <div className="min-w-[48px] min-h-[48px] flex items-center justify-center rounded-xl bg-[#F44336]/10 text-[#F44336]">
+                                {iconMap[p.icon]}
+                              </div>
                               <div
                                 variants={{
                                   hidden: { opacity: 0, y: 20 },
@@ -297,15 +312,9 @@ function Products_HeadSection({ data }) {
                         className="flex items-center gap-4 cursor-pointer"
                         onClick={() => setMenuOpen(false)}
                       >
-                        <motion.img
-                          src={p.icon}
-                          alt={p.title}
-                          className="w-12 h-12"
-                          variants={{
-                            hidden: { opacity: 0, x: 20 },
-                            visible: { opacity: 1, x: 0, transition: { duration: 0.4 } },
-                          }}
-                        />
+                        <div className="min-w-[48px] min-h-[48px] flex items-center justify-center rounded-xl bg-[#FFF5F5] text-[#F44336]">
+                          {iconMap[p.icon]}
+                        </div>
 
                         <div
                           variants={{
@@ -349,9 +358,9 @@ function Products_HeadSection({ data }) {
             {data.hero.subtext}
           </motion.p>
           <motion.div variants={itemVariants}>
-            <h3 className="font-bold text-[24px] text-[#212121] mb-3">
+            {/* <h3 className="font-bold text-[24px] text-[#212121] mb-3">
               {data.hero.includes_title}
-            </h3>
+            </h3> */}
             <ul className="space-y-3 list-none">
               {data.hero.features.map((feature, idx) => (
                 <li

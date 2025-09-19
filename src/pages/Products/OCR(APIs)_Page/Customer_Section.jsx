@@ -37,7 +37,7 @@ const textVariant = {
 function Customer_Section({ data }) {
   return (
     <section className="w-full bg-[#F7F7F7] py-18">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-20">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
         {/* Heading */}
         <h3 className="text-[#F44336] font-medium text-[24px] mb-2">
           {data.heading}

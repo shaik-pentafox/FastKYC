@@ -5,19 +5,7 @@ import bank2 from "../assets/Images/Company_assets/Company_logo2.png";
 import bank3 from "../assets/Images/Company_assets/Company_logo4.png";
 import bank4 from "../assets/Images/Company_assets/Company_logo3.png";
 
-// Nav icons
-import Product1_nav from "../assets/Images/Product_assets/Icon1.png";
-import Product2_nav from "../assets/Images/Product_assets/Icon2.png";
-import Product3_nav from "../assets/Images/Product_assets/Icon3.png";
-import Product4_nav from "../assets/Images/Product_assets/Icon4.png";
-import Product5_nav from "../assets/Images/Product_assets/Icon5.png";
-import SECURITY from "../assets/Images/Product_assets/Security.png";
-
-//Why KYC
-import icon1 from "../assets/Images/Product_assets/Products_Icon5.png";
-import icon2 from "../assets/Images/Product_assets/Products_Icon6.png";
-import icon3 from "../assets/Images/Product_assets/Products_Icon3.png";
-import icon4 from "../assets/Images/Product_assets/Products_Icon4.png";
+import SECURITY from "../assets/Images/Product_assets/Product5.png";
 
 import SECURITY_Match from "../assets/Images/Productsverify_assets/SECURITY_Match.png";
 import SECURITY_Mark from "../assets/Images/Productsverify_assets/SECURITY_Mark.png";
@@ -27,10 +15,10 @@ const SecurityData = {
     header: {
       logo: Logo,
       nav: [
-        { label: "Why FastKYC", link: "/why-fastkyc", dropdown: false },
+        { label: "FastKYC", link: "/why-fastkyc", dropdown: false },
         { label: "Products", link: "#", dropdown: true },
         { label: "Resources", link: "#", dropdown: false },
-        { label: "Company", link: "https://pentafox.in/", dropdown: false,external:true },
+        { label: "Company", link: "https://pentafox.in/", dropdown: false, external: true },
       ],
       actions: [
         { text: "Sign in", link: "/login", primary: false },
@@ -64,13 +52,13 @@ const SecurityData = {
       image: SECURITY,
     },
     companiesLogos: [bank1, bank2, bank3, bank4],
-     products_nav: [
-       { icon: Product5_nav, title: "KYC", desc: "Simplify Onboarding with Powerful KYC", link: "/products-kyc" },
-       { icon: Product3_nav, title: "Bank", desc: "Instant Bank Account Verification", link: "/products-bank-account-verification" },
-       { icon: Product2_nav, title: "Security & Compliance API", desc: "Watermark and Aadhaar Masking", link: "/products-security" },
-       { icon: Product4_nav, title: "OCR API", desc: "Extract data from government IDs and documents", link: "/products-ocr-apis" },
-       { icon: Product1_nav, title: "GST", desc: "GST Verification APIs", link: "/products-gst" },
-     ]
+  products_nav: [
+    { icon: "Id", title: "KYC", desc: "Simplify Onboarding with Powerful KYC", link: "/products-kyc" },
+    { icon: "Bank", title: "Bank", desc: "Instant Bank Account Verification", link: "/products-bank-account-verification" },
+    { icon: "Lock", title: "Security & Compliance API", desc: "Watermark and Aadhaar Masking", link: "/products-security" },
+    { icon: "Scan", title: "OCR API", desc: "Extract data from government IDs and documents", link: "/products-ocr-apis" },
+    { icon: "Tax", title: "GST", desc: "GST Verification APIs", link: "/products-gst" },
+  ],
   },
   whyFastKycData: {
     heading: "Why FastKYC",
@@ -79,22 +67,22 @@ const SecurityData = {
       "Our Security & Compliance APIs safeguard sensitive identity information with Aadhaar Masking and Document Watermarking, ensuring privacy, compliance, and trust. Here’s why businesses rely on us:",
     features: [
       {
-        icon: icon1,
+        icon: "Check",
         title: "Aadhaar Masking",
         desc: "Automatically hide Aadhaar numbers while retaining the last 4 digits, ensuring compliance with UIDAI guidelines and protecting user privacy.",
       },
       {
-        icon: icon2,
+        icon: "AlertTriangle",
         title: "Document Watermarking",
         desc: "Securely stamp documents with customizable watermarks to prevent duplication, forgery, and unauthorized use.",
       },
       {
-        icon: icon3,
+        icon:"Database",
         title: "Fraud Prevention",
         desc: "Prevent identity misuse by ensuring that customer data is always protected and compliant with the latest regulations.",
       },
       {
-        icon: icon4,
+        icon: "Shield",
         title: "Secure Encryption & Compliance",
         desc: "Backed by enterprise-grade encryption and regulatory compliance, FastKYC ensures sensitive information stays private and tamper-proof at every step.",
       },
@@ -132,32 +120,40 @@ const SecurityData = {
     ]
   },
   verificationData: [
-      {
-        id: 1,
-        title: "Face Match",
-        description:
-          "Verify customer identity by matching selfies with official ID photos in seconds.",
-        features: [
-          " AI-powered, highly accurate facial recognition.",
-          "Prevent impersonation and identity fraud.",
-        ],
-        image:SECURITY_Match,
-        alt: "Photo Match",
-      },
-      {
-        id: 2,
-        title: " Watermark",
-        subtitle:"(Document Security)",
-        description:
-          " Protect sensitive documents with secure watermarking.",
-        features: [
-          "Prevent unauthorized sharing or tampering.",
-          "Enhance trust in digital documents.",
-        ],
-        image: SECURITY_Mark,
-        alt: " Water Mark",
-      },
-    ],
+     {
+      tabs: [
+        // { key: "All", label: "All", icon: "LayoutGrid" },
+        { key: "Face Match", label: "Face Match", icon: "UserScan" },
+        { key: "Watermark", label: "Watermark", icon: "TextScan" },
+      ],
+    },
+    {
+      id: 1,
+      title: "Face Match",
+      description:
+        "Verify customer identity by matching selfies with official ID photos in seconds.",
+      features: [
+        " AI-powered, highly accurate facial recognition.",
+        "Prevent impersonation and identity fraud.",
+      ],
+      image: SECURITY_Match,
+      alt: "Photo Match",
+      bg: "#F7F7F7"
+    },
+    {
+      id: 2,
+      title: "Watermark",
+      subheading: "(Document Security)",
+      description:
+        " Protect sensitive documents with secure watermarking.",
+      features: [
+        "Prevent unauthorized sharing or tampering.",
+        "Enhance trust in digital documents.",
+      ],
+      image: SECURITY_Mark,
+      alt: " Water Mark",
+    },
+  ],
   Customer_section: {
     heading: " Security & Compliance APIs",
     subtext: " (Aadhaar Masking, Watermark)",

@@ -27,11 +27,6 @@ function Footer({ data }) {
                   <p className="text-[#ADADAD] text-[14px] leading-relaxed font-medium">
                     {menu.description}
                   </p>
-                  {menu.description2 && (
-                    <p className="text-[#ADADAD] text-[14px] leading-relaxed font-medium">
-                      {menu.description2}
-                    </p>
-                  )}
                 </div>
               </div>
             ))}
@@ -75,21 +70,21 @@ function Footer({ data }) {
         </div>
 
         {/* Bottom Section */}
-        <div className="flex flex-col md:flex-row justify-between items-center border-gray-700 pt-4 text-gray-400 text-sm gap-6">
+        <div className="flex flex-col md:flex-row justify-between items-center border-gray-700 text-gray-400 text-sm gap-6">
           <p className="text-center md:text-left"></p>
 
           <div className="flex gap-8">
             {data.socialLinks.map((social, i) => (
               <a
                 key={i}
-                href={social.url}
+                // href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full border border-gray-500 flex items-center justify-center hover:border-white hover:text-white transition-all"
+                className="w-9 h-9 rounded-full border border-gray-500 flex items-center justify-center hover:border-white hover:text-white transition-all cursor-pointer"
               >
-                {social.icon === "linkedin" && <IconBrandLinkedin size={18} />}
-                {social.icon === "facebook" && <IconBrandFacebook size={18} />}
-                {social.icon === "twitter" && <IconBrandTwitter size={18} />}
+                {social.icon === "linkedin" && <IconBrandLinkedin size={18} stroke={1.5}/>}
+                {social.icon === "facebook" && <IconBrandFacebook size={18} stroke={1.5}/>}
+                {social.icon === "twitter" && <IconBrandTwitter size={18} stroke={1.5}/>}
               </a>
             ))}
           </div>

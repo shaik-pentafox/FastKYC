@@ -6,19 +6,6 @@ import bank2 from "../assets/Images/Company_assets/Company_logo2.png";
 import bank3 from "../assets/Images/Company_assets/Company_logo4.png";
 import bank4 from "../assets/Images/Company_assets/Company_logo3.png";
 
-// Nav icons
-import Product1_nav from "../assets/Images/Product_assets/Icon1.png";
-import Product2_nav from "../assets/Images/Product_assets/Icon2.png";
-import Product3_nav from "../assets/Images/Product_assets/Icon3.png";
-import Product4_nav from "../assets/Images/Product_assets/Icon4.png";
-import Product5_nav from "../assets/Images/Product_assets/Icon5.png";
-
-//Why KYC Data
-import icon1 from "../assets/Images/Product_assets/Products_Icon5.png";
-import icon2 from "../assets/Images/Product_assets/Products_Icon6.png";
-import icon3 from "../assets/Images/Product_assets/Products_Icon3.png";
-import icon4 from "../assets/Images/Product_assets/Products_Icon4.png";
-
 import asset1 from "../assets/Images/Productsverify_assets/OCR_Check.png";
 import asset2 from "../assets/Images/Productsverify_assets/OCR_Verify.png";
 
@@ -27,7 +14,7 @@ const OCRData = {
     header: {
       logo: Logo,
       nav: [
-        { label: "Why FastKYC", link: "/why-fastkyc" },
+        { label: "FastKYC", link: "/why-fastkyc" },
         { label: "Products", link: "#", dropdown: true },
         { label: "Resources", link: "#" },
         { label: "Company", link: "https://pentafox.in/", external: true }
@@ -63,13 +50,13 @@ const OCRData = {
       image: Product_Logo
     },
     companiesLogos: [bank1, bank2, bank3, bank4],
-     products_nav: [
-       { icon: Product5_nav, title: "KYC", desc: "Simplify Onboarding with Powerful KYC", link: "/products-kyc" },
-       { icon: Product3_nav, title: "Bank", desc: "Instant Bank Account Verification", link: "/products-bank-account-verification" },
-       { icon: Product2_nav, title: "Security & Compliance API", desc: "Watermark and Aadhaar Masking", link: "/products-security" },
-       { icon: Product4_nav, title: "OCR API", desc: "Extract data from government IDs and documents", link: "/products-ocr-apis" },
-       { icon: Product1_nav, title: "GST", desc: "GST Verification APIs", link: "/products-gst" },
-     ]
+  products_nav: [
+    { icon: "Id", title: "KYC", desc: "Simplify Onboarding with Powerful KYC", link: "/products-kyc" },
+    { icon: "Bank", title: "Bank", desc: "Instant Bank Account Verification", link: "/products-bank-account-verification" },
+    { icon: "Lock", title: "Security & Compliance API", desc: "Watermark and Aadhaar Masking", link: "/products-security" },
+    { icon: "Scan", title: "OCR API", desc: "Extract data from government IDs and documents", link: "/products-ocr-apis" },
+    { icon: "Tax", title: "GST", desc: "GST Verification APIs", link: "/products-gst" },
+  ],
   },
   whyFastKycData: {
     heading: "Why FastKYC",
@@ -78,22 +65,22 @@ const OCRData = {
       "Our OCR APIs enable instant extraction of information from government-issued IDs, ensuring fast, accurate, and reliable verification. Here’s why businesses trust us:",
     features: [
       {
-        icon: icon1,
+        icon: "Check",
         title: "Instant Data Extraction",
         desc: "Digitize key details from PAN, Aadhaar, Passport, Driving License, Voter ID, and Vehicle RC in real time, eliminating manual entry errors."
       },
       {
-        icon: icon2,
+        icon: "AlertTriangle",
         title: "Fraud Prevention",
         desc: "Detect tampered or fake documents instantly. Our OCR verifies authenticity and ensures only valid identity data enters your systems."
       },
       {
-        icon: icon3,
+        icon: "Database",
         title: "Seamless Real-Time Access",
         desc: "Get quick, structured data directly from uploaded documents to accelerate onboarding and compliance workflows."
       },
       {
-        icon: icon4,
+        icon: "Shield",
         title: "Secure Encryption & Compliance",
         desc: "With enterprise-grade encryption, FastKYC ensures document data remains private, compliant, and secure throughout the process."
       }
@@ -112,7 +99,7 @@ const OCRData = {
           "Capture and digitize key details from PAN, Aadhaar, Passport, Driving License, Voter ID, and Vehicle RC in real time."
       },
       {
-        icon: "Triangle",
+        icon: "FileOff",
         title: "Detect Fake Documents",
         description:
           "Spot tampered or fraudulent IDs instantly with OCR validation for safer onboarding."
@@ -126,6 +113,13 @@ const OCRData = {
     ]
   },
   checkData: [
+     {
+      tabs: [
+        // { key: "All", label: "All", icon: "LayoutGrid" },
+        { key: "Liveliness Check", label: "Liveliness Check", icon: "UserScan" },
+        { key: "OCR", label: "OCR", icon: "TextScan" },
+      ],
+    },
     {
       id: 1,
       title: "Liveliness Check",

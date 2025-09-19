@@ -5,8 +5,23 @@ import {
   IconChevronLeft,
   IconMenu2,
   IconX,
+  IconReceiptTax,
+  IconCloudLock,
+  IconBuildingBank,
+  IconScan,
+  IconId,
 } from "@tabler/icons-react";
-import { Link } from "react-router-dom";
+
+import { Link, useLocation } from "react-router-dom";
+
+const iconMap = {
+  Tax: <IconReceiptTax size={28} stroke={1.5} />,
+  Lock: <IconCloudLock size={28} stroke={1.5} />,
+  Bank: <IconBuildingBank size={28} stroke={1.5} />,
+  Scan: <IconScan size={28} stroke={1.5} />,
+  Id: <IconId size={28} stroke={1.5} />,
+};
+
 
 const RunnerPath = ({ d, duration = 6, offset = 0, className, color = "#E20303" }) => {
   const segmentLength = 180;
@@ -59,20 +74,21 @@ function Head_Section({ data, products_nav }) {
   const dropdownRef = useRef(null);
   const [showNavbar, setShowNavbar] = useState(true);
   const lastScrollY = useRef(0);
+  const location = useLocation();
+
+  useEffect(() => {
+    setMenuOpen(false);
+    setOpenDropdown(false);
+    setShowNavbar(true);
+  }, [location.pathname]);
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
-
       if (currentScrollY > 50) {
         setIsSticky(true);
-
-        if (currentScrollY > lastScrollY.current) {
-          setShowNavbar(false);
-        } else {
-          setShowNavbar(true);
-        }
+        setShowNavbar(currentScrollY < lastScrollY.current);
       } else {
         setIsSticky(false);
         setShowNavbar(true);
@@ -81,6 +97,7 @@ function Head_Section({ data, products_nav }) {
       lastScrollY.current = currentScrollY;
     };
 
+    handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -169,28 +186,34 @@ function Head_Section({ data, products_nav }) {
   };
 
   return (
-    <div className="min-h-screen w-full py-6 relative z-50 overflow-x-hidden">
-      <img src={data.bg_image} alt="Border Decoration" className="absolute inset-0 w-full h-full object-cover pointer-events-none" />
+    <div className="min-h-auto w-full py-6 relative z-50 overflow-x-hidden bg-white">
+      <img
+        src={data.bg_image}
+        alt="Border Decoration"
+        className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+      />
 
       <header
         className={`w-full top-0 z-[100] fixed transition-transform duration-300 transform
-    ${isSticky && showNavbar ? "bg-white py-6" : "bg-transparent py-12 shadow-none"}
-    ${showNavbar ? "translate-y-0" : "-translate-y-full"}
-  `}
+        ${isSticky && showNavbar ? "bg-white py-6 shadow-md" : "bg-transparent py-12 shadow-none"}
+        ${showNavbar ? "translate-y-0" : "-translate-y-full"}`}
       >
         <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 flex justify-between items-center">
           {/* Logo */}
-          <Link to="/">
-            <img src={data.image} alt="FastKYC Logo" className="h-10 cursor-pointer" />
-          </Link>
+          <img
+            src={data.image}
+            alt="FastKYC Logo"
+            className="h-10 cursor-pointer"
+            onClick={() => {
+              setMenuOpen(false);
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+          />
 
           {/* Desktop Nav */}
           <nav className="hidden min-[800px]:flex items-center gap-8 ml-10 relative">
             <span className="text-[#1E1E1E] text-[16px] font-medium cursor-pointer">
-              <Link to="/why-fastkyc">
-
-                Why FastKYC
-              </Link>
+              <Link to="/why-fastkyc">FastKYC</Link>
             </span>
 
             {/* Desktop Products Dropdown */}
@@ -214,33 +237,28 @@ function Head_Section({ data, products_nav }) {
                     exit={{ opacity: 0, y: -10 }}
                     transition={{ duration: 0.3 }}
                     className="absolute left-3/4 -translate-x-1/2 mt-[5.5px]
-           w-[712px] bg-white shadow-lg rounded-[20px] p-6 
-           grid grid-cols-2 gap-5 z-50 border border-[#F44336]"
+                      w-[712px] bg-white shadow-lg rounded-[20px] p-6 
+                      grid grid-cols-2 gap-5 z-50 border border-[#F44336]"
                   >
                     {products_nav.map((p, i) => (
-                      <div
-                      >
+                      <div key={i}>
                         <Link
                           to={p.link}
                           className="flex items-start gap-3 p-2 rounded-lg hover:bg-gray-50 cursor-pointer"
                           onClick={() => setOpenDropdown(false)}
                         >
-                          <motion.img
-                            src={p.icon}
-                            alt={p.title}
-                            className="w-12 h-12"
-                          />
+                          {/* Fixed-size Icon Box */}
+                          <div className="min-w-[48px] min-h-[48px] flex items-center justify-center rounded-xl bg-[#F44336]/10 text-[#F44336]">
+                            {iconMap[p.icon]}
+                          </div>
 
-                          <div
-                            variants={{
-                              hidden: { opacity: 0, y: 20 },
-                              visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
-                            }}
-                          >
-                            {/* <p className="text-[17px] font-medium text-[#212121]">{p.title}</p>
-                            <p className="text-[16px] text-[#616161] font-medium">{p.desc}</p> */}
-                            <h2 className="font-medium text-[#212121]">{p.title}</h2>
-                            <p className="text-[#616161] font-medium">{p.desc}</p>
+                          <div>
+                            <h2 className="font-medium text-[#212121]">
+                              {p.title}
+                            </h2>
+                            <p className="text-[#616161] font-medium">
+                              {p.desc}
+                            </p>
                           </div>
                         </Link>
                       </div>
@@ -250,17 +268,19 @@ function Head_Section({ data, products_nav }) {
               </AnimatePresence>
             </div>
 
-
             <span className="text-[#1E1E1E] text-[16px] font-medium cursor-pointer">
               Resources
             </span>
 
-            <a href="https://pentafox.in/" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://pentafox.in/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <span className="text-[#1E1E1E] text-[16px] font-medium cursor-pointer">
                 Company
               </span>
             </a>
-
           </nav>
 
           {/* Desktop Buttons */}
@@ -305,9 +325,15 @@ function Head_Section({ data, products_nav }) {
           >
             {/* Top Bar */}
             <div className="flex justify-between items-center p-6 border-b">
-              <Link to="/">
-                <img src={data.image} alt="FastKYC Logo" className="h-9 cursor-pointer" />
-              </Link>
+              <img
+                src={data.image}
+                alt="FastKYC Logo"
+                className="h-9 cursor-pointer"
+                onClick={() => {
+                  setMenuOpen(false);
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }}
+              />
 
               <button onClick={() => setMenuOpen(false)}>
                 <IconX size={28} className="text-gray-600 cursor-pointer" />
@@ -318,9 +344,7 @@ function Head_Section({ data, products_nav }) {
             {submenu === null && (
               <div className="flex flex-col gap-6 p-6 text-lg font-medium">
                 <span className="cursor-pointer">
-                  <Link to="/why-fastkyc">
-                    Why FastKYC
-                  </Link>
+                  <Link to="/why-fastkyc">FastKYC</Link>
                 </span>
                 <span
                   className="flex justify-between items-center cursor-pointer"
@@ -349,55 +373,34 @@ function Head_Section({ data, products_nav }) {
                 </h3>
                 <div className="flex flex-col gap-5">
                   {products_nav.map((p, i) => (
-                    <div
+                    <Link
                       key={i}
-                      initial="hidden"
-                      animate="visible"
-                      variants={{
-                        visible: {
-                          transition: { staggerChildren: 0.2, delayChildren: i * 0.4 },
-                        },
-                      }}
+                      to={p.link}
+                      className="flex items-center gap-4 cursor-pointer"
+                      onClick={() => setMenuOpen(false)}
                     >
-                      <Link
-                        to={p.link}
-                        className="flex items-center gap-4 cursor-pointer"
-                        onClick={() => setMenuOpen(false)}
-                      >
-                        <motion.img
-                          src={p.icon}
-                          alt={p.title}
-                          className="w-12 h-12"
-                          variants={{
-                            hidden: { opacity: 0, x: 20 },
-                            visible: { opacity: 1, x: 0, transition: { duration: 0.4 } },
-                          }}
-                        />
+                      {/* Fixed-size Icon Box */}
+                      <div className="min-w-[48px] min-h-[48px] flex items-center justify-center rounded-xl bg-[#FFF5F5] text-[#F44336]">
+                        {iconMap[p.icon]}
+                      </div>
 
-                        <div
-                          variants={{
-                            hidden: { opacity: 0, x: 20 },
-                            visible: { opacity: 1, x: 0, transition: { duration: 0.4 } },
-                          }}
-                        >
-                          <h2 className="font-medium text-[#212121]">{p.title}</h2>
-                          <p className="text-[#616161] font-medium">{p.desc}</p>
-                        </div>
-                      </Link>
-                    </div>
+                      <div>
+                        <h2 className="font-medium text-[#212121]">
+                          {p.title}
+                        </h2>
+                        <p className="text-[#616161] font-medium">{p.desc}</p>
+                      </div>
+                    </Link>
                   ))}
-
                 </div>
               </div>
             )}
           </motion.div>
         )}
       </AnimatePresence>
-
-
       {/* Hero Section */}
       <motion.section
-        className="text-center text-black relative overflow-hidden pt-32"
+        className="text-center text-black relative overflow-hidden pt-26"
         variants={container}
         initial="hidden"
         animate="show"
@@ -412,10 +415,11 @@ function Head_Section({ data, products_nav }) {
                 transition={{ delay: 0.5, duration: 0.8 }}
               >
                 <RunnerPath
-                  d="M10 250 H150 H250 V200 V50 Q250 20, 280 20 H345"
+                  d="M10 250 H150 H250 V220 V80 Q250 60, 280 60 H345"
                   color="#E20303"
-                  className="top-[196px]"
+                  className="top-[138px]"
                 />
+
               </motion.div>
 
               <motion.div
@@ -426,7 +430,7 @@ function Head_Section({ data, products_nav }) {
                 <RunnerPath
                   d="M400 300 V360 Q400 380 420 380 H520 Q540 380 540 400 V440 Q540 460 545"
                   color="#E20303"
-                  className="mt-[83px] left-[636px]"
+                  className="mt-[53px] left-[582px]"
                 />
               </motion.div>
 
@@ -438,7 +442,7 @@ function Head_Section({ data, products_nav }) {
                 <RunnerPath
                   d="M100 300 V100 Q100 50 150 50 H258"
                   color="#E20303"
-                  className="top-[124px] left-[1036px]"
+                  className="top-[124px] left-[986px]"
                 />
               </motion.div>
             </div>
@@ -450,22 +454,6 @@ function Head_Section({ data, products_nav }) {
           <div className="absolute top-0 left-0 w-full h-16 bg-gradient-to-b from-white to-transparent pointer-events-none"></div>
           <div className="absolute left-0 top-0 h-full w-16 bg-gradient-to-r from-white/100 to-transparent pointer-events-none"></div>
           <div className="absolute right-0 top-0 h-full w-16 bg-gradient-to-l from-white/100 to-transparent pointer-events-none"></div>
-
-          {/* Buttons */}
-          <motion.div
-            variants={fadeUp}
-            transition={{ duration: 0.6 / speedFactor }}
-            className="flex flex-wrap min-[800px]:flex-nowrap justify-center gap-3 mb-6"
-          >
-            {data.buttons.map((btn, i) => (
-              <button
-                key={i}
-                className="border border-[#00000066] text-black text-[14px] font-bold px-5 py-2 rounded-full  backdrop-blur-sm transition-transform duration-300 "
-              >
-                {btn}
-              </button>
-            ))}
-          </motion.div>
 
           {/* Heading */}
           <motion.h1
@@ -500,7 +488,7 @@ function Head_Section({ data, products_nav }) {
           >
             <Link
               to={data.cta.link}
-              className="w-full text-center bg-[#F44336] text-white font-medium px-10 py-2 rounded-[8px] text-[16px] hover:bg-red-700 transition block h-10"
+              className="w-full text-center bg-[#F44336] text-white font-medium px-10 py-2 rounded-[8px] text-[16px] hover:bg-red-700 transition block h-10 mt-2"
             >
               {buttonText}
             </Link>
@@ -528,7 +516,7 @@ function Head_Section({ data, products_nav }) {
                 </motion.div>
               ))}
               {[data.cards[2]].map((card, i) => (
-                <motion.div key={i} variants={card3} className="absolute mt-[21px] right-[-40px] w-64 bg-white/90 backdrop-blur-md text-black border border-gray-200 shadow-lg rounded-3xl p-5 cursor-pointer">
+                <motion.div key={i} variants={card3} className="absolute mt-[82px] right-[10px] w-64 bg-white/90 backdrop-blur-md text-black border border-gray-200 shadow-lg rounded-3xl p-5 cursor-pointer">
                   <div className="flex justify-between items-center mb-3">
                     <motion.img src={card.img} alt="status" className="h-8" initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 2.1, type: "spring", damping: 22, stiffness: 40 }} />
                     <p className="font-medium text-[18px] text-[#1E1E1E]">{card.subTitle}</p>

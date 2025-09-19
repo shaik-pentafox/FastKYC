@@ -7,9 +7,9 @@ import {
 import { motion } from "framer-motion";
 
 const iconMap = {
-  lock: <IconLock className="w-8 h-8 text-[#F44336]" />,
-  puzzle: <IconPuzzle className="w-8 h-8 text-[#F44336]" />,
-  adjustments: <IconAdjustmentsHorizontal className="w-8 h-8 text-[#F44336]" />,
+  lock: <IconLock className="w-8 h-8 text-[#F44336]" stroke={1.5}/>,
+  puzzle: <IconPuzzle className="w-8 h-8 text-[#F44336]" stroke={1.5}/>,
+  adjustments: <IconAdjustmentsHorizontal className="w-8 h-8 text-[#F44336]" stroke={1.5}/>,
 };
 
 const containerVariant = {
@@ -30,7 +30,7 @@ const cardVariant = {
 
 function Flow_Section({ data }) {
   return (
-    <section className="w-full bg-gradient-to-r from-[#FFD8D8] to-[#FFFFFF] py-16">
+    <section className="w-full bg-gradient-to-r from-[#FFD8D8] to-[#FFFFFF] py-16 mt-10">
       <motion.div
         className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 text-left px-6 md:px-12 lg:px-20"
         variants={containerVariant}

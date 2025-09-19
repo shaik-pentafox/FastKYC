@@ -103,7 +103,7 @@ function Customers({ data }) {
               {data.testimonial.quote}
             </motion.p>
             <motion.p
-              className="text-[#AD0000] text-[16px] font-medium"
+              className="text-[#E20303] text-[16px] font-medium"
               variants={featureVariants}
               custom={6}
             >

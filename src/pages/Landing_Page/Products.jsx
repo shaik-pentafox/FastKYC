@@ -2,8 +2,25 @@ import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import CountUp from "react-countup";
 import { CheckIcon } from "@mantine/core";
-import { IconHourglass, IconHeart, IconWorld } from "@tabler/icons-react";
+import {
+  IconHourglass,
+  IconWorld,
+  IconHeartHandshake,
+  IconReceiptTax,
+  IconCloudLock,
+  IconBuildingBank,
+  IconScan,
+  IconId,
+} from "@tabler/icons-react";
 import { Link } from "react-router-dom";
+
+const iconMap = {
+  Tax: <IconReceiptTax size={32} stroke={1.5} />,
+  Lock: <IconCloudLock size={32} stroke={1.5} />,
+  Bank: <IconBuildingBank size={32} stroke={1.5} />,
+  Scan: <IconScan size={32} stroke={1.5} />,
+  Id: <IconId size={32} stroke={1.5} />,
+};
 
 function Products({ sections = [], whyChoose = {}, features = [] }) {
   const [activeSection, setActiveSection] = useState(null);
@@ -14,7 +31,7 @@ function Products({ sections = [], whyChoose = {}, features = [] }) {
 
   const iconMap = {
     Hourglass: <IconHourglass size={24} />,
-    Heart: <IconHeart size={24} />,
+    Hearthand: <IconHeartHandshake size={24} />,
     World: <IconWorld size={24} />,
   };
 
@@ -117,9 +134,8 @@ function Products({ sections = [], whyChoose = {}, features = [] }) {
       <section className="py-12 mb-18">
         <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 ">
           <div className="mb-8">
-            <p className="text-[#E20303] text-[24px] font-medium mb-2">Products</p>
             <h2 className="w-full max-w-2xl text-[32px]  md:text-[43px] font-bold text-[#212121]">
-              Powerful APIs for fast, secure and reliable customer onboarding
+              APIs for fast, secure and reliable customer onboarding
             </h2>
           </div>
 
@@ -186,7 +202,7 @@ function Products({ sections = [], whyChoose = {}, features = [] }) {
               </motion.h2>
               <motion.p variants={topToBottom} className="text-[#424242] text-[20px] font-medium">
                 {whyChoose.description}
-              </motion.p>             
+              </motion.p>
               <motion.div
                 className="flex flex-wrap justify-between mt-6 gap-6"
                 ref={counterRef}
@@ -236,8 +252,43 @@ const SectionBlock = React.forwardRef(({ section, isActive, isMobile }, ref) => 
       animate={{ opacity: isActive ? 1 : 0.6 }}
       transition={{ duration: 0.6 }}
     >
+      <div className="flex items-center gap-4 mb-3">
+        <div className="min-w-[54px] min-h-[50px] flex items-center justify-center rounded-xl bg-[#F44336]/10 text-[#F44336]">
+          {iconMap[section.icon]}
+        </div>
+        <h2 className="text-3xl md:text-[40px] font-bold text-[#161C2D]">
+          {section.title}
+        </h2>
+      </div>
+
+      <p className="text-[#424242] text-[20px] font-medium mb-6">
+        {section.description}
+      </p>
+
+      <ul className="list-none space-y-2">
+        {section.list.map((item, i) => (
+          <li
+            key={i}
+            className="flex items-center text-[#424242] text-[20px] font-medium"
+          >
+            <CheckIcon className="w-3 h-3 mr-4 text-red-600" />
+            {item}
+          </li>
+        ))}
+      </ul>
+
+      <div className="py-6">
+        <Link
+          to={section.link}
+          className="w-[170px] h-9 cursor-pointer text-[16px] flex items-center justify-center font-medium text-sm text-[#F44336] border border-[#F44336] rounded-lg hover:bg-red-50 transition"
+        >
+          Know more
+          <span className="ml-2 text-lg md:text-xl font-bold leading-none">→</span>
+        </Link>
+      </div>
+
       {isMobile && (
-        <div className="flex justify-center items-center mb-6">
+        <div className="flex justify-center items-center mt-6">
           <motion.img
             key={section.id}
             src={section.image}
@@ -250,33 +301,6 @@ const SectionBlock = React.forwardRef(({ section, isActive, isMobile }, ref) => 
           />
         </div>
       )}
-
-      <div className="flex items-center gap-4 mb-3">
-        <img src={section.icon} alt={section.title} className="w-14 h-14 flex-shrink-0" />
-        <h2 className="text-3xl md:text-[40px] font-bold text-[#161C2D]">{section.title}</h2>
-      </div>
-
-      <p className="text-[#424242] text-[20px] font-medium mb-6">{section.description}</p>
-
-      <p className="font-bold text-[24px] mb-2 text-[#212121]">Includes:</p>
-      <ul className="list-none space-y-2">
-        {section.list.map((item, i) => (
-          <li key={i} className="flex items-center text-[#424242] text-[20px] font-medium">
-            <CheckIcon className="w-3 h-3 mr-4 text-red-600" />
-            {item}
-          </li>
-        ))}
-      </ul>
-
-      <div className="py-6">
-        <Link
-          to={section.link}
-          className="w-[214px] h-10 cursor-pointer flex items-center justify-center font-medium text-[16px] text-[#F44336] border border-[#F44336] rounded-[8px] px-7 py-1 hover:bg-red-50 transition"
-        >
-          Know more
-          <span className="ml-2 mb-1 text-[28px] font-medium leading-none">→</span>
-        </Link>
-      </div>
     </motion.div>
   );
 });
@@ -291,7 +315,7 @@ const FeatureCard = ({ icon, title, description, variants }) => (
     whileTap={{ scale: 0.98 }}
   >
     <div className="flex-shrink-0 w-10 h-10 bg-red-100 text-[#F44336] flex items-center justify-center rounded-md">
-      {icon}
+      {React.cloneElement(icon, { strokeWidth: 1.5 })}
     </div>
     <div className="ml-4">
       <p className="text-black-900 font-medium text-[16px] leading-snug">{title}</p>

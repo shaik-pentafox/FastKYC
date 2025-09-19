@@ -7,6 +7,11 @@ import {
   IconMenu2,
   IconChevronRight,
   IconChevronLeft,
+  IconReceiptTax,
+  IconCloudLock,
+  IconBuildingBank,
+  IconScan,
+  IconId,
 } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence, useAnimation } from "framer-motion";
@@ -19,6 +24,11 @@ const iconMap = {
   cpu: IconCpu,
   shield: IconShield,
   star: IconStar,
+  Tax: <IconReceiptTax size={28} stroke={1.5} />,
+  Lock: <IconCloudLock size={28} stroke={1.5} />,
+  Bank: <IconBuildingBank size={28} stroke={1.5} />,
+  Scan: <IconScan size={28} stroke={1.5} />,
+  Id: <IconId size={28} stroke={1.5} />,
 };
 
 export default function BookDemo({ data, footerData }) {
@@ -79,6 +89,17 @@ export default function BookDemo({ data, footerData }) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [openDropdown]);
 
+  // Close sidebar automatically when width ≥ 768px
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setMenuOpen(false);
+        setSubmenu(null);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   // Handle input change
   const handleChange = (id, value) => {
@@ -164,7 +185,7 @@ export default function BookDemo({ data, footerData }) {
               <span className="text-[#1E1E1E] text-[16px] font-medium cursor-pointer">
                 <Link to="/why-fastkyc">
 
-                  Why FastKYC
+                  FastKYC
                 </Link>
               </span>
 
@@ -200,12 +221,11 @@ export default function BookDemo({ data, footerData }) {
                             className="flex items-start gap-3 p-2 rounded-lg hover:bg-gray-50 cursor-pointer"
                             onClick={() => setOpenDropdown(false)}
                           >
-                            {/* Icon animation */}
-                            <motion.img
-                              src={p.icon}
-                              alt={p.title}
-                              className="w-12 h-12"
-                            />
+                            {/* Fixed-size Icon Box */}
+                            <div className="min-w-[48px] min-h-[48px] flex items-center justify-center rounded-xl bg-[#F44336]/10 text-[#F44336]">
+                              {iconMap[p.icon]}
+                            </div>
+
 
                             {/* Text animation */}
                             <div
@@ -294,7 +314,7 @@ export default function BookDemo({ data, footerData }) {
                 <div className="flex flex-col gap-6 p-6 text-lg font-medium">
                   <span className="cursor-pointer">
                     <Link to="/why-fastkyc">
-                      Why FastKYC
+                      FastKYC
                     </Link>
                   </span>
                   <span
@@ -339,15 +359,10 @@ export default function BookDemo({ data, footerData }) {
                           className="flex items-center gap-4 cursor-pointer"
                           onClick={() => setMenuOpen(false)}
                         >
-                          <motion.img
-                            src={p.icon}
-                            alt={p.title}
-                            className="w-12 h-12"
-                            variants={{
-                              hidden: { opacity: 0, x: 20 },
-                              visible: { opacity: 1, x: 0, transition: { duration: 0.4 } },
-                            }}
-                          />
+                          {/* Fixed-size Icon Box */}
+                          <div className="min-w-[48px] min-h-[48px] flex items-center justify-center rounded-xl bg-[#FFF5F5] text-[#F44336]">
+                            {iconMap[p.icon]}
+                          </div>
 
                           <div
                             variants={{
@@ -386,7 +401,7 @@ export default function BookDemo({ data, footerData }) {
                       className="flex items-center gap-3 justify-start"
                     >
                       <span className="bg-[#FFF5F5] backdrop-blur-md p-3 rounded-lg">
-                        <Icon className="w-6 h-6 text-red-600" />
+                        <Icon className="w-6 h-6 text-red-600" strokeWidth={1.5} />
                       </span>
                       <span className="font-medium text-[18px] text-[#424242]">
                         {feature.text}
@@ -463,6 +478,7 @@ export default function BookDemo({ data, footerData }) {
                         className="text-[#424242] text-[12px] font-medium mb-1"
                       >
                         {field.label}{" "}
+                        {field.required && <span className="text-[#E20303]"> *</span>}
                       </label>
                       {field.id === "phone" ? (
                         <div className="flex flex-col gap-2 w-full">

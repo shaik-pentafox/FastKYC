@@ -1,19 +1,17 @@
 import React from "react";
 import {
-  IconHeart,
+  IconHeartHandshake,
   IconCurrencyRupee,
-  IconBriefcase,
-  IconCreditCard,
-  IconFileCertificate,
+  IconBriefcase2,
+  IconWallet,
 } from "@tabler/icons-react";
 import { motion } from "framer-motion";
 
 const iconMap = {
-  Heart: <IconHeart size={32} stroke={1.5} className="text-red-500" />,
+  Heart: <IconHeartHandshake size={32} stroke={1.5} className="text-red-500" />,
   CurrencyRupee: <IconCurrencyRupee size={32} stroke={1.5} className="text-red-500" />,
-  Briefcase: <IconBriefcase size={32} stroke={1.5} className="text-red-500" />,
-  CreditCard: <IconCreditCard size={32} stroke={1.5} className="text-red-500" />,
-  FileCertificat: <IconFileCertificate size={32} stroke={1.5} className="text-red-500" />,
+  Briefcase: <IconBriefcase2 size={32} stroke={1.5} className="text-red-500" />,
+  CreditCard: <IconWallet size={32} stroke={1.5} className="text-red-500" />,
 };
 
 const containerVariant = {
@@ -37,7 +35,7 @@ const cardVariant = {
 function Customer_Section({ data }) {
   return (
     <section className="py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-20 text-start">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 text-start">
         {/* Heading */}
         <h2 className="text-3xl md:text-[40px] font-bold text-[#000000] mb-10">
           {data.heading}

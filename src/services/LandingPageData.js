@@ -5,20 +5,7 @@ import bank3 from "../assets/Images/Company_assets/Company_logo4.png";
 import bank4 from "../assets/Images/Company_assets/Company_logo3.png";
 import bg_border from "../assets/Images/icons/border.png";
 
-// Nav icons
-import Product1_nav from "../assets/Images/Product_assets/Icon1.png";
-import Product2_nav from "../assets/Images/Product_assets/Icon2.png";
-import Product3_nav from "../assets/Images/Product_assets/Icon3.png";
-import Product4_nav from "../assets/Images/Product_assets/Icon4.png";
-import Product5_nav from "../assets/Images/Product_assets/Icon5.png";
-
-//2)Product_Section (icons & images)
-import Icon1 from "../assets/Images/Product_assets/Icon1.png";
-import Icon2 from "../assets/Images/Product_assets/Icon2.png";
-import Icon3 from "../assets/Images/Product_assets/Icon3.png";
-import Icon4 from "../assets/Images/Product_assets/Icon4.png";
-import Icon5 from "../assets/Images/Product_assets/Icon5.png";
-
+//2)Product_Section (images)
 import Product1 from "../assets/Images/Product_assets/Product1.png";
 import Product2 from "../assets/Images/Product_assets/Product2.png";
 import Product3 from "../assets/Images/Product_assets/Product3.png";
@@ -40,10 +27,9 @@ const data = {
   heroData: {
     bg_image: bg_border,
     image: FastKYC_Logo,
-    buttons: ["Faster Onboarding", "Stronger Compliance"],
     heading: ["Simplify Compliance.", "Maximize Growth."],
     description:
-      "FastKYC is a robust, API-first platform that streamlines the entire Know Your Customer (KYC) process from identity verification to compliance management with unmatched speed, security, and scalability.",
+      "AI driven platform that streamlines the entire Know Your Customer (KYC) process for easy identity verification built for unmatched speed, security, and scalability.",
     cta: { textDesktop: "Get Started", textMobile: "Book a demo", link: "/book-demo" },
     cards: [
       {
@@ -68,11 +54,11 @@ const data = {
     banks: [bank1, bank2, bank3, bank4],
   },
   products_nav: [
-    { icon: Product5_nav, title: "KYC", desc: "Simplify Onboarding with Powerful KYC", link: "/products-kyc" },
-    { icon: Product3_nav, title: "Bank", desc: "Instant Bank Account Verification", link: "/products-bank-account-verification" },
-    { icon: Product2_nav, title: "Security & Compliance API", desc: "Watermark and Aadhaar Masking", link: "/products-security" },
-    { icon: Product4_nav, title: "OCR API", desc: "Extract data from government IDs and documents", link: "/products-ocr-apis" },
-    { icon: Product1_nav, title: "GST", desc: "GST Verification APIs", link: "/products-gst" },
+    { icon: "Id", title: "KYC", desc: "Simplify Onboarding with Powerful KYC", link: "/products-kyc" },
+    { icon: "Bank", title: "Bank", desc: "Instant Bank Account Verification", link: "/products-bank-account-verification" },
+    { icon: "Lock", title: "Security & Compliance API", desc: "Watermark and Aadhaar Masking", link: "/products-security" },
+    { icon: "Scan", title: "OCR API", desc: "Extract data from government IDs and documents", link: "/products-ocr-apis" },
+    { icon: "Tax", title: "GST", desc: "GST Verification APIs", link: "/products-gst" },
   ],
   productSections: [
     {
@@ -80,13 +66,14 @@ const data = {
       description:
         "Simplify onboarding with powerful KYC checks that confirm customer identity, address, and authenticity in real time. Build trust, prevent fraud, and stay compliant.",
       list: [
+        "Aadhaar Verification",
         "PAN Verification & PAN Aadhaar Link",
         "Name & Address Match",
         "Driving License, Voter ID, Passport Verification",
         "Liveliness Check & Face Match"
       ],
       image: Product1,
-      icon: Icon1,
+      icon: "Id",
       link: "/products-kyc"
     },
     {
@@ -95,7 +82,7 @@ const data = {
         "Instantly verify customer bank accounts and prevent failed transactions. Our APIs ensure accurate account validation, enabling secure, smooth, and trustworthy payments.",
       list: ["Bank Account Verification"],
       image: Product2,
-      icon: Icon2,
+      icon: "Bank",
       link: "/products-bank-account-verification"
     },
     {
@@ -104,7 +91,7 @@ const data = {
         "Verify GST-registered businesses and their compliance status without manual effort. Ensure you only work with genuine, tax-compliant entities.",
       list: ["GST Verification (No PAN Input)"],
       image: Product3,
-      icon: Icon3,
+      icon: "Tax",
       link: "/products-gst"
     },
     {
@@ -113,7 +100,7 @@ const data = {
         "Extract data from government IDs and documents instantly with advanced OCR technology. Save time, eliminate manual entry errors, and accelerate digital onboarding.",
       list: ["OCR for PAN, Aadhaar", "OCR for Passport, Driving License, Voter ID, Vehicle RC"],
       image: Product4,
-      icon: Icon4,
+      icon: "Scan",
       link: "/products-ocr-apis"
     },
     {
@@ -122,7 +109,7 @@ const data = {
         "Safeguard sensitive data with in-built compliance tools. Enhance document integrity, protect customer identity, and meet regulatory requirements with ease.",
       list: ["Aadhaar Masking", "Watermark"],
       image: Product5,
-      icon: Icon5,
+      icon: "Lock",
       link: "/products-security"
     }
   ],
@@ -143,7 +130,7 @@ const data = {
         description: "Cut verification times from days to minutes with instant checks."
       },
       {
-        icon: "Heart",
+        icon: "Hearthand",
         title: "Trusted Security",
         description: "Enterprise-grade encryption ensures data privacy and secure transactions."
       },
@@ -172,7 +159,7 @@ const data = {
     testimonial: {
       quote:
         '“With FastKYC, we were able to onboard customers instantly while staying compliant. The APIs are seamless, reliable, and give us the confidence to scale securely.”',
-      author: "A Leading Fintech Partner"
+      author: " - A Leading Fintech Partner"
     }
   },
 
@@ -252,8 +239,8 @@ const data = {
     description:
       "Create your account instantly and start using our APIs, or connect with our sales team to explore your unique requirements.",
     buttons: [
-        { text: "Get Started", type: "primary", link: "/login" },
-        { text: "Contact Sales", type: "secondary", icon: true, link: "/book-demo" },
+      { text: "Get Started", type: "primary", link: "/login" },
+      { text: "Contact Sales", type: "secondary", icon: true, link: "/book-demo" },
     ],
     image: Book
   },

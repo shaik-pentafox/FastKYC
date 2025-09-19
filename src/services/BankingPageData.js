@@ -6,18 +6,6 @@ import bank2 from "../assets/Images/Company_assets/Company_logo2.png";
 import bank3 from "../assets/Images/Company_assets/Company_logo4.png";
 import bank4 from "../assets/Images/Company_assets/Company_logo3.png";
 
-// Nav icons
-import Product1_nav from "../assets/Images/Product_assets/Icon1.png";
-import Product2_nav from "../assets/Images/Product_assets/Icon2.png";
-import Product3_nav from "../assets/Images/Product_assets/Icon3.png";
-import Product4_nav from "../assets/Images/Product_assets/Icon4.png";
-import Product5_nav from "../assets/Images/Product_assets/Icon5.png";
-
-//Why KYC
-import icon1 from "../assets/Images/Product_assets/Products_Icon5.png";
-import icon2 from "../assets/Images/Product_assets/Products_Icon3.png";
-import icon3 from "../assets/Images/Product_assets/Products_Icon6.png";
-import icon4 from "../assets/Images/Product_assets/Products_Icon4.png";
 
 import Integration from "../assets/Images/Integration.png";
 
@@ -28,7 +16,7 @@ const BankData = {
     header: {
       logo: Logo,
       nav: [
-        { label: "Why FastKYC", link: "/why-fastkyc" },
+        { label: "FastKYC", link: "/why-fastkyc" },
         { label: "Products", link: "#", dropdown: true },
         { label: "Resources", link: "#" },
         { label: "Company", link: "https://pentafox.in/", external: true }
@@ -65,13 +53,13 @@ const BankData = {
       image: Product_Logo
     },
     companiesLogos: [bank1, bank2, bank3, bank4],
-    products_nav: [
-      { icon: Product5_nav, title: "KYC", desc: "Simplify Onboarding with Powerful KYC", link: "/products-kyc" },
-      { icon: Product3_nav, title: "Bank", desc: "Instant Bank Account Verification", link: "/products-bank-account-verification" },
-      { icon: Product2_nav, title: "Security & Compliance API", desc: "Watermark and Aadhaar Masking", link: "/products-security" },
-      { icon: Product4_nav, title: "OCR API", desc: "Extract data from government IDs and documents", link: "/products-ocr-apis" },
-      { icon: Product1_nav, title: "GST", desc: "GST Verification APIs", link: "/products-gst" },
-    ]
+  products_nav: [
+    { icon: "Id", title: "KYC", desc: "Simplify Onboarding with Powerful KYC", link: "/products-kyc" },
+    { icon: "Bank", title: "Bank", desc: "Instant Bank Account Verification", link: "/products-bank-account-verification" },
+    { icon: "Lock", title: "Security & Compliance API", desc: "Watermark and Aadhaar Masking", link: "/products-security" },
+    { icon: "Scan", title: "OCR API", desc: "Extract data from government IDs and documents", link: "/products-ocr-apis" },
+    { icon: "Tax", title: "GST", desc: "GST Verification APIs", link: "/products-gst" },
+  ],
   },
   whyFastKycData: {
     heading: "Why FastKYC",
@@ -80,22 +68,22 @@ const BankData = {
       "Our API enables instant validation of bank account details, ensuring safe, accurate, and seamless transactions. Here’s why businesses rely on us:",
     features: [
       {
-        icon: icon1,
+        icon: "Check",
         title: "Instant Account Validation",
         desc: "Verify account numbers, IFSC codes, and account holder names in real-time to prevent errors and failed transactions.",
       },
       {
-        icon: icon2,
+        icon: "AlertTriangle",
         title: "Fraud Prevention",
         desc: "Stop fraudulent accounts before they impact your business. Our API confirms ownership and account status instantly, giving you complete peace of mind.",
       },
       {
-        icon: icon3,
+        icon: "Database",
         title: "Seamless Real-Time Access",
         desc: "Get instant confirmations from trusted banking networks to ensure accuracy, timeliness, and reliability at scale.",
       },
       {
-        icon: icon4,
+        icon: "Shield",
         title: "Secure Encryption & Compliance",
         desc: "Built with enterprise-grade encryption, FastKYC ensures your financial data remains private, compliant, and secure at every step.",
       },
@@ -111,7 +99,7 @@ const BankData = {
     ],
     image: assets
   },
-  flowData: {
+  contactData: {
     main: {
       title: "Ready to get started? as Unlock Instant Verification",
       highlight: "get started?",
@@ -135,15 +123,15 @@ const BankData = {
           "Prevent failed payments and fraud by verifying bank accounts in real time.",
       },
     ],
-    integration: {
+  },
+   integration: {
       heading: "Jump into integration",
       description:
         "Our detailed API documentation makes setup simple, so you can go live in minutes.",
       buttonText: "API Reference",
       buttonIcon: "→",
       image: Integration
-    },
-  }
+    }
 };
 
 export default BankData;

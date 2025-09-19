@@ -1,7 +1,6 @@
 import React from "react";
 
 //Components
-//import Navbar from './Navbar'
 import Head_Section from "./Head_Section";
 import Products from "./Products";
 import Customer from "./Customers";
@@ -20,11 +19,11 @@ function App() {
     <div>
       <Head_Section  data={data.heroData} products_nav={data.products_nav} />
       <Products sections={data.productSections} whyChoose={data.whyChoose} features={data.whyChoose.featureCards} />
-      <Customer data={data.customerData} />
+     <Customer data={data.customerData} />
       <Designed data={data.designedData} />
       <PayIntegrate data={data.payIntegrateData}  align="left" />
       <FAQ data={data.faqData} />
-      <Contact data={data.contactData} />
+      <Contact data={data.contactData} type="image" />
       <Footer data={footerData} />
     </div>
   );
