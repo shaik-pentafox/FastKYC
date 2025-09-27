@@ -1,10 +1,10 @@
-// KYCData
 import Logo from "../assets/Images/FastKYC_logo.png";
-import KYC from "../assets/Images/Product_assets/Product1.png";
+import KYC from "../assets/Images/Product_assets/Product_KYC.png";
 import bank1 from "../assets/Images/Company_assets/Company_logo1.png";
 import bank2 from "../assets/Images/Company_assets/Company_logo2.png";
 import bank3 from "../assets/Images/Company_assets/Company_logo4.png";
 import bank4 from "../assets/Images/Company_assets/Company_logo3.png";
+import bank5 from "../assets/Images/Company_assets/Company_logo5.png";
 import KYC2 from "../assets/Images/Product_assets/KYC_Image.png";
 import Integration from "../assets/Images/Integration.png";
 
@@ -18,14 +18,17 @@ import KYC_VoterID from "../assets/Images/Productsverify_assets/KYC_VoterID.png"
 import KYC_Passport from "../assets/Images/Productsverify_assets/KYC_Passport.png";
 import KYC_Pan from "../assets/Images/Productsverify_assets/KYC_Pan.png";
 
+import Book from "../assets/Images/Book.png";
+import Walane from "../assets/Images/icons/Walane.png"
+
 const KYCData = {
   pageData: {
     header: {
       logo: Logo,
       nav: [
-        { label: "FastKYC", link: "/why-fastkyc", dropdown: false },
         { label: "Products", link: "#", dropdown: true },
-        { label: "Resources", link: "#", dropdown: false },
+        { label: "Resources", link: "/fast-kyc", dropdown: false },
+        { label: "Solution", link: "#", dropdown: true },
         { label: "Company", link: "https://pentafox.in/", dropdown: false, external: true },
       ],
       actions: [
@@ -34,7 +37,7 @@ const KYCData = {
       ],
     },
     hero: {
-      heading: "More growth, zero fraud",
+      heading: "Seamless KYC, Zero Compromise",
       subtext:
         "Instant, reliable identity verification for secure and seamless onboarding",
       includes_title: "Includes:",
@@ -59,13 +62,17 @@ const KYCData = {
       ],
       image: KYC,
     },
-    companiesLogos: [bank1, bank2, bank3, bank4],
+    companiesLogos: [bank1, bank2, bank3, bank4,bank5],
   products_nav: [
     { icon: "Id", title: "KYC", desc: "Simplify Onboarding with Powerful KYC", link: "/products-kyc" },
     { icon: "Bank", title: "Bank", desc: "Instant Bank Account Verification", link: "/products-bank-account-verification" },
     { icon: "Lock", title: "Security & Compliance API", desc: "Watermark and Aadhaar Masking", link: "/products-security" },
     { icon: "Scan", title: "OCR API", desc: "Extract data from government IDs and documents", link: "/products-ocr-apis" },
     { icon: "Tax", title: "GST", desc: "GST Verification APIs", link: "/products-gst" },
+  ],
+  solution_nav: [
+    { icon: "Message", title: "SMS APIs", desc: "Instant and secure messaging for OTPs, alerts, reminders, and updates", link: "/products-sms" },
+    { image: Walane, title: "WALANE", desc: "Turn chats into customers with automated sales and support on WaLane", link: "https://www.walane.ai/", external: true }
   ],
   },
 
@@ -97,7 +104,7 @@ const KYCData = {
     title: "Confirm Identities with Confidence",
     description:
       "Customer authentication is the backbone of trust and compliance. With FastKYC, you can validate identities instantly using official government databases no manual checks, no delays. Our secure APIs simplify the process, helping businesses prevent fraud, reduce risk, and onboard customers with ease.",
-    whyItMattersTitle: "Why It Matters",
+    // whyItMattersTitle: "Why It Matters",
     whyItMattersPoints: [
       "Build Trust – Ensure only verified customers access your services.",
       "Prevent Fraud – Detect fake or stolen identities before they cause harm.",
@@ -233,30 +240,41 @@ const KYCData = {
     },
   ],
 
+  // contactData: {
+  //   main: {
+  //     title: "Ready to get started? as Unlock Instant Verification",
+  //     highlight: "get started?",
+  //     description:
+  //       "Create your account instantly and start using our APIs, or connect with our sales team to explore your BIZBOK requirements.",
+  //     buttons: [
+  //       { text: "Get Started", type: "primary", link: "/login" },
+  //       { text: "Contact Sales", type: "secondary", icon: true, link: "/book-demo" },
+  //     ]
+  //   },
+  //   features: [
+  //     {
+  //       title: "Access Verified Documents",
+  //       description:
+  //         "Get real-time, verified documents directly from official and government systems. Enhance trust, reduce risks, and ensure seamless KYC every time."
+  //     },
+  //     {
+  //       title: "Explore DigiLocker",
+  //       description:
+  //         "Seamlessly retrieve and share government-issued documents with secure DigiLocker integration."
+  //     }
+  //   ]
+  // },
   contactData: {
-    main: {
-      title: "Ready to get started? as Unlock Instant Verification",
+      title: "Click to below",
       highlight: "get started?",
       description:
-        "Create your account instantly and start using APIs, or connect with our team to tailor solutions for your needs.",
+        "Create your account instantly and start using our APIs, or connect with our sales team to explore your BIZBOK requirements.",
       buttons: [
         { text: "Get Started", type: "primary", link: "/login" },
         { text: "Contact Sales", type: "secondary", icon: true, link: "/book-demo" },
-      ]
+      ],
+      image: Book
     },
-    features: [
-      {
-        title: "Access Verified Documents",
-        description:
-          "Get real-time, verified documents directly from official and government systems. Enhance trust, reduce risks, and ensure seamless KYC every time."
-      },
-      {
-        title: "Explore DigiLocker",
-        description:
-          "Seamlessly retrieve and share government-issued documents with secure DigiLocker integration."
-      }
-    ]
-  },
   payIntegrateData: {
     heading: "Jump into integration",
     description: "Our detailed API documentation makes implementation simple and fast.",

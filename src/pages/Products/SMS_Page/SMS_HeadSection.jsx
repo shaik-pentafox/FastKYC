@@ -13,8 +13,7 @@ import {
   IconMessage,
 } from "@tabler/icons-react";
 import { Link, useLocation } from "react-router-dom";
-import { CheckIcon } from "@mantine/core";
-import useBodyScrollLock from "../../ui/useBodyScrollLock"
+import useBodyScrollLock from "../../../ui/useBodyScrollLock";
 
 const iconMap = {
   Tax: <IconReceiptTax size={28} stroke={1.5} />,
@@ -25,7 +24,7 @@ const iconMap = {
   Message: <IconMessage size={28} stroke={1.5} />
 };
 
-function Products_HeadSection({ data }) {
+function SMS_HeadSection({ data }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [submenu, setSubmenu] = useState(null);
   const [openDropdown, setOpenDropdown] = useState(false);
@@ -37,12 +36,14 @@ function Products_HeadSection({ data }) {
   const lastScrollY = useRef(0);
   const location = useLocation();
 
+  //Close menu on route change
   useEffect(() => {
     setMenuOpen(false);
     setOpenDropdown(false);
     setShowNavbar(true);
   }, [location.pathname]);
 
+  //Navbar scroll behavior
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
@@ -87,7 +88,7 @@ function Products_HeadSection({ data }) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [openDropdown]);
 
-  //Lock body scroll when sidebar open  
+  //Lock body scroll on sidebar open  
   useBodyScrollLock(menuOpen);
 
   // Animation Variants
@@ -222,6 +223,7 @@ function Products_HeadSection({ data }) {
             })}
           </nav>
 
+
           {/* Desktop Actions */}
           <div className="hidden min-[800px]:flex items-center gap-6">
             {data.header.actions.map((btn, i) => (
@@ -346,18 +348,14 @@ function Products_HeadSection({ data }) {
               {/* Solution Submenu (Mobile) */}
               {submenu === "solution" && (
                 <div className="flex flex-col p-6 h-full">
-                  {/* Back Button */}
                   <button
                     className="flex items-center gap-2 text-gray-600 mb-6 cursor-pointer shrink-0"
                     onClick={() => setSubmenu(null)}
                   >
                     <IconChevronLeft size={20} />
                   </button>
-
-                  {/* Heading */}
                   <h3 className="text-[#F44336] font-medium text-lg mb-4 shrink-0">Solution</h3>
 
-                  {/* Scrollable solution items */}
                   <div className="flex-1 overflow-y-auto" style={{ scrollbarWidth: "none" }}>
                     <div className="flex flex-col gap-5">
                       {data.solution_nav.map((s, i) => {
@@ -389,17 +387,18 @@ function Products_HeadSection({ data }) {
                       })}
                     </div>
                   </div>
+
                 </div>
               )}
-
             </div>
           </motion.div>
         )}
       </AnimatePresence>
 
+
       {/* ✅ Hero Section */}
       <motion.section
-        className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-38 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
+        className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-36 lg:py-20 grid grid-rows-1 lg:grid-rows-2 gap-12 items-center text-center"
         initial="hidden"
         animate="visible"
         variants={containerVariants}
@@ -407,35 +406,20 @@ function Products_HeadSection({ data }) {
         {/* Left Content */}
         <motion.div className="space-y-6" variants={containerVariants}>
           <motion.h1
-            className="text-4xl md:text-[48px] font-bold text-[#1E1E1E] leading-tight"
+            className="text-3xl md:text-[48px] min-[800px]:text-[48px] font-bold text-[#1E1E1E] leading-tight lg:px-10"
             variants={itemVariants}
           >
             {data.hero.heading}
           </motion.h1>
 
           <motion.p
-            className="text-[#616161] font-medium text-[20px] max-w-lg"
+            className="text-[#616161] font-medium text-base md:text-[20px] lg:px-10"
             variants={itemVariants}
           >
             {data.hero.subtext}
           </motion.p>
-          <motion.div variants={itemVariants}>
-            <ul className="space-y-3 list-none">
-              {data.hero.features.map((feature, idx) => (
-                <li
-                  key={idx}
-                  className="flex items-center gap-3 text-[#616161] text-[20px] font-medium"
-                >
-                  <span className="flex items-center justify-center w-3 h-3">
-                    <CheckIcon className="w-4 h-4 text-red-600" />
-                  </span>
-                  {feature}
-                </li>
-              ))}
-            </ul>
-          </motion.div>
 
-          <motion.div className="flex flex-wrap gap-4 pt-4 h-10" variants={itemVariants}>
+          <motion.div className="flex flex-wrap justify-center gap-4 pt-4 h-10 " variants={itemVariants}>
             {data.hero.buttons.map((btn, i) => (
               <Link key={i} to={btn.link} className={btn.style}>
                 {btn.label}
@@ -454,13 +438,13 @@ function Products_HeadSection({ data }) {
           <img
             src={data.hero.image}
             alt="Banking Illustration"
-            className="w-full max-w-lg object-contain drop-shadow-lg"
+            className="w-full object-contain drop-shadow-lg"
           />
         </motion.div>
       </motion.section>
 
       {/* ✅ Company Logos */}
-      <section className="w-full py-10 -mt-25">
+      <section className="w-full py-10 -mt-10">
         <motion.div
           className="overflow-hidden w-full relative"
           initial={{ opacity: 0 }}
@@ -501,4 +485,4 @@ function Products_HeadSection({ data }) {
   );
 }
 
-export default Products_HeadSection;
+export default SMS_HeadSection;

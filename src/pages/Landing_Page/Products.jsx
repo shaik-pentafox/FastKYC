@@ -11,6 +11,7 @@ import {
   IconBuildingBank,
   IconScan,
   IconId,
+  IconMessage,
 } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 
@@ -20,6 +21,7 @@ const iconMap = {
   Bank: <IconBuildingBank size={32} stroke={1.5} />,
   Scan: <IconScan size={32} stroke={1.5} />,
   Id: <IconId size={32} stroke={1.5} />,
+  Message: <IconMessage size={28} stroke={1.5} />
 };
 
 function Products({ sections = [], whyChoose = {}, features = [] }) {
@@ -271,9 +273,12 @@ const SectionBlock = React.forwardRef(({ section, isActive, isMobile }, ref) => 
             key={i}
             className="flex items-center text-[#424242] text-[20px] font-medium"
           >
-            <CheckIcon className="w-3 h-3 mr-4 text-red-600" />
+            <span className="flex items-center justify-center w-3 h-3 mr-4 rounded-full">
+              <CheckIcon className="w-4 h-4 text-red-600" />
+            </span>
             {item}
           </li>
+
         ))}
       </ul>
 

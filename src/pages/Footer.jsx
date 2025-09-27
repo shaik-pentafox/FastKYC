@@ -3,6 +3,7 @@ import {
   IconBrandLinkedin,
   IconBrandFacebook,
   IconBrandTwitter,
+  IconBrandInstagram
 } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 
@@ -27,12 +28,15 @@ function Footer({ data }) {
                   <p className="text-[#ADADAD] text-[14px] leading-relaxed font-medium">
                     {menu.description}
                   </p>
+                  <p className="text-[#ADADAD] text-[14px] leading-relaxed font-medium">
+                    {menu.description2}
+                  </p>
                 </div>
               </div>
             ))}
 
           {/* Footer Menus */}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-12">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-9">
             {data.menus
               .filter((menu) => !menu.description)
               .map((menu, idx) => (
@@ -77,14 +81,15 @@ function Footer({ data }) {
             {data.socialLinks.map((social, i) => (
               <a
                 key={i}
-                // href={social.url}
+                href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 rounded-full border border-gray-500 flex items-center justify-center hover:border-white hover:text-white transition-all cursor-pointer"
               >
-                {social.icon === "linkedin" && <IconBrandLinkedin size={18} stroke={1.5}/>}
-                {social.icon === "facebook" && <IconBrandFacebook size={18} stroke={1.5}/>}
-                {social.icon === "twitter" && <IconBrandTwitter size={18} stroke={1.5}/>}
+                {social.icon === "linkedin" && <IconBrandLinkedin size={18} stroke={1.5} />}
+                {social.icon === "facebook" && <IconBrandFacebook size={18} stroke={1.5} />}
+                {social.icon === "twitter" && <IconBrandTwitter size={18} stroke={1.5} />}
+                {social.icon === "instagram" && <IconBrandInstagram size={18} stroke={1.5} />}
               </a>
             ))}
           </div>

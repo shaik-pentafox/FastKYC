@@ -3,6 +3,9 @@ import bank1 from "../assets/Images/Company_assets/Company_logo1.png";
 import bank2 from "../assets/Images/Company_assets/Company_logo2.png";
 import bank3 from "../assets/Images/Company_assets/Company_logo4.png";
 import bank4 from "../assets/Images/Company_assets/Company_logo3.png";
+import bank5 from "../assets/Images/Company_assets/Company_logo5.png";
+
+import Walane from "../assets/Images/icons/Walane.png"
 
 const bookDemoData = {
   logo: Logo,
@@ -18,7 +21,7 @@ const bookDemoData = {
       { value: "96%", label: "Auto-approval Rate" },
       { value: "60%", label: "Faster Onboarding" }
     ],
-    banks: [bank1, bank2, bank3, bank4]
+    banks: [bank1, bank2, bank3, bank4,bank5]
   },
   form: {
     title: "Sign up",
@@ -37,7 +40,11 @@ const bookDemoData = {
     { icon: "Bank", title: "Bank", desc: "Instant Bank Account Verification", link: "/products-bank-account-verification" },
     { icon: "Lock", title: "Security & Compliance API", desc: "Watermark and Aadhaar Masking", link: "/products-security" },
     { icon: "Scan", title: "OCR API", desc: "Extract data from government IDs and documents", link: "/products-ocr-apis" },
-    { icon: "Tax", title: "GST", desc: "GST Verification APIs", link: "/products-gst" },
+    { icon: "Tax", title: "GST", desc: "GST Verification APIs", link: "/products-gst" }
+  ],
+  solution_nav: [
+    { icon: "Message", title: "SMS APIs", desc: "Instant and secure messaging for OTPs, alerts, reminders, and updates", link: "/products-sms" },
+    { image: Walane, title: "WALANE", desc: "Turn chats into customers with automated sales and support on WaLane", link: "https://www.walane.ai/", external: true }
   ],
 };
 

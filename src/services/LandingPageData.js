@@ -3,17 +3,20 @@ import bank1 from "../assets/Images/Company_assets/Company_logo1.png";
 import bank2 from "../assets/Images/Company_assets/Company_logo2.png";
 import bank3 from "../assets/Images/Company_assets/Company_logo4.png";
 import bank4 from "../assets/Images/Company_assets/Company_logo3.png";
+import bank5 from "../assets/Images/Company_assets/Company_logo5.png";
 import bg_border from "../assets/Images/icons/border.png";
 
 //2)Product_Section (images)
-import Product1 from "../assets/Images/Product_assets/Product1.png";
-import Product2 from "../assets/Images/Product_assets/Product2.png";
-import Product3 from "../assets/Images/Product_assets/Product3.png";
-import Product4 from "../assets/Images/Product_assets/Product4.png";
-import Product5 from "../assets/Images/Product_assets/Product5.png";
+import Product1 from "../assets/Images/Product_assets/Product_KYC.png";
+import Product2 from "../assets/Images/Product_assets/Product_BANK.png";
+import Product3 from "../assets/Images/Product_assets/Product_GST.png";
+import Product4 from "../assets/Images/Product_assets/Product_OCR.png";
+import Product5 from "../assets/Images/Product_assets/Product_SECURITY.png";
+import Product6 from "../assets/Images/Product_assets/Product_SMS2.png";
 
 // Other section images
 import FastKYC_Logo from "../assets/Images/FastKYC_logo.png";
+import Walane from "../assets/Images/icons/Walane.png"
 import Premium from "../assets/Images/icons/Premium_rate.png";
 import Security from "../assets/Images/icons/Discount_icon.png";
 import Circle from "../assets/Images/icons/Circle.png";
@@ -29,13 +32,13 @@ const data = {
     image: FastKYC_Logo,
     heading: ["Simplify Compliance.", "Maximize Growth."],
     description:
-      "AI driven platform that streamlines the entire Know Your Customer (KYC) process for easy identity verification built for unmatched speed, security, and scalability.",
+      "An AI-driven platform that streamlines the entire KYC process for easy identity verification, built for unmatched speed, security, and scalability.SMS APIs, it ensures secure, instant delivery of OTPs, alerts, reminders, and updates.",
     cta: { textDesktop: "Get Started", textMobile: "Book a demo", link: "/book-demo" },
     cards: [
       {
         img: Premium,
-        title: "Instant PAN & Aadhaar Verification",
-        value: "99.9% Accuracy",
+        title: "PAN , Aadhaar & More Validation",
+        // value: "10+ IDs Verified in Seconds",
       },
       {
         img: Security,
@@ -44,14 +47,16 @@ const data = {
       },
       {
         img: Circle,
-        title: "Total Verifications",
-        value: "1.2M+",
-        subTitle: "FastKYC",
+        title: "One KYC",
+        title2: "Use",
+        title3: "Trust",
+        // value: "1.2M+",
+        subTitle: "KYC",
         progress: 70,
         avatars: [1, 2, 3],
       },
     ],
-    banks: [bank1, bank2, bank3, bank4],
+    banks: [bank1, bank2, bank3, bank4, bank5],
   },
   products_nav: [
     { icon: "Id", title: "KYC", desc: "Simplify Onboarding with Powerful KYC", link: "/products-kyc" },
@@ -59,6 +64,10 @@ const data = {
     { icon: "Lock", title: "Security & Compliance API", desc: "Watermark and Aadhaar Masking", link: "/products-security" },
     { icon: "Scan", title: "OCR API", desc: "Extract data from government IDs and documents", link: "/products-ocr-apis" },
     { icon: "Tax", title: "GST", desc: "GST Verification APIs", link: "/products-gst" },
+  ],
+  solution_nav: [
+    { icon: "Message", title: "SMS APIs", desc: "Instant and secure messaging for OTPs, alerts, reminders, and updates", link: "/products-sms" },
+    { image: Walane, title: "WALANE", desc: "Turn chats into customers with automated sales and support on WaLane", link: "https://www.walane.ai/", external: true },
   ],
   productSections: [
     {
@@ -111,6 +120,15 @@ const data = {
       image: Product5,
       icon: "Lock",
       link: "/products-security"
+    },
+    {
+      title: "SMS",
+      description:
+        "Enhance customer engagement with secure and reliable SMS APIs that deliver OTPs, alerts, reminders, and updates in real time. Ensure smooth communication, reduce drop-offs, and build lasting trust with every message.",
+      list: ["OTP Delivery & Authentication", "Compliance Alerts & Notifications", "Payment Reminders & Transaction Updates", "Promotional & Informational Messaging"],
+      image: Product6,
+      icon: "Message",
+      link: "/products-sms"
     }
   ],
   whyChoose: {
@@ -158,29 +176,32 @@ const data = {
     ],
     testimonial: {
       quote:
-        '“With FastKYC, we were able to onboard customers instantly while staying compliant. The APIs are seamless, reliable, and give us the confidence to scale securely.”',
+        '“FastKYC has been a game-changer for us. We can now onboard customers instantly while staying fully compliant. The APIs are seamless and reliable, giving us the confidence to scale securely.”',
       author: " - A Leading Fintech Partner"
     }
   },
 
   designedData: {
-    sectionTitle: "Designed for developers",
+    sectionTitle: "Designed for developers by developers",
     heading: "Integrate in minutes. Scale with confidence",
-    description:
-      "We take care of the complex KYC, compliance, and verification frameworks so your team can focus on building amazing products. With our REST APIs, clear documentation, and developer-first approach, you can go from sandbox to production in hours and scale securely to millions of verifications.",
+    description: [
+      "We handle the heavy lifting of KYC, compliance, verification, and secure messaging.",
+      "With simple REST APIs and clear docs, you can integrate in hours.",
+      "Scale confidently to millions of verifications and messages."
+    ],
     image: Design,
     bottomSections: [
       {
-        "title": "Test on the go",
-        "description": "Instantly validate KYC & GST details or experiment with live APIs directly from our Developer Docs.",
-        "referenceText": "API Reference",
-        "referenceLink": "#"
+        //"title": "Test on the go",
+        // "description": "Instantly validate KYC & GST details or experiment with live APIs directly from our Developer Docs.",
+        // "referenceText": "API Reference",
+        // "referenceLink": "#"
       },
       {
-        "title": "Works where you build",
-        "description": "Fork, test, and integrate our APIs in seconds with ready-to-use collections.",
-        "referenceText": "Postman Collections",
-        "referenceLink": "#"
+        //"title": "Works where you build",
+        // "description": "Fork, test, and integrate our APIs in seconds with ready-to-use collections.",
+        // "referenceText": "Postman Collections",
+        // "referenceLink": "#"
       }
     ]
   },
@@ -234,10 +255,10 @@ const data = {
   ],
 
   contactData: {
-    title: "Ready to ",
+    title: "Click to below",
     highlight: "get started?",
     description:
-      "Create your account instantly and start using our APIs, or connect with our sales team to explore your unique requirements.",
+      "Create your account instantly and start using our APIs, or connect with our sales team to explore your BIZBOK requirements.",
     buttons: [
       { text: "Get Started", type: "primary", link: "/login" },
       { text: "Contact Sales", type: "secondary", icon: true, link: "/book-demo" },

@@ -2,10 +2,12 @@ import { IconBox, IconBolt, IconUsersGroup, IconInvoice, IconClockBolt } from "@
 
 import Logo from "../assets/Images/FastKYC_logo.png";
 import Product_Logo from "../assets/Images/Why_FastKYC/Group.png";
+import Walane from "../assets/Images/icons/Walane.png"
 import bank1 from "../assets/Images/Company_assets/Company_logo1.png";
 import bank2 from "../assets/Images/Company_assets/Company_logo2.png";
 import bank3 from "../assets/Images/Company_assets/Company_logo4.png";
 import bank4 from "../assets/Images/Company_assets/Company_logo3.png";
+import bank5 from "../assets/Images/Company_assets/Company_logo5.png";
 
 // import api_logo from "../assets/Images/Integration.png";
 // import api_logo2 from "../assets/Images/Why_FastKYC/api_logo.png";
@@ -27,9 +29,9 @@ const FastKYCPageData = {
     header: {
       logo: Logo,
       nav: [
-        { label: "FastKYC", link: "/why-fastkyc" },
         { label: "Products", link: "#", dropdown: true },
-        { label: "Resources", link: "#" },
+        { label: "Resources", link: "/fast-kyc" },
+        { label: "Solution", link: "#", dropdown: true },
         { label: "Company", link: "https://pentafox.in/", external: true }
       ],
       actions: [
@@ -56,14 +58,18 @@ const FastKYCPageData = {
       ],
       image: Product_Logo
     },
-    companiesLogos: [bank1, bank2, bank3, bank4],
-  products_nav: [
-    { icon: "Id", title: "KYC", desc: "Simplify Onboarding with Powerful KYC", link: "/products-kyc" },
-    { icon: "Bank", title: "Bank", desc: "Instant Bank Account Verification", link: "/products-bank-account-verification" },
-    { icon: "Lock", title: "Security & Compliance API", desc: "Watermark and Aadhaar Masking", link: "/products-security" },
-    { icon: "Scan", title: "OCR API", desc: "Extract data from government IDs and documents", link: "/products-ocr-apis" },
-    { icon: "Tax", title: "GST", desc: "GST Verification APIs", link: "/products-gst" },
-  ],
+    companiesLogos: [bank1, bank2, bank3, bank4,bank5],
+    products_nav: [
+      { icon: "Id", title: "KYC", desc: "Simplify Onboarding with Powerful KYC", link: "/products-kyc" },
+      { icon: "Bank", title: "Bank", desc: "Instant Bank Account Verification", link: "/products-bank-account-verification" },
+      { icon: "Lock", title: "Security & Compliance API", desc: "Watermark and Aadhaar Masking", link: "/products-security" },
+      { icon: "Scan", title: "OCR API", desc: "Extract data from government IDs and documents", link: "/products-ocr-apis" },
+      { icon: "Tax", title: "GST", desc: "GST Verification APIs", link: "/products-gst" },
+    ],
+    solution_nav: [
+    { icon: "Message", title: "SMS APIs", desc: "Instant and secure messaging for OTPs, alerts, reminders, and updates", link: "/products-sms" },
+    { image: Walane, title: "WALANE", desc: "Turn chats into customers with automated sales and support on WaLane", link: "https://www.walane.ai/", external: true }
+  ]
   },
   apiSections: {
     section1: {
@@ -164,6 +170,7 @@ const FastKYCPageData = {
         backgroundImage: border,
         headingAlign: "self-start w-2/3",
         descAlign: "self-end text-right",
+
       },
       {
         id: 2,
@@ -254,9 +261,10 @@ const FastKYCPageData = {
     ]
   },
   contactData: {
-    title: "Launch Fast, Scale Boldly ",
+    title: "Click to below",
+    highlight: "get started?",
     description:
-      "Create your account instantly and start using our APIs, or connect with our sales team to explore your unique requirements.",
+      "Create your account instantly and start using our APIs, or connect with our sales team to explore your BIZBOK requirements.",
     buttons: [
       { text: "Get Started", type: "primary", link: "/login" },
       { text: "Contact Sales", type: "secondary", icon: true, link: "/book-demo" },

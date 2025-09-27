@@ -1,6 +1,5 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { IconChevronRight } from "@tabler/icons-react";
 
 function Designed({ data }) {
   const containerVariants = {
@@ -30,10 +29,9 @@ function Designed({ data }) {
   };
 
   return (
-    <section className="py-20 bg-gradient-to-b from-white via-white to-red-100 overflow-hidden">
+    <section className="py-16 bg-gradient-to-b from-white via-white to-red-100 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
-        <div className="grid md:grid-cols-2 gap-12 items-start">
-          {/* Left side */}
+        <div className="grid md:grid-cols-2 gap-12 items-center">
           <motion.div
             className="flex flex-col justify-center"
             variants={containerVariants}
@@ -57,15 +55,21 @@ function Designed({ data }) {
               {data.heading.split(".")[1]}
             </motion.h2>
 
-            <motion.p
-              className="text-[#333333] text-[16px] font-medium md:text-[16px] mb-8"
-              variants={itemVariants}
-            >
-              {data.description}
-            </motion.p>
+            <ul className="space-y-3 mb-8">
+              {data.description.map((line, index) => (
+                <motion.li
+                  key={index}
+                  className="text-[#333333] text-[16px] font-medium md:text-[16px] flex items-start gap-2"
+                  variants={itemVariants}
+                >
+                  <span className="text-[#333333]">•</span>
+                  {line}
+                </motion.li>
+              ))}
+            </ul>
+          </motion.div>
 
-            {/* Bottom sections */}
-            {data.bottomSections && (
+          {/* {data.bottomSections && (
               <div className="grid md:grid-cols-2 gap-6">
                 {data.bottomSections.map((section, index) => (
                   <motion.div
@@ -73,7 +77,7 @@ function Designed({ data }) {
                     className="flex flex-col"
                     variants={itemVariants}
                   >
-                    <h3 className="text-[24px] font-medium text-[#000000] mb-2">
+                    <h3 className="text-[20px] font-medium text-[#000000] mb-2">
                       {section.title}
                     </h3>
                     <p className="text-[#424242] text-[16px] font-medium mb-3">
@@ -90,12 +94,11 @@ function Designed({ data }) {
                   </motion.div>
                 ))}
               </div>
-            )}
-          </motion.div>
+            )} */}
 
-          {/* Right side */}
+          {/* Right side: Image */}
           <motion.div
-            className="flex justify-start items-start"
+            className="flex justify-center items-center"
             variants={imageVariants}
             initial="hidden"
             whileInView="visible"
@@ -103,7 +106,7 @@ function Designed({ data }) {
           >
             <img
               src={data.image}
-              alt="Developer integration illustration"
+              alt="Illustration"
               className="w-full h-full object-cover rounded-lg"
             />
           </motion.div>

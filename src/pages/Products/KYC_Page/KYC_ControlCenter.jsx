@@ -15,15 +15,15 @@ import footerData from '../../../services/FooterPageData'
 
 function App() {
   return (
-    <div>
+    <>
     <Head_Section data={KYCData.pageData}/>
     <Verification_Section data={KYCData.verificationData} type="tabs"/>
     <Flow_Section data={KYCData.flowData}/>
     <Customer_Section data={KYCData.customerData}/>
-    <Contact_Section data={KYCData.contactData} type="cards"/>
+    <Contact_Section data={KYCData.contactData} type="image"/>
     <PayIntegrate data={KYCData.payIntegrateData} align="right"/>
     <Footer data={footerData} /> 
-    </div>
+    </>
   );
 }
 

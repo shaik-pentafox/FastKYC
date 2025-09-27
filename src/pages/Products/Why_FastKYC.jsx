@@ -7,6 +7,12 @@ import {
   IconShield,
   IconCheck,
   IconAlertTriangle,
+  IconTrendingUp,
+  IconChecklist,
+  IconWorld,
+  IconMessageCircle,
+  IconArrowsMaximize,
+  IconShieldLock,
 } from "@tabler/icons-react";
 
 const iconMap = {
@@ -14,8 +20,14 @@ const iconMap = {
   Shuffle: <IconArrowsShuffle size={28} stroke={1.5} />,
   Database: <IconDatabase size={28} stroke={1.5} />,
   Shield: <IconShield size={28} stroke={1.5} />,
+  ShieldLock:<IconShieldLock size={28} stroke={1.5}/>,
   Check: <IconCheck size={28} stroke={1.5} />,
   AlertTriangle: <IconAlertTriangle size={28} stroke={1.5} />,
+  TrendingUp:<IconTrendingUp size={28} stroke={1.5} />,
+  Checklist:<IconChecklist size={28} stroke={1.5} />,
+  World:<IconWorld size={28} stroke={1.5} />,
+  Message:<IconMessageCircle size={28} stroke={1.5} />,
+  Arrows:<IconArrowsMaximize size={28} stroke={1.5} />,
 };
 
 function Why_FastKYC({ data }) {

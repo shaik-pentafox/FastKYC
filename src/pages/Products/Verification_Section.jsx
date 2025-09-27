@@ -70,39 +70,46 @@ function Verification_Section({ data, type = "normal" }) {
     };
   }, []);
 
-  // useEffect(() => {
-  //   const el = scrollRef.current;
-  //   if (!el) return;
-
-  //   const handleWheel = (e) => {
-  //     if (el.matches(":hover")) {
-  //       if (e.deltaY !== 0) {
-  //         e.preventDefault();
-  //         el.scrollLeft += e.deltaY;
-  //       }
-  //     }
-  //   };
-
-  //   el.addEventListener("wheel", handleWheel, { passive: false });
-  //   return () => el.removeEventListener("wheel", handleWheel);
-  // }, []);
+  const scrollDelta = useRef(0);
+  const isScrolling = useRef(false);
 
   useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
+    const scrollContainer = scrollRef.current;
+    if (!scrollContainer) return;
 
-    const handleWheel = (e) => {
-      if (!el.matches(":hover")) return;
-      if (e.deltaY === 0) return;
-      e.preventDefault();
-      const delta = e.deltaY > 0 ? Math.min(e.deltaY, 20) : Math.max(e.deltaY, -20);
-      const scrollSpeed = 2;
-      el.scrollLeft += delta * scrollSpeed;
+    const step = () => {
+      if (scrollDelta.current !== 0) {
+        scrollContainer.scrollBy({ left: scrollDelta.current, behavior: 'instant' });
+        scrollDelta.current *= 0.7;
+        if (Math.abs(scrollDelta.current) < 0.3) scrollDelta.current = 0;
+        requestAnimationFrame(step);
+      } else {
+        isScrolling.current = false;
+      }
     };
 
-    el.addEventListener("wheel", handleWheel, { passive: false });
-    return () => el.removeEventListener("wheel", handleWheel);
-  }, []);
+    const handleWheel = (e) => {
+      const isTouchpad = Math.abs(e.deltaY) < 10;
+      if (isTouchpad) return;
+
+      e.preventDefault();
+
+      const speedMultiplier = 0.15;
+      scrollDelta.current += e.deltaY * speedMultiplier;
+
+      if (!isScrolling.current) {
+        isScrolling.current = true;
+        requestAnimationFrame(step);
+      }
+    };
+
+    scrollContainer.addEventListener('wheel', handleWheel, { passive: false });
+
+    return () => {
+      scrollContainer.removeEventListener('wheel', handleWheel);
+    };
+  }, [scrollRef]);
+
 
   const containerVariants = {
     hidden: {},
@@ -161,14 +168,17 @@ function Verification_Section({ data, type = "normal" }) {
               {data.points?.map((point, idx) => (
                 <motion.li
                   key={idx}
+                  className="flex items-center gap-3"
                   variants={itemVariants}
-                  className="flex items-start gap-2"
                 >
-                  <IconCircleCheck className="w-6 h-6 text-[#F44336] mt-0.5" />
+                  <span className="flex items-center justify-center w-6 h-6">
+                    <IconCircleCheck className="w-5 h-5 text-[#F44336]" />
+                  </span>
                   <span className="text-[#616161] text-[20px] font-medium">
                     {point}
                   </span>
                 </motion.li>
+
               ))}
             </ul>
           </motion.div>
@@ -194,51 +204,126 @@ function Verification_Section({ data, type = "normal" }) {
       <>
         {data.map((item) => {
           const isOdd = item.id % 2 !== 0;
+
+          // Alternate animation direction
           const contentParentVariants = {
             hidden: { opacity: 0, y: isOdd ? -40 : 40 },
-            visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut", staggerChildren: 0.2 } },
+            visible: {
+              opacity: 1,
+              y: 0,
+              transition: {
+                duration: 0.6,
+                ease: "easeOut",
+                staggerChildren: 0.2,
+              },
+            },
           };
-          const contentChildVariants = { hidden: { opacity: 0, y: isOdd ? -20 : 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } } };
-          const imageVariants = { hidden: { opacity: 0, y: isOdd ? 40 : -40 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut", delay: 0.4 } } };
+
+          const contentChildVariants = {
+            hidden: { opacity: 0, y: isOdd ? -20 : 20 },
+            visible: {
+              opacity: 1,
+              y: 0,
+              transition: { duration: 0.5, ease: "easeOut" },
+            },
+          };
+
+          const imageVariants = {
+            hidden: { opacity: 0, y: isOdd ? -40 : 40 },
+            visible: {
+              opacity: 1,
+              y: 0,
+              transition: {
+                duration: 0.8,
+                ease: "easeOut",
+                delay: 0.4,
+              },
+            },
+          };
 
           return (
-            <section key={item.id} className="w-full py-18" style={{ backgroundColor: item.bg }}>
-              <div className={`max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-18 items-center px-6 md:px-12 lg:px-20 ${!isOdd ? "rounded-2xl p-10" : ""}`}>
+            <section
+              key={item.id}
+              className="w-full py-18"
+              style={{ backgroundColor: item.bg }}
+            >
+              <div
+                className={`max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-18 items-center px-6 md:px-12 lg:px-20 ${!isOdd ? "rounded-2xl p-10" : ""
+                  }`}
+              >
                 {/* Text */}
                 <motion.div
                   className={`order-1 md:order-${isOdd ? "1" : "2"}`}
                   variants={contentParentVariants}
                   initial="hidden"
                   whileInView="visible"
-                  viewport={{ once: false, amount: 0.2 }}
+                  viewport={{ once: true, amount: 0.2 }}
                 >
-                  <motion.h2 className="text-3xl md:text-[40px] font-bold text-[#161C2D] mb-4" variants={contentChildVariants}>
+                  <motion.h2
+                    className="text-3xl md:text-[40px] font-bold text-[#161C2D] mb-4"
+                    variants={contentChildVariants}
+                  >
                     {item.title}
-                    {item.subheading && <span className="text-[20px] text-[#F44336] font-bold">{item.subheading}</span>}
-                    {item.subtitle && <span className="block text-[20px] text-[#F44336] font-bold mt-2">{item.subtitle}</span>}
+                    {item.subheading && (
+                      <span className="text-[20px] text-[#F44336] font-bold">
+                        {item.subheading}
+                      </span>
+                    )}
+                    {item.subtitle && (
+                      <span className="block text-[20px] text-[#F44336] font-bold mt-2">
+                        {item.subtitle}
+                      </span>
+                    )}
                   </motion.h2>
-                  <motion.p className="text-[#616161] font-medium text-[20px] mb-6" variants={contentChildVariants}>
+                  <motion.p
+                    className="text-[#616161] font-medium text-[20px] mb-6"
+                    variants={contentChildVariants}
+                  >
                     {item.description}
                   </motion.p>
+                  <motion.p
+                    className="text-[#616161] font-medium text-[20px] mb-6"
+                    variants={contentChildVariants}
+                  >
+                    {item.description2}
+                  </motion.p>
                   <motion.ul className="space-y-3">
-                    {item.features?.map((feature, index) => (
-                      <motion.li key={index} className="flex items-start gap-2" variants={contentChildVariants}>
-                        <IconCircleCheck className="w-6 h-6 text-[#F44336] mt-0.5" />
-                        <span className="text-[#616161] text-[20px] font-medium">{feature}</span>
+                    {item.features.map((feature, index) => (
+                      <motion.li
+                        key={index}
+                        className="flex items-center gap-3"
+                        variants={contentChildVariants}
+                      >
+                        {/* <span className="flex items-center justify-center w-6 h-6">
+                          <IconCircleCheck className="w-5 h-5 text-[#F44336]" />
+                        </span> */}
+                        <span className="text-[#616161] text-[20px] font-medium">
+                          {feature}
+                        </span>
                       </motion.li>
+
                     ))}
                   </motion.ul>
                 </motion.div>
 
                 {/* Image */}
                 <motion.div
-                  className={`flex justify-center order-2 md:order-${isOdd ? "2" : "1"}`}
+                  className={`flex justify-center order-2 md:order-${isOdd ? "2" : "1"
+                    }`}
                   variants={imageVariants}
                   initial="hidden"
                   whileInView="visible"
-                  viewport={{ once: false, amount: 0.2 }}
+                  viewport={{ once: true, amount: 0.2 }}
                 >
-                  <img src={item.image} alt={item.alt || item.title} className="max-w-full h-auto" />
+                  {item.component ? (
+                    <item.component />
+                  ) : (
+                    <img
+                      src={item.image}
+                      alt={item.alt || item.title}
+                      className="max-w-full h-auto"
+                    />
+                  )}
                 </motion.div>
               </div>
             </section>
@@ -282,7 +367,30 @@ function Verification_Section({ data, type = "normal" }) {
                 {tabs.map((tab) => (
                   <button
                     key={tab.key}
-                    onClick={() => setActiveTab(tab.key)}
+                    onClick={(e) => {
+                      setActiveTab(tab.key);
+
+                      const scrollContainer = scrollRef.current;
+                      const tabElement = e.currentTarget;
+
+                      const containerLeft = scrollContainer.scrollLeft;
+                      const containerRight = containerLeft + scrollContainer.offsetWidth;
+
+                      const tabLeft = tabElement.offsetLeft;
+                      const tabRight = tabLeft + tabElement.offsetWidth;
+
+                      if (tabLeft < containerLeft) {
+                        scrollContainer.scrollTo({
+                          left: tabLeft,
+                          behavior: "smooth",
+                        });
+                      } else if (tabRight > containerRight) {
+                        scrollContainer.scrollTo({
+                          left: tabRight - scrollContainer.offsetWidth,
+                          behavior: "smooth",
+                        });
+                      }
+                    }}
                     className={`flex items-center gap-2 px-4 py-2 rounded-[8px] text-[16px] font-bold transition cursor-pointer ${activeTab === tab.key
                       ? "bg-[#F44336] text-white shadow"
                       : "text-[#F44336] hover:bg-red-100"
@@ -293,7 +401,6 @@ function Verification_Section({ data, type = "normal" }) {
                   </button>
                 ))}
               </div>
-
               {showRightFade && (
                 <div className="absolute right-0 top-0 h-full w-10 pointer-events-none bg-gradient-to-l from-red-100 to-transparent rounded-r-[12px]" />
               )}

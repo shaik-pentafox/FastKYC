@@ -10,9 +10,12 @@ import {
   IconBuildingBank,
   IconScan,
   IconId,
+  IconMessage,
 } from "@tabler/icons-react";
 
 import { Link, useLocation } from "react-router-dom";
+import TypingWord from "../../ui/TypingWorld";
+import useBodyScrollLock from "../../ui/useBodyScrollLock";
 
 const iconMap = {
   Tax: <IconReceiptTax size={28} stroke={1.5} />,
@@ -20,8 +23,8 @@ const iconMap = {
   Bank: <IconBuildingBank size={28} stroke={1.5} />,
   Scan: <IconScan size={28} stroke={1.5} />,
   Id: <IconId size={28} stroke={1.5} />,
+  Message: <IconMessage size={28} stroke={1.5} />
 };
-
 
 const RunnerPath = ({ d, duration = 6, offset = 0, className, color = "#E20303" }) => {
   const segmentLength = 180;
@@ -61,7 +64,7 @@ const RunnerPath = ({ d, duration = 6, offset = 0, className, color = "#E20303" 
   );
 };
 
-function Head_Section({ data, products_nav }) {
+function Head_Section({ data, products_nav, solution_nav }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [submenu, setSubmenu] = useState(null);
   const [openDropdown, setOpenDropdown] = useState(false);
@@ -76,12 +79,14 @@ function Head_Section({ data, products_nav }) {
   const lastScrollY = useRef(0);
   const location = useLocation();
 
+  //Close menu on route change
   useEffect(() => {
     setMenuOpen(false);
     setOpenDropdown(false);
     setShowNavbar(true);
   }, [location.pathname]);
 
+  //Navbar scroll behavior
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
@@ -102,6 +107,7 @@ function Head_Section({ data, products_nav }) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  //Resize → update button text
   useEffect(() => {
     const handleResize = () => {
       setButtonText(
@@ -113,7 +119,7 @@ function Head_Section({ data, products_nav }) {
     return () => window.removeEventListener("resize", handleResize);
   }, [data]);
 
-  // Close sidebar automatically when width ≥ 768px
+  //Resize → close menu on desktop
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 768) {
@@ -125,6 +131,7 @@ function Head_Section({ data, products_nav }) {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  //Increase animation speed
   useEffect(() => {
     const interval = setInterval(() => {
       setSpeedFactor((prev) => Math.min(prev + 0.01, 5));
@@ -132,6 +139,10 @@ function Head_Section({ data, products_nav }) {
     return () => clearInterval(interval);
   }, []);
 
+  //Lock body scroll on sidebar open  
+  useBodyScrollLock(menuOpen);
+
+  //Resize → update text & close menu (duplicate)
   useEffect(() => {
     const handleResize = () => {
       setButtonText(window.innerWidth < 768 ? data.cta.textMobile : data.cta.textDesktop);
@@ -145,6 +156,7 @@ function Head_Section({ data, products_nav }) {
     return () => window.removeEventListener("resize", handleResize);
   }, [data]);
 
+  //Close dropdown on outside click  
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -158,7 +170,6 @@ function Head_Section({ data, products_nav }) {
     }
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [openDropdown]);
-
 
   const container = {
     hidden: {},
@@ -212,17 +223,13 @@ function Head_Section({ data, products_nav }) {
 
           {/* Desktop Nav */}
           <nav className="hidden min-[800px]:flex items-center gap-8 ml-10 relative">
-            <span className="text-[#1E1E1E] text-[16px] font-medium cursor-pointer">
-              <Link to="/why-fastkyc">FastKYC</Link>
-            </span>
-
             {/* Desktop Products Dropdown */}
             <div
               className="relative"
-              ref={dropdownRef}
               onMouseEnter={() => setOpenDropdown(true)}
               onMouseLeave={() => setOpenDropdown(false)}
             >
+              {/* Header Item */}
               <div className="flex items-center gap-1 cursor-pointer">
                 <span className="text-[#1E1E1E] text-[16px] font-medium">
                   Products
@@ -236,32 +243,25 @@ function Head_Section({ data, products_nav }) {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
                     transition={{ duration: 0.3 }}
-                    className="absolute left-3/4 -translate-x-1/2 mt-[5.5px]
-                      w-[712px] bg-white shadow-lg rounded-[20px] p-6 
-                      grid grid-cols-2 gap-5 z-50 border border-[#F44336]"
+                    className="absolute left-1/2 -translate-x-1/2 top-full mt-2 
+                   w-[712px] bg-white shadow-lg rounded-[20px] p-6 
+                   grid grid-cols-2 gap-5 z-50 border border-[#F44336]"
                   >
                     {products_nav.map((p, i) => (
-                      <div key={i}>
-                        <Link
-                          to={p.link}
-                          className="flex items-start gap-3 p-2 rounded-lg hover:bg-gray-50 cursor-pointer"
-                          onClick={() => setOpenDropdown(false)}
-                        >
-                          {/* Fixed-size Icon Box */}
-                          <div className="min-w-[48px] min-h-[48px] flex items-center justify-center rounded-xl bg-[#F44336]/10 text-[#F44336]">
-                            {iconMap[p.icon]}
-                          </div>
-
-                          <div>
-                            <h2 className="font-medium text-[#212121]">
-                              {p.title}
-                            </h2>
-                            <p className="text-[#616161] font-medium">
-                              {p.desc}
-                            </p>
-                          </div>
-                        </Link>
-                      </div>
+                      <Link
+                        key={i}
+                        to={p.link}
+                        className="flex items-start gap-3 p-2 rounded-lg hover:bg-gray-50 cursor-pointer"
+                        onClick={() => setOpenDropdown(false)}
+                      >
+                        <div className="min-w-[48px] min-h-[48px] flex items-center justify-center rounded-xl bg-[#F44336]/10 text-[#F44336]">
+                          {iconMap[p.icon]}
+                        </div>
+                        <div>
+                          <h2 className="font-medium text-[#212121]">{p.title}</h2>
+                          <p className="text-[#616161] font-medium">{p.desc}</p>
+                        </div>
+                      </Link>
                     ))}
                   </motion.div>
                 )}
@@ -269,8 +269,64 @@ function Head_Section({ data, products_nav }) {
             </div>
 
             <span className="text-[#1E1E1E] text-[16px] font-medium cursor-pointer">
-              Resources
+              <Link to="/fast-kyc">Resources</Link>
             </span>
+
+            {/* Desktop Solution Dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={() => setSubmenu("solution")}
+              onMouseLeave={() => setSubmenu(null)}
+            >
+              {/* Header Item */}
+              <div className="flex items-center gap-1 cursor-pointer">
+                <span className="text-[#1E1E1E] text-[16px] font-medium">
+                  Solution
+                </span>
+              </div>
+
+              <AnimatePresence>
+                {submenu === "solution" && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.3 }}
+                    className="absolute left-1/2 -translate-x-1/2 top-full mt-2
+                   w-[712px] bg-white shadow-lg rounded-[20px] p-6 
+                   grid grid-cols-2 gap-5 z-50 border border-[#F44336]"
+                  >
+                    {solution_nav.map((s, i) => {
+                      const content = (
+                        <div className="flex items-start gap-3 p-2 rounded-lg hover:bg-gray-50 cursor-pointer">
+                          <div className="min-w-[48px] min-h-[48px] flex items-center justify-center rounded-xl bg-[#F44336]/10 text-[#F44336]">
+                            {s.icon ? iconMap[s.icon] : s.image && (
+                              <img src={s.image} alt={s.title} className="w-6 h-6" />
+                            )}
+                          </div>
+                          <div>
+                            <h2 className="font-medium text-[#212121]">{s.title}</h2>
+                            <p className="text-[#616161] font-medium">{s.desc}</p>
+                          </div>
+                        </div>
+                      );
+
+                      return (
+                        <div key={i}>
+                          {s.external ? (
+                            <a href={s.link} target="_blank" rel="noopener noreferrer">
+                              {content}
+                            </a>
+                          ) : (
+                            <Link to={s.link}>{content}</Link>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
 
             <a
               href="https://pentafox.in/"
@@ -282,6 +338,7 @@ function Head_Section({ data, products_nav }) {
               </span>
             </a>
           </nav>
+
 
           {/* Desktop Buttons */}
           <div className="hidden min-[800px]:flex items-center gap-6">
@@ -317,14 +374,14 @@ function Head_Section({ data, products_nav }) {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            className="fixed inset-0 bg-white z-[200] flex flex-col w-full"
+            className="fixed inset-0 bg-white z-[200] flex flex-col w-full h-full"
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "tween", ease: "easeInOut", duration: 0.4 }}
           >
-            {/* Top Bar */}
-            <div className="flex justify-between items-center p-6 border-b">
+            {/* Top Bar (fixed) */}
+            <div className="flex justify-between items-center p-6 border-b shrink-0">
               <img
                 src={data.image}
                 alt="FastKYC Logo"
@@ -334,73 +391,132 @@ function Head_Section({ data, products_nav }) {
                   window.scrollTo({ top: 0, behavior: "smooth" });
                 }}
               />
-
               <button onClick={() => setMenuOpen(false)}>
                 <IconX size={28} className="text-gray-600 cursor-pointer" />
               </button>
             </div>
 
-            {/* Main Menu (Mobile) */}
-            {submenu === null && (
-              <div className="flex flex-col gap-6 p-6 text-lg font-medium">
-                <span className="cursor-pointer">
-                  <Link to="/why-fastkyc">FastKYC</Link>
-                </span>
-                <span
-                  className="flex justify-between items-center cursor-pointer"
-                  onClick={() => setSubmenu("products")}
-                >
-                  Products <IconChevronRight size={20} />
-                </span>
-                <span className="cursor-pointer">Resources</span>
-                <a href="https://pentafox.in/" rel="noopener noreferrer">
-                  <span className="cursor-pointer">Company</span>
-                </a>
-              </div>
-            )}
+            {/* Scrollable Content */}
+            <div className="flex-1 overflow-y-auto">
+              {submenu === null && (
+                <div className="flex flex-col gap-6 p-6 text-lg font-medium">
+                  <span
+                    className="flex justify-between items-center cursor-pointer"
+                    onClick={() => setSubmenu("products")}
+                  >
+                    Products <IconChevronRight size={20} />
+                  </span>
 
-            {/* Products Submenu (Mobile) */}
-            {submenu === "products" && (
-              <div className="flex flex-col p-6">
-                <button
-                  className="flex items-center gap-2 text-gray-600 mb-6 cursor-pointer"
-                  onClick={() => setSubmenu(null)}
-                >
-                  <IconChevronLeft size={20} />
-                </button>
-                <h3 className="text-[#F44336] font-medium text-lg mb-4">
-                  Products
-                </h3>
-                <div className="flex flex-col gap-5">
-                  {products_nav.map((p, i) => (
-                    <Link
-                      key={i}
-                      to={p.link}
-                      className="flex items-center gap-4 cursor-pointer"
-                      onClick={() => setMenuOpen(false)}
-                    >
-                      {/* Fixed-size Icon Box */}
-                      <div className="min-w-[48px] min-h-[48px] flex items-center justify-center rounded-xl bg-[#FFF5F5] text-[#F44336]">
-                        {iconMap[p.icon]}
-                      </div>
+                  <span className="cursor-pointer">
+                    <Link to="/fast-kyc">Resources</Link>
+                  </span>
 
-                      <div>
-                        <h2 className="font-medium text-[#212121]">
-                          {p.title}
-                        </h2>
-                        <p className="text-[#616161] font-medium">{p.desc}</p>
-                      </div>
-                    </Link>
-                  ))}
+                  <span
+                    className="flex justify-between items-center cursor-pointer"
+                    onClick={() => setSubmenu("solution")}
+                  >
+                    Solution <IconChevronRight size={20} />
+                  </span>
+
+                  <a href="https://pentafox.in/" rel="noopener noreferrer">
+                    <span className="cursor-pointer">Company</span>
+                  </a>
                 </div>
-              </div>
-            )}
+              )}
+
+              {/* Products Menu */}
+              {submenu === "products" && (
+                <div className="flex flex-col p-6 h-full">
+                  <button
+                    className="flex items-center gap-2 text-gray-600 mb-6 cursor-pointer shrink-0"
+                    onClick={() => setSubmenu(null)}
+                  >
+                    <IconChevronLeft size={20} />
+                  </button>
+
+                  <h3 className="text-[#F44336] font-medium text-lg mb-4 shrink-0">
+                    Products
+                  </h3>
+
+                  <div className="flex-1 overflow-y-auto" style={{ scrollbarWidth: "none" }}>
+                    <div className="flex flex-col gap-5">
+                      {products_nav.map((p, i) => (
+                        <Link
+                          key={i}
+                          to={p.link}
+                          className="flex items-center gap-4 cursor-pointer"
+                          onClick={() => setMenuOpen(false)}
+                        >
+                          <div className="min-w-[48px] min-h-[48px] flex items-center justify-center rounded-xl bg-[#FFF5F5] text-[#F44336]">
+                            {iconMap[p.icon]}
+                          </div>
+                          <div>
+                            <h2 className="font-medium text-[#212121]">{p.title}</h2>
+                            <p className="text-[#616161] font-medium">{p.desc}</p>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Solution Menu */}
+              {submenu === "solution" && (
+                <div className="flex flex-col p-6 h-full">
+                  <button
+                    className="flex items-center gap-2 text-gray-600 mb-6 cursor-pointer shrink-0"
+                    onClick={() => setSubmenu(null)}
+                  >
+                    <IconChevronLeft size={20} />
+                  </button>
+
+                  <h3 className="text-[#F44336] font-medium text-lg mb-4 shrink-0">
+                    Solution
+                  </h3>
+
+                  <div className="flex-1 overflow-y-auto" style={{ scrollbarWidth: "none" }}>
+                    <div className="flex flex-col gap-5">
+                      {solution_nav.map((s, i) => {
+                        const content = (
+                          <div className="flex items-center gap-4 cursor-pointer">
+                            <div className="min-w-[48px] min-h-[48px] flex items-center justify-center rounded-xl bg-[#FFF5F5] text-[#F44336]">
+                              {s.icon
+                                ? iconMap[s.icon]
+                                : s.image && <img src={s.image} alt={s.title} className="w-6 h-6 object-contain rounded-full" />}
+                            </div>
+                            <div>
+                              <h2 className="font-medium text-[#212121]">{s.title}</h2>
+                              <p className="text-[#616161] font-medium">{s.desc}</p>
+                            </div>
+                          </div>
+                        );
+
+                        return (
+                          <div key={i} onClick={() => setMenuOpen(false)}>
+                            {s.external ? (
+                              <a href={s.link} target="_blank" rel="noopener noreferrer">
+                                {content}
+                              </a>
+                            ) : (
+                              <Link to={s.link}>{content}</Link>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                </div>
+              )}
+            </div>
+
           </motion.div>
         )}
       </AnimatePresence>
-      {/* Hero Section */}
+
       <motion.section
-        className="text-center text-black relative overflow-hidden pt-26"
+        className="text-center text-black relative overflow-hidden pt-30 lg:pt-26"
         variants={container}
         initial="hidden"
         animate="show"
@@ -415,9 +531,9 @@ function Head_Section({ data, products_nav }) {
                 transition={{ delay: 0.5, duration: 0.8 }}
               >
                 <RunnerPath
-                  d="M10 250 H150 H250 V220 V80 Q250 60, 280 60 H345"
+                  d="M10 270 H150 H250 V220 V80 Q250 60, 280 60 H345"
                   color="#E20303"
-                  className="top-[138px]"
+                  className="top-[119px]"
                 />
 
               </motion.div>
@@ -430,7 +546,7 @@ function Head_Section({ data, products_nav }) {
                 <RunnerPath
                   d="M400 300 V360 Q400 380 420 380 H520 Q540 380 540 400 V440 Q540 460 545"
                   color="#E20303"
-                  className="mt-[53px] left-[582px]"
+                  className="mt-[56px] left-[582px]"
                 />
               </motion.div>
 
@@ -498,8 +614,8 @@ function Head_Section({ data, products_nav }) {
           <div className="relative h-[600px] mt-[-130px] hidden min-[800px]:block">
             <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 relative h-full">
               {[data.cards[0]].map((card, i) => (
-                <motion.div key={i} variants={card1} className="absolute top-[15%] w-72 bg-white/90 backdrop-blur-md text-black border border-[#00000033] shadow-lg rounded-3xl p-4 py-2 flex items-center gap-4 cursor-pointer">
-                  <motion.img src={card.img} alt={card.title} className="h-13" initial={{ scale: 0.8, rotate: -10 }} animate={{ scale: 1, rotate: 0 }} transition={{ delay: 1, duration: 1.8 }} />
+                <motion.div key={i} variants={card1} className="absolute top-[17%] w-66 bg-white/90 backdrop-blur-md text-black border border-[#00000033] shadow-lg rounded-3xl p-4 py-2 flex items-center gap-4">
+                  <motion.img src={card.img} alt={card.title} className="h-12" initial={{ scale: 0.8, rotate: -10 }} animate={{ scale: 1, rotate: 0 }} transition={{ delay: 1, duration: 1.8 }} />
                   <div>
                     <p className="text-[16px] font-normal text-start">{card.title}</p>
                     <p className="text-[18px] font-bold mt-1 text-start text-[#333333]">{card.value}</p>
@@ -507,7 +623,7 @@ function Head_Section({ data, products_nav }) {
                 </motion.div>
               ))}
               {[data.cards[1]].map((card, i) => (
-                <motion.div key={i} variants={card2} className="absolute left-[3px] top-[36%] w-72 bg-white/90 backdrop-blur-md text-black border border-gray-200 shadow-lg rounded-3xl p-4 flex items-center gap-4 cursor-pointer">
+                <motion.div key={i} variants={card2} className="absolute left-[3px] top-[33%] w-72 bg-white/90 backdrop-blur-md text-black border border-gray-200 shadow-lg rounded-3xl p-4 flex items-center gap-4 ">
                   <motion.img src={card.img} alt={card.title} className="h-13" initial={{ scale: 0.8, rotate: -10 }} animate={{ scale: 1, rotate: 0 }} transition={{ delay: 1.3, duration: 1.8 }} />
                   <div>
                     <p className="text-[16px] font-medium text-start text-[#1E1E1E]">{card.title}</p>
@@ -516,7 +632,7 @@ function Head_Section({ data, products_nav }) {
                 </motion.div>
               ))}
               {[data.cards[2]].map((card, i) => (
-                <motion.div key={i} variants={card3} className="absolute mt-[82px] right-[10px] w-64 bg-white/90 backdrop-blur-md text-black border border-gray-200 shadow-lg rounded-3xl p-5 cursor-pointer">
+                <motion.div key={i} variants={card3} className="absolute mt-[70px] right-[10px] w-64 bg-white/90 backdrop-blur-md text-black border border-gray-200 shadow-lg rounded-3xl p-5 ">
                   <div className="flex justify-between items-center mb-3">
                     <motion.img src={card.img} alt="status" className="h-8" initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 2.1, type: "spring", damping: 22, stiffness: 40 }} />
                     <p className="font-medium text-[18px] text-[#1E1E1E]">{card.subTitle}</p>
@@ -528,7 +644,20 @@ function Head_Section({ data, products_nav }) {
                     ))}
                   </div>
                   <p className="font-medium text-start text-[16px] text-[#1E1E1E]">{card.title}</p>
-                  <p className="font-bold text-start text-[18px] mt-1 text-[#333333]">{card.value}</p>
+                  <TypingWord
+                    title2={card.title2}
+                    title3={card.title3}
+                    fixedText="Everywhere"
+                    startDelay={2000}
+                    speed={100}
+                    pauseDelay={1500}
+                    className="font-medium text-start text-[16px] text-[#1E1E1E]"
+                  />
+
+                  {card.value && (
+                    <p className="font-bold text-start text-[18px] mt-1 text-[#333333]">{card.value}</p>
+                  )}
+
                   <motion.div
                     className="w-full bg-gray-300 rounded-full h-2 mt-3 overflow-hidden"
                     initial={{ opacity: 0 }}

@@ -14,14 +14,14 @@ import footerData from '../../../services/FooterPageData'
 
 function App() {
   return (
-    <div>
+    <>
     <Head_Section data={BankData.pageData}/>
     <Why_FastKYC data={BankData.whyFastKycData}/>
     <Verification_Section data={BankData.verificationData} type="normal"/>
-    <Contact data={BankData.contactData} type="cards"/> 
+    <Contact data={BankData.contactData} type="image"/> 
     <PayIntegrate data={BankData.integration} align="right"/>
     <Footer data={footerData} /> 
-    </div>
+    </>
   );
 }
 

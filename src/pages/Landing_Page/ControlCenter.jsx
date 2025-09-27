@@ -16,16 +16,16 @@ import footerData from "../../services/FooterPageData";
 
 function App() {
   return (
-    <div>
-      <Head_Section  data={data.heroData} products_nav={data.products_nav} />
+    <>
+      <Head_Section data={data.heroData} products_nav={data.products_nav} solution_nav={data.solution_nav}/>
       <Products sections={data.productSections} whyChoose={data.whyChoose} features={data.whyChoose.featureCards} />
-     <Customer data={data.customerData} />
+      <Customer data={data.customerData} />
       <Designed data={data.designedData} />
-      <PayIntegrate data={data.payIntegrateData}  align="left" />
+      <PayIntegrate data={data.payIntegrateData} align="left" />
       <FAQ data={data.faqData} />
       <Contact data={data.contactData} type="image" />
       <Footer data={footerData} />
-    </div>
+    </>
   );
 }
 

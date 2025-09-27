@@ -12,12 +12,14 @@ import {
   IconBuildingBank,
   IconScan,
   IconId,
+  IconMessage,
 } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence, useAnimation } from "framer-motion";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import useBodyScrollLock from "../../ui/useBodyScrollLock";
 import Footer from "../Footer";
 
 const iconMap = {
@@ -29,6 +31,7 @@ const iconMap = {
   Bank: <IconBuildingBank size={28} stroke={1.5} />,
   Scan: <IconScan size={28} stroke={1.5} />,
   Id: <IconId size={28} stroke={1.5} />,
+  Message: <IconMessage size={28} stroke={1.5} />
 };
 
 export default function BookDemo({ data, footerData }) {
@@ -49,6 +52,7 @@ export default function BookDemo({ data, footerData }) {
   const { hero, form } = data;
 
   const hcaptchaRef = useRef(null);
+  //Navbar scroll behavior
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
@@ -100,6 +104,9 @@ export default function BookDemo({ data, footerData }) {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  //Lock body scroll when sidebar open  
+  useBodyScrollLock(menuOpen);
 
   // Handle input change
   const handleChange = (id, value) => {
@@ -182,20 +189,13 @@ export default function BookDemo({ data, footerData }) {
             </Link>
             {/* Desktop Nav */}
             <nav className="hidden min-[800px]:flex items-center gap-8 ml-10 relative">
-              <span className="text-[#1E1E1E] text-[16px] font-medium cursor-pointer">
-                <Link to="/why-fastkyc">
-
-                  FastKYC
-                </Link>
-              </span>
-
               {/* Products Dropdown */}
               <div
                 className="relative"
-                ref={dropdownRef}
                 onMouseEnter={() => setOpenDropdown(true)}
                 onMouseLeave={() => setOpenDropdown(false)}
               >
+                {/* Header Item */}
                 <div className="flex items-center gap-1 cursor-pointer">
                   <span className="text-[#1E1E1E] text-[16px] font-medium">
                     Products
@@ -209,47 +209,90 @@ export default function BookDemo({ data, footerData }) {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
                       transition={{ duration: 0.3 }}
-                      className="absolute left-3/4 -translate-x-1/2
-                         w-[712px] bg-white shadow-lg rounded-[20px] p-6 
-                         grid grid-cols-2 gap-5 z-50 border border-[#F44336]"
+                      className="absolute left-1/2 -translate-x-1/2 top-full mt-2 
+                                w-[712px] bg-white shadow-lg rounded-[20px] p-6 
+                                grid grid-cols-2 gap-5 z-50 border border-[#F44336]"
                     >
+
                       {data.products_nav.map((p, i) => (
-                        <div
+                        <Link
+                          key={i}
+                          to={p.link}
+                          className="flex items-start gap-3 p-2 rounded-lg hover:bg-gray-50 cursor-pointer"
+                          onClick={() => setOpenDropdown(false)}
                         >
-                          <Link
-                            to={p.link}
-                            className="flex items-start gap-3 p-2 rounded-lg hover:bg-gray-50 cursor-pointer"
-                            onClick={() => setOpenDropdown(false)}
-                          >
-                            {/* Fixed-size Icon Box */}
-                            <div className="min-w-[48px] min-h-[48px] flex items-center justify-center rounded-xl bg-[#F44336]/10 text-[#F44336]">
-                              {iconMap[p.icon]}
-                            </div>
-
-
-                            {/* Text animation */}
-                            <div
-                              variants={{
-                                hidden: { opacity: 0, y: 20 },
-                                visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
-                              }}
-                            >
-                              <h2 className="font-medium text-[#212121]">{p.title}</h2>
-                              <p className="text-[#616161] font-medium">{p.desc}</p>
-                            </div>
-                          </Link>
-                        </div>
+                          <div className="min-w-[48px] min-h-[48px] flex items-center justify-center rounded-xl bg-[#F44336]/10 text-[#F44336]">
+                            {iconMap[p.icon]}
+                          </div>
+                          <div>
+                            <h2 className="font-medium text-[#212121]">{p.title}</h2>
+                            <p className="text-[#616161] font-medium">{p.desc}</p>
+                          </div>
+                        </Link>
                       ))}
                     </motion.div>
                   )}
                 </AnimatePresence>
               </div>
 
-
-
               <span className="text-[#1E1E1E] text-[16px] font-medium cursor-pointer">
-                Resources
+                <Link to="/fast-kyc">Resources</Link>
               </span>
+
+              <div
+                className="relative"
+                onMouseEnter={() => setSubmenu("solution")}
+                onMouseLeave={() => setSubmenu(null)}
+              >
+                {/* Header Item */}
+                <div className="flex items-center gap-1 cursor-pointer">
+                  <span className="text-[#1E1E1E] text-[16px] font-medium">
+                    Solution
+                  </span>
+                </div>
+
+                <AnimatePresence>
+                  {submenu === "solution" && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.3 }}
+                      className="absolute left-1/2 -translate-x-1/2 top-full mt-2
+                               w-[712px] bg-white shadow-lg rounded-[20px] p-6 
+                               grid grid-cols-2 gap-5 z-50 border border-[#F44336]"
+                    >
+                      {data.solution_nav.map((s, i) => {
+                        const content = (
+                          <div className="flex items-start gap-3 p-2 rounded-lg hover:bg-gray-50 cursor-pointer">
+                            <div className="min-w-[48px] min-h-[48px] flex items-center justify-center rounded-xl bg-[#F44336]/10 text-[#F44336]">
+                              {s.icon ? iconMap[s.icon] : s.image && (
+                                <img src={s.image} alt={s.title} className="w-6 h-6" />
+                              )}
+                            </div>
+                            <div>
+                              <h2 className="font-medium text-[#212121]">{s.title}</h2>
+                              <p className="text-[#616161] font-medium">{s.desc}</p>
+                            </div>
+                          </div>
+                        );
+
+                        return (
+                          <div key={i}>
+                            {s.external ? (
+                              <a href={s.link} target="_blank" rel="noopener noreferrer">
+                                {content}
+                              </a>
+                            ) : (
+                              <Link to={s.link}>{content}</Link>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
 
               <a href="https://pentafox.in/" target="_blank" rel="noopener noreferrer">
                 <span className="text-[#1E1E1E] text-[16px] font-medium cursor-pointer">
@@ -293,15 +336,15 @@ export default function BookDemo({ data, footerData }) {
         <AnimatePresence>
           {menuOpen && (
             <motion.div
-              className="fixed inset-0 bg-white z-[200] flex flex-col w-full"
+              className="fixed inset-0 bg-white z-[200] flex flex-col w-full h-full"
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "tween", ease: "easeInOut", duration: 0.4 }}
             >
               {/* Top Bar */}
-              <div className="flex justify-between items-center p-6 border-b">
-                <Link to='/'>
+              <div className="flex justify-between items-center p-6 border-b shrink-0">
+                <Link to="/">
                   <img src={data.logo} alt="FastKYC Logo" className="h-9" />
                 </Link>
                 <button onClick={() => setMenuOpen(false)}>
@@ -310,78 +353,156 @@ export default function BookDemo({ data, footerData }) {
               </div>
 
               {/* Main Menu */}
-              {submenu === null && (
-                <div className="flex flex-col gap-6 p-6 text-lg font-medium">
-                  <span className="cursor-pointer">
-                    <Link to="/why-fastkyc">
-                      FastKYC
-                    </Link>
-                  </span>
-                  <span
-                    className="flex justify-between items-center cursor-pointer"
-                    onClick={() => setSubmenu("products")}
-                  >
-                    Products <IconChevronRight size={20} />
-                  </span>
-                  <span className="cursor-pointer">Resources</span>
-                  <a href="https://pentafox.in/" rel="noopener noreferrer">
-                    <span className="cursor-pointer">Company</span>
-                  </a>
-                </div>
-              )}
+              <div className="flex-1 overflow-y-auto">
+                {/* Root menu */}
+                {submenu === null && (
+                  <div className="flex flex-col gap-6 p-6 text-lg font-medium">
+                    <span
+                      className="flex justify-between items-center cursor-pointer"
+                      onClick={() => setSubmenu("products")}
+                    >
+                      Products <IconChevronRight size={20} />
+                    </span>
 
-              {/* Products Submenu */}
-              {submenu === "products" && (
-                <div className="flex flex-col p-6">
-                  <button
-                    className="flex items-center gap-2 text-gray-600 mb-6 cursor-pointer"
-                    onClick={() => setSubmenu(null)}
-                  >
-                    <IconChevronLeft size={20} />
-                  </button>
-                  <h3 className="text-[#F44336] font-medium text-lg mb-4">
-                    Products
-                  </h3>
-                  <div className="flex flex-col gap-5">
-                    {data.products_nav.map((p, i) => (
-                      <div
-                        key={i}
-                        initial="hidden"
-                        animate="visible"
-                        variants={{
-                          visible: {
-                            transition: { staggerChildren: 0.2, delayChildren: i * 0.4 },
-                          },
-                        }}
-                      >
-                        <Link
-                          to={p.link}
-                          className="flex items-center gap-4 cursor-pointer"
-                          onClick={() => setMenuOpen(false)}
-                        >
-                          {/* Fixed-size Icon Box */}
-                          <div className="min-w-[48px] min-h-[48px] flex items-center justify-center rounded-xl bg-[#FFF5F5] text-[#F44336]">
-                            {iconMap[p.icon]}
-                          </div>
+                    <span className="cursor-pointer">
+                      <Link to="/fast-kyc">Resources</Link>
+                    </span>
 
+                    <span
+                      className="flex justify-between items-center cursor-pointer"
+                      onClick={() => setSubmenu("solution")}
+                    >
+                      Solution <IconChevronRight size={20} />
+                    </span>
+
+                    <a href="https://pentafox.in/" rel="noopener noreferrer">
+                      <span className="cursor-pointer">Company</span>
+                    </a>
+                  </div>
+                )}
+
+                {/* Products Submenu */}
+                {submenu === "products" && (
+                  <div className="flex flex-col p-6 h-full">
+                    {/* Back Button */}
+                    <button
+                      className="flex items-center gap-2 text-gray-600 mb-6 cursor-pointer shrink-0"
+                      onClick={() => setSubmenu(null)}
+                    >
+                      <IconChevronLeft size={20} />
+                    </button>
+
+                    {/* Heading */}
+                    <h3 className="text-[#F44336] font-medium text-lg mb-4 shrink-0">
+                      Products
+                    </h3>
+
+                    {/* Scrollable product items */}
+                    <div className="flex-1 overflow-y-auto" style={{ scrollbarWidth: "none" }}>
+                      <div className="flex flex-col gap-5">
+                        {data.products_nav.map((p, i) => (
                           <div
+                            key={i}
+                            initial="hidden"
+                            animate="visible"
                             variants={{
-                              hidden: { opacity: 0, x: 20 },
-                              visible: { opacity: 1, x: 0, transition: { duration: 0.4 } },
+                              visible: { transition: { staggerChildren: 0.2, delayChildren: i * 0.2 } },
                             }}
                           >
-                            <h2 className="font-medium text-[#212121]">{p.title}</h2>
-                            <p className="text-[#616161] font-medium">{p.desc}</p>
+                            <Link
+                              to={p.link}
+                              className="flex items-center gap-4 cursor-pointer"
+                              onClick={() => setMenuOpen(false)}
+                            >
+                              <div className="min-w-[48px] min-h-[48px] flex items-center justify-center rounded-xl bg-[#FFF5F5] text-[#F44336]">
+                                {iconMap[p.icon]}
+                              </div>
+
+                              <motion.div
+                                variants={{
+                                  hidden: { opacity: 0, x: 20 },
+                                  visible: { opacity: 1, x: 0, transition: { duration: 0.4 } },
+                                }}
+                              >
+                                <h2 className="font-medium text-[#212121]">{p.title}</h2>
+                                <p className="text-[#616161] font-medium">{p.desc}</p>
+                              </motion.div>
+                            </Link>
                           </div>
-                        </Link>
+                        ))}
                       </div>
-                    ))}
+                    </div>
                   </div>
-                </div>
-              )}
+                )}
+
+                {/* Solution Submenu */}
+                {submenu === "solution" && (
+                  <div className="flex flex-col p-6 h-full">
+                    {/* Back Button */}
+                    <button
+                      className="flex items-center gap-2 text-gray-600 mb-6 cursor-pointer shrink-0"
+                      onClick={() => setSubmenu(null)}
+                    >
+                      <IconChevronLeft size={20} />
+                    </button>
+
+                    {/* Heading */}
+                    <h3 className="text-[#F44336] font-medium text-lg mb-4 shrink-0">
+                      Solution
+                    </h3>
+
+                    {/* Scrollable solution items */}
+                    <div className="flex-1 overflow-y-auto" style={{ scrollbarWidth: "none" }}>
+                      <div className="flex flex-col gap-5">
+                        {data.solution_nav.map((s, i) => {
+                          const content = (
+                            <div className="flex items-center gap-4 cursor-pointer">
+                              <div className="min-w-[48px] min-h-[48px] flex items-center justify-center rounded-xl bg-[#FFF5F5] text-[#F44336]">
+                                {s.icon ? iconMap[s.icon] : s.image && <img src={s.image} alt={s.title} className="w-6 h-6 object-contain" />}
+                              </div>
+
+                              <div
+                                variants={{
+                                  hidden: { opacity: 0, x: 20 },
+                                  visible: { opacity: 1, x: 0, transition: { duration: 0.4 } },
+                                }}
+                              >
+                                <h2 className="font-medium text-[#212121]">{s.title}</h2>
+                                <p className="text-[#616161] font-medium">{s.desc}</p>
+                              </div>
+                            </div>
+                          );
+
+                          return (
+                            <div
+                              key={i}
+                              initial="hidden"
+                              animate="visible"
+                              variants={{
+                                visible: { transition: { staggerChildren: 0.2, delayChildren: i * 0.2 } },
+                              }}
+                              onClick={() => setMenuOpen(false)}
+                            >
+                              {s.external ? (
+                                <a href={s.link} target="_blank" rel="noopener noreferrer">
+                                  {content}
+                                </a>
+                              ) : (
+                                <Link to={s.link}>{content}</Link>
+                              )}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
+
 
         {/* Main Content */}
         <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 pt-34">

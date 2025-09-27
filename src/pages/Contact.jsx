@@ -12,7 +12,7 @@ function Contact_Section({ data, type = "cards" }) {
           {/* ✅ Left Section */}
           <div>
             <h2 className="text-2xl md:text-[24px] font-bold leading-snug mb-4">
-              Ready to{" "}
+              Click to below{" "}
               <span className="text-[#F44336]">{data.main.highlight}</span> as
               Unlock Instant Verification
             </h2>

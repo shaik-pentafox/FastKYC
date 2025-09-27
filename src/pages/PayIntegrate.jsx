@@ -1,5 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { IconCircleFilled } from "@tabler/icons-react";
+import { Link } from "react-router-dom";
 
 function PayIntegrate({ data, align = "left" }) {
   const containerVariants = {
@@ -58,7 +60,7 @@ function PayIntegrate({ data, align = "left" }) {
             viewport={{ once: true, amount: 0.3 }}
           >
             <motion.h2
-              className="text-2xl md:text-3xl lg:text-5xl font-bold text-[#161C2D] mb-4 leading-snug"
+              className="text-3xl lg:text-5xl font-bold text-[#161C2D] mb-4 leading-snug"
               variants={textItemVariants}
             >
               {data.heading}
@@ -71,14 +73,34 @@ function PayIntegrate({ data, align = "left" }) {
               {data.description}
             </motion.p>
 
+
+            <motion.ul
+              className="space-y-3 list-none"
+              variants={containerVariants}
+            >
+              {data?.features?.map((feature, idx) => (
+                <motion.li
+                  key={idx}
+                  className="flex items-center gap-3 text-[#616161] text-[20px] font-medium"
+                  variants={textItemVariants}
+                >
+                  <span className="flex items-center justify-center w-6 h-6">
+                    <IconCircleFilled className="w-2 h-2 text-[#616161]" />
+                  </span>
+                  {feature}
+                </motion.li>
+              ))}
+            </motion.ul>
+
             <motion.div className="pt-4" variants={textItemVariants}>
+               <Link to="/fast-kyc">
               <button className="cursor-pointer flex items-center font-medium text-sm md:text-base lg:text-lg text-[#E20303] border border-[#E20303] rounded-[6px] px-3 md:px-4 lg:px-5 py-2 hover:bg-red-50 transition">
                 {data.buttonText}
                 <span className="ml-2 mb-0.5 text-lg md:text-xl font-bold leading-none">
                   {data.buttonIcon}
                 </span>
               </button>
-
+              </Link>
             </motion.div>
           </motion.div>
         </div>

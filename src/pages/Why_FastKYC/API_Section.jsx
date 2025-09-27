@@ -35,9 +35,9 @@ function API_Section({ data }) {
   return (
     <>
       {/* Section 1 */}
-      <section className="py-16 bg-white">
+      <section className="py-28 bg-white">
         <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
-          <motion.h2
+          {/* <motion.h2
             variants={fadeInUp}
             initial="hidden"
             whileInView="visible"
@@ -45,7 +45,7 @@ function API_Section({ data }) {
             className="text-2xl md:text-3xl font-bold text-[#1E1E1E] leading-relaxed mb-10 text-left lg:w-2/3"
           >
             {data.section1.heading}
-          </motion.h2>
+          </motion.h2> */}
 
           <div className="flex flex-col md:flex-row items-center gap-12 md:gap-16">
             <div className="md:w-1/2 space-y-4">
