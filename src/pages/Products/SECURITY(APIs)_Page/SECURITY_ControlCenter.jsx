@@ -19,7 +19,7 @@ function App() {
     <Verification_Section data={SecurityData.verificationData} type="tabs"/>
     <Why_FastKYC data={SecurityData.whyFastKycData}/>
     <Business_Section data={SecurityData.Business_section} layout="faq"/>
-    <Compliance_Section data={SecurityData.Customer_section}/>
+    <Compliance_Section data={SecurityData.Compliance_section}/>
     <Footer data={footerData} /> 
     </>
   );

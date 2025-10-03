@@ -2,8 +2,8 @@ import React from "react";
 
 //Components
 import Head_Section from "./SMS_HeadSection";
-import Why_FastKYC from "../Why_FastKYC";
-import Information_Section from "../Verification_Section";
+import Why_FastKYC from "../../Products/Why_FastKYC";
+import Information_Section from "../../Products/Verification_Section";
 import PayIntegrate from "../../PayIntegrate"
 import Footer from "../../Footer";
 

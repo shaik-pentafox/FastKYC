@@ -12,7 +12,7 @@ import Product2 from "../assets/Images/Product_assets/Product_BANK.png";
 import Product3 from "../assets/Images/Product_assets/Product_GST.png";
 import Product4 from "../assets/Images/Product_assets/Product_OCR.png";
 import Product5 from "../assets/Images/Product_assets/Product_SECURITY.png";
-import Product6 from "../assets/Images/Product_assets/Product_SMS2.png";
+import Product6 from "../assets/Images/Product_assets/Solution_SMS2.png";
 
 // Other section images
 import FastKYC_Logo from "../assets/Images/FastKYC_logo.png";
@@ -66,7 +66,7 @@ const data = {
     { icon: "Tax", title: "GST", desc: "GST Verification APIs", link: "/products-gst" },
   ],
   solution_nav: [
-    { icon: "Message", title: "SMS", desc: "Instant and secure messaging for OTPs, alerts, reminders, and updates", link: "/products-sms" },
+    { icon: "Message", title: "SMS", desc: "Instant and secure messaging for OTPs, alerts, reminders, and updates", link: "/solution-sms" },
     { image: Walane, title: "walane", desc: "Turn chats into customers with automated sales and support on WaLane", link: "https://www.walane.ai/", external: true },
   ],
   productSections: [
@@ -128,7 +128,7 @@ const data = {
       list: ["OTP Delivery & Authentication", "Compliance Alerts & Notifications", "Payment Reminders & Transaction Updates", "Promotional & Informational Messaging"],
       image: Product6,
       icon: "Message",
-      link: "/products-sms"
+      link: "/solution-sms"
     }
   ],
   whyChoose: {

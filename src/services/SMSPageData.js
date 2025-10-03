@@ -1,5 +1,5 @@
 import Logo from "../assets/Images/FastKYC_logo.png";
-import Product_Logo from "../assets/Images/Product_assets/Product_SMS.png";
+import Product_Logo from "../assets/Images/Product_assets/Solution_SMS.png";
 import Socialmedia from "../assets/Images/Productsverify_assets/SMS_Socialmedia.png";
 import SMS_Api from "../assets/Images/Productsverify_assets/SMS_Api.png";
 import Analytics from "../assets/Images/Productsverify_assets/SMS_Analytics.png";
@@ -62,7 +62,7 @@ const SMSData = {
       { icon: "Tax", title: "GST", desc: "GST Verification APIs", link: "/products-gst" },
     ],
     solution_nav: [
-    { icon: "Message", title: "SMS", desc: "Instant and secure messaging for OTPs, alerts, reminders, and updates", link: "/products-sms" },
+    { icon: "Message", title: "SMS", desc: "Instant and secure messaging for OTPs, alerts, reminders, and updates", link: "/solution-sms" },
     { image: Walane, title: "walane", desc: "Turn chats into customers with automated sales and support on WaLane", link: "https://www.walane.ai/", external: true }
     ],
     },

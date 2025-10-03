@@ -6,7 +6,7 @@ import Products from "./Products";
 import Customer from "./Customers";
 import Designed from "./Designed";
 import PayIntegrate from "../PayIntegrate";
-import FAQ from "./FAQ";
+import FAQ from "../FAQ";
 import Contact from "../Contact";
 import Footer from "../Footer";
 

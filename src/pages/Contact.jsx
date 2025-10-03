@@ -31,7 +31,7 @@ function Contact_Section({ data, type = "cards" }) {
                     : "border border-[#F44336] text-[#F44336] hover:bg-red-100"
                     }`}
                 >
-                  {btn.icon && <IconPhone size={18} stroke={1.5}/>}
+                  {btn.icon && <IconPhone size={18} stroke={1.5} />}
                   {btn.text}
                 </Link>
               ))}
@@ -72,6 +72,10 @@ function Contact_Section({ data, type = "cards" }) {
                   {data.description}
                 </p>
 
+                <p className="text-[#616161] text-base md:text-[16px] font-medium mb-6">
+                  {data.description2}
+                </p>
+
                 {/* ✅ Buttons */}
                 <div className="flex flex-col sm:flex-row sm:items-center gap-4">
                   {data.buttons?.map((btn, index) => (
@@ -83,7 +87,7 @@ function Contact_Section({ data, type = "cards" }) {
                         : "border border-[#F44336] text-[#F44336] hover:bg-red-100"
                         }`}
                     >
-                      {btn.icon && <IconPhone size={18} stroke={1.5}/>}
+                      {btn.icon && <IconPhone size={18} stroke={1.5} />}
                       {btn.text}
                     </a>
                   ))}

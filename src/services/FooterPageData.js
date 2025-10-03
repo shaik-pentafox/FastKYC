@@ -20,8 +20,8 @@ const footerData = {
     { 
       title: "Soultion", 
       links: [
-        { name: "Whatsapp KYC", path: "#" },
-        { name: "SMS", path: "/products-sms" },
+        { name: "Whatsapp KYC", path: "/solution-whatsappkyc" },
+        { name: "SMS", path: "/solution-sms" },
         { name: "walane", path: "https://www.walane.ai/",external:true },
       ] 
     },

@@ -63,7 +63,7 @@ const SecurityData = {
       { icon: "Tax", title: "GST", desc: "GST Verification APIs", link: "/products-gst" },
     ],
     solution_nav: [
-    { icon: "Message", title: "SMS", desc: "Instant and secure messaging for OTPs, alerts, reminders, and updates", link: "/products-sms" },
+    { icon: "Message", title: "SMS", desc: "Instant and secure messaging for OTPs, alerts, reminders, and updates", link: "/solution-sms" },
     { image: Walane, title: "walane", desc: "Turn chats into customers with automated sales and support on WaLane", link: "https://www.walane.ai/", external: true }
   ],
   },
@@ -161,7 +161,7 @@ const SecurityData = {
       alt: " Water Mark",
     },
   ],
-  Customer_section: {
+   Compliance_section: {
     heading: " Security & Compliance APIs",
     subtext: " (Aadhaar Masking, Watermark)",
     description: "Instantly digitize and verify identity documents with accuracy and speed. Our OCR APIs extract key details from PAN, Aadhaar, Passport, Voter ID, and Driving License in real time, reducing errors and ensuring smoother onboarding.",

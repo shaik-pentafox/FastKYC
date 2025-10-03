@@ -88,7 +88,7 @@ function Products({ sections = [], whyChoose = {}, features = [] }) {
     return () => window.removeEventListener("load", detectInitialSection);
   }, []);
 
-  // ✅ Counter animation
+  // Counter animation
   useEffect(() => {
     const counterObserver = new IntersectionObserver(
       (entries) => {

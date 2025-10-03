@@ -60,7 +60,7 @@ const GSTData = {
             { icon: "Tax", title: "GST", desc: "GST Verification APIs", link: "/products-gst" },
         ],
         solution_nav: [
-            { icon: "Message", title: "SMS", desc: "Instant and secure messaging for OTPs, alerts, reminders, and updates", link: "/products-sms" },
+            { icon: "Message", title: "SMS", desc: "Instant and secure messaging for OTPs, alerts, reminders, and updates", link: "/solution-sms" },
             { image: Walane, title: "walane", desc: "Turn chats into customers with automated sales and support on WaLane", link: "https://www.walane.ai/", external: true }
         ],
     },
