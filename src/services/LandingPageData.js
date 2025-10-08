@@ -66,8 +66,9 @@ const data = {
     { icon: "Tax", title: "GST", desc: "GST Verification APIs", link: "/products-gst" },
   ],
   solution_nav: [
-    { icon: "Message", title: "SMS", desc: "Instant and secure messaging for OTPs, alerts, reminders, and updates", link: "/solution-sms" },
-    { image: Walane, title: "walane", desc: "Turn chats into customers with automated sales and support on WaLane", link: "https://www.walane.ai/", external: true },
+    { icon: "Whatsapp", title: "WhatsApp KYC", desc: "Secure and hassle-free KYC verification directly on WhatsApp for faster onboarding and customer trust", link: "/solution-whatsappkyc" },
+    { icon: "Message", title: "SMS", desc: "Reliable and instant communication for OTPs, alerts, reminders, and customer engagement", link: "/solution-sms" },
+    { image: Walane, title: "walane", desc: "Smart and automated conversations that drive customer support, sales, and retention", link: "https://www.walane.ai/", external: true }
   ],
   productSections: [
     {
@@ -167,11 +168,12 @@ const data = {
     features: [
       {
         highlight: "98%",
-        text: "Reduction in fraudulent applications with real-time verification"
+        text: "Reduction in fraudulent applications",
+        text2: "Enabled through real-time verification workflows"
       },
       {
         highlight: "5000+",
-        text: "Customer identities verified every day through our APIs"
+        text: "Identities verified every day Seamless onboarding powered by secure APIs"
       }
     ],
     testimonial: {

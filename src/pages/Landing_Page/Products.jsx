@@ -205,7 +205,7 @@ function Products({ sections = [], whyChoose = {}, features = [] }) {
               <motion.p variants={topToBottom} className="text-[#424242] text-[20px] font-medium">
                 {whyChoose.description}
               </motion.p>
-              <motion.div
+              {/* <motion.div
                 className="flex flex-wrap justify-between mt-6 gap-6"
                 ref={counterRef}
                 variants={topToBottom}
@@ -222,7 +222,7 @@ function Products({ sections = [], whyChoose = {}, features = [] }) {
                     <p className="text-[#424242] text-[16px] font-medium">{counter.label}</p>
                   </motion.div>
                 ))}
-              </motion.div>
+              </motion.div> */}
             </motion.div>
 
             {/* Right: Feature Cards */}

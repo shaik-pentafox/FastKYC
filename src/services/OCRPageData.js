@@ -52,18 +52,19 @@ const OCRData = {
       ],
       image: Product_Logo
     },
-  companiesLogos: [bank1, bank2, bank3, bank4,bank5],
-  products_nav: [
-    { icon: "Id", title: "KYC", desc: "Simplify Onboarding with Powerful KYC", link: "/products-kyc" },
-    { icon: "Bank", title: "Bank", desc: "Instant Bank Account Verification", link: "/products-bank-account-verification" },
-    { icon: "Lock", title: "Security & Compliance", desc: "Watermark and Aadhaar Masking", link: "/products-security" },
-    { icon: "Scan", title: "OCR", desc: "Extract data from government IDs and documents", link: "/products-ocr-apis" },
-    { icon: "Tax", title: "GST", desc: "GST Verification APIs", link: "/products-gst" },
+    companiesLogos: [bank1, bank2, bank3, bank4, bank5],
+    products_nav: [
+      { icon: "Id", title: "KYC", desc: "Simplify Onboarding with Powerful KYC", link: "/products-kyc" },
+      { icon: "Bank", title: "Bank", desc: "Instant Bank Account Verification", link: "/products-bank-account-verification" },
+      { icon: "Lock", title: "Security & Compliance", desc: "Watermark and Aadhaar Masking", link: "/products-security" },
+      { icon: "Scan", title: "OCR", desc: "Extract data from government IDs and documents", link: "/products-ocr-apis" },
+      { icon: "Tax", title: "GST", desc: "GST Verification APIs", link: "/products-gst" },
     ],
     solution_nav: [
-    { icon: "Message", title: "SMS", desc: "Instant and secure messaging for OTPs, alerts, reminders, and updates", link: "/solution-sms" },
-    { image: Walane, title: "walane", desc: "Turn chats into customers with automated sales and support on WaLane", link: "https://www.walane.ai/", external: true }
-  ],
+      { icon: "Whatsapp", title: "WhatsApp KYC", desc: "Secure and hassle-free KYC verification directly on WhatsApp for faster onboarding and customer trust", link: "/solution-whatsappkyc" },
+      { icon: "Message", title: "SMS", desc: "Reliable and instant communication for OTPs, alerts, reminders, and customer engagement", link: "/solution-sms" },
+      { image: Walane, title: "walane", desc: "Smart and automated conversations that drive customer support, sales, and retention", link: "https://www.walane.ai/", external: true }
+    ],
   },
   whyFastKycData: {
     heading: "Why FastKYC",
@@ -120,7 +121,7 @@ const OCRData = {
     ]
   },
   checkData: [
-     {
+    {
       tabs: [
         // { key: "All", label: "All", icon: "LayoutGrid" },
         { key: "Liveliness Check", label: "Liveliness Check", icon: "UserScan" },

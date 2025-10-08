@@ -1,7 +1,7 @@
 import Logo from "../assets/Images/FastKYC_logo.png";
 import Whatsapp_icon from "../assets/Images/icons/WhatsApp.png"
 import Whatsapp_logo from "../assets/Images/Product_assets/Solution_Whatsapp.png";
-import Whatsapp_logo2 from "../assets/Images/Product_assets/Solution_Whatsapp.png"
+import Whatsapp_logo2 from "../assets/Images/Product_assets/Solution_Onboarding.png"
 import bank1 from "../assets/Images/Company_assets/Company_logo1.png";
 import bank2 from "../assets/Images/Company_assets/Company_logo2.png";
 import bank3 from "../assets/Images/Company_assets/Company_logo4.png";
@@ -10,6 +10,8 @@ import bank5 from "../assets/Images/Company_assets/Company_logo5.png";
 
 import Book from "../assets/Images/Book2.png";
 import Walane from "../assets/Images/icons/Walane.png"
+
+import Product1 from "../assets/Images/Productsverify_assets/KYC_PanVerify.png";
 
 const WaKycData = {
   pageData: {
@@ -61,8 +63,9 @@ const WaKycData = {
       { icon: "Tax", title: "GST", desc: "GST Verification APIs", link: "/products-gst" },
     ],
     solution_nav: [
-      { icon: "Message", title: "SMS", desc: "Instant and secure messaging for OTPs, alerts, reminders, and updates", link: "/solution-sms" },
-      { image: Walane, title: "walane", desc: "Turn chats into customers with automated sales and support on WaLane", link: "https://www.walane.ai/", external: true }
+      { icon: "Whatsapp", title: "WhatsApp KYC", desc: "Secure and hassle-free KYC verification directly on WhatsApp for faster onboarding and customer trust", link: "/solution-whatsappkyc" },
+      { icon: "Message", title: "SMS", desc: "Reliable and instant communication for OTPs, alerts, reminders, and customer engagement", link: "/solution-sms" },
+      { image: Walane, title: "walane", desc: "Smart and automated conversations that drive customer support, sales, and retention", link: "https://www.walane.ai/", external: true }
     ],
   },
   Onboarding: {
@@ -78,6 +81,7 @@ const WaKycData = {
     ],
   },
   Offer_section: {
+    head: "Solution",
     heading: "What does WhatsApp KYC offer?",
     features: [
       {
@@ -149,41 +153,41 @@ const WaKycData = {
     {
       question: "Is WhatsApp KYC secure?",
       answer:
-        "All checks are done in real time, giving instant results within seconds."
+        "Yes - all data is encrypted, API-driven, and fully compliance-ready."
     },
     {
       question: "How long does verification take?",
       answer:
-        "You can verify PAN, Aadhaar (masking & link check), Passport, Driving License, Voter ID, and GSTIN through our APIs."
+        "Just a few minutes. Most checks happen in real time."
     },
     {
       question: "Can it integrate with our systems?",
-      answer: "Yes. We fetch and verify data directly from government databases and trusted financial systems."
+      answer: "Yes - results can be pushed to CRMs, onboarding tools, and compliance dashboards."
     },
     {
       question: "Which industries use it?",
-      answer: "Absolutely. We use end-to-end encryption and follow strict compliance standards to protect sensitive data."
+      answer: "Banks, NBFCs, fintech, telecom, e-commerce, logistics, insurance, healthcare, and education."
     },
     {
       question: "Does it support Aadhaar checks?",
       answer:
-        "No. We don’t use AI. All verification is done using authorized government and financial data sources only."
+        "Yes, including PAN - Aadhaar link validation (where regulations allow)."
     },
     {
       question: "How fast can we deploy?",
-      answer: "Yes. Our APIs support Face Match and Liveliness Detection for secure and fraud-free verification."
+      answer: "Integration is quick - businesses often go live within hours."
     },
     {
       question: "How does OCR help?",
-      answer: "Our APIs are built for banks, NBFCs, fintechs, insurers, marketplaces, and enterprises that need secure, reliable onboarding."
+      answer: "It extracts data automatically from IDs, reducing manual errors."
     },
     {
       question: "What’s the business value?",
-      answer: "Yes. Our APIs support Face Match and Liveliness Detection for secure and fraud-free verification."
+      answer: "Higher conversions, lower costs, faster onboarding, and a digital audit trail."
     },
     {
       question: "Do customers need to install an app?",
-      answer: "Our APIs are built for banks, NBFCs, fintechs, insurers, marketplaces, and enterprises that need secure, reliable onboarding."
+      answer: "No - everything happens inside WhatsApp."
     }
   ],
 };

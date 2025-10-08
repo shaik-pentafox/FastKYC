@@ -11,6 +11,7 @@ import {
   IconScan,
   IconId,
   IconMessage,
+  IconBrandWhatsapp,
 } from "@tabler/icons-react";
 
 import { Link, useLocation } from "react-router-dom";
@@ -23,7 +24,8 @@ const iconMap = {
   Bank: <IconBuildingBank size={28} stroke={1.5} />,
   Scan: <IconScan size={28} stroke={1.5} />,
   Id: <IconId size={28} stroke={1.5} />,
-  Message: <IconMessage size={28} stroke={1.5} />
+  Message: <IconMessage size={28} stroke={1.5} />,
+  Whatsapp:<IconBrandWhatsapp size={28} stroke={1.5}/>
 };
 
 const RunnerPath = ({ d, duration = 6, offset = 0, className, color = "#E20303" }) => {

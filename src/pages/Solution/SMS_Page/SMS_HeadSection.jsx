@@ -11,6 +11,7 @@ import {
   IconScan,
   IconId,
   IconMessage,
+  IconBrandWhatsapp,
 } from "@tabler/icons-react";
 import { Link, useLocation } from "react-router-dom";
 import useBodyScrollLock from "../../../ui/useBodyScrollLock";
@@ -21,7 +22,8 @@ const iconMap = {
   Bank: <IconBuildingBank size={28} stroke={1.5} />,
   Scan: <IconScan size={28} stroke={1.5} />,
   Id: <IconId size={28} stroke={1.5} />,
-  Message: <IconMessage size={28} stroke={1.5} />
+  Message: <IconMessage size={28} stroke={1.5} />,
+  Whatsapp: <IconBrandWhatsapp size={28} stroke={1.5} />
 };
 
 function SMS_HeadSection({ data }) {
@@ -406,14 +408,14 @@ function SMS_HeadSection({ data }) {
         {/* Left Content */}
         <motion.div className="space-y-6" variants={containerVariants}>
           <motion.h1
-            className="text-3xl md:text-[48px] min-[800px]:text-[48px] font-bold text-[#1E1E1E] leading-tight lg:px-10"
+            className="text-3xl sm:text-4xl md:text-[48px] min-[800px]:text-[48px] font-bold text-[#1E1E1E] leading-tight lg:px-10"
             variants={itemVariants}
           >
             {data.hero.heading}
           </motion.h1>
 
           <motion.p
-            className="text-[#616161] font-medium text-base md:text-[20px] lg:px-10"
+            className="text-[#616161] font-medium text-[20px] lg:px-10"
             variants={itemVariants}
           >
             {data.hero.subtext}

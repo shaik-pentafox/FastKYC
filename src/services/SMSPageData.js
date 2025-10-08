@@ -19,41 +19,41 @@ import Walane from "../assets/Images/icons/Walane.png"
 import { WorldMapAnimation } from '../ui/WorldMapAnimation'
 
 const SMSData = {
-    pageData: {
-      header: {
-        logo: Logo,
-        nav: [
-          { label: "Products", link: "#", dropdown: true },
-          { label: "Resources", link: "/fast-kyc" },
-          { label: "Solution", link: "#", dropdown: true },
-          { label: "Company", link: "https://pentafox.in/", external: true }
-        ],
-        actions: [
-          { text: "Sign in", link: "/login", primary: false },
-          { text: "Book a demo", link: "/book-demo", primary: true },
-        ],
-      },
-      hero: {
-        heading: "Engage Customers Worldwide with Trusted SMS Solutions",
-        subtext: "Simplify business communication with reliable SMS services that ensure instant delivery and global reach.Our platform is built for developers, marketers, and enterprises to scale with confidence.",
-        includes_title: "Includes:",
-        buttons: [
-          {
-            label: "Get started",
-            link: "/login",
-            style:
-              "hidden md:block bg-[#F44336] text-white px-5 py-2 rounded-[8px] font-medium hover:bg-red-700 transition text-[16px]"
-          },
-          {
-            label: "Book a Demo",
-            link: "/book-demo",
-            style:
-              "border border-[#F44336] px-5 py-2 rounded-[8px] font-medium hover:bg-[#F44336] hover:text-white transition md:text-[#F44336] bg-[#F44336] md:bg-white text-[#E4E6EA] text-[16px]"
-          }
-        ],
-        image: Product_Logo
-      },
-      companiesLogos: [bank1, bank2, bank3, bank4,bank5],
+  pageData: {
+    header: {
+      logo: Logo,
+      nav: [
+        { label: "Products", link: "#", dropdown: true },
+        { label: "Resources", link: "/fast-kyc" },
+        { label: "Solution", link: "#", dropdown: true },
+        { label: "Company", link: "https://pentafox.in/", external: true }
+      ],
+      actions: [
+        { text: "Sign in", link: "/login", primary: false },
+        { text: "Book a demo", link: "/book-demo", primary: true },
+      ],
+    },
+    hero: {
+      heading: "Engage Customers Worldwide with Trusted SMS Solutions",
+      subtext: "Simplify business communication with reliable SMS services that ensure instant delivery and global reach.Our platform is built for developers, marketers, and enterprises to scale with confidence.",
+      includes_title: "Includes:",
+      buttons: [
+        {
+          label: "Get started",
+          link: "/login",
+          style:
+            "hidden md:block bg-[#F44336] text-white px-5 py-2 rounded-[8px] font-medium hover:bg-red-700 transition text-[16px]"
+        },
+        {
+          label: "Book a Demo",
+          link: "/book-demo",
+          style:
+            "border border-[#F44336] px-5 py-2 rounded-[8px] font-medium hover:bg-[#F44336] hover:text-white transition md:text-[#F44336] bg-[#F44336] md:bg-white text-[#E4E6EA] text-[16px]"
+        }
+      ],
+      image: Product_Logo
+    },
+    companiesLogos: [bank1, bank2, bank3, bank4, bank5],
     products_nav: [
       { icon: "Id", title: "KYC", desc: "Simplify Onboarding with Powerful KYC", link: "/products-kyc" },
       { icon: "Bank", title: "Bank", desc: "Instant Bank Account Verification", link: "/products-bank-account-verification" },
@@ -62,10 +62,11 @@ const SMSData = {
       { icon: "Tax", title: "GST", desc: "GST Verification APIs", link: "/products-gst" },
     ],
     solution_nav: [
-    { icon: "Message", title: "SMS", desc: "Instant and secure messaging for OTPs, alerts, reminders, and updates", link: "/solution-sms" },
-    { image: Walane, title: "walane", desc: "Turn chats into customers with automated sales and support on WaLane", link: "https://www.walane.ai/", external: true }
+      { icon: "Whatsapp", title: "WhatsApp KYC", desc: "Secure and hassle-free KYC verification directly on WhatsApp for faster onboarding and customer trust", link: "/solution-whatsappkyc" },
+      { icon: "Message", title: "SMS", desc: "Reliable and instant communication for OTPs, alerts, reminders, and customer engagement", link: "/solution-sms" },
+      { image: Walane, title: "walane", desc: "Smart and automated conversations that drive customer support, sales, and retention", link: "https://www.walane.ai/", external: true }
     ],
-    },
+  },
   whyFastKycData: {
     heading: "Why Businesses Rely on SMS",
     subheading: "Simple and Secure Bank Account Verification",

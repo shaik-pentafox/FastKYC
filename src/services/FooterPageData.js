@@ -2,45 +2,45 @@ import FastKYC_Logo2 from "../assets/Images/FastKYC_logo2.png";
 
 const footerData = {
   menus: [
-    { 
+    {
       title: FastKYC_Logo2,
       description: "India’s leading verification API platform powering KYC, Banking, OCR, Security & Compliance, and GST with real-time government integrations. Trusted by businesses to simplify compliance and accelerate customer onboarding.",
-      description2:"Instant and secure messaging APIs for OTPs, alerts, reminders, and updates with high delivery success rates. Strengthen customer trust and ensure seamless real-time communication."
+      description2: "Instant and secure messaging APIs for OTPs, alerts, reminders, and updates with high delivery success rates. Strengthen customer trust and ensure seamless real-time communication."
     },
-    { 
-      title: "Products", 
+    {
+      title: "Products",
       links: [
         { name: "KYC", path: "/products-kyc" },
         { name: "Bank", path: "/products-bank-account-verification" },
         { name: "Security & Compliance", path: "/products-security" },
         { name: "OCR", path: "/products-ocr-apis" },
         { name: "GST", path: "/products-gst" },
-      ] 
+      ]
     },
-    { 
-      title: "Soultion", 
+    {
+      title: "Soultion",
       links: [
         { name: "Whatsapp KYC", path: "/solution-whatsappkyc" },
         { name: "SMS", path: "/solution-sms" },
-        { name: "walane", path: "https://www.walane.ai/",external:true },
-      ] 
+        { name: "walane", path: "https://www.walane.ai/", external: true },
+      ]
     },
-    { 
-      title: "Resources", 
+    {
+      title: "Resources",
       links: [
         { name: "API documentation", path: "#" },
         { name: "API Reference", path: "#" }
-      ] 
+      ]
     },
-    { 
-      title: "Company", 
+    {
+      title: "Company",
       links: [
         { name: "Resources", path: "/fast-kyc" },
         { name: "Privacy", path: "#" },
         { name: "Terms of use", path: "#" },
-        { name: "About us", path: "https://pentafox.in/",external:true },
+        { name: "About us", path: "https://pentafox.in/", external: true },
         { name: "Contact sales", path: "/book-demo" },
-      ] 
+      ]
     },
   ],
   socialLinks: [

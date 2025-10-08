@@ -116,9 +116,10 @@ function WaKyc_Onboarding({ data }) {
             <img
               src={data.image}
               alt="Illustration"
-              className="w-full h-full object-cover rounded-lg"
+              className="w-[80%] max-w-[380px] h-auto object-contain rounded-lg"
             />
           </motion.div>
+
         </div>
       </div>
     </section>

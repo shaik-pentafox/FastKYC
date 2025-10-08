@@ -90,7 +90,11 @@ function Customers({ data }) {
                   <span className="text-[#E20303] font-medium text-[20px]">
                     {feature.highlight}
                   </span>{" "}
-                  <span className="text-[#424242]">{feature.text}</span>
+                  <span className="text-[#424242]">
+                    {feature.text}
+                    <br />
+                    {feature.text2}
+                  </span>
                 </p>
               </motion.div>
             ))}

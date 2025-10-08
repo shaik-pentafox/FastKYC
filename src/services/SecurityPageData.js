@@ -54,7 +54,7 @@ const SecurityData = {
       ],
       image: SECURITY,
     },
-    companiesLogos: [bank1, bank2, bank3, bank4,bank5],
+    companiesLogos: [bank1, bank2, bank3, bank4, bank5],
     products_nav: [
       { icon: "Id", title: "KYC", desc: "Simplify Onboarding with Powerful KYC", link: "/products-kyc" },
       { icon: "Bank", title: "Bank", desc: "Instant Bank Account Verification", link: "/products-bank-account-verification" },
@@ -63,9 +63,10 @@ const SecurityData = {
       { icon: "Tax", title: "GST", desc: "GST Verification APIs", link: "/products-gst" },
     ],
     solution_nav: [
-    { icon: "Message", title: "SMS", desc: "Instant and secure messaging for OTPs, alerts, reminders, and updates", link: "/solution-sms" },
-    { image: Walane, title: "walane", desc: "Turn chats into customers with automated sales and support on WaLane", link: "https://www.walane.ai/", external: true }
-  ],
+      { icon: "Whatsapp", title: "WhatsApp KYC", desc: "Secure and hassle-free KYC verification directly on WhatsApp for faster onboarding and customer trust", link: "/solution-whatsappkyc" },
+      { icon: "Message", title: "SMS", desc: "Reliable and instant communication for OTPs, alerts, reminders, and customer engagement", link: "/solution-sms" },
+      { image: Walane, title: "walane", desc: "Smart and automated conversations that drive customer support, sales, and retention", link: "https://www.walane.ai/", external: true }
+    ],
   },
   whyFastKycData: {
     heading: "Why FastKYC",
@@ -161,7 +162,7 @@ const SecurityData = {
       alt: " Water Mark",
     },
   ],
-   Compliance_section: {
+  Compliance_section: {
     heading: " Security & Compliance APIs",
     subtext: " (Aadhaar Masking, Watermark)",
     description: "Instantly digitize and verify identity documents with accuracy and speed. Our OCR APIs extract key details from PAN, Aadhaar, Passport, Voter ID, and Driving License in real time, reducing errors and ensuring smoother onboarding.",

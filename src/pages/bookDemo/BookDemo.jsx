@@ -13,6 +13,7 @@ import {
   IconScan,
   IconId,
   IconMessage,
+  IconBrandWhatsapp
 } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence, useAnimation } from "framer-motion";
@@ -31,7 +32,8 @@ const iconMap = {
   Bank: <IconBuildingBank size={28} stroke={1.5} />,
   Scan: <IconScan size={28} stroke={1.5} />,
   Id: <IconId size={28} stroke={1.5} />,
-  Message: <IconMessage size={28} stroke={1.5} />
+  Message: <IconMessage size={28} stroke={1.5} />,
+  Whatsapp:<IconBrandWhatsapp size={28} stroke={1.5}/>
 };
 
 export default function BookDemo({ data, footerData }) {
