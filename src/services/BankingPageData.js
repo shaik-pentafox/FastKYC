@@ -5,7 +5,7 @@ import bank2 from "../assets/Images/Company_assets/Company_logo2.png";
 import bank3 from "../assets/Images/Company_assets/Company_logo4.png";
 import bank4 from "../assets/Images/Company_assets/Company_logo3.png";
 import bank5 from "../assets/Images/Company_assets/Company_logo5.png";
-
+import bank6 from "../assets/Images/Company_assets/Company_logo6.png";
 
 import Integration from "../assets/Images/Integration.png";
 
@@ -55,7 +55,7 @@ const BankData = {
       ],
       image: Product_Logo
     },
-    companiesLogos: [bank1, bank2, bank3, bank4, bank5],
+    companiesLogos: [bank1, bank2, bank3, bank4, bank5 ,bank6],
     products_nav: [
       { icon: "Id", title: "KYC", desc: "Simplify Onboarding with Powerful KYC", link: "/products-kyc" },
       { icon: "Bank", title: "Bank", desc: "Instant Bank Account Verification", link: "/products-bank-account-verification" },

@@ -4,6 +4,7 @@ import bank2 from "../assets/Images/Company_assets/Company_logo2.png";
 import bank3 from "../assets/Images/Company_assets/Company_logo4.png";
 import bank4 from "../assets/Images/Company_assets/Company_logo3.png";
 import bank5 from "../assets/Images/Company_assets/Company_logo5.png";
+import bank6 from "../assets/Images/Company_assets/Company_logo6.png";
 
 import Walane from "../assets/Images/icons/Walane.png"
 
@@ -21,7 +22,7 @@ const bookDemoData = {
       { value: "96%", label: "Auto-approval Rate" },
       { value: "60%", label: "Faster Onboarding" }
     ],
-    banks: [bank1, bank2, bank3, bank4,bank5]
+    banks: [bank1, bank2, bank3, bank4,bank5,bank6]
   },
   form: {
     title: "Sign up",

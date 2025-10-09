@@ -2,11 +2,13 @@ import Logo from "../assets/Images/FastKYC_logo.png";
 import Whatsapp_icon from "../assets/Images/icons/WhatsApp.png"
 import Whatsapp_logo from "../assets/Images/Product_assets/Solution_Whatsapp.png";
 import Whatsapp_logo2 from "../assets/Images/Product_assets/Solution_Onboarding.png"
+
 import bank1 from "../assets/Images/Company_assets/Company_logo1.png";
 import bank2 from "../assets/Images/Company_assets/Company_logo2.png";
 import bank3 from "../assets/Images/Company_assets/Company_logo4.png";
 import bank4 from "../assets/Images/Company_assets/Company_logo3.png";
 import bank5 from "../assets/Images/Company_assets/Company_logo5.png";
+import bank6 from "../assets/Images/Company_assets/Company_logo6.png";
 
 import Book from "../assets/Images/Book2.png";
 import Walane from "../assets/Images/icons/Walane.png"
@@ -54,7 +56,7 @@ const WaKycData = {
       ],
       image: Whatsapp_logo,
     },
-    companiesLogos: [bank1, bank2, bank3, bank4, bank5],
+    companiesLogos: [bank1, bank2, bank3, bank4, bank5,bank6],
     products_nav: [
       { icon: "Id", title: "KYC", desc: "Simplify Onboarding with Powerful KYC", link: "/products-kyc" },
       { icon: "Bank", title: "Bank", desc: "Instant Bank Account Verification", link: "/products-bank-account-verification" },
