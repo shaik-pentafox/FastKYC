@@ -13,7 +13,9 @@ import Product2 from "../assets/Images/Product_assets/Product_BANK.png";
 import Product3 from "../assets/Images/Product_assets/Product_GST.png";
 import Product4 from "../assets/Images/Product_assets/Product_OCR.png";
 import Product5 from "../assets/Images/Product_assets/Product_SECURITY.png";
-import Product6 from "../assets/Images/Product_assets/Solution_SMS2.png";
+import Product6 from "../assets/Images/Product_assets/Solution_Whatsapp.png";
+import Product7 from "../assets/Images/Product_assets/Solution_SMS2.png";
+import Product8 from "../assets/Images/Product_assets/Solution_Walane.png";
 
 // Other section images
 import FastKYC_Logo from "../assets/Images/FastKYC_logo.png";
@@ -124,13 +126,32 @@ const data = {
       link: "/products-security"
     },
     {
+      title: "WhatsApp KYC",
+      description:
+        "Enable customers to complete KYC instantly through WhatsApp with secure, AI-powered verification. Streamline onboarding, reduce drop-offs, and deliver a seamless digital experience.",
+      list: ["KYC via WhatsApp chat flow", "Document capture, validation & authentication"],
+      image: Product6,
+      icon: "Whatsapp",
+      link: "/solution-whatsappkyc"
+    },
+    {
       title: "SMS",
       description:
         "Enhance customer engagement with secure and reliable SMS APIs that deliver OTPs, alerts, reminders, and updates in real time. Ensure smooth communication, reduce drop-offs, and build lasting trust with every message.",
       list: ["OTP Delivery & Authentication", "Compliance Alerts & Notifications", "Payment Reminders & Transaction Updates", "Promotional & Informational Messaging"],
-      image: Product6,
+      image: Product7,
       icon: "Message",
       link: "/solution-sms"
+    },
+    {
+      title: "WALANE",
+      description:
+        "Deliver seamless digital solutions with intelligent automation. Improve efficiency, reduce manual effort, and empower secure digital experiences across platforms.",
+      list: ["Integration with enterprise systems", "Smart data processing and onboarding workflows"],
+      image: Product8,
+      icon: Walane,
+      link: "https://www.walane.ai/",
+      external: true 
     }
   ],
   whyChoose: {

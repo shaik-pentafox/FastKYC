@@ -25,7 +25,7 @@ const iconMap = {
   Scan: <IconScan size={28} stroke={1.5} />,
   Id: <IconId size={28} stroke={1.5} />,
   Message: <IconMessage size={28} stroke={1.5} />,
-  Whatsapp:<IconBrandWhatsapp size={28} stroke={1.5}/>
+  Whatsapp: <IconBrandWhatsapp size={28} stroke={1.5} />
 };
 
 const RunnerPath = ({ d, duration = 6, offset = 0, className, color = "#E20303" }) => {
@@ -270,10 +270,6 @@ function Head_Section({ data, products_nav, solution_nav }) {
               </AnimatePresence>
             </div>
 
-            <span className="text-[#1E1E1E] text-[16px] font-medium cursor-pointer">
-              <Link to="/fast-kyc">Resources</Link>
-            </span>
-
             {/* Desktop Solution Dropdown */}
             <div
               className="relative"
@@ -329,6 +325,10 @@ function Head_Section({ data, products_nav, solution_nav }) {
                 )}
               </AnimatePresence>
             </div>
+
+            <span className="text-[#1E1E1E] text-[16px] font-medium cursor-pointer">
+              <Link to="/fast-kyc">Resources</Link>
+            </span>
 
             <a
               href="https://pentafox.in/"
@@ -409,15 +409,15 @@ function Head_Section({ data, products_nav, solution_nav }) {
                     Products <IconChevronRight size={20} />
                   </span>
 
-                  <span className="cursor-pointer">
-                    <Link to="/fast-kyc">Resources</Link>
-                  </span>
-
                   <span
                     className="flex justify-between items-center cursor-pointer"
                     onClick={() => setSubmenu("solution")}
                   >
                     Solution <IconChevronRight size={20} />
+                  </span>
+
+                  <span className="cursor-pointer">
+                    <Link to="/fast-kyc">Resources</Link>
                   </span>
 
                   <a href="https://pentafox.in/" rel="noopener noreferrer">

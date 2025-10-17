@@ -47,7 +47,6 @@ function Footer({ data }) {
                   <ul className="space-y-3">
                     {menu.links.map((item, i) => (
                       <li key={i}>
-                        {/* Check external or http(s) link */}
                         {item.external || item.path.startsWith("http") ? (
                           <a
                             href={item.path}

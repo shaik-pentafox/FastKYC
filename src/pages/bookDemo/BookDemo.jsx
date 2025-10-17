@@ -33,7 +33,7 @@ const iconMap = {
   Scan: <IconScan size={28} stroke={1.5} />,
   Id: <IconId size={28} stroke={1.5} />,
   Message: <IconMessage size={28} stroke={1.5} />,
-  Whatsapp:<IconBrandWhatsapp size={28} stroke={1.5}/>
+  Whatsapp: <IconBrandWhatsapp size={28} stroke={1.5} />
 };
 
 export default function BookDemo({ data, footerData }) {
@@ -237,10 +237,6 @@ export default function BookDemo({ data, footerData }) {
                 </AnimatePresence>
               </div>
 
-              <span className="text-[#1E1E1E] text-[16px] font-medium cursor-pointer">
-                <Link to="/fast-kyc">Resources</Link>
-              </span>
-
               <div
                 className="relative"
                 onMouseEnter={() => setSubmenu("solution")}
@@ -295,6 +291,9 @@ export default function BookDemo({ data, footerData }) {
                   )}
                 </AnimatePresence>
               </div>
+              <span className="text-[#1E1E1E] text-[16px] font-medium cursor-pointer">
+                <Link to="/fast-kyc">Resources</Link>
+              </span>
 
               <a href="https://pentafox.in/" target="_blank" rel="noopener noreferrer">
                 <span className="text-[#1E1E1E] text-[16px] font-medium cursor-pointer">
@@ -365,17 +364,16 @@ export default function BookDemo({ data, footerData }) {
                     >
                       Products <IconChevronRight size={20} />
                     </span>
-
-                    <span className="cursor-pointer">
-                      <Link to="/fast-kyc">Resources</Link>
-                    </span>
-
                     <span
                       className="flex justify-between items-center cursor-pointer"
                       onClick={() => setSubmenu("solution")}
                     >
                       Solution <IconChevronRight size={20} />
                     </span>
+                    <span className="cursor-pointer">
+                      <Link to="/fast-kyc">Resources</Link>
+                    </span>
+
 
                     <a href="https://pentafox.in/" rel="noopener noreferrer">
                       <span className="cursor-pointer">Company</span>

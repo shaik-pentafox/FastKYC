@@ -17,9 +17,9 @@ const GSTData = {
             logo: Logo,
             nav: [
                 { label: "Products", link: "#", dropdown: true },
-                { label: "Resources", link: "/fast-kyc", dropdown: false },
                 { label: "Solution", link: "#", dropdown: true },
-                { label: "Company", link: "https://pentafox.in/", dropdown: false, external: true },
+                { label: "Resources", link: "/fast-kyc", dropdown: false },
+                { label: "Company", link: "https://pentafox.in/", dropdown: false, external: true }
             ],
             actions: [
                 { text: "Sign in", link: "/login", primary: false },

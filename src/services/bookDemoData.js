@@ -22,17 +22,17 @@ const bookDemoData = {
       { value: "96%", label: "Auto-approval Rate" },
       { value: "60%", label: "Faster Onboarding" }
     ],
-    banks: [bank1, bank2, bank3, bank4,bank5,bank6]
+    banks: [bank1, bank2, bank3, bank4, bank5, bank6]
   },
   form: {
     title: "Sign up",
     successMessage: "Thanks for booking. We'll reach out soon",
-   fields: [
-  { id: "fullName", label: "Full Name", type: "text", placeholder: "Enter your full name", required: false },
-  { id: "companyName", label: "Company Name", type: "text", placeholder: "Enter company name", required: true },
-  { id: "email", label: "Email", type: "email", placeholder: "Enter working email address", required: true },
-  { id: "phone", label: "Phone number", type: "tel", placeholder: "Enter phone number", required: true }
-],
+    fields: [
+      { id: "fullName", label: "Full Name", type: "text", placeholder: "Enter your full name", required: false },
+      { id: "companyName", label: "Company Name", type: "text", placeholder: "Enter company name", required: true },
+      { id: "email", label: "Email", type: "email", placeholder: "Enter working email address", required: true },
+      { id: "phone", label: "Phone number", type: "tel", placeholder: "Enter phone number", required: true }
+    ],
     countryOptions: ["India (+91)"],
     submit: { label: "Submit" }
   },
@@ -43,7 +43,7 @@ const bookDemoData = {
     { icon: "Scan", title: "OCR", desc: "Extract data from government IDs and documents", link: "/products-ocr-apis" },
     { icon: "Tax", title: "GST", desc: "GST Verification APIs", link: "/products-gst" }
   ],
- solution_nav: [
+  solution_nav: [
     { icon: "Whatsapp", title: "WhatsApp KYC", desc: "Secure and hassle-free KYC verification directly on WhatsApp for faster onboarding and customer trust", link: "/solution-whatsappkyc" },
     { icon: "Message", title: "SMS", desc: "Reliable and instant communication for OTPs, alerts, reminders, and customer engagement", link: "/solution-sms" },
     { image: Walane, title: "walane", desc: "Smart and automated conversations that drive customer support, sales, and retention", link: "https://www.walane.ai/", external: true }

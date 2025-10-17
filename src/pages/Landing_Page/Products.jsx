@@ -12,6 +12,7 @@ import {
   IconScan,
   IconId,
   IconMessage,
+  IconBrandWhatsapp
 } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 
@@ -21,7 +22,8 @@ const iconMap = {
   Bank: <IconBuildingBank size={32} stroke={1.5} />,
   Scan: <IconScan size={32} stroke={1.5} />,
   Id: <IconId size={32} stroke={1.5} />,
-  Message: <IconMessage size={28} stroke={1.5} />
+  Message: <IconMessage size={32} stroke={1.5} />,
+  Whatsapp: <IconBrandWhatsapp size={32} stroke={1.5} />
 };
 
 function Products({ sections = [], whyChoose = {}, features = [] }) {
@@ -37,7 +39,7 @@ function Products({ sections = [], whyChoose = {}, features = [] }) {
     World: <IconWorld size={24} />,
   };
 
-  // ✅ Detect mobile
+  //Detect mobile
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile();
@@ -45,7 +47,7 @@ function Products({ sections = [], whyChoose = {}, features = [] }) {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // ✅ Track active section on scroll
+  //Track active section on scroll
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -256,8 +258,13 @@ const SectionBlock = React.forwardRef(({ section, isActive, isMobile }, ref) => 
     >
       <div className="flex items-center gap-4 mb-3">
         <div className="min-w-[54px] min-h-[50px] flex items-center justify-center rounded-xl bg-[#F44336]/10 text-[#F44336]">
-          {iconMap[section.icon]}
+          {section.icon && iconMap[section.icon] ? (
+            iconMap[section.icon]
+          ) : section.icon ? (
+            <img src={section.icon} alt={section.title} className="w-7 h-7" />
+          ) : (null)}
         </div>
+
         <h2 className="text-3xl md:text-[40px] font-bold text-[#161C2D]">
           {section.title}
         </h2>
@@ -283,14 +290,27 @@ const SectionBlock = React.forwardRef(({ section, isActive, isMobile }, ref) => 
       </ul>
 
       <div className="py-6">
-        <Link
-          to={section.link}
-          className="w-[170px] h-9 cursor-pointer text-[16px] flex items-center justify-center font-medium text-sm text-[#F44336] border border-[#F44336] rounded-lg hover:bg-red-50 transition"
-        >
-          Know more
-          <span className="ml-2 text-lg md:text-xl font-bold leading-none">→</span>
-        </Link>
+        {section.external || section.link.startsWith("http") ? (
+          <a
+            href={section.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-[170px] h-9 cursor-pointer text-[16px] flex items-center justify-center font-medium text-sm text-[#F44336] border border-[#F44336] rounded-lg hover:bg-red-50 transition"
+          >
+            Know more
+            <span className="ml-2 text-lg md:text-xl font-bold leading-none">→</span>
+          </a>
+        ) : (
+          <Link
+            to={section.link}
+            className="w-[170px] h-9 cursor-pointer text-[16px] flex items-center justify-center font-medium text-sm text-[#F44336] border border-[#F44336] rounded-lg hover:bg-red-50 transition"
+          >
+            Know more
+            <span className="ml-2 text-lg md:text-xl font-bold leading-none">→</span>
+          </Link>
+        )}
       </div>
+
 
       {isMobile && (
         <div className="flex justify-center items-center mt-6">
