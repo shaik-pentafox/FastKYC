@@ -64,7 +64,7 @@ function Contact_Section({ data, type = "cards" }) {
 
               {/* ✅ Left Section */}
               <div className="text-left">
-                <h2 className="text-3xl sm:text-4xl md:text-[32px] font-bold mb-4">
+                <h2 className="text-2xl sm:text-3xl md:text-[32px] font-bold mb-4">
                   {data.title} <span className="text-[#E20303]">{data.highlight}</span>
                 </h2>
 

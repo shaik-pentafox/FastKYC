@@ -1,4 +1,4 @@
-//Offer_Section
+/*First Part*/
 import React from "react";
 import {
   IconUserSearch,
@@ -28,156 +28,105 @@ const iconMap = {
 const containerVariant = {
   hidden: {},
   show: {
-    transition: { staggerChildren: 0.15 },
+    transition: {
+      staggerChildren: 0.25,
+    },
   },
 };
 
-const featureVariant = {
-  hidden: { opacity: 0, y: 30 },
+const cardVariant = {
+  hidden: { opacity: 0, scale: 0.95 },
   show: {
     opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] },
+    scale: 1,
+    transition: { duration: 0.6, ease: "easeInOut" },
   },
 };
 
 function Offer_Section({ data }) {
   return (
-    <section className="py-16 scroll-smooth">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
-        {/* Section Header */}
-        <h2 className="text-3xl md:text-[32px] font-medium text-[#212121] mb-3">
-          {data.head}
-        </h2>
-        <h3 className="w-full max-w-2xl text-[32px] md:text-[43px] font-bold text-[#212121] mb-12">
+    <section className="py-12">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 text-start">
+        <h2 className="text-3xl md:text-[32px] font-medium text-[#212121] mb-10">
           {data.heading}
-        </h3>
+        </h2>
 
-        {/* Features List */}
+        {/* Features Grid */}
         <motion.div
           variants={containerVariant}
           initial="hidden"
           whileInView="show"
-          // ✅ KEY FIXES BELOW
-          viewport={{ once: false, amount: 0.3 }}
-          // ✅ fallback to visible in case of hydration/render mismatch
-          style={{ opacity: 1 }}
-          className="flex flex-col gap-16"
+          viewport={{ once: true, amount: 0.2 }}
+          className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
         >
           {data.features.map((item, index) => (
             <motion.div
               key={index}
-              variants={featureVariant}
-              // ✅ Prevent invisible blank area before scroll detection
-              initial={{ opacity: 1, y: 0 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: "easeInOut" }}
-              viewport={{ once: false, amount: 0.3 }}
-              className="flex flex-col lg:flex-row items-center justify-between gap-8"
+              variants={cardVariant}
+              className="flex flex-col items-start p-6 border border-[#FF725E] rounded-xl shadow-sm hover:shadow-md transition bg-[#FFFFFF]"
             >
-              {/* Left side */}
-              <div className="lg:w-1/2 flex flex-col justify-center items-start gap-4 text-left">
-                <div className="flex items-center gap-4">
-                  {iconMap[item.icon]}
-                  <h3 className="text-[22px] md:text-[26px] font-bold text-[#1E1E1E]">
-                    {item.title}
-                  </h3>
-                </div>
-                <p className="text-[20px] font-medium text-[#424242] leading-relaxed">
-                  {item.desc}
-                </p>
-              </div>
-
-              {/* Right side image */}
-              {item.image && (
-                <motion.div
-                  className="lg:w-1/2 flex justify-center"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: false, amount: 0.3 }}
-                  transition={{ duration: 0.6, ease: "easeInOut" }}
-                >
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="w-full max-w-md h-auto object-cover rounded-xl"
-                  />
-                </motion.div>
-              )}
+              {iconMap[item.icon]}
+              <h3 className="mt-4 text-[18px] font-bold text-[#1E1E1E]">{item.title}</h3>
+              <p className="mt-2 text-[16px] font-medium text-[#424242]">{item.desc}</p>
             </motion.div>
           ))}
         </motion.div>
+
       </div>
     </section>
   );
 }
 
 export default Offer_Section;
-  Offer_section: {
+
+ Offer_section: {
     head: "Solution",
     heading: "What does WhatsApp KYC offer?",
     features: [
       {
         icon: "Id",
         title: "PAN Verification",
-        desc: "Verify customer PAN instantly for faster and compliant onboarding.",
-        image: Product1,
+        desc: "Verify customer PAN instantly for faster and compliant onboarding."
       },
       {
         icon: "Check",
         title: "Name Match",
-        desc: "Cross-check customer names across official databases to prevent mismatches.",
-        image: Product1,
+        desc: "Cross-check customer names across official databases to prevent mismatches."
       },
       {
         icon: "MapPin",
         title: "Address Match",
-        desc: "Validate customer addresses directly from trusted ID proofs.",
-          image: Product1,
-      
+        desc: "Validate customer addresses directly from trusted ID proofs."
       },
       {
         icon: "Badge2",
         title: "Driving License Verification",
-        desc: "Authenticate users with DL checks - perfect for mobility and delivery businesses.",
-          image: Product1,
-      
+        desc: "Authenticate users with DL checks - perfect for mobility and delivery businesses."
       },
       {
         icon: "HandClick",
         title: "Voter ID Verification",
-        desc: "Confirm voter ID details for reliable government-backed identity verification.",
-          image: Product1,
-      
+        desc: "Confirm voter ID details for reliable government-backed identity verification."
       },
       {
         icon: "PlaneInflight",
         title: "Passport Verification",
-        desc: "Enable secure global KYC with instant passport validation.",
-          image: Product1,
-      
+        desc: "Enable secure global KYC with instant passport validation."
       },
       {
         icon: "Link",
         title: "PAN - Aadhaar Link Check",
-        desc: "Confirm if a customer’s PAN is linked with Aadhaar in real time.",
-          image: Product1,
-      
+        desc: "Confirm if a customer’s PAN is linked with Aadhaar in real time."
       },
       {
         icon: "UserSearch",
         title: "PAN Profile Fetch",
-        desc: "Retrieve verified details like name, DOB, and parent’s name to complete customer profiling.",
-          image: Product1,
-      
+        desc: "Retrieve verified details like name, DOB, and parent’s name to complete customer profiling."
       },
       {
         icon: "QRScan",
         title: "OCR (Optical Character Recognition)",
-        desc: "Extract data automatically from ID documents - no manual entry, no errors.",
-          image: Product1,
-      
+        desc: "Extract data automatically from ID documents - no manual entry, no errors."
       },
     ]
   },
-  

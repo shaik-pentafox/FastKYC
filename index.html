@@ -1,15 +1,26 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/public/Logo.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FastKYC</title>
-    <!-- in your index.html head -->
-    <link href="https://fonts.cdnfonts.com/css/satoshi" rel="stylesheet">
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/public/Logo.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FastKYC</title>
+  <!-- in your index.html head -->
+  <script>
+  function initApollo() {
+      var n = Math.random().toString(36).substring(7), o = document.createElement("script");
+      o.src = "https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache=" + n, o.async = !0, o.defer = !0,
+        o.onload = function () { window.trackingFunctions.onLoad({ appId: "68f751a0746f23001d72a9bc" }) },
+        document.head.appendChild(o)
+    } initApollo();
+    </script>
+  <link href="https://fonts.cdnfonts.com/css/satoshi" rel="stylesheet">
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+
 </html>

@@ -15,6 +15,14 @@ import Walane from "../assets/Images/icons/Walane.png"
 
 import Product1 from "../assets/Images/Productsverify_assets/KYC_PanVerify.png";
 
+//offer section
+import pan_verify from "../assets/Images/Productsverify_assets/SECURITY_Match.png";
+import SECURITY_Mark from "../assets/Images/Productsverify_assets/SECURITY_Mark.png";
+import match_verify from "../assets/Images/Productsverify_assets/KYC_NameMatch.png";
+import verify from "../assets/Images/Productsverify_assets/KYC_Driving.png";
+import scan_verify from "../assets/Images/Productsverify_assets/OCR_Check.png";
+import OCR_Verify from "../assets/Images/Productsverify_assets/OCR_Verify.png";
+
 const WaKycData = {
   pageData: {
     header: {
@@ -56,7 +64,7 @@ const WaKycData = {
       ],
       image: Whatsapp_logo,
     },
-    companiesLogos: [bank1, bank2, bank3, bank4, bank5,bank6],
+    companiesLogos: [bank1, bank2, bank3, bank4, bank5, bank6],
     products_nav: [
       { icon: "Id", title: "KYC", desc: "Simplify Onboarding with Powerful KYC", link: "/products-kyc" },
       { icon: "Bank", title: "Bank", desc: "Instant Bank Account Verification", link: "/products-bank-account-verification" },
@@ -82,57 +90,122 @@ const WaKycData = {
       { end: 100, suffix: "%", label: "Onboarding done with full compliance and security" }
     ],
   },
-  Offer_section: {
-    head: "Solution",
-    heading: "What does WhatsApp KYC offer?",
-    features: [
-      {
-        icon: "Id",
-        title: "PAN Verification",
-        desc: "Verify customer PAN instantly for faster and compliant onboarding."
-      },
-      {
-        icon: "Check",
-        title: "Name Match",
-        desc: "Cross-check customer names across official databases to prevent mismatches."
-      },
-      {
-        icon: "MapPin",
-        title: "Address Match",
-        desc: "Validate customer addresses directly from trusted ID proofs."
-      },
-      {
-        icon: "Badge2",
-        title: "Driving License Verification",
-        desc: "Authenticate users with DL checks - perfect for mobility and delivery businesses."
-      },
-      {
-        icon: "HandClick",
-        title: "Voter ID Verification",
-        desc: "Confirm voter ID details for reliable government-backed identity verification."
-      },
-      {
-        icon: "PlaneInflight",
-        title: "Passport Verification",
-        desc: "Enable secure global KYC with instant passport validation."
-      },
-      {
-        icon: "Link",
-        title: "PAN - Aadhaar Link Check",
-        desc: "Confirm if a customer’s PAN is linked with Aadhaar in real time."
-      },
-      {
-        icon: "UserSearch",
-        title: "PAN Profile Fetch",
-        desc: "Retrieve verified details like name, DOB, and parent’s name to complete customer profiling."
-      },
-      {
-        icon: "QRScan",
-        title: "OCR (Optical Character Recognition)",
-        desc: "Extract data automatically from ID documents - no manual entry, no errors."
-      },
-    ]
-  },
+  Offer_section: [
+    {
+      title: "Government ID Verification",
+      icon: "Badge2",
+      points: [
+        {
+          title: "PAN Verification",
+          desc: "Retrieve verified details like name, DOB, and parent’s name to complete customer profiling.",
+        },
+        {
+          title: "Aadhaar Verification",
+          desc: "Confirm if a customer’s PAN is linked with Aadhaar in real time.",
+        },
+        {
+          title: "Passport Verification",
+          desc: "Verify customer details through passport validation for faster and compliant onboarding.",
+        },
+        {
+          title: "Driving License Verification",
+          desc: "Authenticate driving license details to ensure document validity and identity accuracy.",
+        },
+      ],
+      img: pan_verify,
+    },
+    {
+      title: "Biometric Verification",
+      icon: "Finger",
+      points: [
+        {
+          title: "Voter ID Verification",
+          desc: "Validate voter ID details to confirm customer identity and ensure record consistency.",
+        },
+        {
+          title: "Selfie verification ",
+          desc: "Match a customer’s selfie with their ID photograph to confirm genuine identity.",
+        },
+        {
+          title: "Liveness Check ",
+          desc: "Ensure the person is physically present during verification to prevent spoofing or fraud.",
+        },
+      ],
+      img: SECURITY_Mark,
+    },
+    {
+      title: "Contact Verification",
+      icon: "Message",
+      points: [
+        {
+          title: "Mobile Number Verification",
+          desc: "Validate customer mobile numbers through OTP and cross-check names across official databases for accuracy.",
+        },
+        {
+          title: "Email verification",
+          desc: "Authenticate customer email addresses and verify linked addresses using trusted ID proofs.",
+        },
+      ],
+      img: match_verify,
+    },
+    {
+      title: "Address Verification",
+      icon: "MapPin",
+      points: [
+        {
+          title: "Bank Statement Verification",
+          desc: "Confirm voter ID-linked details for reliable, government-backed identity verification.",
+        },
+        {
+          title: "Passport Verification",
+          desc: "Enable secure global KYC with instant passport validation for faster onboarding.",
+        },
+      ],
+      img: verify,
+    },
+    {
+      title: "Bank & Financial Verification",
+      icon: "Bank",
+      points: [
+        {
+          title: "Bank Account Verification",
+          desc: "Instant IMPS account verification with automated, error-free data.",
+        },
+        {
+          title: "UPI Verification",
+          desc: "Seamlessly authenticate UPI with auto data for fast, error-free validation.",
+        },
+        {
+          title: "Micro-Deposit Verification",
+          desc: "Confirm account ownership via optional credit and auto document data extraction.",
+        },
+        {
+          title: "Income Verification",
+          desc: "Verify income for loans and insurance with auto data from trusted IDs.",
+        },
+      ],
+      img: scan_verify,
+    },
+    {
+      title: "Compliance Checks",
+      icon: "ShieldCheck",
+      points: [
+        {
+          title: "Age Verification",
+          desc: "Automatically verify customer age from ID documents - no manual data entry, no errors.",
+        },
+        {
+          title: "AML/CFT Compliance",
+          desc: "Screen customers for anti-money laundering and counter-terrorism compliance using automated ID data extraction.",
+        },
+        {
+          title: "Sanction List Screening",
+          desc: "Detect and flag individuals on global sanction lists with instant, automated ID-based checks.",
+        },
+      ],
+      img: OCR_Verify,
+    }
+  ],
   contactData: {
     title: "Get Started with ",
     highlight: "Official WhatsApp KYC",

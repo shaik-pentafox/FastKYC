@@ -18,8 +18,8 @@ function WaKyc_ControlCenter() {
       <WaKyc_HeadSection data={WaKycData.pageData} />
       <WaKyc_Onboarding data={WaKycData.Onboarding} />
       <WaKyc_Offer data={WaKycData.Offer_section} />
-      <WaKyc_Contact data={WaKycData.contactData} type='image' />
       <WaKyc_FAQ data={WaKycData.faqData} />
+      <WaKyc_Contact data={WaKycData.contactData} type='image' />
       <Footer data={footerData} />
     </>
   )
