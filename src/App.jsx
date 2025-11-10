@@ -10,10 +10,10 @@ import OCR_Page from './pages/Products/OCR(APIs)_Page/OCR_ControlCenter'
 import Products_security from './pages/Products/SECURITY(APIs)_Page/SECURITY_ControlCenter'
 import Solution_SMS from './pages/Solution/SMS_Page/SMS_ControlCenter'
 import Solution_WhatsAppKYC from './pages/Solution/WhatsAppKYC/WaKyc_ControlCenter'
-import FastKYC from './pages/Why_FastKYC/FastKYC_ControlCenter'
+import Resource from './pages/Resources/Resource_ControlCenter'
 import BookDemo from './pages/bookDemo/BookDemo'
 
-//Json Data
+//Response Data
 import data from "../src/services/bookDemoData";
 import footerData from './services/FooterPageData'
 
@@ -31,8 +31,8 @@ function App() {
           <Route path='/products-security' element={<Products_security />} />
           <Route path='/solution-sms' element={<Solution_SMS />} />
           <Route path='/solution-whatsappkyc' element={<Solution_WhatsAppKYC />} />
+          <Route path='/resources' element={<Resource />} />
           <Route path='/login' element={<Login />} />
-          <Route path='/fast-kyc' element={<FastKYC />} />
           <Route path="/book-demo" element={<BookDemo data={data} footerData={footerData} />} />
         </Routes>
       </BrowserRouter>

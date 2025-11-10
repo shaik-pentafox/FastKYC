@@ -8,7 +8,7 @@ import Business_Section from "../Business_Section";
 import Compliance_Section from "./Compliance_Section";
 import Footer from "../../Footer";
 
-//Json Data
+//Response Data
 import SecurityData from "../../../services/SecurityPageData";
 import footerData from '../../../services/FooterPageData'
 

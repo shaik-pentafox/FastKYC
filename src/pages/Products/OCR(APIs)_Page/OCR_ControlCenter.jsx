@@ -9,7 +9,7 @@ import Customer_Section from "./Customer_Section";
 import Footer from "../../Footer";
 
 
-//Json Data
+//Response Data
 import OCRData from "../../../services/OCRPageData"
 import footerData from '../../../services/FooterPageData'
 

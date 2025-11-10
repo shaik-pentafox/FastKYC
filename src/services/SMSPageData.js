@@ -26,7 +26,7 @@ const SMSData = {
       nav: [
         { label: "Products", link: "#", dropdown: true },
         { label: "Solution", link: "#", dropdown: true },
-        { label: "Resources", link: "/fast-kyc" },
+        { label: "Resources", link: "/resources" },
         { label: "Company", link: "https://pentafox.in/", external: true }
       ],
       actions: [

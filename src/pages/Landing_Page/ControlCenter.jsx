@@ -10,7 +10,7 @@ import FAQ from "../FAQ";
 import Contact from "../Contact";
 import Footer from "../Footer";
 
-//Json Data
+//Response Data
 import data from "../../services/LandingPageData";
 import footerData from "../../services/FooterPageData";
 

@@ -1,21 +1,21 @@
 import React from 'react'
-import HeadSection from './FastKYC_HeadSection'
+import HeadSection from './Resource_HeadSection'
 import API_Section from './API_Section';
 import Compliance_Section from './Compliance_Section';
 import Protected_Section from './Protected_Section';
 import Footer from '../Footer';
 
-//Jsondata
-import FastKYCData from "../../services/FastKYCPageData";
+//Response data
+import ResourceData from "../../services/ResourcePageData";
 import footerData from '../../services/FooterPageData'
 
 function FastKYC_ControlCenter() {
   return (
     <>
-      <HeadSection data={FastKYCData.pageData}/>
-      <API_Section data={FastKYCData.apiSections}/>
-      <Compliance_Section data={FastKYCData.complianceData}/>
-      <Protected_Section data={FastKYCData.ProtectedData} contact_data={FastKYCData.contactData}/>
+      <HeadSection data={ResourceData.pageData}/>
+      <API_Section data={ResourceData.apiSections}/>
+      <Compliance_Section data={ResourceData.complianceData}/>
+      <Protected_Section data={ResourceData.ProtectedData} contact_data={ResourceData.contactData}/>
       <Footer data={footerData} />  
     </>
   )

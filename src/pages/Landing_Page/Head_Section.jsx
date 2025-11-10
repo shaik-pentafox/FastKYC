@@ -327,7 +327,7 @@ function Head_Section({ data, products_nav, solution_nav }) {
             </div>
 
             <span className="text-[#1E1E1E] text-[16px] font-medium cursor-pointer">
-              <Link to="/fast-kyc">Resources</Link>
+              <Link to="/resources">Resources</Link>
             </span>
 
             <a
@@ -417,7 +417,7 @@ function Head_Section({ data, products_nav, solution_nav }) {
                   </span>
 
                   <span className="cursor-pointer">
-                    <Link to="/fast-kyc">Resources</Link>
+                    <Link to="/resources">Resources</Link>
                   </span>
 
                   <a href="https://pentafox.in/" rel="noopener noreferrer">

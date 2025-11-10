@@ -35,7 +35,7 @@ const footerData = {
     {
       title: "Company",
       links: [
-        { name: "Resources", path: "/fast-kyc" },
+        { name: "Resources", path: "/resources" },
         { name: "Privacy", path: "#" },
         { name: "Terms of use", path: "#" },
         { name: "About us", path: "https://pentafox.in/", external: true },

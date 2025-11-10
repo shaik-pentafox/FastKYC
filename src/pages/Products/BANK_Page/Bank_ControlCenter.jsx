@@ -8,7 +8,7 @@ import Contact from "../../Contact"
 import PayIntegrate from "../../PayIntegrate"
 import Footer from "../../Footer";
 
-//Json Data
+//Response Data
 import BankData from "../../../services/BankingPageData";
 import footerData from '../../../services/FooterPageData'
 

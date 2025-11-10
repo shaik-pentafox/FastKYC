@@ -7,7 +7,7 @@ import Business_Section from "../Business_Section";
 import Verification_Section from '../Verification_Section'
 import Footer from "../../Footer";
 
-//Json Data
+//Response Data
 import GSTData from "../../../services/GSTPageData"
 import footerData from '../../../services/FooterPageData'
 

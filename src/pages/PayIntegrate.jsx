@@ -93,7 +93,7 @@ function PayIntegrate({ data, align = "left" }) {
             </motion.ul>
 
             <motion.div className="pt-4" variants={textItemVariants}>
-               <Link to="/fast-kyc">
+               <Link to="/resources">
               <button className="cursor-pointer flex items-center font-medium text-sm md:text-base lg:text-lg text-[#E20303] border border-[#E20303] rounded-[6px] px-3 md:px-4 lg:px-5 py-2 hover:bg-red-50 transition">
                 {data.buttonText}
                 <span className="ml-2 mb-0.5 text-lg md:text-xl font-bold leading-none">

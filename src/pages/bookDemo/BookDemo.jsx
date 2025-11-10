@@ -292,7 +292,7 @@ export default function BookDemo({ data, footerData }) {
                 </AnimatePresence>
               </div>
               <span className="text-[#1E1E1E] text-[16px] font-medium cursor-pointer">
-                <Link to="/fast-kyc">Resources</Link>
+                <Link to="/resources">Resources</Link>
               </span>
 
               <a href="https://pentafox.in/" target="_blank" rel="noopener noreferrer">
@@ -371,7 +371,7 @@ export default function BookDemo({ data, footerData }) {
                       Solution <IconChevronRight size={20} />
                     </span>
                     <span className="cursor-pointer">
-                      <Link to="/fast-kyc">Resources</Link>
+                      <Link to="/resources">Resources</Link>
                     </span>
 
 

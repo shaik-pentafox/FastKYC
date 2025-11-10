@@ -25,14 +25,14 @@ import border2 from "../assets/Images/Why_FastKYC/border2.png";
 
 import Book from "../assets/Images/Book.png";
 
-const FastKYCPageData = {
+const ResourcePageData = {
   pageData: {
     header: {
       logo: Logo,
       nav: [
         { label: "Products", link: "#", dropdown: true },
         { label: "Solution", link: "#", dropdown: true },
-        { label: "Resources", link: "/fast-kyc" },
+        { label: "Resources", link: "/resources" },
         { label: "Company", link: "https://pentafox.in/", external: true }
       ],
       actions: [
@@ -59,7 +59,7 @@ const FastKYCPageData = {
       ],
       image: Product_Logo
     },
-    companiesLogos: [bank1, bank2, bank3, bank4, bank5,bank6],
+    companiesLogos: [bank1, bank2, bank3, bank4, bank5, bank6],
     products_nav: [
       { icon: "Id", title: "KYC", desc: "Simplify Onboarding with Powerful KYC", link: "/products-kyc" },
       { icon: "Bank", title: "Bank", desc: "Instant Bank Account Verification", link: "/products-bank-account-verification" },
@@ -82,7 +82,7 @@ const FastKYCPageData = {
         description: "Built by developers, for developers  our APIs are compliant with the latest KYC rules, intuitive, and effortless to integrate.",
         buttonText: "Explore APIs",
         buttonColor: "text-red-600 border-red-600",
-        buttonArrow: "→",
+        buttonArrow: "→"
       },
       rightImage: [back, api_logo],
     },
@@ -93,6 +93,7 @@ const FastKYCPageData = {
       buttonText: "Explore API Docs",
       buttonColor: "text-[#E20303] border-[#E20303]",
       buttonArrow: "→",
+      buttonLink: "https://documenter.getpostman.com/view/47416783/2sB3HjMLwD#our-product-capabilities",
       features: [
         {
           title: "Postman Collections",
@@ -121,6 +122,7 @@ const FastKYCPageData = {
       buttonText: "Start free trial",
       buttonColor: "text-[#E20303] border-[#E20303]",
       buttonArrow: "→",
+      buttonLink: "/login",
       features: [
         {
           title: "Onboard in Minutes",
@@ -159,8 +161,8 @@ const FastKYCPageData = {
     },
   },
   complianceData: {
-    heading: "Automating India’s Tax Compliance",
-    subheading: "Navigating Tax Compliance Made Simple with Technology",
+    heading: "Automating India’s KYC Verification",
+    subheading: "Simplifying KYC Compliance Through Advanced Technology",
     features: [
       {
         id: 1,
@@ -205,7 +207,7 @@ const FastKYCPageData = {
         id: 4,
         heading: "Volume",
         headingColor: "#F44336",
-        description: "From Hundreds to\nMillions Seamlessly",
+        description: "From Hundreds to\n Millions Seamlessly",
         descriptionColor: "#1E1E1E",
         backgroundColor: "#FFE7E7",
         backgroundImage: border,
@@ -275,4 +277,4 @@ const FastKYCPageData = {
   }
 };
 
-export default FastKYCPageData;
+export default ResourcePageData;

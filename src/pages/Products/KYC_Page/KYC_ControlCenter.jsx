@@ -9,7 +9,7 @@ import Contact_Section from "../../Contact";
 import PayIntegrate from "../../PayIntegrate";
 import Footer from "../../Footer";
 
-//Json Data
+//Response Data
 import KYCData from "../../../services/KYCPageData";
 import footerData from '../../../services/FooterPageData'
 

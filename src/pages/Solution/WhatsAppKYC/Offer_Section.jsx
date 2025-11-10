@@ -15,12 +15,12 @@ import { useLocation } from "react-router-dom";
 gsap.registerPlugin(ScrollTrigger);
 
 const iconMap = {
-  Badge2: (<IconIdBadge2 size={42} stroke={1.5} className="text-red-500 w-[34px] h-[34px] sm:w-[38px] sm:h-[38px] md:w-[40px] md:h-[40px] lg:w-[42px] lg:h-[42px]" />),
-  Finger: (<IconFingerprint size={42} stroke={1.5} className="text-red-500 w-[34px] h-[34px] sm:w-[38px] sm:h-[38px] md:w-[40px] md:h-[40px] lg:w-[42px] lg:h-[42px]" />),
-  Message: (<IconMessageCheck size={42} stroke={1.5} className="text-red-500 w-[34px] h-[34px] sm:w-[38px] sm:h-[38px] md:w-[40px] md:h-[40px] lg:w-[42px] lg:h-[42px]" />),
-  MapPin: (<IconMapPinCheck size={42} stroke={1.5} className="text-red-500 w-[34px] h-[34px] sm:w-[38px] sm:h-[38px] md:w-[40px] md:h-[40px] lg:w-[42px] lg:h-[42px]" />),
-  Bank: (<IconBuildingBank size={42} stroke={1.5} className="text-red-500 w-[34px] h-[34px] sm:w-[38px] sm:h-[38px] md:w-[40px] md:h-[40px] lg:w-[42px] lg:h-[42px]" />),
-  ShieldCheck: (<IconShieldCheck size={42} stroke={1.5} className="text-red-500 w-[34px] h-[34px] sm:w-[38px] sm:h-[38px] md:w-[40px] md:h-[40px] lg:w-[42px] lg:h-[42px]" />),
+  Badge2: (<IconIdBadge2 size={42} stroke={1.5} className="text-red-500 w-[30px] h-[30px] sm:w-[38px] sm:h-[38px] md:w-[40px] md:h-[40px] lg:w-[42px] lg:h-[42px]" />),
+  Finger: (<IconFingerprint size={42} stroke={1.5} className="text-red-500 w-[30px] h-[30px] sm:w-[38px] sm:h-[38px] md:w-[40px] md:h-[40px] lg:w-[42px] lg:h-[42px]" />),
+  Message: (<IconMessageCheck size={42} stroke={1.5} className="text-red-500 w-[30px] h-[30px] sm:w-[38px] sm:h-[38px] md:w-[40px] md:h-[40px] lg:w-[42px] lg:h-[42px]" />),
+  MapPin: (<IconMapPinCheck size={42} stroke={1.5} className="text-red-500 w-[30px] h-[30px] sm:w-[38px] sm:h-[38px] md:w-[40px] md:h-[40px] lg:w-[42px] lg:h-[42px]" />),
+  Bank: (<IconBuildingBank size={42} stroke={1.5} className="text-red-500 w-[30px] h-[30px] sm:w-[38px] sm:h-[38px] md:w-[40px] md:h-[40px] lg:w-[42px] lg:h-[42px]" />),
+  ShieldCheck: (<IconShieldCheck size={42} stroke={1.5} className="text-red-500 w-[30px] h-[30px] sm:w-[38px] sm:h-[38px] md:w-[40px] md:h-[40px] lg:w-[42px] lg:h-[42px]" />),
 };
 
 function Offer_Section({ data }) {

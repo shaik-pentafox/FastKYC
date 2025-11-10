@@ -128,6 +128,9 @@ function API_Section({ data }) {
                   {data.section2.description}
                 </p>,
                 <button
+                  onClick={() =>
+                    window.open(data.section2.buttonLink, "_blank", "noopener,noreferrer")
+                  }
                   className={`cursor-pointer flex items-center font-bold text-base md:text-lg ${data.section2.buttonColor} border ${data.section2.buttonColor.split(" ")[1]} 
                     rounded-lg px-6 py-2 hover:bg-red-50 transition`}
                 >
@@ -216,8 +219,9 @@ function API_Section({ data }) {
                   {data.section3.description}
                 </p>,
                 <button
+                  onClick={() => (window.location.href = data.section3.buttonLink)}
                   className={`cursor-pointer flex items-center font-bold text-base md:text-lg ${data.section3.buttonColor} border ${data.section3.buttonColor.split(" ")[1]} 
-                    rounded-lg px-6 py-2 hover:bg-red-50 transition`}
+    rounded-lg px-6 py-2 hover:bg-red-50 transition`}
                 >
                   {data.section3.buttonText}
                   <span className="ml-2 text-lg md:text-xl font-bold leading-none">
